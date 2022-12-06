@@ -42,6 +42,7 @@ public class AdminServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				// 檢查參數是否為空白
 				String str = req.getParameter("adminNo");
 				if (str == null || (str.trim().length() == 0)) {
 					errorMsgs.add("請輸入管理員編號");
@@ -49,11 +50,12 @@ public class AdminServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/admin/select_page.jsp");
+							.getRequestDispatcher("/back-end/admin/selectPageAdmin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
+				// 檢查參數格式不為字串
 				Integer adminNo = null;
 				try {
 					adminNo = Integer.valueOf(str);
@@ -63,7 +65,7 @@ public class AdminServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/admin/select_page.jsp");
+							.getRequestDispatcher("/back-end/admin/selectPageAdmin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -77,7 +79,7 @@ public class AdminServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/admin/select_page.jsp");
+							.getRequestDispatcher("/back-end/admin/selectPageAdmin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -197,7 +199,9 @@ public class AdminServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				
 				String adminEmail = req.getParameter("adminEmail");
-				
+				if(adminEmail == null || adminEmail.trim().length() ==0) {
+					errorMsgs.add("管理員信箱: 請勿空白");
+				}
 				String adminPassword = req.getParameter("adminPassword");
 				String adminPasswordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (adminPassword == null || adminPassword.trim().length() == 0) {
@@ -221,14 +225,16 @@ public class AdminServlet extends HttpServlet {
 			
 				String adminPrivilege = req.getParameter("adminPrivilege");
 	//	        String adminPrivilegeReg = "^[(0-9)]{1}$";
-	//			if (adminPrivilege == null || adminPrivilege.trim().length() == 0) {
-	//				errorMsgs.add("管理員權限: 請勿空白");
-	//			} else if (!adminPrivilege.trim().matches(adminPrivilegeReg)) { // 以下練習正則(規)表示式(regular-expression)
-	//				errorMsgs.add("管理員權限: 只能是數字, 且長度必需在1");
-	//			}
-				
+				if (adminPrivilege == null || adminPrivilege.trim().length() == 0) {
+					errorMsgs.add("管理員權限: 請勿空白");
+				} 
 	
-				Integer uploader = Integer.valueOf(req.getParameter("uploader").trim());
+				Integer uploader = null;
+				try {
+					uploader = Integer.valueOf(req.getParameter("uploader").trim());
+				} catch (NumberFormatException e){
+					errorMsgs.add("請選擇管理員編號");
+				}
 				
 				AdminVO adminVO = new AdminVO();	
 				adminVO.setAdminEmail(adminEmail);
