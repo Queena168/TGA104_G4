@@ -257,8 +257,9 @@ pageContext.setAttribute("list", list);
 								<a class="nav-link dropdown-toggle hide-arrow"
 								href="javascript:void(0);" data-bs-toggle="dropdown">
 									<div class="avatar avatar-online">
-										<img src="../assets/img/avatars/1.png" alt
-											class="w-px-40 h-auto rounded-circle" />
+										<img
+											src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+											alt class="w-px-40 rounded-circle" />
 									</div>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-end">
@@ -266,26 +267,37 @@ pageContext.setAttribute("list", list);
 											<div class="d-flex">
 												<div class="flex-shrink-0 me-3">
 													<div class="avatar avatar-online">
-														<img src="../assets/img/avatars/1.png" alt
-															class="w-px-40 h-auto rounded-circle" />
+														<img
+															src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+															alt class="w-px-40  rounded-circle" />
 													</div>
 												</div>
 												<div class="flex-grow-1">
-													<span class="fw-semibold d-block">John Doe</span> <small
-														class="text-muted">Admin</small>
+													<span class="fw-semibold d-block">${adminVO.adminName}</span>
+													<small class="text-muted">${adminVO.adminEmail}</small>
 												</div>
 											</div>
 									</a></li>
-									<li><a class="dropdown-item" href="#"> <i
-											class="bx bx-user me-2"></i> <span class="align-middle">My
-												Profile</span>
-									</a></li>
-									<li><a class="dropdown-item" href="#"> <i
-											class="bx bx-cog me-2"></i> <span class="align-middle">Settings</span>
-									</a></li>
-									<li><a class="dropdown-item" href="auth-login-basic.html">
-											<i class="bx bx-power-off me-2"></i> <span
-											class="align-middle">Log Out</span>
+
+									<li><form method="post"
+											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+											<div class="dropdown-item">
+
+												<label class="btn rounded-pill bg-label-secondary"
+													tabindex="0"> <i class="bx bx-user me-2"></i> <span
+													class="align-middle">My Profile</span> <input type="hidden"
+													name="adminNo" value="${adminVO.adminNo}"> <input
+													type="hidden" name="action" value="getOne_For_Profile">
+													<input type="submit" class="account-file-input" hidden />
+												</label>
+											</div>
+										</form></li>
+									<li><a class="dropdown-item"
+										href="../adminLogin/admin-login.jsp"> <label
+											class="btn rounded-pill bg-label-secondary" tabindex="0">
+												<i class="bx bx-power-off me-2"></i> <span
+												class="align-middle">Log Out</span>
+										</label>
 									</a></li>
 								</ul>
 							</li>
@@ -333,7 +345,7 @@ pageContext.setAttribute("list", list);
 												<td>${adminVO.adminName}</td>
 												<td><img
 													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
-													alt class="w-px-40 h-auto rounded-circle" /></td>
+													alt class="avatar w-px-40 rounded-circle" /></td>
 												<td>${adminVO.adminPrivilege}</td>
 												<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
 														value="${adminVO.createTime}" /></td>
@@ -343,11 +355,11 @@ pageContext.setAttribute("list", list);
 														action="<%=request.getContextPath()%>/back-end/admin/admin.do">
 														<label class="btn btn-primary" tabindex="0"> <span
 															class="d-none d-sm-block">修改</span> <i
-															class="fa-regular fa-pen-to-square d-block d-sm-none"></i> <input
-															type="submit" class="account-file-input" hidden /> <input
-															type="hidden" name="adminNo" value="${adminVO.adminNo}">
-															<input type="hidden" name="action"
-															value="getOne_For_Update">
+															class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+															<input type="submit" class="account-file-input" hidden />
+															<input type="hidden" name="adminNo"
+															value="${adminVO.adminNo}"> <input type="hidden"
+															name="action" value="getOne_For_Update">
 														</label>
 													</form>
 												</td>
@@ -356,8 +368,8 @@ pageContext.setAttribute("list", list);
 														action="<%=request.getContextPath()%>/back-end/admin/admin.do">
 														<label class="btn btn-primary" tabindex="0"> <span
 															class="d-none d-sm-block">刪除</span> <i
-															class="fa-regular fa-trash-can d-block d-sm-none"></i> <input type="submit"
-															class="account-file-input" hidden /> <input
+															class="fa-regular fa-trash-can d-block d-sm-none"></i> <input
+															type="submit" class="account-file-input" hidden /> <input
 															type="hidden" name="adminNo" value="${adminVO.adminNo}">
 															<input type="hidden" name="action" value="delete">
 														</label>

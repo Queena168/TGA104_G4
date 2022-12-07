@@ -301,7 +301,7 @@
 									<%-- /錯誤表列 --%>
 
 									<form id="formAuthentication" class="mb-3"
-										action="AdminLoginServlet" method=get
+										action="AdminLoginServlet" method="get"
 										enctype="multipart/form-data">
 										<!-- input標籤name屬性值為表格欄位名稱 預計傳入LoginServlet處理 -->
 										<div class="mb-3">

@@ -71,7 +71,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="../index.html" class="app-brand-link"> <span
+					<a href="index.jsp" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -255,8 +255,9 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 								<a class="nav-link dropdown-toggle hide-arrow"
 								href="javascript:void(0);" data-bs-toggle="dropdown">
 									<div class="avatar avatar-online">
-										<img src="../assets/img/avatars/1.png" alt
-											class="w-px-40 h-auto rounded-circle" />
+										<img
+											src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+											alt class="w-px-40 rounded-circle" />
 									</div>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-end">
@@ -264,27 +265,37 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 											<div class="d-flex">
 												<div class="flex-shrink-0 me-3">
 													<div class="avatar avatar-online">
-														<img src="../assets/img/avatars/1.png" alt
-															class="w-px-40 h-auto rounded-circle" />
+														<img
+															src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+															alt class="w-px-40  rounded-circle" />
 													</div>
 												</div>
 												<div class="flex-grow-1">
-													<span class="fw-semibold d-block">John Doe</span> <small
-														class="text-muted">Admin</small>
+													<span class="fw-semibold d-block">${adminVO.adminName}</span>
+													<small class="text-muted">${adminVO.adminEmail}</small>
 												</div>
 											</div>
 									</a></li>
-									<li><a class="dropdown-item" href="#"> <i
-											class="bx bx-user me-2"></i> <span class="align-middle">My
-												Profile</span>
-									</a></li>
-									<li><a class="dropdown-item" href="#"> <i
-											class="bx bx-cog me-2"></i> <span class="align-middle">Settings</span>
-									</a></li>
-									<li><a class="dropdown-item" href="auth-login-basic.html">
-											<i class="bx bx-power-off me-2"></i> <span
-											class="align-middle">Log Out</span>
-									</a></li>
+
+									<li><form method="post"
+											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+											<div class="dropdown-item" > 
+												
+												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
+													<i class="bx bx-user me-2"></i> 
+													<span class="align-middle">My Profile</span> 
+													<input type="hidden" name="adminNo" value="${adminVO.adminNo}"> 
+													<input type="hidden" name="action" value="getOne_For_Profile">
+													<input type="submit" class="account-file-input" hidden />
+												</label>
+											</div>
+										</form></li>
+									<li><a class="dropdown-item" href="../adminLogin/admin-login.jsp">
+												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
+													<i class="bx bx-power-off me-2"></i> 
+													<span class="align-middle">Log Out</span> 
+												</label>
+									</a></li>	
 								</ul>
 							</li>
 							<!--/ User -->
@@ -345,10 +356,15 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 											<input type="TEXT" hidden name="adminPrivilege"
 												value="<%=adminVO.getAdminPrivilege()%>" />
 										</div>
-										<div class="mb-3 col-md-6">
-											<label for="firstName" class="form-label">管理員密碼</label> <input
-												class="form-control" type="password" id="firstName"
-												name="adminPassword" value="<%=adminVO.getAdminPassword()%>" />
+										<div class="mb-3 col-md-6 ">
+											<label for="firstName" class="form-label">管理員密碼</label>
+											<div class="input-group input-group-merge">
+												<input class="form-control" type="password" id="firstName"
+													name="adminPassword"
+													value="<%=adminVO.getAdminPassword()%>" /> <span
+													class="input-group-text cursor-pointer"><i
+													class="bx bx-hide"></i></span>
+											</div>
 										</div>
 										<!-- 排版用區塊  -->
 										<div class="mb-3 col-md-6"></div>
