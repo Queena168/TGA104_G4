@@ -26,6 +26,15 @@
 		<servlet-name>AdminServlet</servlet-name>
 		<url-pattern>/back-end/admin/admin.do</url-pattern>
 	</servlet-mapping>
+		<!-- 管理員登入 -->
+	<servlet>
+		<servlet-name>AdminLoginServlet</servlet-name>
+		<servlet-class>com.admin.controller.AdminLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminLoginServlet</servlet-name>
+		<url-pattern>/back-end/adminLogin/AdminLoginServlet</url-pattern>
+	</servlet-mapping>
   
   
   

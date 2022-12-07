@@ -370,9 +370,9 @@
 										<form method="post" action="admin.do">
 											<div class="row gx-3 gy-2 align-items-center">
 												<div class="col-md-3">
-													<label class="form-label" for="selectTypeOpt">選擇管理員姓名</label>
+													<label class="form-label" for="selectTypeOpt">選擇管理員名稱</label>
 													<select id="selectTypeOpt"
-														class="form-select color-dropdown" name="adminNO">
+														class="form-select color-dropdown" name="adminNo">
 														<c:forEach var="adminVO" items="${adminSvc.all}">
 															<option value="${adminVO.adminNo}">${adminVO.adminName}
 														</c:forEach>

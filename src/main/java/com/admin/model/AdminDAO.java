@@ -13,11 +13,6 @@ import javax.sql.DataSource;
 
 
 public class AdminDAO implements AdminDAO_interface{
-	// 一般JDBCDAO連線
-//	String driver = "com.mysql.cj.jdbc.Driver";
-//	String url = "jdbc:mysql://localhost:3306/Mdb?serverTimezone=Asia/Taipei";
-//	String userid = "root";
-//	String passwd = "password";
 	
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
@@ -40,6 +35,8 @@ public class AdminDAO implements AdminDAO_interface{
 		"delete from Admin where adminNo = ?";
 	private static final String UPDATE = 
 		"update Admin set adminEmail=?, adminPassword=?, adminName=?, adminPic=?, adminPrivilege=? where adminNo = ? ";
+	private static final String SELECT_FOR_LOGIN = 
+		"select * from admin where adminEmail = ? and adminPassword = ?";
 	
 	@Override
 	public void insert(AdminVO adminVO) {
@@ -284,6 +281,46 @@ public class AdminDAO implements AdminDAO_interface{
 		}
 		return list;
 	}
+	
+	
+	public AdminVO adminLogin (AdminVO adminVO) {
+		boolean status = false; // 利用布林值確認帳號密碼是否匹配 
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_FOR_LOGIN);
+			
+			pstmt.setString(1, adminVO.getAdminEmail());
+			pstmt.setString(2, adminVO.getAdminPassword());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				status = true;
+				
+				adminVO = new AdminVO();
+				adminVO.setAdminNo(rs.getInt("adminNo"));
+				adminVO.setAdminEmail(rs.getString("adminEmail"));
+				adminVO.setAdminPassword(rs.getString("adminPassword"));
+				adminVO.setAdminName(rs.getString("adminName"));
+				adminVO.setAdminPic(rs.getBytes("adminPic"));
+				adminVO.setAdminPrivilege(rs.getString("adminPrivilege"));
+				adminVO.setCreateTime(rs.getTimestamp("createTime"));
+				adminVO.setUploader(rs.getInt("uploader"));
+			}
+			
+		} catch (SQLException se) {
+			// process sql exception
+			se.printStackTrace(System.err);
+		}
+		
+		return adminVO;
+	}
+	
+	
 
 	// 使用InputStream資料流方式
 	public static InputStream getPictureStream(String path)  throws IOException{
@@ -300,64 +337,5 @@ public class AdminDAO implements AdminDAO_interface{
 	}
 	
 	
-	public static void main(String[] args) throws IOException {
-		AdminDAO dao = new AdminDAO();
-
-//		//新增
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		AdminVO adminVO = new AdminVO();
-		
-		
-//
-//		// 2. setBytes
-//		try {
-//		adminVO.setAdminEmail("aa");
-//		adminVO.setAdminPassword("aa");
-//		adminVO.setAdminName("aa");
-//		byte[] pic = getPictureByteArray("/Users/marschen/Desktop/tibame/JSP_Servlet/BLOB/items/FC_Barcelona.png");
-//		adminVO.setAdminPic(pic);
-//		adminVO.setAdminPrivilege("");
-//		adminVO.setCreateTime(null);
-//		adminVO.setUploader(1);
-//		dao.insert(adminVO);
-//		
-//		System.out.println("新增成功");
-//		
-//		} catch (IOException ie) {
-//			System.out.println(ie);
-//		} finally {
-//			// 依建立順序關閉資源 (越晚建立越早關閉)
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					System.out.println(se);
-//				}
-//			}
-//
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (SQLException se) {
-//					System.out.println(se);
-//				}
-//			}
-//		}
-		
-		
-		// 查詢
-		List<AdminVO> list = dao.getAll();
-		for (AdminVO aAdmin : list) {
-			System.out.print(aAdmin.getAdminNo() + ",");
-			System.out.print(aAdmin.getAdminEmail() + ",");
-			System.out.print(aAdmin.getAdminPassword() + ",");
-			System.out.print(aAdmin.getAdminName() + ",");
-			System.out.print(aAdmin.getAdminPic() + ",");
-			System.out.print(aAdmin.getAdminPrivilege() + ",");
-			System.out.print(aAdmin.getCreateTime() + ",");
-			System.out.print(aAdmin.getUploader() + ",\t");
-			System.out.println();
-		}
-	}
+	
 }

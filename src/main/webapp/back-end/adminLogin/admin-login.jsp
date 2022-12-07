@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.admin.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java (Concroller) 存入req的AdminVO物件 (包括幫忙取出的AdminVO, 也包括輸入資料錯誤時的AdminVO物件)
+	AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 %>
 
 <!DOCTYPE html>
@@ -53,7 +52,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
-
+<link rel="stylesheet" href="../assets/vendor/css/pages/admin-login.css" />
 <!-- Helpers -->
 <script src="../assets/vendor/js/helpers.js"></script>
 
@@ -85,7 +84,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 					<!-- Member會員管理 -->
 					<li class="menu-item"><a href="javascript:void(0);"
-						class="menu-link menu-toggle"> <i
+						class="menu-link "> <i
 							class="menu-icon tf-icons fa-regular fa-user "></i>
 							<div data-i18n="Member">會員管理</div>
 					</a>
@@ -99,7 +98,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 					<!-- Designer設計師管理 -->
 					<li class="menu-item"><a href="javascript:void(0);"
-						class="menu-link menu-toggle"> <i
+						class="menu-link "> <i
 							class="menu-icon tf-icons fa-solid fa-user"></i>
 							<div data-i18n="Designer">設計師管理</div>
 					</a>
@@ -117,7 +116,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 					<!-- Designer_Order設計師訂單管理 -->
 					<li class="menu-item"><a href="javascript:void(0);"
-						class="menu-link menu-toggle"> <i
+						class="menu-link "> <i
 							class="menu-icon tf-icons fa-regular fa-file"></i>
 							<div data-i18n="Designer_Order">合約案件管理</div>
 					</a>
@@ -144,7 +143,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 					<!-- Forum論壇管理 -->
 					<li class="menu-item"><a href="javascript:void(0);"
-						class="menu-link menu-toggle"> <i
+						class="menu-link "> <i
 							class="menu-icon tf-icons fa-regular fa-pen-to-square"></i>
 							<div data-i18n="Forum">論壇管理</div>
 					</a>
@@ -175,7 +174,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 					<!-- Product商品管理 -->
 					<li class="menu-item"><a href="javascript:void(0)"
-						class="menu-link menu-toggle"> <i
+						class="menu-link "> <i
 							class="menu-icon tf-icons bx bx-shopping-bag"></i>
 							<div data-i18n="Product">商品管理</div>
 					</a>
@@ -199,8 +198,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 					<!-- Article報導文章管理 -->
 					<li class="menu-item"><a href="javascript:void(0)"
-						class="menu-link menu-toggle"> <i
-							class="menu-icon tf-icons bx bx-copy"></i>
+						class="menu-link "> <i class="menu-icon tf-icons bx bx-copy"></i>
 							<div data-i18n="Article">報導文章管理</div>
 					</a>
 						<ul class="menu-sub">
@@ -217,13 +215,13 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 						</ul></li>
 
 					<!-- Admin管理員管理 -->
-					<li class="menu-item active open"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link "> <i
 							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
 							<div data-i18n="Admin">管理員管理</div>
 					</a>
 						<ul class="menu-sub">
-							<li class="menu-item active"><a href="listAllAdmin.jsp"
+							<li class="menu-item"><a href="listAllAdmin.jsp"
 								class="menu-link">
 									<div data-i18n="">管理員資料管理</div>
 							</a></li>
@@ -250,44 +248,23 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 						id="navbar-collapse">
 
 						<ul class="navbar-nav flex-row align-items-center ms-auto">
-							<!-- User -->
+							<!-- Setting-Login -->
 							<li class="nav-item navbar-dropdown dropdown-user dropdown">
 								<a class="nav-link dropdown-toggle hide-arrow"
 								href="javascript:void(0);" data-bs-toggle="dropdown">
-									<div class="avatar avatar-online">
-										<img src="../assets/img/avatars/1.png" alt
+									<div class="avatar ">
+										<img src="../assets/img/icons/cog-regular-setting.png" alt
 											class="w-px-40 h-auto rounded-circle" />
 									</div>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-end">
-									<li><a class="dropdown-item" href="#">
-											<div class="d-flex">
-												<div class="flex-shrink-0 me-3">
-													<div class="avatar avatar-online">
-														<img src="../assets/img/avatars/1.png" alt
-															class="w-px-40 h-auto rounded-circle" />
-													</div>
-												</div>
-												<div class="flex-grow-1">
-													<span class="fw-semibold d-block">John Doe</span> <small
-														class="text-muted">Admin</small>
-												</div>
-											</div>
-									</a></li>
-									<li><a class="dropdown-item" href="#"> <i
-											class="bx bx-user me-2"></i> <span class="align-middle">My
-												Profile</span>
-									</a></li>
-									<li><a class="dropdown-item" href="#"> <i
-											class="bx bx-cog me-2"></i> <span class="align-middle">Settings</span>
-									</a></li>
-									<li><a class="dropdown-item" href="auth-login-basic.html">
-											<i class="bx bx-power-off me-2"></i> <span
-											class="align-middle">Log Out</span>
+									<li><a class="dropdown-item" href="admin-login.jsp"> <i
+											class='bx bx-arrow-to-right'></i> <span class="align-middle">Log
+												in</span>
 									</a></li>
 								</ul>
 							</li>
-							<!--/ User -->
+							<!--/ Setting-Login -->
 						</ul>
 					</div>
 				</nav>
@@ -297,99 +274,67 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 				<!-- Content wrapper -->
 				<div class="content-wrapper">
 					<!-- Content -->
+					<!-- <div class="container-xxl"> -->
+					<div
+						class="authentication-wrapper authentication-basic container-p-y">
+						<div class="authentication-inner">
+							<!-- Register Card -->
+							<div class="card ">
+								<div class="card-body">
 
-					<div class="container-xxl flex-grow-1 container-p-y">
-						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">MatDesign /</span> 管理員資料修改
-						</h4>
+									<h5 class="mb-2 card-title text-center">MatDesign管理員登入</h5>
 
-						<!-- Update Admin Info -->
-						<div class="card mb-4">
-							<%-- 錯誤表列 --%>
-							<c:if test="${not empty errorMsgs}">
-								<div class="mb-3">
-									<ul class="list-unstyled mt-2">
-										<li class="card-header">請修正以下錯誤
-											<ul>
-												<c:forEach var="message" items="${errorMsgs}">
-													<li class="form-text" style="color: red">${message}</li>
-												</c:forEach>
+									<%-- 錯誤表列 --%>
+									<c:if test="${not empty errorMsgs}">
+										<div class="mb-3">
+											<ul class="list-unstyled mt-2">
+												<li class="card-header">請修正以下錯誤
+													<ul>
+														<c:forEach var="message" items="${errorMsgs}">
+															<li class="form-text" style="color: red">${message}</li>
+														</c:forEach>
+													</ul>
+												</li>
 											</ul>
-										</li>
-									</ul>
-								</div>
-							</c:if>
-							<%-- /錯誤表列 --%>
-							<!-- Account -->
-							<div class="card-body">
-								<div
-									class="d-flex align-items-start align-items-sm-center gap-4">
-									<img
-										src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
-										alt="user-avatar" class="d-block rounded-circle " height="100"
-										width="100" />
-								</div>
-							</div>
-							<hr class="my-0" />
-							<div class="card-body">
-								<form id="formAccountSettings" method="POST" name="addAdmin"
-									enctype="multipart/form-data" action="admin.do">
-									<div class="row">
-										<div class="mb-3 col-md-6">
-											<label for="email" class="form-label">管理員E-mail</label> <input
-												class="form-control" type="text" id="email"
-												name="adminEmail" value="<%=adminVO.getAdminEmail()%>" />
 										</div>
-										<!-- 排版用區塊  隱藏權限-->
-										<div class="mb-3 col-md-6">
-											<input type="TEXT" hidden name="adminPrivilege"
-												value="<%=adminVO.getAdminPrivilege()%>" />
+									</c:if>
+									<%-- /錯誤表列 --%>
+
+									<form id="formAuthentication" class="mb-3"
+										action="AdminLoginServlet" method=get
+										enctype="multipart/form-data">
+										<!-- input標籤name屬性值為表格欄位名稱 預計傳入LoginServlet處理 -->
+										<div class="mb-3">
+											<label for="email" class="form-label">帳號(Email)</label> 
+											<input
+												type="text" class="form-control" id="email"
+												name="adminEmail" placeholder="Enter email" autofocus
+												value="<%=(adminVO == null) ? "" : adminVO.getAdminEmail()%>" />
 										</div>
-										<div class="mb-3 col-md-6">
-											<label for="firstName" class="form-label">管理員密碼</label> <input
-												class="form-control" type="password" id="firstName"
-												name="adminPassword" value="<%=adminVO.getAdminPassword()%>" />
-										</div>
-										<!-- 排版用區塊  -->
-										<div class="mb-3 col-md-6"></div>
-										<div class="mb-3 col-md-6">
-											<label for="firstName" class="form-label">管理員名稱</label> <input
-												class="form-control" type="text" id="firstName"
-												name="adminName" value="<%=adminVO.getAdminName()%>" />
-										</div>
-										<!-- 排版用區塊  -->
-										<div class="mb-3 col-md-6"></div>
-										<div class="mb-3 col-md-6">
-											<label for="firstName" class="form-label">大頭貼</label> <img
-												src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
-												alt="user-avatar" class="d-block rounded" height="100"
-												width="100" id="uploadedAvatar" /> <br>
-											<div class="button-wrapper">
-												<label for="upload" class="btn btn-secondary" tabindex="0">
-													<input type="file" id="upload" class="account-file-input"
-													accept="image/png, image/jpeg" name="adminPic"
-													value="<%=adminVO.getAdminPic()%>" />
-												</label>
-												<p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max
-													size of 800K</p>
+
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label" for="password">密碼</label>
+											<div class="input-group input-group-merge">
+												<input type="password" id="password" class="form-control"
+													name="adminPassword"
+													placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+													aria-describedby="password"
+													value="<%=(adminVO == null) ? "" : adminVO.getAdminPassword()%>" />
+												<span class="input-group-text cursor-pointer"><i
+													class="bx bx-hide"></i></span>
 											</div>
 										</div>
-										<!-- 排版用區塊  -->
-										<div class="mb-3 col-md-6"></div>
-										<div class="mt-2">
-											<button type="submit" class="btn btn-primary me-2">Save
-												changes</button>
-											<input type="hidden" name="action" value="update"> <input
-												type="hidden" name="adminNo"
-												value="<%=adminVO.getAdminNo()%>">
+										<div class="mb-3">
+											<input class="btn btn-primary d-grid w-100" type="submit"
+												value="登入">
 										</div>
-								</form>
+									</form>
+								</div>
 							</div>
-							<!-- /Account -->
+							<!-- Register Card -->
 						</div>
-						<!--/ Update Admin Info -->
-
 					</div>
+					<!-- </div> -->
 					<!-- / Content -->
 
 					<!-- Footer -->
@@ -436,13 +381,14 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 	<!-- Main JS -->
 	<script src="../assets/js/main.js"></script>
+	<script src="../assets/js/main.js"></script>
+
 
 	<!-- Page JS -->
 	<script src="../assets/js/dashboards-analytics.js"></script>
-	<script src="../assets/js/pages-account-settings-account.js"></script>
+	<script src="../assets/js/admin-picpreview.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
-

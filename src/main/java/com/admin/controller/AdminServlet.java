@@ -124,7 +124,9 @@ public class AdminServlet extends HttpServlet {
 				Integer adminNo = Integer.valueOf(req.getParameter("adminNo").trim());
 				
 				String adminEmail = req.getParameter("adminEmail");
-				
+				if (adminEmail == null || adminEmail.trim().length() == 0) {
+					errorMsgs.add("管理員信箱: 請勿空白");
+				}
 				String adminPassword = req.getParameter("adminPassword");
 				String adminPasswordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (adminPassword == null || adminPassword.trim().length() == 0) {
@@ -134,16 +136,13 @@ public class AdminServlet extends HttpServlet {
 	            }
 				 
 				String adminName = req.getParameter("adminName");
-//				String adminNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-//				if (adminName == null || adminName.trim().length() == 0) {
-//					errorMsgs.add("管理員姓名: 請勿空白");
-//				} else if(!adminName.trim().matches(adminNameReg)) { //以下練習正則(規)表示式(regular-expression)
-//					errorMsgs.add("管理員姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-//	            }
+				if (adminName == null || adminName.trim().length() == 0) {
+					errorMsgs.add("管理員姓名: 請勿空白");
+				} 
 				
 				byte[] adminPic = req.getPart("adminPic").getInputStream().readAllBytes();
 				if(adminPic.length==0) {
-					adminPic=null;
+					adminPic = null;
 				}
 			
 				String adminPrivilege = req.getParameter("adminPrivilege");
