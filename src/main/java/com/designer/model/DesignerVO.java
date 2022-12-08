@@ -1,24 +1,27 @@
 package com.designer.model;
 
-
 import java.util.Date;
 
-
+import com.expertise.model.ExpertiseVO;
 
 public class DesignerVO implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Integer designerNo;// (設計師編號): int, not null
 	private String designerAccount;// (設計師帳號(信箱)): varchar(50), not null
 	private String designerPassword;// (設計師密碼): varchar(50), not null
 	private String designerName;// (設計師名稱): varchar(25), not null
 	private String designerCompany;// (公司名稱): varchar(50)
 	private byte[] designerPic;// (設計師照片): blob
+	private String phone;
+	private String designerDetail;
 	private String approvalStatus;// (審核狀態): varchar(25)
 	private Date approvalTime;// (審核時間): timestamp
 	private Integer approver;// (審核管理員編號): int
 	private Boolean designerStatus;// (設計師狀態)
-	
 
-	
+	private ExpertiseVO ExpertiseVO;
+
 	public Integer getDesignerNo() {
 		return designerNo;
 	}
@@ -99,5 +102,32 @@ public class DesignerVO implements java.io.Serializable {
 		this.designerStatus = designerStatus;
 	}
 
-	
+	public ExpertiseVO getExpertiseVO() {
+		return ExpertiseVO;
+	}
+
+	public void setExpertiseVO(ExpertiseVO expertiseVO) {
+		ExpertiseVO = expertiseVO;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getDesignerDetail() {
+		return designerDetail;
+	}
+
+	public void setDesignerDetail(String designerDetail) {
+		this.designerDetail = designerDetail;
+	}
+
+
+
+
+
 }

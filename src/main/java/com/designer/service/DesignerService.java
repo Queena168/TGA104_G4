@@ -6,6 +6,7 @@ import com.designer.model.DesignerDAO_interface;
 import com.designer.model.DesignerJNDIDAO;
 import com.designer.model.DesignerVO;
 
+
 public class DesignerService {
 
 	private DesignerDAO_interface dao;
@@ -38,7 +39,7 @@ public class DesignerService {
 	
 	
 	public DesignerVO addDesignerinfo(String designerAccount, String designerPassword, String designerName,
-			String designerCompany, byte[] designerPic) {
+			String designerCompany, byte[] designerPic,String phone,String designerDetail) {
 
 		DesignerVO designerVO = new DesignerVO();
 
@@ -47,8 +48,9 @@ public class DesignerService {
 		designerVO.setDesignerName(designerName);
 		designerVO.setDesignerCompany(designerCompany);
 		designerVO.setDesignerPic(designerPic);
+		designerVO.setPhone(phone);
+		designerVO.setDesignerDetail(designerDetail);
 		dao.insertDesigner(designerVO);
-
 		return designerVO;
 	}
 
@@ -63,9 +65,7 @@ public class DesignerService {
 	public DesignerVO updateDesigner(Integer designerNo, String designerAccount, String designerPassword, String designerName,
 			String designerCompany, byte[] designerPic/*, String approvalStatus, java.sql.Date approvalTime,
 			Integer approver, Boolean designerStatus*/) {
-
 		DesignerVO designerVO = new DesignerVO();
-
 		designerVO.setDesignerNo(designerNo);
 		designerVO.setDesignerAccount(designerAccount);
 		designerVO.setDesignerPassword(designerPassword);
@@ -77,15 +77,8 @@ public class DesignerService {
 //		designerVO.setApprover(approver);
 //		designerVO.setDesignerStatus(designerStatus);    
 		dao.update(designerVO);
-
 		return dao.findByPrimaryKey(designerNo);
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 
@@ -106,7 +99,6 @@ public class DesignerService {
 //		designerVO.setApprover(approver);
 //		designerVO.setDesignerStatus(designerStatus);    
 		dao.updatenoPic(designerVO);
-
 		return dao.findByPrimaryKey(designerNo);
 	}
 
@@ -125,6 +117,11 @@ public class DesignerService {
 	
 	public DesignerVO getOneDesignerinfo(Integer designerVO) {
 		return dao.findByPrimaryKey(designerVO);
+	}
+	
+	
+	public DesignerVO logindesigner(String designerAccount,String designerPassword) {
+		return dao.login(designerAccount, designerPassword);
 	}
 
 	
