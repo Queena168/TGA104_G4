@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.designer.model.*"  %>
+<%@ page import="com.designer.model.*" %>
 <%@ page import="com.designer.service.*" %>
 <%@ page import="com.designer.controller.*" %>
-
+<%@ page import="com.designerExpertise.model.*" %>
 
 
 
@@ -48,8 +48,7 @@
   <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 
 <style>
   table#table-1 {
@@ -151,13 +150,14 @@
 	<!-- Topbar End -->
 
 	<!-- Navbar Start -->
+	
 	<div class="container-fluid">
 		<div class="row border-top px-xl-5">
 
 			<div class="col-lg-9">
 				<nav
 					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="" class="text-decoration-none d-block d-lg-none">
+					<a href="index.jsp" class="text-decoration-none d-block d-lg-none">
 						<h1 class="m-0">
 							<span class="text-primary">M</span>atDesign
 						</h1>
@@ -169,19 +169,22 @@
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
 						<div class="navbar-nav py-0">
-							<a id="product" href="index.html" class="nav-item nav-link">找作品</a>
-							<a id="design" href="findDesigner.jsp" class="nav-item nav-link">找設計師</a>
-							<a id="store" href="course.html" class="nav-item nav-link">商城</a>
-							<a id="fourm" href="teacher.html" class="nav-item nav-link">論壇</a>
-							<a id="topic" href="teacher.html" class="nav-item nav-link">報導文章</a>
-
+							<div id="selfedit" style="width: 200px"><a  href="index.html" class="nav-item nav-link"><b>找作品</b></a></div>
+							<div id="ordermanage" style="width: 200px"><a  href="findDesigner.jsp" class="nav-item nav-link"><b>找設計師</b></a></div>
+							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>商城</b></a></div>
+							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>論壇</b></a></div>
+							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>報導文章</b></a></div>
 						</div>
-
 					</div>
+					
 				</nav>
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
 	<!-- Navbar End -->
 	
 <!--  -->
@@ -192,8 +195,9 @@
   <div>&emsp;&emsp;<font size="4px" color="black">設計強項</font></div>
   <div>
      <div>
-         <ul>
+       
          <form METHOD="post">
+           <ul>
             <input type="button" value="小坪數" /> &emsp;&emsp;
             <input type="button" value="大坪數" /> &emsp;&emsp;
             <input type="button" value="輕奢新古典"/> &emsp;&emsp;
@@ -203,15 +207,16 @@
             <input type="button" value="小資裝潢"/> &emsp;&emsp;
             <input type="button" value="老屋翻新"/> &emsp;&emsp;
             <input type="button" value="奢華裝修"/> 
+           </ul>
         </form>
-         </ul>
+        
      </div>
   </div>
  
 </div>
 
 <!-- Team Start -->
-	<div class="container-fluid py-5">
+	
 		<div class="container pt-5 pb-3">
 			<div class="text-center mb-5">
 				<h2 class="text-primary text-uppercase mb-3"
@@ -220,228 +225,33 @@
 			</div>
 		
 			<div class="row">
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="0" end="0">
+		<c:forEach var="designerVO"  items="${list}" begin="0" end="7">
+				<div class="col-md-6 col-lg-3 text-center team mb-4">	
+					<form method="post" ACTION="<%=request.getContextPath()%>/ShowDesignerInfo" >		
 					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-	<!-- 設計師圖片 -->						<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
+						<div class="team-img position-relative">				
+	<!-- 設計師圖片 -->		<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
 							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-						
-	<!-- 設計師姓名 -->						<h5>${designerVO.designerName}</h5>
-						
-	<!-- 設計師公司 -->						<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="1" end="1">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
 							
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="2" end="2">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-						
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="3" end="3">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-						
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-			</div>
-			
-			<!--第二列開始  -->
-			
-					<div class="row">
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="4" end="4">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
 							
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="5" end="5">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
+							<input type="hidden" name="action" value="designerinfo">
+							<input type="submit" class="btn btn-outline-light" value="查看">
 							</div>
 						</div>
-						<div class="bg-secondary p-4">
-							
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
+						<div class="bg-secondary p-4">					
+	<!-- 設計師姓名 -->						<h5>${designerVO.designerName}</h5>		
+	<!-- 設計師公司 -->						<p class="m-0">${designerVO.designerCompany}</p>  
+	                               <input type="hidden" name="designerNo" size="45" 
+		                                      value="${designerVO.designerNo}"/>                               	   
+		                                    
+	  
 						</div>
 					</div>
-					</c:forEach>
+				</form>
 				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-				<c:forEach var="designerVO"  items="${list}" begin="6" end="6">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%  alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-							
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-				<c:forEach var="designerVO"  items="${list}" begin="7" end="7">
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-						
-							<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%  alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light " href="#">查看<i
-									class="fab fa-twitter"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-							
-							<h5>${designerVO.designerName}</h5>
-						
-							<p class="m-0">${designerVO.designerCompany}</p>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
-			</div>
-			
-		
+			</c:forEach>
 		</div>
 	</div>
 	<!-- Team End -->
-
-
-
-	 <!--<tr>-->
-	 <!--	<th>設計師編號</th>-->
-	 <!--	<th>設計師帳號</th>-->
-	 <!--	<th>設計師密碼</th>-->
-	<!--	<th>設計師姓名</th>-->
-	<!--	<th>公司</th>-->
-	<!--	<th>設計師照片</th>-->
-		<!--<th>專長</th>-->
-	 <!--	<th>審核狀態</th>-->
-	 <!--	<th>審核成功時間</th>-->
-	 <!--	<th>審核人</th>-->
-	 <!--	<th>設計師狀態</th>-->
-	 <!--	<th>修改</th>-->
-	  <!--	<th>刪除</th>-->
-	 <!--</tr>-->
-
-	
-		
-	 <!--	<tr>-->
-		 <!--	<td>${designerVO.designerNo}</td>-->
-		 <!--	<td>${designerVO.designerAccount}</td>-->
-		 <!--	<td>${designerVO.designerPassword}</td>-->
-			 <!--<td>${designerVO.designerName}</td>-->
-			 <!--<td>${designerVO.designerCompany}</td>-->
-		 <!--	<td><img src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}"></td>-->
-			 <!--	<td>${designerVO.approvalStatus}</td>-->
-			 <!--	<td>${designerVO.approvalTime}</td>-->
-			 <!--	<td>${designerVO.approver}</td>-->
-			 <!--	<td>${designerVO.designerStatus}</td> -->
-			
-			
-		
-			
-			<!--<td>-->
-			<!--  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/designer/designer.do" style="margin-bottom: 0px;">-->
-			 <!--    <input type="submit" value="修改">-->
-			  <!--   <input type="hidden" name="designerNo"  value="${designerVO.designerNo}">-->
-			  <!--   <input type="hidden" name="action"	value="getOne_For_Update">-->
-			 <!--   </FORM>-->
-			<!--</td>-->
-			
-			
-			
-	    <!--  	<td>   -->
-		<!--	  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/designer/designer.do" style="margin-bottom: 0px;">-->
-		<!--	     <input type="submit" value="刪除">-->
-		<!--	     <input type="hidden" name="designerNo"  value="${designerVO.designerNo}">-->
-		<!--	     <input type="hidden" name="action" value="delete"></FORM>-->
-		<!--	</td>-->
-			
-		
-	 <!--	</tr>-->
-	
-<!--</table>  -->
-
-
 </body>
 </html>

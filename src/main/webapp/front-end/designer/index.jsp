@@ -30,6 +30,7 @@
 <!-- Customized Bootstrap Stylesheet -->
 <link href="css/style.css" rel="stylesheet" />
 
+
   <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -51,6 +52,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<!-- Registration Start -->
+						
 						<div class="container-fluid bg-registration py-5"
 							style="margin: 30px 0">
 							<div class="col-lg-5">
@@ -60,55 +62,58 @@
 										<div class="row justify-content-center">
 											<div class="col-md-10 d-flex justify-content-center py-4">
 												<div class="h-swicher">
-													<input type="radio" name="login" id="memberlogin"
-														checked="checked"
-														class="swicher-input swicher-input-memberlogin" /> <label
-														for="memberlogin" class="swicher-label">會員登入</label> <input
-														type="radio" name="login" id="designerlogin"
-														class="swicher-input swicher-input-designerlogin" /> <label
-														for="designerlogin" class="swicher-label">設計師登入</label> <span
-														class="switcher-toggle"></span>
+												<input type="hidden" name="action" value="memberlogin">
+												 <input type="radio" name="login" id="memberlogin" checked="checked" class="swicher-input swicher-input-memberlogin" />
+												 <label	for="memberlogin" class="swicher-label">會員登入</label> 
+												 <input type="hidden" name="action" value="designerlogin">
+												 <input	type="radio" name="login" id="designerlogin" class="swicher-input swicher-input-designerlogin" /> 
+												 <label	for="designerlogin" class="swicher-label">設計師登入</label>
+												        <span	class="switcher-toggle"></span>
 												</div>
 											</div>
 										</div>
 									</div>
 
 									<!-- tab標籤結束 -->
+									<form method="post" action="<%=request.getContextPath()%>/Login" enctype="multipart/form-data">
 									<div class="card-body rounded-bottom bg-primary p-5">
-										<form>
-											<div class="form-group">
-												<input type="text" class="form-control border-0 p-4"
-													placeholder="帳號" required="required" />
-											</div>
+									<!-- <form> -->
 											<div class="form-group">
 												<input type="email" class="form-control border-0 p-4"
-													placeholder="密碼" required="required" />
+													placeholder="帳號" required="required" name="account"/>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control border-0 p-4"
+													placeholder="密碼" required="required"  name="password"/>
 											</div>
 										<!-- <div class="form-group"></div> -->	
 										<!--	<input type="checkbox" class="remember" />記住我的密碼 -->	
 											<div>
-												<button class="btn btn-dark btn-block border-0 py-3"
-													type="submit">送出</button>
+											    <input type="hidden" id="loginattr" name="login" value="memberlogin"/> 
+												<input  class="btn btn-dark btn-block border-0 py-3"
+													type="submit" value="登入">
 											</div>
-										</form>
+									<!-- 	</form> -->
 										<!-- Footer -->
 										<div class="modal-footer">
 											<div class="signup">
 												<span style="color: black; font-weight: bold">尚未成為會員</span>
 												<a href="#" type="button" class="member"
-													style="color: black; font-weight: bold"> 立即加入 </a>
+													style="color: black; font-weight: bold"> <u>加入會員</u></a>
 											</div>
 											
 											<div class="signup">
 												<span style="color: black; font-weight: bold">加入設計團隊</span>
 												<a href="addDesigner.jsp" type="button" class="designer"
-													style="color: black; font-weight: bold"> 立即加入 </a>
+													style="color: black; font-weight: bold"><u> 成為夥伴 </u></a>
 											</div>
 										</div>
 									</div>
+									</form>
 								</div>
 							</div>
 						</div>
+						
 						<!-- Registration End -->
 					</div>
 				</div>
@@ -145,12 +150,11 @@
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
 						<div class="navbar-nav py-0">
-							<a id="product" href="index.html" class="nav-item nav-link">找作品</a>
-							<a id="design" href="findDesigner.jsp" class="nav-item nav-link">找設計師</a>
-							<a id="store" href="course.html" class="nav-item nav-link">商城</a>
-							<a id="fourm" href="teacher.html" class="nav-item nav-link">論壇</a>
-							<a id="topic" href="teacher.html" class="nav-item nav-link">報導文章</a>
-
+							<div id="selfedit" style="width: 200px"><a  href="index.html" class="nav-item nav-link"><b>找作品</b></a></div>
+							<div id="ordermanage" style="width: 200px"><a  href="findDesigner.jsp" class="nav-item nav-link"><b>找設計師</b></a></div>
+							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>商城</b></a></div>
+							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>論壇</b></a></div>
+							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>報導文章</b></a></div>
 						</div>
 
 					</div>
@@ -581,6 +585,10 @@
 
 		</div>
 	</div>
+	
+	 <!-- <input type="hidden" value="${errorFlag}" id="errorFlag"/> -->
+ 
+	 
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 		class="fa fa-angle-double-up"></i></a>
@@ -598,6 +606,47 @@
 
 	<!-- Template Javascript -->
 	<script src="/js/main.js"></script>
+
+
+
+
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<%
+	//HttpSession session2=request.getSession();
+	//String errorFlag=(String)session2.getAttribute("errorFlag");
+	//System.out.println("errorFlag:"+errorFlag);
+	%>
+	
+	
+	<script >
+	
+	
+
+	  
+	    $(document).on("click","#designerlogin",function(){
+        ($("#loginattr").removeAttr("value"))
+        ($("#loginattr").attr("value","designerlogin"));
+        });
+	    
+	    
+	    $(document).on("click","#memberlogin",function(){
+	        ($("#loginattr").removeAttr("value"))
+	        ($("#loginattr").attr("value","memberlogin"));
+	        });
+	    
+	    
+		//var flag=document.getElementById("errorFlag").value;
+		//if(flag==null||flag==""){
+			
+		//}else{
+			//var flag="${errorFlag}";
+			//alert("flag:"+flag);
+		//}
+		
+	    
+	</script>
 
 
 </body>
