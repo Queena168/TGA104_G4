@@ -297,6 +297,22 @@ public class DesignerServlet extends HttpServlet {
 			 in.read(designerPic);
 			 in.close();
 			 
+				String phone = req.getParameter("phone").trim();
+				String phoneReg = "^[0][9][0-9]{8}$";
+				if(phone == null || phone.trim().length() ==0) {
+					errorMsgs.add("請勿空白，請填寫手機號碼，以利我們團隊方便聯繫到您");
+				}else if(!phone.trim().matches(phoneReg)){
+					errorMsgs.add("請填寫正確手機號碼格式");
+				}
+				
+				String designerDetail=null;
+				try {
+					 designerDetail =req.getParameter("designerDetail").trim();
+					
+				}catch (NullPointerException e) {
+					errorMsgs.add("請填寫您的簡介，好讓客戶對您有好感覺");
+				}
+			 
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -311,7 +327,7 @@ public class DesignerServlet extends HttpServlet {
 			System.out.println("新增開始=================================================");
 			DesignerService designerSvc = new DesignerService();
 			designerSvc.addDesignerinfo(designerAccount, designerPassword, designerName,
-					designerCompany , designerPic );
+					designerCompany , designerPic,phone, designerDetail);
 			System.out.println("新增完成=================================================");
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			System.out.println("轉交開始=================================================");

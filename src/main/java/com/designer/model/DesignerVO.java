@@ -2,7 +2,7 @@ package com.designer.model;
 
 import java.util.Date;
 
-import com.expertise.model.ExpertiseVO;
+
 
 public class DesignerVO implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class DesignerVO implements java.io.Serializable {
 	private Integer approver;// (審核管理員編號): int
 	private Boolean designerStatus;// (設計師狀態)
 
-	private ExpertiseVO ExpertiseVO;
+
 
 	public Integer getDesignerNo() {
 		return designerNo;
@@ -102,13 +102,6 @@ public class DesignerVO implements java.io.Serializable {
 		this.designerStatus = designerStatus;
 	}
 
-	public ExpertiseVO getExpertiseVO() {
-		return ExpertiseVO;
-	}
-
-	public void setExpertiseVO(ExpertiseVO expertiseVO) {
-		ExpertiseVO = expertiseVO;
-	}
 
 	public String getPhone() {
 		return phone;
