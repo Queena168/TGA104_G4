@@ -21,10 +21,10 @@ public class ForumReplyService {
 		return forumReplyVO;
 	}
 
-	public ForumReplyVO updateReply(String content, Integer replyTo) {
+	public ForumReplyVO updateReply(String content, Integer replyNo) {
 		ForumReplyVO forumReplyVO = new ForumReplyVO();
 		forumReplyVO.setContent(content);
-		forumReplyVO.setReplyTo(replyTo);
+		forumReplyVO.setReplyNo(replyNo);
 		dao.update(forumReplyVO);
 
 		return forumReplyVO;

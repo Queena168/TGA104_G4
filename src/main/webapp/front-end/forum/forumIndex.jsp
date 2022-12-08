@@ -6,12 +6,27 @@
 <html>
 <head>
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front-end/css/forum_style.css">
+<link rel="stylesheet" href="../CSS/forum_style.css">
 </head>
 
 <body>
+<c:if test="${not empty errorMessages}">
+<ul>
+<c:forEach var="message" items="${errorMessages}">
+<li style="color: red">${message}</li>
+</c:forEach>
+</ul>
+</c:if>
 
-	<c:forEach var="forumTopicVO" items="${forumTopicVOList}" varStatus="status">
+<form method="post" action="forumpost.do">
+<span>
+<input type="text" name="keyword" placeholder="搜尋論壇發文">
+<input type="hidden" name="action" value="search">
+<button>確認</button></span>
+</form>
+
+
+<c:forEach var="forumTopicVO" items="${forumTopicVOList}" varStatus="status">
 	<div class="subforum-row">
 
 		<div class="subforum-icon subforum-column center">
@@ -27,7 +42,7 @@
 		</div>
 	
 		<div class="subforum-info subforum-column">
-			<b>最新:<a href="<%=request.getContextPath()%>/front-end/forum/posts.do?topicNo=${forumPostVOList[status.index].topicNo}&postNo=${forumPostVOList[status.index].postNo}">${forumPostVOList[status.index].title}</a></b> by (會員暱稱) ${forumPostVOList[status.index].memberNo}</a>
+			<b>最新:<a href="posts.do?topicNo=${forumPostVOList[status.index].topicNo}&postNo=${forumPostVOList[status.index].postNo}">${forumPostVOList[status.index].title}</a></b> by (會員暱稱) ${forumPostVOList[status.index].memberNo}</a>
 			<br>on <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVOList[status.index].postTime}"/>
 		</div>
 	</div>

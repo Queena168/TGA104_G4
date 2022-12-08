@@ -1,4 +1,5 @@
 package com.forum;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -20,7 +21,12 @@ import redis.clients.jedis.Jedis;
 
 @WebServlet("/front-end/forum/posts.do")
 public class Post extends HttpServlet {
-
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

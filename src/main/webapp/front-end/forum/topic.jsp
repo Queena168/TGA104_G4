@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front-end/css/forum_style.css">
+<link rel="stylesheet" href="../CSS/forum_style.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 		<!--Display posts table-->
 		<div class="posts-table">
 			<div class="table-head">
-				<div class="status">Status</div>
+				<div class="status">筆數</div>
 				<div class="subjects">主題</div>
 				<div class="replies">回應/瀏覽次數</div>
 				<div class="last-reply">最新回應</div>
@@ -29,7 +29,7 @@
 		<c:forEach var="forumPostVO" items="${forumPostVOList}" varStatus="status">
 		
 			<div class="table-row">
-				<div class="status"><i class="fa fa-fire"></i></div>
+				<div class="status">第${status.count}篇</div>
 				<div class="subjects">
 					<a href="posts.do?topicNo=${param.topicNo}&postNo=${forumPostVO.postNo}">${forumPostVO.title}</a> <br>
 					<span>Started by <b><a href="">${forumPostVO.memberNo}</a></b>

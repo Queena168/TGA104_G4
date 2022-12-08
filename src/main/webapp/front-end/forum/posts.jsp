@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/forum_style.css">
+<link rel="stylesheet" href="../CSS/forum_style.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -23,11 +23,19 @@
         margin-inline-end: 0px;
     }
     /* 蓋掉summernote原本的css */
+    
 </style>
 <title>Insert title here</title>
 </head>
 
 <body>
+<c:if test="${not empty errorMessages}">
+<ul>
+<c:forEach var="message" items="${errorMessages}">
+<li style="color: red">${message}</li>
+</c:forEach>
+</ul>
+</c:if>
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
@@ -45,7 +53,7 @@
             <!--Original thread-->
             <div class="head">
                 <div class="authors">發文者</div>
-                <div class="content">${forumPostVO.title}</div>
+                <div class=content>${forumPostVO.title}</div>
 				<div class="view">瀏覽次數: ${view}次</div>
             </div>
 
@@ -64,27 +72,22 @@
                     </div>
                 </div>
                 <div class="content">
-                    ${forumPostVO.content}
-                    <br>發文時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
-                    <br>最終修改時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.modificationTime}" />
+                    <span class="post">${forumPostVO.content}</span>
+                    <div class="time">
+                		<br>發文時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
+                		<br>最終修改時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.modificationTime}" />
+                		<br>原PO
+                	</div>
                     <div class="comment">
-                    <form method="post" action="forumpost/forumpost.do">
-                    	<button type="submit" value="update">修改內容</button>
-                   	</form>
-                   <form method="post" action="">
-                    	<button type="submit" value="update">加到我的最愛</button>
-                   	</form>
-                   	<form method="post" action="">
-                    	<button type="submit" value="update">檢舉</button>
-                   	</form>
-                        <button onclick="showReply()">我要回覆</button>
+                        <button class="post_modify_btn">我要修改</button>
+						<button class="report_btn">我要檢舉</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!--Comments Section-->
-        <c:forEach var="forumReplyVO" items="${forumReplyVOList}">
+        <c:forEach var="forumReplyVO" items="${forumReplyVOList}" varStatus="status">
         <div class="comments-container">
             <div class="body">
                 <div class="authors">
@@ -98,42 +101,107 @@
                     <div>Points: <u>4586</u></div>
                 </div>
                 <div class="content">
-                    ${forumReplyVO.content}
-                    <br>回應時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVO.replyTime}" />
-                    <br>最終修改時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVO.modificationTime}" />
+                    <span class="reply_spn">${forumReplyVO.content}</span>
+            		<input type="hidden" class="hidden_replyNo" value="${forumReplyVO.replyNo}">
+					<div class="time">
+	                   <br>回應時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVO.replyTime}" />
+	                   <br>最終修改時間<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVO.modificationTime}" />
+	                   <br>${status.count}樓
+                	</div>
                     <div class="comment">
-                    <form method="post" action = "forumreply/forumreply.do">
-                 		<input type="button" value="修改內容">
-                    	<input type="button" value="加到我的最愛">
-						<input type="button" value="檢舉文章">
-                   	</form>
-                        <button onclick="showReply()">我要回覆</button>
+                        <button class="reply_modify_btn">我要修改</button>
+						<button class="report_btn">我要檢舉</button>
                     </div>
                 </div>
             </div>
         </div>
         </c:forEach>
+        
         <!--Reply Area-->
-        <form method="post" action="forumreply/forumreply.do">
-         <div class="comment-area hide" id="reply-area">
-             <textarea name="content" id="summernote"></textarea>
-             <input type="submit" value="送出">
-         </div>
+        <form method="post" id="form" action="forumreply.do">
+		<input type="hidden" id="title" name="title" value="${forumPostVO.title}">
+        <div class="comment-area" id="reply-area">
+			<textarea name="content" id="summernote"></textarea>
+			<input type="submit" value="送出">
+        </div>
 		<input type="hidden" name="action" value="insert">
 		<input type="hidden" name="memberNo" value=1>
+		<input type="hidden" name="replyNo" value="">
 		<input type="hidden" name="topicNo" value="${param.topicNo}">
-		<input type="hidden" name="replyTo" value="${param.postNo}">
+		<input type="hidden" name="postNo" value="${param.postNo}">
          </form>
+              
+    </div>
+    
+	   <div id="modalOne" class="modal">
+        <div class="modal-content">
+            <div class="contact-form">
+                <a class="close">&times;</a>
+                <form action="/">
+                    <h2>檢舉</h2>
+                    <div>
+                        <input type="text" name="postNo" placeholder="發文號碼" />
+                        <input type="text" name="replyNo" placeholder="回應號碼" />
+                        <input type="text" name="memberNo" placeholder="會員編號" />
+                    </div>
+                    <span>檢舉原因</span>
+                    <div>
+                        <textarea rows="4"></textarea>
+                    </div>
+                    <button type="submit" href="/">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
 
 <script>
-function showReply(){
-document.getElementById("reply-area").classList.remove("hide");
-document.getElementsByClassName("note-editable")[0].focus();
-}
-</script>
+var report_btn = document.querySelectorAll(".report_btn");
+report_btn.forEach(function (btn){
+	btn.addEventListener("click", function(){
+        document.getElementById("modalOne").style.display = "block";
+	});
+});
 
-<script>
+
+document.querySelector(".close").addEventListener("click", function(){
+    document.getElementById("modalOne").style.display = "none";
+});
+
+
+var reply_modify_btn = document.querySelectorAll(".reply_modify_btn");
+reply_modify_btn.forEach(function (btn){
+	btn.addEventListener("click", function(){
+ 		$('#summernote').summernote('focus');	 	
+	 	if ($('#summernote').summernote(!'isEmpty')) {
+	 		$('#summernote').summernote('reset');
+	 	}
+		var replyContent = this.parentElement.parentElement.firstElementChild.innerHTML;
+		window.alert("您現在是修改模式");
+		$('#summernote').summernote('pasteHTML', replyContent);
+		document.getElementById("form").setAttribute("action","forumreply.do");
+		document.getElementById("title").setAttribute("type","hidden");
+		document.getElementsByName("action")[0].setAttribute("value","update");
+		
+		var replyNo = this.parentElement.parentElement.firstElementChild.nextElementSibling.value;
+		document.getElementsByName("replyNo")[0].setAttribute("value", replyNo);
+	});
+});
+
+var post_modify_btn = document.querySelector(".post_modify_btn");
+post_modify_btn.addEventListener("click", function(){
+	$('#summernote').summernote('focus');	 	
+ 	if ($('#summernote').summernote(!'isEmpty')) {
+ 		$('#summernote').summernote('reset');
+ 	}
+	var postContent = this.parentElement.parentElement.firstElementChild.innerHTML;
+	window.alert("您現在是修改模式");
+	$('#summernote').summernote('pasteHTML', postContent);
+	document.getElementById("form").setAttribute("action","forumpost.do");
+	document.getElementById("title").setAttribute("type","text");
+	document.getElementsByName("action")[0].setAttribute("value","update");
+	
+});
+
 $('#summernote').summernote({
 	lang: 'zh-TW',
     placeholder: '輸入文字... 或將圖片拖曳至此',
@@ -151,6 +219,7 @@ $('#summernote').summernote({
 		['view', ['codeview']],
 	],
 });
+
 </script>
 
 </body>

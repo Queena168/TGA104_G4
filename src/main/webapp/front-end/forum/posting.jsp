@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/forum_style.css">
+<link rel="stylesheet" href="../CSS/forum_style.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -24,7 +25,15 @@
 </style>
 <title>Insert title here</title>
 </head>
+
 <body>
+<c:if test="${not empty errorMessages}">
+<ul>
+<c:forEach var="message" items="${errorMessages}">
+<li style="color: red">${message}</li>
+</c:forEach>
+</ul>
+</c:if>
         <div class="navigate">
             <span>
                 <a href="forumIndex.do">論壇首頁</a> >>
@@ -32,18 +41,16 @@
             </span>
 
         </div>
-        <form method="post" action="forumpost.do">
-        <input type="text" placeholder="請輸入標題" name="title">
-         <div class="comment-area" id="reply-area">
-             <textarea name="content" id="summernote"></textarea>
-             <input type="submit" value="送出">
-         </div>
+		<form method="post" action="forumpost.do">
+		<input type="text" placeholder="請輸入標題" name="title" value="${forumPostVO.title}">
+		<div class="comment-area" id="reply-area">
+		<textarea name="content" id="summernote">${forumPostVO.content}</textarea>
+		<input type="submit" value="送出">
+		</div>
 		<input type="hidden" name="action" value="insert">
 		<input type="hidden" name="topicNo" value="${param.topicNo}">
 		<input type="hidden" name="memberNo" value=1>
-         </form>
-
-
+		</form>
 
 <script>
 $('#summernote').summernote({
@@ -63,6 +70,8 @@ $('#summernote').summernote({
 		['view', ['codeview']],
 	],
 });
+
 </script>
+
 </body>
 </html>
