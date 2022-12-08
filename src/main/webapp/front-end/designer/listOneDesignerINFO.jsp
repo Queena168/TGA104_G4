@@ -4,7 +4,7 @@
 <%@ page import="com.designer.model.*" %>
 <%@ page import="com.designer.service.*" %>
 <%@ page import="com.designer.controller.*" %>
-<%@ page import="com.designerExpertise.model.*" %>
+
 
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
