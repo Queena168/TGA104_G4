@@ -19,23 +19,28 @@ public class DesignerEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    HttpSession session=req.getSession();  
-    session.getAttribute("designerNo");
-	DesignerVO designerVO= new DesignerVO();
-    DesignerService designerService =new DesignerService();
-    designerService.getOneDesigner(designerVO.getDesignerNo());
 
+		HttpSession session = req.getSession();
+		session.getAttribute("designerVO");
+		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
+		System.out.println(designerNo);
 
-    req.setAttribute("designerVO", designerVO); // 資料庫取出的empVO物件,存入req
-	String url = "/front-end/designer/updatedesignerINFO.jsp";
-	RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
-	successView.forward(req, res);
-			
+		DesignerService designerService = new DesignerService();
+		DesignerVO designerVO = designerService.getOneDesigner(designerNo);
+		System.out.println("有執行============================================");
+
+		// System.out.println(designerNo + "===========================");
+
+		session.setAttribute("designerVO", designerVO); //
+		String url = "/front-end/designer/updatedesignerINFO.jsp";
+		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
+		successView.forward(req, res);
+		doPost(req, res);
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		doGet(req, res);
 	}
 
 }

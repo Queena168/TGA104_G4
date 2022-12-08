@@ -1,8 +1,9 @@
 package com.designer.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
-
+import com.expertise.model.ExpertiseVO;
 
 public class DesignerVO implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,7 +20,6 @@ public class DesignerVO implements java.io.Serializable {
 	private Date approvalTime;// (審核時間): timestamp
 	private Integer approver;// (審核管理員編號): int
 	private Boolean designerStatus;// (設計師狀態)
-
 
 
 	public Integer getDesignerNo() {
@@ -102,7 +102,6 @@ public class DesignerVO implements java.io.Serializable {
 		this.designerStatus = designerStatus;
 	}
 
-
 	public String getPhone() {
 		return phone;
 	}
@@ -118,6 +117,18 @@ public class DesignerVO implements java.io.Serializable {
 	public void setDesignerDetail(String designerDetail) {
 		this.designerDetail = designerDetail;
 	}
+
+	@Override
+	public String toString() {
+		return "DesignerVO [designerNo=" + designerNo + ", designerAccount=" + designerAccount + ", designerPassword="
+				+ designerPassword + ", designerName=" + designerName + ", designerCompany=" + designerCompany
+				+ ", designerPic=" + Arrays.toString(designerPic) + ", phone=" + phone + ", designerDetail="
+				+ designerDetail + ", approvalStatus=" + approvalStatus + ", approvalTime=" + approvalTime
+				+ ", approver=" + approver + ", designerStatus=" + designerStatus + "]";
+	}
+	
+	
+	
 
 
 

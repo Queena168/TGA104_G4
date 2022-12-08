@@ -29,7 +29,7 @@ public class Login extends HttpServlet {
 //		System.out.println("done0===============================");
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html;charset=UTF-8");
-		HttpSession session=req.getSession();
+
 		PrintWriter out = res.getWriter();
 		String login = req.getParameter("login");
 //		System.out.println("done0.5===========================");
@@ -53,24 +53,13 @@ public class Login extends HttpServlet {
 
 			DesignerService designerSvc = new DesignerService();
 //			System.out.println("done1.5=====================================================");
-			DesignerVO designerlogin = designerSvc.logindesigner(designerAccount, designerPassword);
-			
-			
-			if (designerlogin == null) {
-//				errorMsgs.add("帳號或密碼錯誤，請重新輸入");
-//				System.out.println("done1.8=================================================");
-//				out.println("<script type=\"text/javascript\">");
-//				out.println("alert('User or password incorrect');");
-//				out.println("location='index.jsp';");
-//				out.println("</script>");
-				// res.sendRedirect(req.getContextPath() + "/front-end/designer/index.jsp");
-				
-				
-				//
+			//DesignerVO designerlogin = designerSvc.logindesigner(designerAccount, designerPassword);
+			DesignerVO designerVO = designerSvc.logindesigner(designerAccount,designerPassword);
+		
+			if (designerVO == null) {
 				out.println("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
 						+ "/front-end/designer/index.jsp'>");// redirects after 1 seconds
 				out.println("<script> alert('帳號或密碼錯誤，請重新登入!');</script>");
-				//out.println("<script><p style='color:red;'>帳號或密碼錯誤，請重新登入!</p></script>");
 				return;
 			}
 			// Send the use back to the form, if there were errors
@@ -96,15 +85,19 @@ public class Login extends HttpServlet {
 			
 			
 			
-			
+			System.out.println("TEST0.0"+designerVO.toString());
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			//req.setAttribute("designerlogin", designerlogin); // 資料庫取出的empVO物件,存入req
 //			System.out.println("done2===========================================");
-			session.setAttribute("designerlogin", designerlogin);
+			designerVO=designerSvc.getOneDesigner(designerVO.getDesignerNo());
+			HttpSession session=req.getSession();
+			session.setAttribute("designerVO", designerVO);
+			System.out.println("TEST0.1"+designerVO.toString());
 			String url = "/front-end/designer/designerMainPage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 //			System.out.println("done3=======================================");
 			successView.forward(req, res);
+		
 
 		}
 

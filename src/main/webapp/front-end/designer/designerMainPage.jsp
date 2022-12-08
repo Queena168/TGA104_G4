@@ -90,11 +90,11 @@
 						<div class="navbar-nav py-0">
 				<!-- 	<form method="post" action="<%=request.getContextPath()%>/DesignerEdit">  -->	
 					<!--	<input type="hidden" name="designerNo" value="${designerVO.designerNo}"> -->
-	<%
-	session.setAttribute("designerVO",designerVO);
-	System.out.println(designerVO);
-	%>
-							<div id="selfedit" style="width: 200px"><a href="<%=request.getContextPath()%>/DesignerEdit?${designerVO.designerNo}" class="nav-item nav-link"><b>編輯簡介</b></a></div>
+	                  <%
+	                     session.setAttribute("designerVO",designerVO);
+	                     System.out.println(designerVO);
+	                   %>
+							<div id="selfedit" style="width: 200px"><a href="<%=request.getContextPath()%>/DesignerEdit?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>編輯簡介</b></a></div>
 						<!--	</form>-->
 							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/front-end/designer/orderManage.jsp" class="nav-item nav-link"><b>訂單管理</b></a></div>
 							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>製作報價</b></a></div>

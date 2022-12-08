@@ -66,7 +66,7 @@ h4 {
 
 <style>
 table {
-	width: 1100px;
+	width: 800px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -86,9 +86,12 @@ th, td {
 #preview {
 	border: 1px solid lightgray;
 	display: inline-block;
-	width: 100px;
-	min-height: 150px;
+	width: 150px;
+	min-height: 200px;
 	position: relative;
+	
+
+	
 }
 
 #preview span.text {
@@ -104,6 +107,41 @@ th, td {
 #preview img.preview_img {
 	width: 100%;
 }
+
+
+.wrap{
+    margin: auto;
+    margin-left: 500px;
+}
+.wrap1{
+    margin: auto;
+    margin-left: 300px;
+}
+
+
+#block1{
+margin-left: 200px;
+}
+#block2{
+margin-left: 500px;
+}
+
+img{
+    max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
+    height:auto;
+}
+
+.intro{
+margin-left: 200px;
+
+}
+/*
+.h2regisiter{
+margin-left: 200px;
+}
+*/
+
+
 </style>
 
 </head>
@@ -189,21 +227,26 @@ th, td {
 
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/designer/designer.do"  enctype="multipart/form-data">
-<table align="right">
-
-<div id="preview">
+<div id="container">
+     <!-- <div class="h2regisiter"><h2 >設計師註冊</h2></div> -->
+     <div style="text-align: center;"><h2 >設計師註冊</h2></div>  
+   <div class="wrap">
+  
+        <div id="preview">
 			<span class="text">預覽圖</span>
-		</div><br><br>
-
-
+		</div> 
+   </div>
+   <br>
+<div id="block1">
+<table>
 	<tr>
 		<td>帳號:</td>
-		<td><input type="TEXT" name="designerAccount" size="45" 
+		<td><input type="email" name="designerAccount" size="45" 
 			 value="${param.designerAccount}"/></td>
 	</tr>
 	<tr>
 		<td>密碼:</td>
-		<td><input type="PASSWORD" name="designerPassword" size="45"
+		<td><input type="password" name="designerPassword" size="45"
 			 value="${param.designerPassword}"/></td>
 	</tr>
 
@@ -218,42 +261,44 @@ th, td {
 			 value="${param.designerCompany}"/></td>
 	</tr>
 	
+	<tr>
+		<td>手機號碼:</td>
+		<td><input type="TEXT" name="phone" size="45"
+			 value="${param.phone}"/></td>
+	</tr>
 	
 	<tr>
-
 		<td>設計師照片上傳</td>
 		<td><input type="file" name="designerPic" id="p_file">
 	</tr>
-</table>  <br>
+	
+	</table>
+  <br>
+  </div>
+  
+  <table class=intro>
+    <tr>
+      <td>簡介</td>
+    </tr>
+  </table>
+  <div class="wrap1">
+	 <textarea rows="10" cols="60" placeholder="關於我!" name="designerDetail"></textarea>
+  </div>
 
 	
 		    
 		
 
-
-
+<div id="block2">
 <input type="hidden" name="action" value="insertdesigner">
-<input type="submit" value="送出註冊資料"></FORM>
+<input type="submit" value="送出註冊資料">
+</div>
+</div>
 
+</FORM>
 
-
-
-	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
- <script>
-      //點擊圖片加讀取圖片動作
-      let div_preview = document.getElementById("p_file");
-      div_preview.addEventListener("change", function () {
-        console.log(this.files[0]);
-
-        let reader = new FileReader();
-        reader.readAsDataURL(this.files[0]);
-        reader.addEventListener("load", function () {
-          console.log(reader.result);
-          let div_pic = `<div><img src="${reader.result}" id="picture"></div>`;
-          document.getElementById("preview").innerHTML = div_pic;
-        });
-      });
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="js/MatDesign.js"></script>
 
 
 </body>
