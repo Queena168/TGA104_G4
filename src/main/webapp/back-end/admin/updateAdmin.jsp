@@ -53,7 +53,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
-
+<link rel="stylesheet" href="../assets/vendor/css/pages/admin-login.css" />
 <!-- Helpers -->
 <script src="../assets/vendor/js/helpers.js"></script>
 
@@ -279,23 +279,24 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 
 									<li><form method="post"
 											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
-											<div class="dropdown-item" > 
-												
-												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
-													<i class="bx bx-user me-2"></i> 
-													<span class="align-middle">My Profile</span> 
-													<input type="hidden" name="adminNo" value="${adminVO.adminNo}"> 
-													<input type="hidden" name="action" value="getOne_For_Profile">
+											<div class="dropdown-item">
+
+												<label class="btn rounded-pill bg-label-secondary"
+													tabindex="0"> <i class="bx bx-user me-2"></i> <span
+													class="align-middle">My Profile</span> <input type="hidden"
+													name="adminNo" value="${adminVO.adminNo}"> <input
+													type="hidden" name="action" value="getOne_For_Profile">
 													<input type="submit" class="account-file-input" hidden />
 												</label>
 											</div>
 										</form></li>
-									<li><a class="dropdown-item" href="../adminLogin/admin-login.jsp">
-												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
-													<i class="bx bx-power-off me-2"></i> 
-													<span class="align-middle">Log Out</span> 
-												</label>
-									</a></li>	
+									<li><a class="dropdown-item"
+										href="../adminLogin/admin-login.jsp"> <label
+											class="btn rounded-pill bg-label-secondary" tabindex="0">
+												<i class="bx bx-power-off me-2"></i> <span
+												class="align-middle">Log Out</span>
+										</label>
+									</a></li>
 								</ul>
 							</li>
 							<!--/ User -->
@@ -331,6 +332,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 								</div>
 							</c:if>
 							<%-- /錯誤表列 --%>
+							
 							<!-- Account -->
 							<div class="card-body">
 								<div
@@ -356,7 +358,8 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 											<input type="TEXT" hidden name="adminPrivilege"
 												value="<%=adminVO.getAdminPrivilege()%>" />
 										</div>
-										<div class="mb-3 col-md-6 ">
+										<!-- /排版用區塊  隱藏權限-->
+										<div class="mb-3 col-md-6 form-password-toggle">
 											<label for="firstName" class="form-label">管理員密碼</label>
 											<div class="input-group input-group-merge">
 												<input class="form-control" type="password" id="firstName"
@@ -368,6 +371,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 										</div>
 										<!-- 排版用區塊  -->
 										<div class="mb-3 col-md-6"></div>
+										<!-- /排版用區塊  -->
 										<div class="mb-3 col-md-6">
 											<label for="firstName" class="form-label">管理員名稱</label> <input
 												class="form-control" type="text" id="firstName"
@@ -375,11 +379,14 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 										</div>
 										<!-- 排版用區塊  -->
 										<div class="mb-3 col-md-6"></div>
-										<div class="mb-3 col-md-6">
-											<label for="firstName" class="form-label">大頭貼</label> <img
-												src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
-												alt="user-avatar" class="d-block rounded" height="100"
-												width="100" id="uploadedAvatar" /> <br>
+										<!-- /排版用區塊  -->
+										<div class="mb-3 col-md-6 ">
+											<label for="firstName" class="form-label">大頭貼</label>
+												<img
+													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+													alt="user-avatar" class="d-block rounded" height="100"
+													width="100" id="uploadedAvatar" />
+											<br>
 											<div class="button-wrapper">
 												<label for="upload" class="btn btn-secondary" tabindex="0">
 													<input type="file" id="upload" class="account-file-input"
@@ -454,8 +461,8 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 	<script src="../assets/js/main.js"></script>
 
 	<!-- Page JS -->
-	<script src="../assets/js/dashboards-analytics.js"></script>
 	<script src="../assets/js/pages-account-settings-account.js"></script>
+	<script src="../assets/js/adminUpdate-changepic.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

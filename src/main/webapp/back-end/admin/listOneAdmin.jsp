@@ -4,6 +4,7 @@
 <%@ page import="com.admin.model.*"%>
 
 <%
+AdminVO adminVoSelect = (AdminVO) request.getAttribute("adminVoSelect");
 AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 AdminService adminSvc = new AdminService();
 %>
@@ -333,17 +334,17 @@ AdminService adminSvc = new AdminService();
 									</thead>
 									<tbody class="table-border-bottom-0">
 										<tr>
-											<td><strong><%=adminVO.getAdminNo()%></strong></td>
-											<td><%=adminVO.getAdminEmail()%></td>
-											<td><%=adminVO.getAdminPassword()%></td>
-											<td><%=adminVO.getAdminName()%></td>
+											<td><strong><%=adminVoSelect.getAdminNo()%></strong></td>
+											<td><%=adminVoSelect.getAdminEmail()%></td>
+											<td><%=adminVoSelect.getAdminPassword()%></td>
+											<td><%=adminVoSelect.getAdminName()%></td>
 											<td><img
-												src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+												src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoSelect.adminNo}"
 												alt class="w-px-40 rounded-circle avatar" /></td>
-											<td><%=adminVO.getAdminPrivilege()%></td>
+											<td><%=adminVoSelect.getAdminPrivilege()%></td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
 													value="${adminVO.createTime}" /></td>
-											<td><%=adminVO.getUploader()%></td>
+											<td><%=adminVoSelect.getUploader()%></td>
 										</tr>
 									</tbody>
 								</table>

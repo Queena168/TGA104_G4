@@ -70,8 +70,8 @@ public class AdminServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			AdminService adminSvc = new AdminService();
-			AdminVO adminVO = adminSvc.getOneAdmin(adminNo);
-			if (adminVO == null) {
+			AdminVO adminVoSelect = adminSvc.getOneAdmin(adminNo);
+			if (adminVoSelect == null) {
 				errorMsgs.add("查無資料");
 			}
 			// Send the use back to the form, if there were errors
@@ -82,7 +82,7 @@ public class AdminServlet extends HttpServlet {
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("adminVO", adminVO); // 資料庫取出的AdminVO物件,存入req
+			req.setAttribute("adminVoSelect", adminVoSelect); // 資料庫取出的AdminVO物件,存入req
 			String url = "/back-end/admin/listOneAdmin.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
