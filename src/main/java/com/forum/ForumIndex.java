@@ -2,9 +2,7 @@ package com.forum;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,12 +20,12 @@ import redis.clients.jedis.Jedis;
 
 @WebServlet("/front-end/forum/forumIndex.do")
 public class ForumIndex extends HttpServlet {
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -47,20 +45,17 @@ public class ForumIndex extends HttpServlet {
 		request.setAttribute("forumPostVOList", forumPostVOList);
 		// 從TopicVO中得到topicNo作為參數，用ForumPostService呼叫方法取得每個討論區的最新一篇文章，存入attribute
 
-//		Map<String, String> map = new HashMap<String, String>();
-//
-//		Jedis jedis = new Jedis("localhost", 6379);
-//		for (ForumPostVO a : forumPostService.getAll()) {
-//			String view;
-//			if (jedis.get("postNo:" + a.getPostNo() + ":view") == null) {
-//				view = "0";
-//			} else {
-//				view = jedis.get("postNo:" + a.getPostNo() + ":view");
-//			}
-//			map.put(a.getPostNo().toString(), view);
-//		}
-//		jedis.close();
-
+		Jedis jedis = new Jedis("localhost", 6379);
+		List<ForumPostVO> hotList = new ArrayList<ForumPostVO>();
+		List<Integer> viewList = new ArrayList<Integer>();
+		for (String a : jedis.zrevrange("viewZset", 0, 4)) {
+			hotList.add(forumPostService.getPostByPostNo(Integer.valueOf(a)));
+			viewList.add(jedis.zscore("viewZset", a).intValue());
+		}
+		jedis.close();
+		request.setAttribute("hotList", hotList);
+		request.setAttribute("viewList", viewList);
+		// 取得Redis紀錄瀏覽次數的zset中瀏覽次數最高的1-5篇文章，將文章VO和瀏覽次數分別存到attribute
 
 		RequestDispatcher successView = request.getRequestDispatcher("/front-end/forum/forumIndex.jsp");
 		successView.forward(request, response);

@@ -1,35 +1,32 @@
-//package com.forum_report.controller;
-//
-//import java.io.IOException;
-//import java.sql.SQLException;
-//import java.util.LinkedList;
-//import java.util.List;
-//
-//import javax.servlet.RequestDispatcher;
-//import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//
-//import com.forum_report.model.ForumReportService;
-//import com.forum_report.model.ForumReportVO;
-//import com.forum_topic.model.ForumTopicService;
-//
-//@WebServlet("/forumreport/forumreport.do")
-//public class ForumReportController extends HttpServlet {
-//
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		doPost(request, response);
-//	}
-//
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//
-//		request.setCharacterEncoding("UTF-8");
-//		String action = request.getParameter("action");
-//
+package com.forum_report.controller;
+
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.forum_report.model.ForumReportService;
+
+@WebServlet("/front-end/forum/forumreport.do")
+public class ForumReportServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		String action = request.getParameter("action");
+
 //		// 透過檢舉編號找
 //		if ("getReportByReportNo".equals(action)) {
 //			List<String> errorMessages = new LinkedList<String>();
@@ -229,74 +226,34 @@
 //			RequestDispatcher successViewe = request.getRequestDispatcher("/forumreport/getReportByReportNo.jsp");
 //			successViewe.forward(request, response);
 //		}
-//
-//		// 檢舉文章
-//		if ("insertPostReport".equals(action)) {
-//			List<String> errorMessages = new LinkedList<String>();
-//			request.setAttribute("errorMessages", errorMessages);
-//
-//			/************************ 1 ************************/
-//			Integer postNo = Integer.valueOf(request.getParameter("postNo"));
-//			Integer informant = Integer.valueOf(request.getParameter("informant"));
-//
-//			String reportReason = request.getParameter("reportReason");
-//			if (reportReason.trim().length() == 0) {
-//				errorMessages.add("請輸入檢舉原因");
-//			}
-//
-//			ForumReportVO forumReportVO = new ForumReportVO();
-//			forumReportVO.setPostNo(postNo);
-//			forumReportVO.setInformant(informant);
-//			forumReportVO.setReportReason(reportReason);
-//
-//			if (!errorMessages.isEmpty()) {
-//				request.setAttribute("forumReportVO", forumReportVO);
-//				RequestDispatcher failureView = request.getRequestDispatcher("/forumreport/addReport.jsp");
-//				failureView.forward(request, response);
-//				return;
-//			}
-//
-//			/************************ 2 ************************/
-//			ForumReportService forumReportService = new ForumReportService();
-//			forumReportService.addPostToReport(postNo, informant, reportReason);
-//			/************************ 3 ************************/
-//			RequestDispatcher successViewe = request.getRequestDispatcher("/forumreport/listAllReports.jsp");
-//			successViewe.forward(request, response);
-//		}
-//
-//		// 檢舉回應
-//		if ("insertReplyReport".equals(action)) {
-//			List<String> errorMessages = new LinkedList<String>();
-//			request.setAttribute("errorMessages", errorMessages);
-//
-//			/************************ 1 ************************/
-//			Integer replyNo = Integer.valueOf(request.getParameter("replyNo"));
-//			Integer informant = Integer.valueOf(request.getParameter("informant"));
-//
-//			String reportReason = request.getParameter("reportReason");
-//			if (reportReason.trim().length() == 0) {
-//				errorMessages.add("請輸入檢舉原因");
-//			}
-//
-//			ForumReportVO forumReportVO = new ForumReportVO();
-//			forumReportVO.setReplyNo(replyNo);
-//			forumReportVO.setInformant(informant);
-//			forumReportVO.setReportReason(reportReason);
-//
-//			if (!errorMessages.isEmpty()) {
-//				request.setAttribute("forumReportVO", forumReportVO);
-//				RequestDispatcher failureView = request.getRequestDispatcher("/forumreport/addReport.jsp");
-//				failureView.forward(request, response);
-//				return;
-//			}
-//
-//			/************************ 2 ************************/
-//			ForumReportService forumReportService = new ForumReportService();
-//			forumReportService.addReplyToReport(replyNo, informant, reportReason);
-//			/************************ 3 ************************/
-//			RequestDispatcher successViewe = request.getRequestDispatcher("/forumreport/listAllReports.jsp");
-//			successViewe.forward(request, response);
-//		}
-//
-//	}
-//}
+
+		// ============================ 新增檢舉 ============================
+		if ("insertReport".equals(action)) {
+			/************************ 1 ************************/
+			Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
+			Integer informant = Integer.valueOf(request.getParameter("informant"));
+			Integer postNo = Integer.valueOf(request.getParameter("postNo"));
+
+			String reportReason = request.getParameter("reportReason");
+			if (reportReason.trim().length() == 0) {
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+				return;
+			}
+
+			Integer replyNo;
+
+			/************************ 2 ************************/
+			ForumReportService forumReportService = new ForumReportService();
+			if (request.getParameter("replyNo").trim().length() == 0) {
+				forumReportService.addReport(postNo, null, informant, reportReason);
+			} else {
+				replyNo = Integer.valueOf(request.getParameter("replyNo"));
+				forumReportService.addReport(null, replyNo, informant, reportReason);
+			}
+
+			/************************ 3 ************************/
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+		}
+
+	}
+}

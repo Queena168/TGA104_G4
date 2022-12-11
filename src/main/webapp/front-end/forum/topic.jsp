@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>討論區分頁</title>
 <link rel="stylesheet" href="../CSS/forum_style.css">
 </head>
 
@@ -15,7 +15,7 @@
 		<!--Navigation-->
 		<div class="navigate">
 			<span><a href="forumIndex.do">論壇首頁</a> >> <a href="topic.do?topicNo=${param.topicNo}">${forumTopicVO.topicName}</a></span>
-		<input type="button" value="我要發文" onclick="location.href='posting.do?topicNo=${param.topicNo}'">
+		<input type="button" value="我要發文" onclick="location.href='posting.do?topicNo=${param.topicNo}'"><%--從topic.do傳來的forumTopicVO--%>
 		</div>
 		<!--Display posts table-->
 		<div class="posts-table">
@@ -26,7 +26,7 @@
 				<div class="last-reply">最新回應</div>
 			</div>
 
-		<c:forEach var="forumPostVO" items="${forumPostVOList}" varStatus="status">
+		<c:forEach var="forumPostVO" items="${forumPostVOList}" varStatus="status"><%--從topic.do傳來的forumPostVOList--%>
 		
 			<div class="table-row">
 				<div class="status">第${status.count}篇</div>
@@ -38,12 +38,13 @@
 				
 				<div class="replies">
 					${(countList[status.index] == null) ? 0: countList[status.index]} 次回應 <br>
-					${(viewList[status.index] == null) ? 0: viewList[status.index]} 次瀏覽
+					${viewList[status.index]} 次瀏覽<%--從topic.do傳來的countList & viewList，相同的index--%>
 				</div>
 				<div class="last-reply">
 		<c:choose>  <%-- 用JSTL的choose --%>
 		<c:when test="${countList[status.index] != null}">
 				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVOList[status.index].replyTime}"/> <br>By <b><a href="">${forumReplyVOList[status.index].memberNo}</a></b>
+															<%--從topic.do傳來的forumReplyVOList，相同的index--%>
 		</c:when>
 		<c:otherwise>
 				暫無人回應

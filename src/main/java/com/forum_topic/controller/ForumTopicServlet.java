@@ -16,7 +16,7 @@ import com.forum_topic.model.ForumTopicService;
 import com.forum_topic.model.ForumTopicVO;
 
 @WebServlet("/forumtopic/forumtopic.do")
-public class ForumTopicController extends HttpServlet {
+public class ForumTopicServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

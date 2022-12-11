@@ -1,7 +1,6 @@
 package com.forum_reply.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,11 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.forum_reply.model.ForumReplyVO;
 import com.forum_reply.model.ForumReplyService;
 
 @WebServlet("/front-end/forum/forumreply.do")
-public class ForumReplyController extends HttpServlet {
+public class ForumReplyServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -236,25 +234,17 @@ public class ForumReplyController extends HttpServlet {
 //
 //		}
 //
-//		// 修改
+		// ============================ 修改 ============================
 		if ("update".equals(action)) {
-			List<String> errorMessages = new LinkedList<String>();
-			request.setAttribute("errorMessages", errorMessages);
-
 			/************************ 1 ************************/
 			Integer replyNo = Integer.valueOf(request.getParameter("replyNo"));
 			Integer replyTo = Integer.valueOf(request.getParameter("postNo"));
 			Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
 
 			String content = request.getParameter("content");
-			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				errorMessages.add("請輸入回應內容");
-			}
 
-			if (!errorMessages.isEmpty()) {
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/front-end/forum/posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
-				failureView.forward(request, response);
+			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
 				return;
 			}
 
@@ -262,16 +252,11 @@ public class ForumReplyController extends HttpServlet {
 			ForumReplyService forumReplyService = new ForumReplyService();
 			forumReplyService.updateReply(content, replyNo);
 			/************************ 3 ************************/
-			RequestDispatcher successViewe = request
-					.getRequestDispatcher("/front-end/forum/posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
-			successViewe.forward(request, response);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
 		}
 
-		// 新增
+		// ============================ 新增 ============================
 		if ("insert".equals(action)) {
-			List<String> errorMessages = new LinkedList<String>();
-			request.setAttribute("errorMessages", errorMessages);
-
 			/************************ 1 ************************/
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
 			Integer replyTo = Integer.valueOf(request.getParameter("postNo"));
@@ -279,19 +264,7 @@ public class ForumReplyController extends HttpServlet {
 
 			String content = request.getParameter("content");
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				errorMessages.add("請輸入回應內容");
-			}
-
-			ForumReplyVO forumReplyVO = new ForumReplyVO();
-			forumReplyVO.setMemberNo(memberNo);
-			forumReplyVO.setReplyTo(replyTo);
-			forumReplyVO.setContent(content);
-
-			if (!errorMessages.isEmpty()) {
-				request.setAttribute("forumReplyVO", forumReplyVO);
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/front-end/forum/posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
-				failureView.forward(request, response);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
 				return;
 			}
 
@@ -299,9 +272,7 @@ public class ForumReplyController extends HttpServlet {
 			ForumReplyService forumReplyService = new ForumReplyService();
 			forumReplyService.addReply(memberNo, replyTo, content);
 			/************************ 3 ************************/
-			RequestDispatcher successViewe = request
-					.getRequestDispatcher("/front-end/forum/posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
-			successViewe.forward(request, response);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
 		}
 
 	}

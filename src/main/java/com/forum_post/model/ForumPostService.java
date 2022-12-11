@@ -56,14 +56,18 @@ public class ForumPostService {
 	public List<ForumPostVO> getPostByMemberNo(Integer memberNo) {
 		return dao.findByMemberNo(memberNo);
 	}
+	
+	public List<ForumPostVO> getPostByKeyword(String keyword) {
+	return dao.findByKeyword(keyword);
+}
 
-	public List<ForumPostVO> getPostByTitle(String title) {
-		return dao.findByTitle(title);
-	}
-
-	public List<ForumPostVO> getPostByContent(String content) {
-		return dao.findByContent(content);
-	}
+//	public List<ForumPostVO> getPostByTitle(String title) {
+//		return dao.findByTitle(title);
+//	}
+//
+//	public List<ForumPostVO> getPostByContent(String content) {
+//		return dao.findByContent(content);
+//	}
 
 	public List<ForumPostVO> getAll() {
 		return dao.getAll();

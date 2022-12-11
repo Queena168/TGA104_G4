@@ -21,12 +21,12 @@ import redis.clients.jedis.Jedis;
 
 @WebServlet("/front-end/forum/posts.do")
 public class Post extends HttpServlet {
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -53,10 +53,11 @@ public class Post extends HttpServlet {
 		// 以postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的所有回應ReplyVO，存入attribute
 
 		Jedis jedis = new Jedis("localhost", 6379);
-		jedis.incr("postNo:" + postNo + ":view");
-		request.setAttribute("view", jedis.get("postNo:" + postNo + ":view"));
+		jedis.zincrby("viewZset", 1, postNo.toString());
+		request.setAttribute("view", (jedis.zscore("viewZset", postNo.toString()).intValue()));
 		jedis.close();
-		// 用Jedis紀錄瀏覽次數，key為"postNo:" + postNo + ":view"，每進一次頁面value先自動加一，再取出存入attribute
+		// 用Redis zset紀錄瀏覽次數，key為"viewZset"，member為postNo，score為瀏覽次數，每次進入頁面score自動增加1
+		// 再取出該member的score存入attribute
 
 		RequestDispatcher successView = request.getRequestDispatcher("/front-end/forum/posts.jsp");
 		successView.forward(request, response);

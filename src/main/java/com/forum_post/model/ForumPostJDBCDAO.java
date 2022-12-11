@@ -21,8 +21,10 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 	private static final String DELETE_STATEMENT = "DELETE FROM ForumPost WHERE postNo = ?";
 	private static final String FINDBYPOSTNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE postNo = ?";
 	private static final String FINDBYMEMBERNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost FORUM_POST WHERE memberNo = ?";
-	private static final String FINDBYTITLE_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE title LIKE ?";
-	private static final String FINDBYCONTENT_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE content LIKE ?";
+//	private static final String FINDBYTITLE_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE title LIKE ?";
+//	private static final String FINDBYCONTENT_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE content LIKE ?";
+	private static final String FINDBYKEYWORD_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE title LIKE ? OR content like ?";
+
 	private static final String GETALL_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost ORDER BY postTime";
 	private static final String FINDBYPOSTTIME_STATAMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE topicNo = ? ORDER BY postTime DESC LIMIT 1";
 	private static final String FINDPOSTBYTOPICNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE topicNo = ?";
@@ -185,14 +187,14 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 	}
 
 	@Override
-	public List<ForumPostVO> findByTitle(String title) {
+	public List<ForumPostVO> findByKeyword(String keyword) {
 		List<ForumPostVO> list = new ArrayList<ForumPostVO>();
 		ForumPostVO forumPostVO = null;
 		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-				PreparedStatement ps = connection.prepareStatement(FINDBYTITLE_STATEMENT)) {
-			ps.setString(1, "%" + title + "%");
+				PreparedStatement ps = connection.prepareStatement(FINDBYKEYWORD_STATEMENT)) {
+			ps.setString(1, "%" + keyword + "%");
+			ps.setString(2, "%" + keyword + "%");
 			ResultSet rs = ps.executeQuery();
-
 			while (rs.next()) {
 				forumPostVO = new ForumPostVO();
 				forumPostVO.setPostNo(rs.getInt("postNo"));
@@ -205,40 +207,67 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setView(rs.getInt("view"));
 				list.add(forumPostVO);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 
-	@Override
-	public List<ForumPostVO> findByContent(String content) {
-		List<ForumPostVO> list = new ArrayList<ForumPostVO>();
-		ForumPostVO forumPostVO = null;
-		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-				PreparedStatement ps = connection.prepareStatement(FINDBYCONTENT_STATEMENT)) {
-			ps.setString(1, "%" + content + "%");
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				forumPostVO = new ForumPostVO();
-				forumPostVO.setPostNo(rs.getInt("postNo"));
-				forumPostVO.setMemberNo(rs.getInt("memberNo"));
-				forumPostVO.setTopicNo(rs.getInt("topicNo"));
-				forumPostVO.setTitle(rs.getString("title"));
-				forumPostVO.setContent(rs.getString("content"));
-				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
-				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
-				list.add(forumPostVO);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+//	@Override
+//	public List<ForumPostVO> findByTitle(String title) {
+//		List<ForumPostVO> list = new ArrayList<ForumPostVO>();
+//		ForumPostVO forumPostVO = null;
+//		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//				PreparedStatement ps = connection.prepareStatement(FINDBYTITLE_STATEMENT)) {
+//			ps.setString(1, "%" + title + "%");
+//			ResultSet rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				forumPostVO = new ForumPostVO();
+//				forumPostVO.setPostNo(rs.getInt("postNo"));
+//				forumPostVO.setMemberNo(rs.getInt("memberNo"));
+//				forumPostVO.setTopicNo(rs.getInt("topicNo"));
+//				forumPostVO.setTitle(rs.getString("title"));
+//				forumPostVO.setContent(rs.getString("content"));
+//				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
+//				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
+//				forumPostVO.setView(rs.getInt("view"));
+//				list.add(forumPostVO);
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+//
+//	@Override
+//	public List<ForumPostVO> findByContent(String content) {
+//		List<ForumPostVO> list = new ArrayList<ForumPostVO>();
+//		ForumPostVO forumPostVO = null;
+//		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//				PreparedStatement ps = connection.prepareStatement(FINDBYCONTENT_STATEMENT)) {
+//			ps.setString(1, "%" + content + "%");
+//			ResultSet rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				forumPostVO = new ForumPostVO();
+//				forumPostVO.setPostNo(rs.getInt("postNo"));
+//				forumPostVO.setMemberNo(rs.getInt("memberNo"));
+//				forumPostVO.setTopicNo(rs.getInt("topicNo"));
+//				forumPostVO.setTitle(rs.getString("title"));
+//				forumPostVO.setContent(rs.getString("content"));
+//				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
+//				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
+//				forumPostVO.setView(rs.getInt("view"));
+//				list.add(forumPostVO);
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 
 	@Override
 	public List<ForumPostVO> getAll() {
@@ -359,10 +388,24 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 //			System.out.println("=====================");
 //		}
 
-		ForumPostVO forumpostVO = dao.findLastPostTimeByTopicNo(1);
-		System.out.println(forumpostVO.getMemberNo());
-		System.out.println(forumpostVO.getTitle());
-		System.out.println(forumpostVO.getPostTime());
+//		ForumPostVO forumpostVO = dao.findLastPostTimeByTopicNo(1);
+//		System.out.println(forumpostVO.getMemberNo());
+//		System.out.println(forumpostVO.getTitle());
+//		System.out.println(forumpostVO.getPostTime());
+		
+		// FIND BY TITLE
+		List<ForumPostVO> list = dao.findByKeyword("redis");
+		for (ForumPostVO aForumPostVO : list) {
+			System.out.println(aForumPostVO);
+//			System.out.println(aForumPostVO.getPostNo());
+//			System.out.println(aForumPostVO.getMemberNo());
+//			System.out.println(aForumPostVO.getTopicNo());
+//			System.out.println(aForumPostVO.getTitle());
+//			System.out.println(aForumPostVO.getContent());
+//			System.out.println(aForumPostVO.getPostTime());
+//			System.out.println(aForumPostVO.getView());
+			System.out.println("=====================");
+		}
 
 	}
 }

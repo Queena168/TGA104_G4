@@ -20,9 +20,11 @@ public interface ForumPostDAO_interface {
 
 	public List<ForumPostVO> findPostByTopicNo(Integer topicNo);
 	
-	public List<ForumPostVO> findByTitle(String title);
+//	public List<ForumPostVO> findByTitle(String title);
 	
-	public List<ForumPostVO> findByContent(String content);
-
+//	public List<ForumPostVO> findByContent(String content);
+	
+	public List<ForumPostVO> findByKeyword(String keyword);
+	
 	public List<ForumPostVO> getAll();
 }

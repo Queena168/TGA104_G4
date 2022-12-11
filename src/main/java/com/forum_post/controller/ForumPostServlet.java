@@ -15,10 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.forum_post.model.ForumPostService;
 import com.forum_post.model.ForumPostVO;
 import com.forum_topic.model.ForumTopicService;
-import com.forum_topic.model.ForumTopicVO;
 
 @WebServlet("/front-end/forum/forumpost.do")
-public class ForumPostController extends HttpServlet {
+public class ForumPostServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -125,7 +124,7 @@ public class ForumPostController extends HttpServlet {
 //
 //		}
 //
-		// 搜尋
+		// ============================ 搜尋 ============================
 		if ("search".equals(action)) {
 			List<String> errorMessages = new LinkedList<String>();
 			request.setAttribute("errorMessages", errorMessages);
@@ -133,21 +132,15 @@ public class ForumPostController extends HttpServlet {
 			/************************ 1 ************************/
 			String str = request.getParameter("keyword");
 			if ((str.trim()).length() == 0) {
-				errorMessages.add("請輸入文字");
-			}
-
-			if (!errorMessages.isEmpty()) {
-				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/forum/forumIndex.do");
-				failureView.forward(request, response);
+				response.sendRedirect("forumIndex.do");
 				return;
 			}
 
 			/************************ 2 ************************/
 			ForumPostService forumPostService = new ForumPostService();
-			List<ForumPostVO> titleList = forumPostService.getPostByTitle(str);
-			List<ForumPostVO> contentList = forumPostService.getPostByContent(str);
-			
-			if (titleList.isEmpty() && contentList.isEmpty()) {
+			List<ForumPostVO> resultList = forumPostService.getPostByKeyword(str);
+
+			if (resultList.isEmpty()) {
 				errorMessages.add("查無資料");
 			}
 			if (!errorMessages.isEmpty()) {
@@ -156,20 +149,12 @@ public class ForumPostController extends HttpServlet {
 				return;
 			}
 			/************************ 3 ************************/
-			List<ForumPostVO> resultList = new ArrayList<ForumPostVO>();
-			for (ForumPostVO a : titleList) {
-				resultList.add(a);
-			}
-			for (ForumPostVO b : contentList) {
-				resultList.add(b);
-			}
-
 			ForumTopicService forumTopicService = new ForumTopicService();
 
 			List<String> topicNameList = new ArrayList<String>();
-			
-			for (ForumPostVO c : resultList) {
-				topicNameList.add(forumTopicService.getTopicByTopicNo(c.getTopicNo()).getTopicName());
+
+			for (ForumPostVO a : resultList) {
+				topicNameList.add(forumTopicService.getTopicByTopicNo(a.getTopicNo()).getTopicName());
 			}
 
 			request.setAttribute("resultList", resultList);
@@ -204,51 +189,33 @@ public class ForumPostController extends HttpServlet {
 //			}
 //		}
 //
-		// 修改
+		// ============================ 修改 ============================
 		if ("update".equals(action)) {
-			List<String> errorMessages = new LinkedList<String>();
-			request.setAttribute("errorMessages", errorMessages);
-
 			/************************ 1 ************************/
 			Integer postNo = Integer.valueOf(request.getParameter("postNo"));
 			Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
 
 			String title = request.getParameter("title");
 			if (title.trim().length() == 0) {
-				errorMessages.add("請輸入文章標題");
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+				return;
 			}
 
 			String content = request.getParameter("content");
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				errorMessages.add("請輸入文章內容");
-			}
-
-			ForumPostService forumPostService = new ForumPostService();
-			ForumPostVO forumPostVO = forumPostService.getPostByPostNo(postNo);
-
-			forumPostVO.setTitle(title);
-			forumPostVO.setContent(content);
-
-			if (!errorMessages.isEmpty()) {
-				request.setAttribute("forumPostVO", forumPostVO);
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/front-end/forum/posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
-				failureView.forward(request, response);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
 				return;
 			}
 
 			/************************ 2 ************************/
+			ForumPostService forumPostService = new ForumPostService();
 			forumPostService.updatePost(title, content, postNo);
 			/************************ 3 ************************/
-			RequestDispatcher successViewe = request
-					.getRequestDispatcher("/front-end/forum/posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
-			successViewe.forward(request, response);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
 		}
 
-		// 新增
+		// ============================ 新增 ============================
 		if ("insert".equals(action)) {
-			List<String> errorMessages = new LinkedList<String>();
-			request.setAttribute("errorMessages", errorMessages);
 
 			/************************ 1 ************************/
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
@@ -256,25 +223,13 @@ public class ForumPostController extends HttpServlet {
 
 			String title = request.getParameter("title");
 			if (title.trim().length() == 0) {
-				errorMessages.add("請輸入文章標題");
+				response.sendRedirect("posting.do?topicNo=" + topicNo);
+				return;
 			}
 
 			String content = request.getParameter("content");
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				errorMessages.add("請輸入文章內容");
-			}
-
-			ForumPostVO forumPostVO = new ForumPostVO();
-			forumPostVO.setMemberNo(memberNo);
-			forumPostVO.setTopicNo(topicNo);
-			forumPostVO.setTitle(title);
-			forumPostVO.setContent(content);
-
-			if (!errorMessages.isEmpty()) {
-				request.setAttribute("forumPostVO", forumPostVO);
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/front-end/forum/posting.do?topicNo=" + topicNo);
-				failureView.forward(request, response);
+				response.sendRedirect("posting.do?topicNo=" + topicNo);
 				return;
 			}
 
@@ -282,10 +237,7 @@ public class ForumPostController extends HttpServlet {
 			ForumPostService forumPostService = new ForumPostService();
 			forumPostService.addPost(memberNo, topicNo, title, content);
 			/************************ 3 ************************/
-			RequestDispatcher successViewe = request
-					.getRequestDispatcher("/front-end/forum/topic.do?topicNo=" + topicNo);
-			successViewe.forward(request, response);
+			response.sendRedirect("topic.do?topicNo=" + topicNo);
 		}
-
 	}
 }

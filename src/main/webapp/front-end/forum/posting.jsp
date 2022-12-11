@@ -27,25 +27,19 @@
 </head>
 
 <body>
-<c:if test="${not empty errorMessages}">
-<ul>
-<c:forEach var="message" items="${errorMessages}">
-<li style="color: red">${message}</li>
-</c:forEach>
-</ul>
-</c:if>
         <div class="navigate">
             <span>
                 <a href="forumIndex.do">論壇首頁</a> >>
-                <a href="topic.do?topicNo=${param.topicNo}"> ${forumTopicVO.topicName} </a>
+                <a href="topic.do?topicNo=${param.topicNo}"> ${forumTopicVO.topicName} </a><%--從posting.do傳來的forumTopicVO--%>
             </span>
 
         </div>
-		<form method="post" action="forumpost.do">
-		<input type="text" placeholder="請輸入標題" name="title" value="${forumPostVO.title}">
+		<form method="post" id="form" action="forumpost.do">
+		<input id="post_title" type="text" placeholder="請輸入標題" name="title" value="${forumPostVO.title}"><%--若發文格式，顯示從forumPostController回傳的forumPostVO--%>
 		<div class="comment-area" id="reply-area">
 		<textarea name="content" id="summernote">${forumPostVO.content}</textarea>
-		<input type="submit" value="送出">
+		<button id="add_btn" type="button">送出</button>
+<!-- 		<input type="submit" value="送出"> -->
 		</div>
 		<input type="hidden" name="action" value="insert">
 		<input type="hidden" name="topicNo" value="${param.topicNo}">
@@ -53,6 +47,23 @@
 		</form>
 
 <script>
+document.querySelector("#add_btn").addEventListener("click", function(){
+	let content = $('#summernote').summernote('code');
+	let title = document.getElementById("post_title").value;
+	if ((content == "<p><br></p>" && title == "") || (content == "" && title =="")){
+		alert("請輸入標題及文章內容");
+	}else if (content == "<p><br></p>" || content == ""){
+		alert("請輸入文章內容");
+	}else if(title==""){
+		alert("請輸入標題")
+	}else{
+		document.querySelector("#form").submit();
+		alert("新增成功");
+	}
+});
+
+
+
 $('#summernote').summernote({
 	lang: 'zh-TW',
     placeholder: '輸入文字... 或將圖片拖曳至此',

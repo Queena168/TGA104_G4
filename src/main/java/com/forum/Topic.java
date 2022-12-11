@@ -2,6 +2,7 @@ package com.forum;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +23,7 @@ import redis.clients.jedis.Jedis;
 
 @WebServlet("/front-end/forum/topic.do")
 public class Topic extends HttpServlet {
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
@@ -43,13 +44,14 @@ public class Topic extends HttpServlet {
 
 		ForumPostService forumPostService = new ForumPostService();
 		List<ForumPostVO> forumPostVOList = forumPostService.getPostsByTopicNo(topicNo);
+		Collections.reverse(forumPostVOList);
 		request.setAttribute("forumPostVOList", forumPostVOList);
 		// 用topicNo取得該討論區的所有PostVO，存入attribute
 
 		ForumReplyService forumReplyService = new ForumReplyService();
 		List<ForumReplyVO> forumReplyVOList = new ArrayList<ForumReplyVO>();
 		List<Integer> countList = new ArrayList<Integer>();
-		List<String> viewList = new ArrayList<String>();
+		List<Integer> viewList = new ArrayList<Integer>();
 
 		for (ForumPostVO a : forumPostVOList) {
 			forumReplyVOList.add(forumReplyService.getLastReplyTimeByReplyTo(a.getPostNo()));
@@ -62,14 +64,18 @@ public class Topic extends HttpServlet {
 		}
 		request.setAttribute("countList", countList);
 		// 從PostVO中得到postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的總回應數，存入attribute
-		
+
 		Jedis jedis = new Jedis("localhost", 6379);
 		for (ForumPostVO a : forumPostVOList) {
-			viewList.add(jedis.get("postNo:" + a.getPostNo() + ":view"));
+			if (jedis.zscore("viewZset", a.getPostNo().toString()) == null) {
+				jedis.zadd("viewZset", 0, a.getPostNo().toString());
+			}
+			viewList.add(jedis.zscore("viewZset", a.getPostNo().toString()).intValue());
 		}
 		request.setAttribute("viewList", viewList);
 		jedis.close();
-		// 用Jedis取得每篇文章的瀏覽次數，存入attribute
+		// 從PostVO中得到postNo作為Redis zset的member，取得該member的score，放到list存入attribute
+		// 如果該member當下還不存在(例如新發文)，則新增該member/score設為0。
 
 		RequestDispatcher successView = request.getRequestDispatcher("/front-end/forum/topic.jsp");
 		successView.forward(request, response);
