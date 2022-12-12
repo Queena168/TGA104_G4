@@ -45,8 +45,10 @@ create table Admin (
 
 
 -- 會員
+-- (12.12 Nick 增加memberAccount欄位)
 CREATE TABLE Member (
  memberNo INT NOT NULL AUTO_INCREMENT COMMENT '會員編號',
+ memberAccount varchar(50) NOT NULL COMMENT '會員帳號(信箱)',
  memberPassword varchar(50) NOT NULL COMMENT '會員密碼',
  memberName varchar(20) NOT NULL COMMENT '會員姓名',
  nickName varchar(20) NOT NULL COMMENT '會員暱稱',
