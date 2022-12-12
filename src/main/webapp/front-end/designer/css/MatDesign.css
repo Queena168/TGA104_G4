@@ -13,8 +13,7 @@
 /* border:1px solid green; */
 width: 150px;
 height: 45px;
-
-position: absolute;
+position: sticky;
 top: 40px;
 left: 1000px;
 

@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 
 @WebServlet("/DesignerShowPic")
 public class DesignerShowPic extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	Connection con;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

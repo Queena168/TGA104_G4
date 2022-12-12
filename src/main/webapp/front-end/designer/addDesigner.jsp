@@ -16,7 +16,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Free HTML Templates" name="keywords" />
 <meta content="Free HTML Templates" name="description" />
-<link href="css/MatDesign.css" rel="stylesheet" />
+
 <!-- Favicon -->
 <link href="img/favicon.ico" rel="icon" />
 
@@ -37,6 +37,7 @@
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="css/style.css" rel="stylesheet" />
+<link href="css/MatDesign.css" rel="stylesheet" />
 
   <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.designer.model.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.designer.model.*" %>
-<%@ page import="com.designer.service.*" %>
-<%@ page import="com.designer.controller.*" %>
+<%@ page import="com.designerExpertise.model.*" %>
+<%@ page import="com.designerExpertise.Service.*" %>
 
 
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
+
+
 
 
 <html>
@@ -31,8 +33,7 @@
 	rel="stylesheet" />
 
 <!-- Libraries Stylesheet -->
-<link href="<%=request.getContextPath()%>/lib/owlcarousel/assets/owl.carousel.min.css"
-	rel="stylesheet" />
+
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="<%=request.getContextPath()%>/front-end/designer/css/style.css" rel="stylesheet" />
@@ -315,13 +316,100 @@
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid d-none d-lg-block">
-      <div class="row align-items-center py-4 px-xl-5">          
+      <div class="row align-items-center py-4 px-xl-5"> 
+      
+      	
+		<div class="align-item-center-right">
+				<a href="#" type="button"
+					class="btn btn-primary py-2 px-4 d-none d-lg-block"
+					data-bs-toggle="modal" data-bs-target="#loginModal" style=" color: #fff; background-color: #FF6600; border-color: #FF6600;">登入/註冊</a>
+			</div>
+		
+		
+		
+			<div class="modal fade" id="loginModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- Registration Start -->
+						
+						<div class="container-fluid bg-registration py-5"
+							style="margin: 30px 0">
+							<div class="col-lg-5">
+								<div id="cardborder" class="card border-0">
+									<!-- tab標籤開始 -->
+									<div class="h-swicher-wrapper container">
+										<div class="row justify-content-center">
+											<div class="col-md-10 d-flex justify-content-center py-4">
+												<div class="h-swicher">
+												<input type="hidden" name="action" value="memberlogin">
+												 <input type="radio" name="login" id="memberlogin" checked="checked" class="swicher-input swicher-input-memberlogin" />
+												 <label	for="memberlogin" class="swicher-label">會員登入</label> 
+												 <input type="hidden" name="action" value="designerlogin">
+												 <input	type="radio" name="login" id="designerlogin" class="swicher-input swicher-input-designerlogin" /> 
+												 <label	for="designerlogin" class="swicher-label">設計師登入</label>
+												        <span	class="switcher-toggle"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- tab標籤結束 -->
+									<form method="post" action="<%=request.getContextPath()%>/Login" enctype="multipart/form-data">
+									<div class="card-body rounded-bottom bg-primary p-5">
+									<!-- <form> -->
+											<div class="form-group">
+												<input type="email" class="form-control border-0 p-4"
+													placeholder="帳號" required="required" name="account"/>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control border-0 p-4"
+													placeholder="密碼" required="required"  name="password"/>
+											</div>
+										<!-- <div class="form-group"></div> -->	
+										<!--	<input type="checkbox" class="remember" />記住我的密碼 -->	
+											<div>
+											    <input type="hidden" id="loginattr" name="login" value="memberlogin"/> 
+												<input  class="btn btn-dark btn-block border-0 py-3" style=" color: #fff;
+                                                         background-color: #44425A; border-color: #44425A;"
+													type="submit" value="登入"> 
+											</div>
+									<!-- 	</form> -->
+										<!-- Footer -->
+										<div class="modal-footer">
+											<div class="signup">
+												<span style="color: black; font-weight: bold">尚未成為會員</span>
+												<a href="#" type="button" class="member"
+													style="color: black; font-weight: bold"> <u>加入會員</u></a>
+											</div>
+											
+											<div class="signup">
+												<span style="color: black; font-weight: bold">加入設計團隊</span>
+												<a href="addDesigner.jsp" type="button" class="designer"
+													style="color: black; font-weight: bold"><u> 成為夥伴 </u></a>
+											</div>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Registration End -->
+					</div>
+				</div>
+			</div>
+      
+      
+      
+      
+               
         <div class="col-lg-0">
           <a href="<%=request.getContextPath()%>/front-end/designer/index.jsp" class="text-decoration-none">
             <h1 class="m-0"><span class="text-primary">M</span>atDesign</h1>
           </a>
       </div>
     </div>
+  </div>  
     <!-- Topbar End -->
 
     <!-- Navbar Start -->
@@ -343,14 +431,16 @@
             <div
               class="collapse navbar-collapse justify-content-between"
               id="navbarCollapse" >
-              <div class="navbar-nav py-0">
-                <a id="product" href="index.html" class="nav-item nav-link" >找作品</a>
-                <a id="design" href="<%=request.getContextPath()%>/front-end/designer/findDesigner.jsp" class="nav-item nav-link">找設計師</a >
-                <a id="store" href="course.html" class="nav-item nav-link">商城</a>
-                <a id="fourm" href="teacher.html" class="nav-item nav-link">論壇</a>
-                <a id="topic" href="teacher.html" class="nav-item nav-link">報導文章</a>
-               
-              </div>
+             <div class="collapse navbar-collapse justify-content-between"
+						id="navbarCollapse">
+						<div class="navbar-nav py-0">
+							<div id="selfedit" style="width: 200px"><a  href="index.html" class="nav-item nav-link"><b>找作品</b></a></div>
+							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/designer.do" class="nav-item nav-link"><b>找設計師</b></a></div>
+							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>商城</b></a></div>
+							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>論壇</b></a></div>
+							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>報導文章</b></a></div>
+						</div>
+					</div>
        
             </div>
           </nav>
@@ -358,7 +448,8 @@
       </div>
     </div>
     <!-- Navbar End -->
-    <!-- <Start------------------------------------------------------------------------------>
+      <!-- <Start------------------------------------------------------------------------------>
+   
       <div class="container">
         <div class="cartcard">
           <div class="container-fliud">
@@ -366,18 +457,30 @@
               <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
                   <div class="tab-pane active" id="pic-1">
-                    <img src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
+                 <c:forEach var="designerExpertiseVO"  items="${listXX}"  begin="0" end="0">
+                    <img src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerExpertiseVO.designerVO.designerNo}" width=100% alt="" />
+                 </c:forEach>
                   </div>
          
                 </div>
               </div>
               <div class="details col-md-6">
-                <h3 class="product-title"><p>設計師姓名:</p>${designerVO.designerName}</h3>
+              <c:forEach var="designerExpertiseVO"  items="${listXX}"  begin="0" end="0">
+                <h3 class="product-title"><p>設計師姓名:</p>${designerExpertiseVO.designerVO.designerName}</h3>
+                  </c:forEach>
                 <p class="product-description">
-                  簡介：${designerVO.designerDetail}
-                </p>
+                 <c:forEach var="designerExpertiseVO"  items="${listXX}"  begin="0" end="0">
+                  簡介：${designerExpertiseVO.designerVO.designerDetail}
+                  </c:forEach>
+                </p>                
                 <h4 class="price">作品: <span></span></h4>
-                <br /><br />
+                <br /><br />           
+                <h4 class="price">專長: 
+                 <c:forEach var="designerExpertiseVO"  items="${listXX}" >
+               <u style="color: orange;"><span>${designerExpertiseVO.expertiseVO.expertiseName}</span></u>
+                 </c:forEach>
+                </h4>
+                <br /><br />            
               </div>
             </div>
           </div>
@@ -385,101 +488,9 @@
       </div>
   
       <!-- <End------------------------------------------------------------------------------>
+	
 
-    <!-- Carousel Start -->
-    <!-- <div class="container-fluid p-0 pb-5 mb-5">
-      <div
-        id="header-carousel"
-        class="carousel slide carousel-fade"
-        data-ride="carousel"
-      >
-        <ol class="carousel-indicators">
-          <li
-            data-target="#header-carousel"
-            data-slide-to="0"
-            class="active"
-          ></li>
-          <li data-target="#header-carousel" data-slide-to="1"></li>
-          <li data-target="#header-carousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active" style="min-height: 300px">
-            <img
-              class="position-relative w-100"
-              src="./img/matdesign001.jpg"
-              style="min-height: 300px; object-fit: cover"
-            />
-            <div
-              class="carousel-caption d-flex align-items-center justify-content-center"
-            >
-              <div class="p-5" style="width: 100%; max-width: 900px">
-                <h5 class="text-white text-uppercase mb-md-3">
-                  Best Online Courses
-                </h5>
-                <h1 class="display-3 text-white mb-md-4">
-                  Best Education From Your Home
-                </h1>
-                <a
-                  href=""
-                  class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"
-                  >Learn More</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item" style="min-height: 300px">
-            <img
-              class="position-relative w-100"
-              src="./img/matdesign002.jpg"
-              style="min-height: 300px; object-fit: cover"
-            />
-            <div
-              class="carousel-caption d-flex align-items-center justify-content-center"
-            >
-              <div class="p-5" style="width: 100%; max-width: 900px">
-                <h5 class="text-white text-uppercase mb-md-3">
-                  Best Online Courses
-                </h5>
-                <h1 class="display-3 text-white mb-md-4">
-                  Best Online Learning Platform
-                </h1>
-                <a
-                  href=""
-                  class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"
-                  >Learn More</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item" style="min-height: 300px">
-            <img
-              class="position-relative w-100"
-              src="./img/matdesign003.jpg"
-              style="min-height: 300px; object-fit: cover"
-            />
-            <div
-              class="carousel-caption d-flex align-items-center justify-content-center"
-            >
-              <div class="p-5" style="width: 100%; max-width: 900px">
-                <h5 class="text-white text-uppercase mb-md-3">
-                  Best Online Courses
-                </h5>
-                <h1 class="display-3 text-white mb-md-4">
-                  New Way To Learn From Home
-                </h1>
-                <a
-                  href=""
-                  class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"
-                  >Learn More</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Carousel End -->
-
+   
     <!-- Courses Start -->
     <div class="container-fluid py-5">
       <div class="container py-5">
@@ -495,14 +506,14 @@
             <div class="rounded overflow-hidden mb-2">
               <img
                 class="img-fluid"
-                src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%"
+                src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%
                 alt=""
               />
               <div class="bg-secondary p-4">
                 <div class="d-flex justify-content-between mb-3">
              </div>
                 <a class="h5" href=""
-                  >Web design & development courses for beginner</a
+                  >作品名稱</a
                 >
                 <div class="border-top mt-4 pt-4">
                   <div class="d-flex justify-content-between">
@@ -510,7 +521,7 @@
                       <i class="fa fa-star text-primary mr-2"></i>4.5
                       <small>(250)</small>
                     </h6>
-                    <h5 class="m-0">$99</h5>
+                  
                   </div>
                 </div>
               </div>
@@ -520,15 +531,14 @@
             <div class="rounded overflow-hidden mb-2">
               <img
                 class="img-fluid"
-                src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%"
-                alt=""
-              />
+                src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%
+                alt=""/>
               <div class="bg-secondary p-4">
                 <div class="d-flex justify-content-between mb-3">
                   
                 </div>
                 <a class="h5" href=""
-                  >Web design & development courses for beginner</a
+                  >作品名稱</a
                 >
                 <div class="border-top mt-4 pt-4">
                   <div class="d-flex justify-content-between">
@@ -536,7 +546,7 @@
                       <i class="fa fa-star text-primary mr-2"></i>4.5
                       <small>(250)</small>
                     </h6>
-                    <h5 class="m-0">$99</h5>
+                   
                   </div>
                 </div>
               </div>
@@ -546,15 +556,14 @@
             <div class="rounded overflow-hidden mb-2">
               <img
                 class="img-fluid"
-                src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100%"
-                alt=""
-              />
+                src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" 
+                width=100%  alt="" />
               <div class="bg-secondary p-4">
                 <div class="d-flex justify-content-between mb-3">
                 
                 </div>
                 <a class="h5" href=""
-                  >Web design & development courses for beginner</a
+                  >作品名稱</a
                 >
                 <div class="border-top mt-4 pt-4">
                   <div class="d-flex justify-content-between">
@@ -562,7 +571,7 @@
                       <i class="fa fa-star text-primary mr-2"></i>4.5
                       <small>(250)</small>
                     </h6>
-                    <h5 class="m-0">$99</h5>
+                   
                   </div>
                 </div>
               </div>
@@ -574,279 +583,6 @@
     </div>
     <!-- Courses End -->
 
-    <!-- Team Start -->
-    <!-- <div class="container-fluid py-5">
-      <div class="container pt-5 pb-3">
-        <div class="text-center mb-5">
-          <h5
-            class="text-primary text-uppercase mb-3"
-            style="letter-spacing: 5px"
-          >
-            Teachers
-          </h5>
-          <h1>Meet Our Teachers</h1>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-3 text-center team mb-4">
-            <div class="team-item rounded overflow-hidden mb-2">
-              <div class="team-img position-relative">
-                <img class="img-fluid" src="img/team-1.jpg" alt="" />
-                <div class="team-social">
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="bg-secondary p-4">
-                <h5>Jhon Doe</h5>
-                <p class="m-0">Web Designer</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-4">
-            <div class="team-item rounded overflow-hidden mb-2">
-              <div class="team-img position-relative">
-                <img class="img-fluid" src="img/team-2.jpg" alt="" />
-                <div class="team-social">
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="bg-secondary p-4">
-                <h5>Jhon Doe</h5>
-                <p class="m-0">Web Designer</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-4">
-            <div class="team-item rounded overflow-hidden mb-2">
-              <div class="team-img position-relative">
-                <img class="img-fluid" src="img/team-3.jpg" alt="" />
-                <div class="team-social">
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="bg-secondary p-4">
-                <h5>Jhon Doe</h5>
-                <p class="m-0">Web Designer</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-4">
-            <div class="team-item rounded overflow-hidden mb-2">
-              <div class="team-img position-relative">
-                <img class="img-fluid" src="img/team-4.jpg" alt="" />
-                <div class="team-social">
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a class="btn btn-outline-light btn-square mx-1" href="#"
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="bg-secondary p-4">
-                <h5>Jhon Doe</h5>
-                <p class="m-0">Web Designer</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Team End -->
-
-    <!-- Testimonial Start -->
-    <!-- <div class="container-fluid py-5">
-      <div class="container py-5">
-        <div class="text-center mb-5">
-          <h5
-            class="text-primary text-uppercase mb-3"
-            style="letter-spacing: 5px"
-          >
-            Testimonial
-          </h5>
-          <h1>What Say Our Students</h1>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="owl-carousel testimonial-carousel">
-              <div class="text-center">
-                <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                <h4 class="font-weight-normal mb-4">
-                  Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum
-                  elitr dolore et eos labore, stet justo sed est sed. Diam sed
-                  sed dolor stet amet eirmod eos labore diam
-                </h4>
-                <img
-                  class="img-fluid mx-auto mb-3"
-                  src="img/testimonial-1.jpg"
-                  alt=""
-                />
-                <h5 class="m-0">Client Name</h5>
-                <span>Profession</span>
-              </div>
-              <div class="text-center">
-                <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                <h4 class="font-weight-normal mb-4">
-                  Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum
-                  elitr dolore et eos labore, stet justo sed est sed. Diam sed
-                  sed dolor stet amet eirmod eos labore diam
-                </h4>
-                <img
-                  class="img-fluid mx-auto mb-3"
-                  src="img/testimonial-2.jpg"
-                  alt=""
-                />
-                <h5 class="m-0">Client Name</h5>
-                <span>Profession</span>
-              </div>
-              <div class="text-center">
-                <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                <h4 class="font-weight-normal mb-4">
-                  Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum
-                  elitr dolore et eos labore, stet justo sed est sed. Diam sed
-                  sed dolor stet amet eirmod eos labore diam
-                </h4>
-                <img
-                  class="img-fluid mx-auto mb-3"
-                  src="img/testimonial-3.jpg"
-                  alt=""
-                />
-                <h5 class="m-0">Client Name</h5>
-                <span>Profession</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Testimonial End -->
-
-    <!-- Blog Start -->
-    <!-- <div class="container-fluid py-5">
-      <div class="container pt-5 pb-3">
-        <div class="text-center mb-5">
-          <h5
-            class="text-primary text-uppercase mb-3"
-            style="letter-spacing: 5px"
-          >
-            Our Blog
-          </h5>
-          <h1>Latest From Our Blog</h1>
-        </div>
-        <div class="row pb-3">
-          <div class="col-lg-4 mb-4">
-            <div
-              class="blog-item position-relative overflow-hidden rounded mb-2"
-            >
-              <img class="img-fluid" src="img/blog-1.jpg" alt="" />
-              <a class="blog-overlay text-decoration-none" href="">
-                <h5 class="text-white mb-3">
-                  Lorem elitr magna stet eirmod labore amet labore clita at ut
-                  clita
-                </h5>
-                <p class="text-primary m-0">Jan 01, 2050</p>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div
-              class="blog-item position-relative overflow-hidden rounded mb-2"
-            >
-              <img class="img-fluid" src="img/blog-2.jpg" alt="" />
-              <a class="blog-overlay text-decoration-none" href="">
-                <h5 class="text-white mb-3">
-                  Lorem elitr magna stet eirmod labore amet labore clita at ut
-                  clita
-                </h5>
-                <p class="text-primary m-0">Jan 01, 2050</p>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div
-              class="blog-item position-relative overflow-hidden rounded mb-2"
-            >
-              <img class="img-fluid" src="img/blog-3.jpg" alt="" />
-              <a class="blog-overlay text-decoration-none" href="">
-                <h5 class="text-white mb-3">
-                  Lorem elitr magna stet eirmod labore amet labore clita at ut
-                  clita
-                </h5>
-                <p class="text-primary m-0">Jan 01, 2050</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Blog End -->
-    <!-- About Start -->
-    <!-- <div class="container-fluid py-5">
-      <div class="container py-5">
-        <div class="row align-items-center">
-          <div class="col-lg-5">
-            <img
-              class="img-fluid rounded mb-4 mb-lg-0"
-              src="img/about.jpg"
-              alt=""
-            />
-          </div>
-          <div class="col-lg-7">
-            <div class="text-left mb-4">
-              <h5
-                class="text-primary text-uppercase mb-3"
-                style="letter-spacing: 5px"
-              >
-                About Us
-              </h5>
-              <h1>Innovative Way To Learn</h1>
-            </div>
-            <p>
-              Aliquyam accusam clita nonumy ipsum sit sea clita ipsum clita,
-              ipsum dolores amet voluptua duo dolores et sit ipsum rebum,
-              sadipscing et erat eirmod diam kasd labore clita est. Diam sanctus
-              gubergren sit rebum clita amet, sea est sea vero sed et.
-              Sadipscing labore tempor at sit dolor clita consetetur diam. Diam
-              ut diam tempor no et, lorem dolore invidunt no nonumy stet ea
-              labore, dolor justo et sit gubergren diam sed sed no ipsum. Sit
-              tempor ut nonumy elitr dolores justo aliquyam ipsum stet
-            </p>
-            <a
-              href=""
-              class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"
-              >Learn More</a
-            >
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- About End -->
 
     <!-- Footer Start -->
     <div
@@ -860,117 +596,22 @@
             <div class="col-md-6 mb-5">
               <h5
                 class="text-primary text-uppercase mb-4"
-                style="letter-spacing: 5px"
-              >
+                style="letter-spacing: 5px">
                 關於我們
               </h5>
 
               <a href="#" style="font-weight: bold">關於我們</a>
-              <!-- <p>
-                <i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York,
-                USA
-              </p> -->
-              <!-- <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-              <p><i class="fa fa-envelope mr-2"></i>info@example.com</p> -->
-              <!-- <div class="d-flex justify-content-start mt-4">
-                <a class="btn btn-outline-light btn-square mr-2" href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a class="btn btn-outline-light btn-square mr-2" href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a class="btn btn-outline-light btn-square mr-2" href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-                <a class="btn btn-outline-light btn-square" href="#"
-                  ><i class="fab fa-instagram"></i
-                ></a>
-              </div> -->
+      
             </div>
             <div class="col-md-6 mb-5">
-              <!-- <h5
-                class="text-primary text-uppercase mb-4"
-                style="letter-spacing: 5px"
-              >
-                Our Courses
-              </h5> -->
-              <!-- <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="#"
-                  ><i class="fa fa-angle-right mr-2"></i>Web Design</a
-                >
-                <a class="text-white mb-2" href="#"
-                  ><i class="fa fa-angle-right mr-2"></i>Apps Design</a
-                >
-                <a class="text-white mb-2" href="#"
-                  ><i class="fa fa-angle-right mr-2"></i>Marketing</a
-                >
-                <a class="text-white mb-2" href="#"
-                  ><i class="fa fa-angle-right mr-2"></i>Research</a
-                >
-                <a class="text-white" href="#"
-                  ><i class="fa fa-angle-right mr-2"></i>SEO</a
-                >
-              </div> -->
+  
             </div>
           </div>
         </div>
-        <!-- <div class="col-lg-5 col-md-12 mb-5">
-          <h5
-            class="text-primary text-uppercase mb-4"
-            style="letter-spacing: 5px"
-          >
-            Newsletter
-          </h5>
-          <p>
-            Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum
-            sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo
-            eirmod sea justo no lorem est diam
-          </p>
-          <div class="w-100">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control border-light"
-                style="padding: 30px"
-                placeholder="Your Email Address"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-primary px-4">Sign Up</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
+
       </div>
     </div>
-    <!-- <div
-      class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
-      style="border-color: rgba(256, 256, 256, 0.1) !important">
-      <div class="row">
-        <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-          <p class="m-0 text-white">
-            &copy; <a href="#">Domain Name</a>. All Rights Reserved. Designed by
-            <a href="https://htmlcodex.com">HTML Codex</a>
-          </p>
-        </div>
-        <div class="col-lg-6 text-center text-md-right">
-          <ul class="nav d-inline-flex">
-            <li class="nav-item">
-              <a class="nav-link text-white py-0" href="#">Privacy</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white py-0" href="#">Terms</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white py-0" href="#">FAQs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white py-0" href="#">Help</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
-    <!-- Footer End -->
+
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
@@ -980,15 +621,42 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="<%=request.getContextPath()%>/front-end/designer/lib/easing/easing.min.js"></script>
+    <script src="<%=request.getContextPath()%>/front-end/designer/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script src="<%=request.getContextPath()%>/front-end/designer/mail/jqBootstrapValidation.min.js"></script>
+    <script src="<%=request.getContextPath()%>/front-end/designer/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="<%=request.getContextPath()%>/front-end/designer/js/main.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    	<script >
+	
+	
+
+	  
+	    $(document).on("click","#designerlogin",function(){
+        ($("#loginattr").removeAttr("value"))
+        ($("#loginattr").attr("value","designerlogin"));
+        });
+	    
+	    
+	    $(document).on("click","#memberlogin",function(){
+	        ($("#loginattr").removeAttr("value"))
+	        ($("#loginattr").attr("value","memberlogin"));
+	        });
+
+		
+	    
+	</script>
 
   </body>
 </html>

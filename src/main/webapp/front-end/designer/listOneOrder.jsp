@@ -1,16 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.designer.model.*"%>
-	<%
-	DesignerVO designerVO=(DesignerVO) session.getAttribute("designerVO");
-	%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page import="com.designer.model.*" %>
+<%@ page import="com.designerOrder.model.*" %>
 
-<!DOCTYPE html>
+<%
+  DesignerOrderVO designerOrderVO = (DesignerOrderVO) request.getAttribute("designerOrderVO"); //DesignerServlet.java(Concroller), 存入req的empVO物件
+%>
+
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>設計師資料修改頁面 -UpdateDesignerINFO.jsp</title>
-
+<title>案件 - listOneOrder.jsp</title>
 
 <meta charset="utf-8" />
 <title>MatDesign</title>
@@ -141,10 +139,45 @@ margin-left: 200px;
 
 </style>
 
-</head>
 
-<body>
-	<!-- Topbar Start -->
+
+<style>
+  table#table-1 {
+	background-color: #CCCCFF;
+    border: 2px solid black;
+    text-align: center;
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
+
+<style>
+  table {
+	width: 1100px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  table, th, td {
+    border: 1px solid #CCCCFF;
+  }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
+</style>
+
+</head>
+<body bgcolor='white'>
+
+<!-- Topbar Start -->
 	<div class="container-fluid d-none d-lg-block">
 		<div class="row align-items-center py-4 px-xl-5">
 			<div class="align-item-center-right">
@@ -202,84 +235,36 @@ margin-left: 200px;
 	
 	<!-- Navbar End -->
 <hr size="8px" align="center" width="100%" >
-
-<div style="text-align: center;"><h2>基本資料修改</h2></div> 
-
-<FORM METHOD="post" ACTION="designer.do" name="form1"  enctype="multipart/form-data">
-<div id="container">
-
-
-   <div class="wrap">
-  
-        <div id="preview">
-			<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-		</div> 
-   </div>
-<div id="block1">
+<div align="center">
 <table>
-    <tr>
-		<td><input type="hidden"></td>
-		<td><input type="hidden" name="designerAccount" size="45" 
-		   value="${designerVO.designerNo}" readonly/></td>
+
+	<tr>
+		<th>案件編號</th>
+		<th>客戶</th>
+		<th>案件設計師</th>
+		<th>諮詢預算</th>
+		<th>諮詢坪數</th>
+		<th>諮詢內容</th>
+	    <th>報價金額</th>
+		<th>報價內容</th>
+		<th>報價時間</th>
 	</tr>
 	
 	<tr>
-		<td>設計師帳號:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="designerAccount" size="45" 
-			 value="${designerVO.designerAccount}" readonly/></td>
+		    <td>${designerOrderVO.orderNo}</td>
+			<td>${designerOrderVO.memberVO.memberName}</td>
+			<td>${designerOrderVO.designerVO.designerName}</td>
+			<td>${designerOrderVO.inquiryBudget}</td>
+			<td>${designerOrderVO.inquirySize}</td>
+			<td>${designerOrderVO.inquiryDetail}</td>
+			<td>${designerOrderVO.quotationAmount}</td>
+			<td>${designerOrderVO.quotationDetail}</td>
+			<td>${designerOrderVO.quotationSendTime}</td> 
+			
 		
 	</tr>
-		
-	<tr>
-		<td>設計師姓名:</td>
-		<td><input type="TEXT" name="designerName" size="45" 
-			 value="${designerVO.designerName}"/></td><td>${errorMsgs.designerName}</td>
-	</tr>
-
-	<tr>
-		<td>設計師密碼:</td>
-		<td><input type="PASSWORD" name="designerPassword" size="45"
-			 value="${designerVO.designerPassword}"/></td><td>${errorMsgs.designerPassword}</td>
-	</tr>
-	<tr>
-		<td>公司:</td>
-		<td><input type="TEXT" name="designerCompany" size="45"
-			 value="${designerVO.designerCompany}"/></td><td>${errorMsgs.designerCompany}</td>
-	</tr>
 	
-	
-	
-	<tr>
-		<td>設計師照片上傳</td>
-		<td><input type="file" name="designerPic" id="p_file">
-	</tr>
-	</table>
-</div>	
-
-
-  <table class=intro>
-    <tr>
-      <td>簡介</td>
-    </tr>
-  </table>
-
- <div class="wrap1">
-	 <textarea rows="10" cols="60"  name="designerDetail">${designerVO.designerDetail}</textarea>
-	  <!--  <textarea rows="10" cols="60" name="自我介紹" placeholder="關於我!" name="designerDetail"></textarea>-->
-  </div>
-
-        <div id="block2">
-              <input type="hidden" name="action" value="update">
-              <input type="hidden" name="designerNo" value="${param.designerNo}">
-              <input type="submit" value="送出修改">
-              
-              <input type="hidden" name="action" value="cancel">
-              <input type="hidden" name="designerNo" value="${param.designerNo}">
-              <input type ="button" onclick="history.back()" value="取消"></input>
-        </div>
+</table>
 </div>
-</FORM>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/front-end/designer/js/MatDesign.js"></script>
 </body>
 </html>

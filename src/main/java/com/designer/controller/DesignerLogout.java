@@ -20,10 +20,11 @@ public class DesignerLogout extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String Logout = req.getParameter("logout");
-		System.out.println("logout1111111111111111111111111111111");
 		if("desginerlogout".equals(Logout)) {			
 			HttpSession session = req.getSession();
 				session.removeAttribute("designerlogin");
+				session.invalidate();
+				//return "redirect:Ui//front-end/designer/index.jsp";
 				res.sendRedirect(req.getContextPath() + "/front-end/designer/index.jsp");	
 		}
 		

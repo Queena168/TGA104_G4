@@ -3,7 +3,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.designer.model.*" %>
 <%@ page import="com.designer.service.*" %>
-<%@ page import="com.designer.controller.*" %>
 
 
 
@@ -11,9 +10,9 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    DesignerService designerSvc = new DesignerService();
-    List<DesignerVO> list = designerSvc.getAll();
-    pageContext.setAttribute("list",list);
+    //DesignerService designerSvc = new DesignerService();
+    //List<DesignerVO> list = designerSvc.getAll();
+    //pageContext.setAttribute("list",list);
 %>
 
 
@@ -23,9 +22,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Free HTML Templates" name="keywords" />
 <meta content="Free HTML Templates" name="description" />
-<link href="css/MatDesign.css" rel="stylesheet" />
+
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon" />
+<link href="<%=request.getContextPath()%>/front-end/designer/img/favicon.ico" rel="icon" />
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -39,11 +38,12 @@
 	rel="stylesheet" />
 
 <!-- Libraries Stylesheet -->
-<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="<%=request.getContextPath()%>/front-end/designer/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet" />
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/style.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/front-end/designer/css/style.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/front-end/designer/css/MatDesign.css" rel="stylesheet" />
 
   <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -108,37 +108,88 @@
 <!-- Topbar Start -->
 	<div class="container-fluid d-none d-lg-block">
 		<div class="row align-items-center py-4 px-xl-5">
+		
+		<div class="align-item-center-right">
+				<a href="#" type="button"
+					class="btn btn-primary py-2 px-4 d-none d-lg-block"
+					data-bs-toggle="modal" data-bs-target="#loginModal" style=" color: #fff; background-color: #FF6600; border-color: #FF6600;">登入/註冊</a>
+			</div>
+		
+		
+		
 			<div class="modal fade" id="loginModal">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<!-- Registration Start -->
+						
 						<div class="container-fluid bg-registration py-5"
 							style="margin: 30px 0">
 							<div class="col-lg-5">
 								<div id="cardborder" class="card border-0">
 									<!-- tab標籤開始 -->
-									
-
-									<!-- tab標籤結束 -->
-									<div class="card-body rounded-bottom bg-primary p-5"><!-- 動這行會影響到左上角LOGO -->
-							
-										<!-- Footer -->
-										<div class="modal-footer"><!-- 動這行會影響到左上角LOGO -->
-											<div class="signup"><!-- 動這行會影響到左上角LOGO -->
-												
+									<div class="h-swicher-wrapper container">
+										<div class="row justify-content-center">
+											<div class="col-md-10 d-flex justify-content-center py-4">
+												<div class="h-swicher">
+												<input type="hidden" name="action" value="memberlogin">
+												 <input type="radio" name="login" id="memberlogin" checked="checked" class="swicher-input swicher-input-memberlogin" />
+												 <label	for="memberlogin" class="swicher-label">會員登入</label> 
+												 <input type="hidden" name="action" value="designerlogin">
+												 <input	type="radio" name="login" id="designerlogin" class="swicher-input swicher-input-designerlogin" /> 
+												 <label	for="designerlogin" class="swicher-label">設計師登入</label>
+												        <span	class="switcher-toggle"></span>
+												</div>
 											</div>
 										</div>
 									</div>
+
+									<!-- tab標籤結束 -->
+									<form method="post" action="<%=request.getContextPath()%>/Login" enctype="multipart/form-data">
+									<div class="card-body rounded-bottom bg-primary p-5">
+									<!-- <form> -->
+											<div class="form-group">
+												<input type="email" class="form-control border-0 p-4"
+													placeholder="帳號" required="required" name="account"/>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control border-0 p-4"
+													placeholder="密碼" required="required"  name="password"/>
+											</div>
+										<!-- <div class="form-group"></div> -->	
+										<!--	<input type="checkbox" class="remember" />記住我的密碼 -->	
+											<div>
+											    <input type="hidden" id="loginattr" name="login" value="memberlogin"/> 
+												<input  class="btn btn-dark btn-block border-0 py-3"
+													type="submit" value="登入">
+											</div>
+									<!-- 	</form> -->
+										<!-- Footer -->
+										<div class="modal-footer">
+											<div class="signup">
+												<span style="color: black; font-weight: bold">尚未成為會員</span>
+												<a href="#" type="button" class="member"
+													style="color: black; font-weight: bold"> <u>加入會員</u></a>
+											</div>
+											
+											<div class="signup">
+												<span style="color: black; font-weight: bold">加入設計團隊</span>
+												<a href="addDesigner.jsp" type="button" class="designer"
+													style="color: black; font-weight: bold"><u> 成為夥伴 </u></a>
+											</div>
+										</div>
+									</div>
+									</form>
 								</div>
 							</div>
 						</div>
+						
 						<!-- Registration End -->
 					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-0">
-				<a href="index.jsp" class="text-decoration-none">
+				<a href="<%=request.getContextPath()%>/front-end/designer/index.jsp" class="text-decoration-none">
 					<h1 class="m-0">
 						<span class="text-primary">M</span>atDesign
 					</h1>
@@ -157,7 +208,7 @@
 			<div class="col-lg-9">
 				<nav
 					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="index.jsp" class="text-decoration-none d-block d-lg-none">
+					<a href="<%=request.getContextPath()%>/front-end/designer/index.jsp" class="text-decoration-none d-block d-lg-none">
 						<h1 class="m-0">
 							<span class="text-primary">M</span>atDesign
 						</h1>
@@ -170,7 +221,7 @@
 						id="navbarCollapse">
 						<div class="navbar-nav py-0">
 							<div id="selfedit" style="width: 200px"><a  href="index.html" class="nav-item nav-link"><b>找作品</b></a></div>
-							<div id="ordermanage" style="width: 200px"><a  href="findDesigner.jsp" class="nav-item nav-link"><b>找設計師</b></a></div>
+							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/designer.do" class="nav-item nav-link"><b>找設計師</b></a></div>
 							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>商城</b></a></div>
 							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>論壇</b></a></div>
 							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>報導文章</b></a></div>
@@ -225,24 +276,23 @@
 			</div>
 		
 			<div class="row">
-		<c:forEach var="designerVO"  items="${list}" begin="0" end="7">
+		<c:forEach var="designerExpertiseVO"  items="${set}" begin="0" end="7">
 				<div class="col-md-6 col-lg-3 text-center team mb-4">	
-					<form method="post" ACTION="<%=request.getContextPath()%>/ShowDesignerInfo" >		
+				
+					<form method="post" ACTION="<%=request.getContextPath()%>/designerExpertise?designerNo=${designerExpertiseVO.designerNo}" >		
 					<div class="team-item rounded overflow-hidden mb-2">
 						<div class="team-img position-relative">				
-	<!-- 設計師圖片 -->		<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerVO.designerNo}" width=100% alt="" />
-							<div class="team-social">
-							
-							
+	<!-- 設計師圖片 -->		<img class="img-fluid" src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerExpertiseVO.designerNo}" width=100% alt="" />
+							<div class="team-social">		
 							<input type="hidden" name="action" value="designerinfo">
 							<input type="submit" class="btn btn-outline-light" value="查看">
 							</div>
 						</div>
 						<div class="bg-secondary p-4">					
-	<!-- 設計師姓名 -->						<h5>${designerVO.designerName}</h5>		
-	<!-- 設計師公司 -->						<p class="m-0">${designerVO.designerCompany}</p>  
+	<!-- 設計師姓名 -->						<h5>${designerExpertiseVO.designerVO.designerName}</h5>		
+	<!-- 設計師公司 -->						<p class="m-0">${designerExpertiseVO.designerVO.designerCompany}</p>  
 	                               <input type="hidden" name="designerNo" size="45" 
-		                                      value="${designerVO.designerNo}"/>                               	   
+		                                      value="${designerExpertiseVO.designerNo}"/>                               	   
 		                                    
 	  
 						</div>
@@ -253,5 +303,35 @@
 		</div>
 	</div>
 	<!-- Team End -->
+	
+	
+	
+		<script >
+	
+	
+
+	  
+	    $(document).on("click","#designerlogin",function(){
+        ($("#loginattr").removeAttr("value"))
+        ($("#loginattr").attr("value","designerlogin"));
+        });
+	    
+	    
+	    $(document).on("click","#memberlogin",function(){
+	        ($("#loginattr").removeAttr("value"))
+	        ($("#loginattr").attr("value","memberlogin"));
+	        });
+	    
+	    
+		//var flag=document.getElementById("errorFlag").value;
+		//if(flag==null||flag==""){
+			
+		//}else{
+			//var flag="${errorFlag}";
+			//alert("flag:"+flag);
+		//}
+		
+	    
+	</script>
 </body>
 </html>

@@ -23,11 +23,11 @@ public class DesignerEdit extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.getAttribute("designerVO");
 		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
-		System.out.println(designerNo);
+		//System.out.println(designerNo);
 
 		DesignerService designerService = new DesignerService();
 		DesignerVO designerVO = designerService.getOneDesigner(designerNo);
-		System.out.println("有執行============================================");
+		//System.out.println("有執行============================================");
 
 		// System.out.println(designerNo + "===========================");
 

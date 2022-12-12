@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ page import="com.designer.model.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.designer.model.*" %>
 	<%
 	DesignerVO designerVO=(DesignerVO) session.getAttribute("designerVO");
-	System.out.println(designerVO);
 	%>
 <!DOCTYPE html>
 <html>
@@ -87,18 +85,11 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
-						<div class="navbar-nav py-0">
-				<!-- 	<form method="post" action="<%=request.getContextPath()%>/DesignerEdit">  -->	
-					<!--	<input type="hidden" name="designerNo" value="${designerVO.designerNo}"> -->
-	                  <%
-	                     session.setAttribute("designerVO",designerVO);
-	                     System.out.println(designerVO);
-	                   %>
-							<div id="selfedit" style="width: 200px"><a href="<%=request.getContextPath()%>/DesignerEdit?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>編輯簡介</b></a></div>
-						<!--	</form>-->
-							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/front-end/designer/orderManage.jsp" class="nav-item nav-link"><b>訂單管理</b></a></div>
-							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>製作報價</b></a></div>
-							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>製作合約</b></a></div>
+						<div class="navbar-nav py-0">	                        
+							<div id="selfedit" style="width: 200px"><a href="<%=request.getContextPath()%>/DesignerEdit?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>編輯簡介</b></a></div>					
+						    <div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerOrder?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>案件管理</b></a></div>					
+							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>報價</b></a></div>
+							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>合約</b></a></div>
 							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>作品管理</b></a></div>
 						</div>
 					</div>
@@ -257,16 +248,17 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/lib/easing/easing.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/lib/owlcarousel/owl.carousel.min.js"></script>
 
 	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/mail/jqBootstrapValidation.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/mail/contact.js"></script>
 
 	<!-- Template Javascript -->
-	<script src="/js/main.js"></script>
-
+	<script src="<%=request.getContextPath()%>/front-end/designer/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/designer/js/MatDesign.js"></script>
 
 </body>
 </html>

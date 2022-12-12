@@ -26,16 +26,16 @@ public class Login extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-//		System.out.println("done0===============================");
+
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html;charset=UTF-8");
 
 		PrintWriter out = res.getWriter();
 		String login = req.getParameter("login");
-//		System.out.println("done0.5===========================");
+
 
 		if ("designerlogin".equals(login)) {
-//			System.out.println("done1=====================================");
+
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -52,8 +52,6 @@ public class Login extends HttpServlet {
 			/*************************** 2.開始查詢資料 *****************************************/
 
 			DesignerService designerSvc = new DesignerService();
-//			System.out.println("done1.5=====================================================");
-			//DesignerVO designerlogin = designerSvc.logindesigner(designerAccount, designerPassword);
 			DesignerVO designerVO = designerSvc.logindesigner(designerAccount,designerPassword);
 		
 			if (designerVO == null) {
@@ -62,18 +60,7 @@ public class Login extends HttpServlet {
 				out.println("<script> alert('帳號或密碼錯誤，請重新登入!');</script>");
 				return;
 			}
-			// Send the use back to the form, if there were errors
-			// 測試alert
-//			if (!errorMsgs.isEmpty()) {
-//				HttpSession session = req.getSession();
-//				session.setAttribute("errorFlag", "帳號或密碼錯誤，請重新輸入");
-//				//req.setAttribute("errorFlag", "帳號或密碼錯誤，請重新輸入");
-//				res.sendRedirect(req.getContextPath() + "/front-end/designer/index.jsp");
-//				// RequestDispatcher failureView =
-//				// req.getRequestDispatcher("/front-end/designer/index.jsp");
-//				// failureView.forward(req, res);
-//				return;// 程式中斷
-//			}
+
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 //			req.setAttribute("designerlogin", designerlogin); // 資料庫取出的empVO物件,存入req
@@ -85,17 +72,13 @@ public class Login extends HttpServlet {
 			
 			
 			
-			System.out.println("TEST0.0"+designerVO.toString());
+			//System.out.println("TEST0.0"+designerVO.toString());
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			//req.setAttribute("designerlogin", designerlogin); // 資料庫取出的empVO物件,存入req
-//			System.out.println("done2===========================================");
 			designerVO=designerSvc.getOneDesigner(designerVO.getDesignerNo());
 			HttpSession session=req.getSession();
 			session.setAttribute("designerVO", designerVO);
-			System.out.println("TEST0.1"+designerVO.toString());
 			String url = "/front-end/designer/designerMainPage.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
-//			System.out.println("done3=======================================");
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 designerMainPage.jsp
 			successView.forward(req, res);
 		
 

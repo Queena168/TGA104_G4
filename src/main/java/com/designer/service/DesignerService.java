@@ -107,16 +107,16 @@ public class DesignerService {
 //		dao.update(designerVO);
 //	}
 
-	public void deleteDesigner(Integer designerVO) {
-		dao.delete(designerVO);
+	public void deleteDesigner(Integer designerNo) {
+		dao.delete(designerNo);
 	}
 
-	public DesignerVO getOneDesigner(Integer designerVO) {
-		return dao.findByPrimaryKey(designerVO);
+	public DesignerVO getOneDesigner(Integer designerNo) {
+		return dao.findByPrimaryKey(designerNo);
 	}
 	
-	public DesignerVO getOneDesignerinfo(Integer designerVO) {
-		return dao.findByPrimaryKey(designerVO);
+	public DesignerVO getOneDesignerinfo(Integer designerNo) {
+		return dao.findByPrimaryKey(designerNo);
 	}
 	
 	
