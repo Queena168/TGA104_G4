@@ -1,6 +1,8 @@
-package com.expertise.model;
+package com.designer.model;
 
 public class ExpertiseVO implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Integer expertiseNo;// (專長編號): int, not null
 	private String expertiseName;// (專長名稱): varchar(25), not null
 

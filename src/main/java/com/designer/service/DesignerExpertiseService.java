@@ -1,10 +1,11 @@
-package com.designerExpertise.Service;
+package com.designer.service;
 
 import java.util.List;
 import java.util.Set;
-import com.designerExpertise.model.DesignerExpertiseDAO_interface;
-import com.designerExpertise.model.DesignerExpertiseJNDIDAO;
-import com.designerExpertise.model.DesignerExpertiseVO;
+
+import com.designer.model.DesignerExpertiseDAO_interface;
+import com.designer.model.DesignerExpertiseJNDIDAO;
+import com.designer.model.DesignerExpertiseVO;
 
 public class DesignerExpertiseService {
 

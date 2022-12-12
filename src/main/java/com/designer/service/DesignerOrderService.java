@@ -1,11 +1,11 @@
-package com.designerOrder.Service;
+package com.designer.service;
 
 import java.sql.Date;
 import java.util.List;
 
-import com.designerOrder.model.DesignerOrderDAO_interface;
-import com.designerOrder.model.DesignerOrderJNDIDAO;
-import com.designerOrder.model.DesignerOrderVO;
+import com.designer.model.DesignerOrderDAO_interface;
+import com.designer.model.DesignerOrderJNDIDAO;
+import com.designer.model.DesignerOrderVO;
 
 public class DesignerOrderService {
 

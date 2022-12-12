@@ -1,8 +1,10 @@
-package com.designerOrderPhase.model;
+package com.designer.model;
 
 import java.time.LocalDateTime;
 
 public class DesignerOrderPhaseVO implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Integer phaseNo;// (期數流水編號): int, not null
 	private Integer orderPhase;// (期數) int, not null
 	private Integer amount;// (各期金額): int, not null

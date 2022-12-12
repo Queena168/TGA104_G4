@@ -1,4 +1,4 @@
-package com.designerExpertise.controller;
+package com.designer.controller;
 
 
 import java.io.IOException;
@@ -10,10 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.designerExpertise.Service.DesignerExpertiseService;
-import com.designerExpertise.model.DesignerExpertiseVO;
+import com.designer.model.DesignerExpertiseVO;
+import com.designer.service.DesignerExpertiseService;
 
 @WebServlet("/designerExpertise")
 public class DesignerExpertiseServlet extends HttpServlet {

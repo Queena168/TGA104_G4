@@ -1,9 +1,7 @@
-package com.designerExpertise.model;
+package com.designer.model;
 
-import com.designer.model.DesignerVO;
 import com.designer.service.DesignerService;
-import com.expertise.Service.ExpertiseService;
-import com.expertise.model.ExpertiseVO;
+import com.designer.service.ExpertiseService;
 
 public class DesignerExpertiseVO {
 	private Integer designerExpertiseNo;// (設計師專長編號): int, not null

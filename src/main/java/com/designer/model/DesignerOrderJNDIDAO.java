@@ -1,4 +1,4 @@
-package com.designerOrder.model;
+package com.designer.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

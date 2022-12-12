@@ -3,8 +3,8 @@
 <%@ page import="com.designer.model.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.designer.model.*" %>
-<%@ page import="com.designerExpertise.model.*" %>
-<%@ page import="com.designerExpertise.Service.*" %>
+<%@ page import="com.designer.controller.*" %>
+<%@ page import="com.designer.service.*" %>
 
 
 

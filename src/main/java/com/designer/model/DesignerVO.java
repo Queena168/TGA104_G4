@@ -3,8 +3,6 @@ package com.designer.model;
 import java.util.Arrays;
 import java.util.Date;
 
-import com.expertise.model.ExpertiseVO;
-
 public class DesignerVO implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 

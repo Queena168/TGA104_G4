@@ -1,4 +1,4 @@
-package com.expertise.model;
+package com.designer.model;
 
 import java.util.*;
 

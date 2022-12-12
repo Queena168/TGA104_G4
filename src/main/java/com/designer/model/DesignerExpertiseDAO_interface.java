@@ -1,4 +1,4 @@
-package com.designerExpertise.model;
+package com.designer.model;
 import java.util.*;
 public interface DesignerExpertiseDAO_interface {
 	   public void insert(DesignerExpertiseVO designerexpertiseVO);

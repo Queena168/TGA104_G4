@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="com.designer.model.*" %>
-<%@ page import="com.designerOrder.model.*" %>
+
 
 <%
   DesignerOrderVO designerOrderVO = (DesignerOrderVO) request.getAttribute("designerOrderVO"); //DesignerServlet.java(Concroller), 存入req的empVO物件

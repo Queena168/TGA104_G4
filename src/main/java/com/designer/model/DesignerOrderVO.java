@@ -1,13 +1,11 @@
-package com.designerOrder.model;
+package com.designer.model;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
-import com.designer.model.DesignerVO;
 import com.designer.service.DesignerService;
-import com.member.model.MemberVO;
-import com.member.service.MemberService;
+//import com.member.model.MemberVO;
+//import com.member.service.MemberService;
 
 public class DesignerOrderVO implements java.io.Serializable {
 	private Integer orderNo;// (諮詢報價單合約訂單案件編號): int, not null
@@ -231,11 +229,11 @@ public class DesignerOrderVO implements java.io.Serializable {
 
 	// ================================================================
 	// member
-	public MemberVO getMemberVO() {
-		MemberService memberSvc = new MemberService();
-		MemberVO memberVO = memberSvc.getOneDesigner(memberNo);
-		return memberVO;
-	}
+//	public MemberVO getMemberVO() {
+//		MemberService memberSvc = new MemberService();
+//		MemberVO memberVO = memberSvc.getOneDesigner(memberNo);
+//		return memberVO;
+//	}
 
 	@Override
 	public String toString() {
