@@ -8,9 +8,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Free HTML Templates" name="keywords" />
 <meta content="Free HTML Templates" name="description" />
-<link href="css/MatDesign.css" rel="stylesheet" />
+
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon" />
+<link href="<%=request.getContextPath()%>/front-end/designer/img/favicon.ico" rel="icon" />
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -24,11 +24,13 @@
 	rel="stylesheet" />
 
 <!-- Libraries Stylesheet -->
-<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="<%=request.getContextPath()%>/front-end/designer/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet" />
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/style.css" rel="stylesheet" />
+
+<link href="<%=request.getContextPath()%>/front-end/designer/css/style.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/front-end/designer/css/MatDesign.css" rel="stylesheet" />
 
 
   <script
@@ -45,7 +47,7 @@
 			<div class="align-item-center-right">
 				<a href="#" type="button"
 					class="btn btn-primary py-2 px-4 d-none d-lg-block"
-					data-bs-toggle="modal" data-bs-target="#loginModal">登入/註冊</a>
+					data-bs-toggle="modal" data-bs-target="#loginModal" style=" color: #fff; background-color: #FF6600; border-color: #FF6600;">登入/註冊</a>
 			</div>
 
 			<div class="modal fade" id="loginModal">
@@ -91,7 +93,8 @@
 											<div>
 											    <input type="hidden" id="loginattr" name="login" value="memberlogin"/> 
 												<input  class="btn btn-dark btn-block border-0 py-3"
-													type="submit" value="登入">
+													type="submit" value="登入"  style=" color: #fff;
+                                                    background-color: #44425A;border-color: #44425A;">
 											</div>
 									<!-- 	</form> -->
 										<!-- Footer -->
@@ -104,7 +107,7 @@
 											
 											<div class="signup">
 												<span style="color: black; font-weight: bold">加入設計團隊</span>
-												<a href="addDesigner.jsp" type="button" class="designer"
+												<a href="<%=request.getContextPath()%>/front-end/designer/addDesigner.jsp" type="button" class="designer"
 													style="color: black; font-weight: bold"><u> 成為夥伴 </u></a>
 											</div>
 										</div>
@@ -120,7 +123,7 @@
 			</div>
 
 			<div class="col-lg-0">
-				<a href="" class="text-decoration-none">
+				<a href="<%=request.getContextPath()%>/front-end/designer/index.jsp" class="text-decoration-none">
 					<h1 class="m-0">
 						<span class="text-primary">M</span>atDesign
 					</h1>
@@ -138,7 +141,7 @@
 			<div class="col-lg-9">
 				<nav
 					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="" class="text-decoration-none d-block d-lg-none">
+					<a href="<%=request.getContextPath()%>/front-end/designer/index.jsp" class="text-decoration-none d-block d-lg-none">
 						<h1 class="m-0">
 							<span class="text-primary">M</span>atDesign
 						</h1>
@@ -151,7 +154,7 @@
 						id="navbarCollapse">
 						<div class="navbar-nav py-0">
 							<div id="selfedit" style="width: 200px"><a  href="index.html" class="nav-item nav-link"><b>找作品</b></a></div>
-							<div id="ordermanage" style="width: 200px"><a  href="findDesigner.jsp" class="nav-item nav-link"><b>找設計師</b></a></div>
+							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/designer.do" class="nav-item nav-link"><b>找設計師</b></a></div>
 							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>商城</b></a></div>
 							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>論壇</b></a></div>
 							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>報導文章</b></a></div>
@@ -595,59 +598,15 @@
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/lib/easing/easing.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/lib/owlcarousel/owl.carousel.min.js"></script>
 	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
-
+	<script src="<%=request.getContextPath()%>/front-end/designer/mail/jqBootstrapValidation.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/mail/contact.js"></script>
 	<!-- Template Javascript -->
-	<script src="/js/main.js"></script>
-
-
-
-
-
+	<script src="<%=request.getContextPath()%>/front-end/designer/js/main.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
-	<%
-	//HttpSession session2=request.getSession();
-	//String errorFlag=(String)session2.getAttribute("errorFlag");
-	//System.out.println("errorFlag:"+errorFlag);
-	%>
-	
-	
-	<script >
-	
-	
-
-	  
-	    $(document).on("click","#designerlogin",function(){
-        ($("#loginattr").removeAttr("value"))
-        ($("#loginattr").attr("value","designerlogin"));
-        });
-	    
-	    
-	    $(document).on("click","#memberlogin",function(){
-	        ($("#loginattr").removeAttr("value"))
-	        ($("#loginattr").attr("value","memberlogin"));
-	        });
-	    
-	    
-		//var flag=document.getElementById("errorFlag").value;
-		//if(flag==null||flag==""){
-			
-		//}else{
-			//var flag="${errorFlag}";
-			//alert("flag:"+flag);
-		//}
-		
-	    
-	</script>
-
-
+	<script src="<%=request.getContextPath()%>/front-end/designer/js/login.js"></script>
 </body>
 </html>
