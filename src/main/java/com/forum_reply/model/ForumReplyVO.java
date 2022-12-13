@@ -7,8 +7,10 @@ public class ForumReplyVO {
 	private String content;
 	private java.util.Date replyTime;
 	private java.util.Date modificationTime;
-	private Integer view;
+	private String nickName;
+	private String reviewResult;
 
+	
 	public Integer getReplyNo() {
 		return replyNo;
 	}
@@ -57,19 +59,26 @@ public class ForumReplyVO {
 		this.modificationTime = modificationTime;
 	}
 
-	public Integer getView() {
-		return view;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setView(Integer view) {
-		this.view = view;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getReviewResult() {
+		return reviewResult;
+	}
+
+	public void setReviewResult(String reviewResult) {
+		this.reviewResult = reviewResult;
 	}
 
 	@Override
 	public String toString() {
 		return "ForumReplyVO [replyNo=" + replyNo + ", memberNo=" + memberNo + ", replyTo=" + replyTo + ", content="
-				+ content + ", replyTime=" + replyTime + ", modificationTime=" + modificationTime + ", view=" + view
-				+ "]";
+				+ content + ", replyTime=" + replyTime + ", modificationTime=" + modificationTime + ", nickName="
+				+ nickName + ", reviewResult=" + reviewResult + "]";
 	}
-
 }

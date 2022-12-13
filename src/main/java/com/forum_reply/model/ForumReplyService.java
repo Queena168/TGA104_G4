@@ -30,9 +30,9 @@ public class ForumReplyService {
 		return forumReplyVO;
 	}
 
-	public void updateReplyView(Integer view, Integer replyNo) {
-		dao.updatView(view, replyNo);
-	}
+//	public void updateReplyView(Integer view, Integer replyNo) {
+//		dao.updatView(view, replyNo);
+//	}
 
 	public void deleteReply(Integer replyNo) throws SQLException {
 		dao.delete(replyNo);

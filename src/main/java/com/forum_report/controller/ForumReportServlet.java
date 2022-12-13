@@ -16,11 +16,6 @@ import com.forum_report.model.ForumReportService;
 @WebServlet("/front-end/forum/forumreport.do")
 public class ForumReportServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

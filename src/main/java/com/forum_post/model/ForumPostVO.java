@@ -8,7 +8,8 @@ public class ForumPostVO {
 	private String content;
 	private java.util.Date postTime;
 	private java.util.Date modificationTime;
-	private Integer view;
+	private String nickName;
+	private String reviewResult;
 
 	public Integer getPostNo() {
 		return postNo;
@@ -57,7 +58,7 @@ public class ForumPostVO {
 	public void setPostTime(java.util.Date postTime) {
 		this.postTime = postTime;
 	}
-	
+
 	public java.util.Date getModificationTime() {
 		return modificationTime;
 	}
@@ -65,19 +66,27 @@ public class ForumPostVO {
 	public void setModificationTime(java.util.Date modificationTime) {
 		this.modificationTime = modificationTime;
 	}
-
-	public Integer getView() {
-		return view;
+	
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setView(Integer view) {
-		this.view = view;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getReviewResult() {
+		return reviewResult;
+	}
+
+	public void setReviewResult(String reviewResult) {
+		this.reviewResult = reviewResult;
 	}
 
 	@Override
 	public String toString() {
 		return "ForumPostVO [postNo=" + postNo + ", memberNo=" + memberNo + ", topicNo=" + topicNo + ", title=" + title
 				+ ", content=" + content + ", postTime=" + postTime + ", modificationTime=" + modificationTime
-				+ ", view=" + view + "]";
+				+ ", nickName=" + nickName + ", reviewResult=" + reviewResult + "]";
 	}
 }

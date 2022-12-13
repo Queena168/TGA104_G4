@@ -33,9 +33,9 @@ public class ForumPostService {
 		return forumPostVO;
 	}
 
-	public void updatePostView(Integer view, Integer postNo) {
-		dao.updateView(view, postNo);
-	}
+//	public void updatePostView(Integer view, Integer postNo) {
+//		dao.updateView(view, postNo);
+//	}
 
 	public void deletePost(Integer postNo) throws SQLException {
 		dao.delete(postNo);

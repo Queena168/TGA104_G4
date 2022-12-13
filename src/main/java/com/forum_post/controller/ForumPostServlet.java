@@ -126,8 +126,6 @@ public class ForumPostServlet extends HttpServlet {
 //
 		// ============================ 搜尋 ============================
 		if ("search".equals(action)) {
-			List<String> errorMessages = new LinkedList<String>();
-			request.setAttribute("errorMessages", errorMessages);
 
 			/************************ 1 ************************/
 			String str = request.getParameter("keyword");
@@ -141,10 +139,7 @@ public class ForumPostServlet extends HttpServlet {
 			List<ForumPostVO> resultList = forumPostService.getPostByKeyword(str);
 
 			if (resultList.isEmpty()) {
-				errorMessages.add("查無資料");
-			}
-			if (!errorMessages.isEmpty()) {
-				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/forum/forumIndex.do");
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/forum/searchResult.jsp");
 				failureView.forward(request, response);
 				return;
 			}

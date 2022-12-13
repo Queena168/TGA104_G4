@@ -32,7 +32,7 @@
 				<div class="status">第${status.count}篇</div>
 				<div class="subjects">
 					<a href="posts.do?topicNo=${param.topicNo}&postNo=${forumPostVO.postNo}">${forumPostVO.title}</a> <br>
-					<span>Started by <b><a href="">${forumPostVO.memberNo}</a></b>
+					<span>Started by <b>${forumPostVO.nickName}</b>
 					<br><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" /></span>
 				</div>
 				
@@ -43,7 +43,7 @@
 				<div class="last-reply">
 		<c:choose>  <%-- 用JSTL的choose --%>
 		<c:when test="${countList[status.index] != null}">
-				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVOList[status.index].replyTime}"/> <br>By <b><a href="">${forumReplyVOList[status.index].memberNo}</a></b>
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVOList[status.index].replyTime}"/> <br>By <b>${forumReplyVOList[status.index].nickName}</b>
 															<%--從topic.do傳來的forumReplyVOList，相同的index--%>
 		</c:when>
 		<c:otherwise>

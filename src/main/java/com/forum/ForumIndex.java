@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.forum_post.model.ForumPostService;
 import com.forum_post.model.ForumPostVO;
@@ -30,6 +31,10 @@ public class ForumIndex extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("account", "peter");
+		session.setAttribute("memberNo", 2);
 
 		ForumTopicService forumTopicService = new ForumTopicService();
 		List<ForumTopicVO> forumTopicVOList = forumTopicService.getAll();

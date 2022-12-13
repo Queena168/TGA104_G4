@@ -8,7 +8,7 @@ public interface ForumPostDAO_interface {
 
 	public void update(ForumPostVO forumPostVO);
 	
-	public void updateView(Integer view, Integer postNo);
+//	public void updateView(Integer view, Integer postNo);
 
 	public void delete(Integer postNo) throws SQLException;
 

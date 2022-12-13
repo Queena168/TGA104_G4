@@ -10,7 +10,7 @@ public interface ForumReplyDAO_interface {
 
 	public void update(ForumReplyVO forumReplyVO);
 
-	public void updatView(Integer view, Integer replyNo);
+//	public void updatView(Integer view, Integer replyNo);
 
 	public void delete(Integer replyNo) throws SQLException;
 

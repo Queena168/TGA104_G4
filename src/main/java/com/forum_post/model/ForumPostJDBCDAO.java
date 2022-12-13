@@ -17,18 +17,29 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 
 	private static final String INSERT_STATEMENT = "INSERT INTO ForumPost (memberNo, topicNo, title, content) VALUES (?, ?, ?, ?)";
 	private static final String UPDATE_STATEMENT = "UPDATE ForumPost SET title = ?, content = ?, modificationTime = now() WHERE postNo = ?";
-	private static final String UPDATEVIEW_STATEMENT = "UPDATE ForumPost SET view = ? WHERE postNo = ?";
+//	private static final String UPDATEVIEW_STATEMENT = "UPDATE ForumPost SET view = ? WHERE postNo = ?";
 	private static final String DELETE_STATEMENT = "DELETE FROM ForumPost WHERE postNo = ?";
-	private static final String FINDBYPOSTNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE postNo = ?";
-	private static final String FINDBYMEMBERNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost FORUM_POST WHERE memberNo = ?";
+	
+	
+	
+//	private static final String FINDBYPOSTNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime FROM ForumPost WHERE postNo = ?";
+	private static final String FINDBYPOSTNO_STATEMENT = "SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE P.postNo = ?";
+//	private static final String FINDBYMEMBERNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime FROM ForumPost FORUM_POST WHERE memberNo = ?";
+	private static final String FINDBYMEMBERNO_STATEMENT = "SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE P.memberNo = ?";
+//	private static final String FINDBYKEYWORD_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime FROM ForumPost WHERE title LIKE ? OR content like ?";
+	private static final String FINDBYKEYWORD_STATEMENT = "SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE title LIKE ? OR content like ?";
+//	private static final String GETALL_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime FROM ForumPost";
+	private static final String GETALL_STATEMENT = "SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo";
+//	private static final String FINDBYPOSTTIME_STATAMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime FROM ForumPost WHERE topicNo = ? ORDER BY postTime DESC LIMIT 1";
+	private static final String FINDBYPOSTTIME_STATAMENT = "SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE topicNo = ? ORDER BY postTime DESC LIMIT 1";
+//	private static final String FINDPOSTBYTOPICNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime FROM ForumPost WHERE topicNo = ?";
+	private static final String FINDPOSTBYTOPICNO_STATEMENT = "SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE topicNo = ?";
+
+
+	
 //	private static final String FINDBYTITLE_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE title LIKE ?";
 //	private static final String FINDBYCONTENT_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE content LIKE ?";
-	private static final String FINDBYKEYWORD_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE title LIKE ? OR content like ?";
-
-	private static final String GETALL_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost ORDER BY postTime";
-	private static final String FINDBYPOSTTIME_STATAMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE topicNo = ? ORDER BY postTime DESC LIMIT 1";
-	private static final String FINDPOSTBYTOPICNO_STATEMENT = "SELECT postNo, memberNo, topicNo, title, content, postTime, modificationTime, view FROM ForumPost WHERE topicNo = ?";
-
+	
 	@Override
 	public void insert(ForumPostVO forumPostVO) {
 		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -56,17 +67,17 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 		}
 	}
 
-	@Override
-	public void updateView(Integer view, Integer postNo) {
-		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-				PreparedStatement ps = connection.prepareStatement(UPDATEVIEW_STATEMENT)) {
-			ps.setInt(1, view);
-			ps.setInt(2, postNo);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	public void updateView(Integer view, Integer postNo) {
+//		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//				PreparedStatement ps = connection.prepareStatement(UPDATEVIEW_STATEMENT)) {
+//			ps.setInt(1, view);
+//			ps.setInt(2, postNo);
+//			ps.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public void delete(Integer postNo) throws SQLException {
@@ -96,7 +107,8 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setContent(rs.getString("content"));
 				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
 				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
+				forumPostVO.setNickName(rs.getString("nickName"));
+				forumPostVO.setReviewResult(rs.getString("reviewResult"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,7 +134,8 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setContent(rs.getString("content"));
 				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
 				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
+				forumPostVO.setNickName(rs.getString("nickName"));
+				forumPostVO.setReviewResult(rs.getString("reviewResult"));
 				list.add(forumPostVO);
 			}
 
@@ -149,7 +162,8 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setContent(rs.getString("content"));
 				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
 				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
+				forumPostVO.setNickName(rs.getString("nickName"));
+				forumPostVO.setReviewResult(rs.getString("reviewResult"));
 			}
 
 		} catch (SQLException e) {
@@ -176,7 +190,8 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setContent(rs.getString("content"));
 				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
 				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
+				forumPostVO.setNickName(rs.getString("nickName"));
+				forumPostVO.setReviewResult(rs.getString("reviewResult"));
 				list.add(forumPostVO);
 			}
 
@@ -204,7 +219,8 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setContent(rs.getString("content"));
 				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
 				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
+				forumPostVO.setNickName(rs.getString("nickName"));
+				forumPostVO.setReviewResult(rs.getString("reviewResult"));
 				list.add(forumPostVO);
 			}
 		} catch (SQLException e) {
@@ -286,7 +302,8 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 				forumPostVO.setContent(rs.getString("content"));
 				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
 				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setView(rs.getInt("view"));
+				forumPostVO.setNickName(rs.getString("nickName"));
+				forumPostVO.setReviewResult(rs.getString("reviewResult"));
 				list.add(forumPostVO);
 			}
 		} catch (SQLException e) {
@@ -295,6 +312,9 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 		return list;
 	}
 
+	
+	
+	
 	public static void main(String[] args) {
 		ForumPostJDBCDAO dao = new ForumPostJDBCDAO();
 //
@@ -308,9 +328,9 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 //
 //		// UPDATE
 //		ForumPostVO forumPostVO2 = new ForumPostVO();
-//		forumPostVO2.setTitle("aaaaa123");
+//		forumPostVO2.setTitle("aaaaaaa");
 //		forumPostVO2.setContent("hahahahaha");
-//		forumPostVO2.setPostNo(1);
+//		forumPostVO2.setPostNo(3);
 //		dao.update(forumPostVO2);
 //		
 //		// UPDATE VIEW
@@ -378,25 +398,6 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 //		List<ForumPostVO> list4 = dao.getAll();
 //		for (ForumPostVO aForumPostVO : list4) {
 //			System.out.println(aForumPostVO);
-////			System.out.println(aForumPostVO.getPostNo());
-////			System.out.println(aForumPostVO.getMemberNo());
-////			System.out.println(aForumPostVO.getTopicNo());
-////			System.out.println(aForumPostVO.getTitle());
-////			System.out.println(aForumPostVO.getContent());
-////			System.out.println(aForumPostVO.getPostTime());
-////			System.out.println(aForumPostVO.getView());
-//			System.out.println("=====================");
-//		}
-
-//		ForumPostVO forumpostVO = dao.findLastPostTimeByTopicNo(1);
-//		System.out.println(forumpostVO.getMemberNo());
-//		System.out.println(forumpostVO.getTitle());
-//		System.out.println(forumpostVO.getPostTime());
-		
-		// FIND BY TITLE
-		List<ForumPostVO> list = dao.findByKeyword("redis");
-		for (ForumPostVO aForumPostVO : list) {
-			System.out.println(aForumPostVO);
 //			System.out.println(aForumPostVO.getPostNo());
 //			System.out.println(aForumPostVO.getMemberNo());
 //			System.out.println(aForumPostVO.getTopicNo());
@@ -404,8 +405,26 @@ public class ForumPostJDBCDAO implements ForumPostDAO_interface {
 //			System.out.println(aForumPostVO.getContent());
 //			System.out.println(aForumPostVO.getPostTime());
 //			System.out.println(aForumPostVO.getView());
-			System.out.println("=====================");
-		}
+//			System.out.println("=====================");
+//		}
+//
+//		ForumPostVO forumpostVO = dao.findLastPostTimeByTopicNo(1);
+//		System.out.println(forumpostVO.getMemberNo());
+//		System.out.println(forumpostVO.getTitle());
+//		System.out.println(forumpostVO.getPostTime());
+//
+//		// FIND BY keyword
+//		List<ForumPostVO> list = dao.findByKeyword("redis");
+//		for (ForumPostVO aForumPostVO : list) {
+//			System.out.println(aForumPostVO);
+//			System.out.println(aForumPostVO.getPostNo());
+//			System.out.println(aForumPostVO.getMemberNo());
+//			System.out.println(aForumPostVO.getTopicNo());
+//			System.out.println(aForumPostVO.getTitle());
+//			System.out.println(aForumPostVO.getContent());
+//			System.out.println(aForumPostVO.getPostTime());
+//			System.out.println("=====================");
+//		}
 
 	}
 }

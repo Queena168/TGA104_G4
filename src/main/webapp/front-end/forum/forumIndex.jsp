@@ -11,14 +11,6 @@
 			</head>
 
 			<body>
-				<c:if test="${not empty errorMessages}">
-					<ul>
-						<c:forEach var="message" items="${errorMessages}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-
 				<form method="post" id="form" action="forumpost.do">
 					<span>
 						<input type="text" name="keyword" placeholder="搜尋論壇發文">
@@ -46,7 +38,7 @@
 							<div class="subforum-info subforum-column">
 								<b>最新:<a
 										href="posts.do?topicNo=${forumPostVOList[status.index].topicNo}&postNo=${forumPostVOList[status.index].postNo}">${forumPostVOList[status.index].title}</a></b>
-								by (會員暱稱) ${forumPostVOList[status.index].memberNo}</a>
+								by ${forumPostVOList[status.index].nickName}</a>
 								<%--從forumIndex.do傳來的forumPostVOList，相同的index--%>
 									<br>on
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
