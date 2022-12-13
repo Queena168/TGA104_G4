@@ -37,6 +37,8 @@ public class AdminDAO implements AdminDAO_interface{
 		"update Admin set adminEmail=?, adminPassword=?, adminName=?, adminPic=?, adminPrivilege=? where adminNo = ? ";
 	private static final String SELECT_FOR_LOGIN = 
 		"select * from admin where adminEmail = ? and adminPassword = ?";
+	private static final String UPDATE_FOR_ADMINPRIVILEGE = 
+		"update Admin set adminPrivilege=? where (adminNo = ? and adminEmail = ? and adminPassword = ?)";
 	
 	@Override
 	public void insert(AdminVO adminVO) {
@@ -334,6 +336,45 @@ public class AdminDAO implements AdminDAO_interface{
 		fis.read(buffer);
 		fis.close();
 		return buffer;
+	}
+
+	@Override
+	public void updatePrivilege(AdminVO adminVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_FOR_ADMINPRIVILEGE);
+			//private static final String UPDATE_FOR_ADMINPRIVILEGE = 
+			//		"update Admin set adminPrivilege=? where (adminNo = ? and adminEmail = ? and adminPassword = ?)";
+			pstmt.setString(1, adminVO.getAdminPrivilege());
+			pstmt.setInt(2, adminVO.getAdminNo());
+			pstmt.setString(3, adminVO.getAdminEmail());
+			pstmt.setString(4, adminVO.getAdminPassword());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 	
 	

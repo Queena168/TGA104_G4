@@ -8,4 +8,5 @@ public interface AdminDAO_interface {
 	public void delete(Integer adminNo);
 	public AdminVO findByPrimaryKey(Integer adminNo);
 	public List<AdminVO> getAll();
+	public void updatePrivilege(AdminVO adminVO);
 }

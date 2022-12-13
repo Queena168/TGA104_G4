@@ -1,16 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.admin.model.*"%>
 
 <%
-AdminService adminSvc = new AdminService();
-List<AdminVO> list = adminSvc.getAll();
-pageContext.setAttribute("list", list);
-@SuppressWarnings("unchecked")
-List<AdminVO> listPrivilege = (List<AdminVO>) request.getAttribute("listPrivilege");
-pageContext.setAttribute("listPrivilege", listPrivilege);
+AdminVO adminVoUpdate = (AdminVO) request.getAttribute("adminVoUpdate"); //AdminServlet.java (Concroller) 存入req的AdminVO物件 (包括幫忙取出的AdminVO, 也包括輸入資料錯誤時的AdminVO物件)
+AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 %>
 
 <!DOCTYPE html>
@@ -23,7 +19,7 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign ListAllAdmin</title>
+<title>MatDesign Admin</title>
 
 <meta name="description" content="" />
 
@@ -58,7 +54,7 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
-
+<link rel="stylesheet" href="../assets/vendor/css/pages/admin-login.css" />
 <!-- Helpers -->
 <script src="../assets/vendor/js/helpers.js"></script>
 
@@ -115,8 +111,7 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer_portfolio/listAllPortfolio.jsp"
-								class="menu-link">
+								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -318,12 +313,11 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">MatDesign /</span> 管理員列表
+							<span class="text-muted fw-light">MatDesign /</span> 管理員資料修改
 						</h4>
 
-						<!-- Striped Rows -->
-						<div class="card">
-
+						<!-- Update Admin Info -->
+						<div class="card mb-4">
 							<%-- 錯誤表列 --%>
 							<c:if test="${not empty errorMsgs}">
 								<div class="mb-3">
@@ -339,73 +333,83 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 								</div>
 							</c:if>
 							<%-- /錯誤表列 --%>
-
-							<a href="selectPageAdmin.jsp" class="card-header">管理員查詢</a>
-							<div class="table-responsive text-nowrap">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>管理員編號</th>
-											<th>管理員信箱</th>
-											<th>管理員密碼</th>
-											<th>管理員名稱</th>
-											<th>管理員照片</th>
-											<th>管理員權限</th>
-											<th>新增時間</th>
-											<th>上傳管理員</th>
-											<th>修改</th>
-										</tr>
-									</thead>
-									<tbody class="table-border-bottom-0">
-										<c:forEach var="adminVoList" items="${list}">
-											<tr>
-												<td><strong>${adminVoList.adminNo}</strong></td>
-												<td>${adminVoList.adminEmail}</td>
-												<td>${adminVoList.adminPassword}</td>
-												<td>${adminVoList.adminName}</td>
-												<td><img
-													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoList.adminNo}"
-													alt class="avatar w-px-40 rounded-circle" /></td>
-												<td>${adminVoList.adminPrivilege}</td>
-												<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-														value="${adminVoList.createTime}" /></td>
-												<td>${adminVoList.uploader}</td>
-												<td>
-													<form method="post"
-														action="<%=request.getContextPath()%>/back-end/admin/admin.do">
-														<label class="btn btn-primary" tabindex="0"> <span
-															class="d-none d-sm-block">修改</span> <i
-															class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
-															<input type="submit" class="account-file-input" hidden />
-															<input type="hidden" name="adminNo"
-															value="${adminVoList.adminNo}"> <input type="hidden"
-															name="action" value="getOne_For_AdminPrivilegeUpdate">
-															<input type="hidden" name="adminPrivilege"
-															value="${adminVoList.adminPrivilege}">
-														</label>
-													</form>
-												</td>
-												<%-- 移除刪除資料按鈕 --%>
-												<%-- <td>
-													<form method="post"
-														action="<%=request.getContextPath()%>/back-end/admin/admin.do">
-														<label class="btn btn-primary" tabindex="0"> <span
-															class="d-none d-sm-block">刪除</span> <i
-															class="fa-regular fa-trash-can d-block d-sm-none"></i> <input
-															type="submit" class="account-file-input" hidden /> <input
-															type="hidden" name="adminNo" value="${adminVO.adminNo}">
-															<input type="hidden" name="action" value="delete">
-														</label>
-													</form>
-												</td> --%>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+							
+							<!-- Account -->
+							<div class="card-body">
+								<div
+									class="d-flex align-items-start align-items-sm-center gap-4">
+									<img
+										src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoUpdate.adminNo}"
+										alt="user-avatar" class="d-block rounded-circle " height="100"
+										width="100" />
+								</div>
 							</div>
-							<a href="addAdmin.jsp" class="card-header">新增管理員</a>
+							<hr class="my-0" />
+							<div class="card-body">
+								<form id="formAccountSettings" method="POST" name="addAdmin"
+									enctype="multipart/form-data" action="admin.do">
+									<div class="row">
+										<div class="mb-3 col-md-6">
+											<label for="email" class="form-label">管理員E-mail</label> <input
+												class="form-control" type="text" id="email"
+												name="adminEmail" value="<%=adminVoUpdate.getAdminEmail()%>" readonly/>
+										</div>
+										<!-- 排版用區塊  隱藏權限-->
+										<div class="mb-3 col-md-6"></div>
+										<!-- /排版用區塊  隱藏權限-->
+										<div class="mb-3 col-md-6 form-password-toggle">
+											<label for="firstName" class="form-label">管理員密碼</label>
+											<div class="input-group input-group-merge">
+												<input class="form-control" type="password" id="firstName"
+													name="adminPassword"
+													value="<%=adminVoUpdate.getAdminPassword()%>" readonly/> <span
+													class="input-group-text cursor-pointer"></span>
+											</div>
+										</div>
+										<!-- 排版用區塊  -->
+										<div class="mb-3 col-md-6"></div>
+										<!-- /排版用區塊  -->
+										<div class="mb-3 col-md-6">
+											<label for="firstName" class="form-label">管理員名稱</label> <input
+												class="form-control" type="text" id="firstName"
+												name="adminName" value="<%=adminVoUpdate.getAdminName()%>" readonly/>
+										</div>
+										<!-- 排版用區塊  -->
+										<div class="mb-3 col-md-6"></div>
+										<!-- /排版用區塊  -->
+										<div class="mb-3 col-md-6 ">
+											<label for="firstName" class="form-label">大頭貼</label>
+												<img
+													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoUpdate.adminNo}"
+													alt="user-avatar" class="d-block rounded" height="100"
+													width="100" id="uploadedAvatar" />
+											<br>
+										</div>
+										<!-- 排版用區塊  -->
+										<div class="mb-3 col-md-6"></div>
+										<div class="mb-3 col-md-6">
+											<label for="firstName" class="form-label">管理員權限</label> 
+											<%-- <input
+												class="form-control" type="text" id="firstName"
+												name="adminPrivilege" value="<%=adminVoUpdate.getAdminPrivilege()%>" /> --%>
+											<select id="selectTypeOpt"
+														class="form-select color-dropdown" name="adminPrivilege">
+														<option value="1">1
+														<option value="2" selected>2
+												</select>
+										</div>
+										<div class="mt-2">
+											<button type="submit" class="btn btn-primary me-2">Save
+												changes</button>
+											<input type="hidden" name="action" value="updatePrivilege"> <input
+												type="hidden" name="adminNo"
+												value="<%=adminVoUpdate.getAdminNo()%>">
+										</div>
+								</form>
+							</div>
+							<!-- /Account -->
 						</div>
-						<!--/ Striped Rows -->
+						<!--/ Update Admin Info -->
 
 					</div>
 					<!-- / Content -->
@@ -454,13 +458,13 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 
 	<!-- Main JS -->
 	<script src="../assets/js/main.js"></script>
-	<script src="../assets/js/main.js"></script>
-
 
 	<!-- Page JS -->
-	<script src="../assets/js/dashboards-analytics.js"></script>
+	<script src="../assets/js/pages-account-settings-account.js"></script>
+	<script src="../assets/js/adminUpdate-changepic.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
+

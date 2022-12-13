@@ -110,6 +110,27 @@ public class AdminServlet extends HttpServlet {
 			successView.forward(req, res);
 
 		}
+		
+		if ("getOne_For_AdminPrivilegeUpdate".equals(action)) { // 來自listAllAdmin.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer adminNo = Integer.valueOf(req.getParameter("adminNo"));
+
+			/*************************** 2.開始查詢資料 ****************************************/
+			AdminService adminSvc = new AdminService();
+			AdminVO adminVoUpdate = adminSvc.getOneAdmin(adminNo);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("adminVoUpdate", adminVoUpdate); // 資料庫取出的AdminVO物件,存入req
+			String url = "/back-end/admin/adminPrivilegeUpdate.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 
 		if ("getOne_For_Profile".equals(action)) { // 來自index.jsp的My Profile請求
 
@@ -201,6 +222,48 @@ public class AdminServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("adminVO", adminVO); // 資料庫取出的AdminVO物件,存入req
+			String url = "/back-end/admin/listAllAdmin.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
+		if ("updatePrivilege".equals(action)) { // 來自updateAdmin.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer adminNo = Integer.valueOf(req.getParameter("adminNo").trim());
+
+			String adminEmail = req.getParameter("adminEmail");
+
+			String adminPassword = req.getParameter("adminPassword");
+
+
+			String adminPrivilege = req.getParameter("adminPrivilege");
+//			Integer uploader = Integer.valueOf(req.getParameter("uploader").trim());
+
+			AdminVO adminVoPrivilege = new AdminVO();
+			adminVoPrivilege.setAdminNo(adminNo);
+			adminVoPrivilege.setAdminPrivilege(adminPrivilege);
+			adminVoPrivilege.setAdminEmail(adminEmail);
+			adminVoPrivilege.setAdminPassword(adminPassword);
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("adminVO", adminVoPrivilege); // 含有輸入格式錯誤的manager_VO物件,也存入req
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/admin/adminPrivilegeUpdate.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
+
+			/*************************** 2.開始修改資料 *****************************************/
+			AdminService adminSvc = new AdminService();
+			adminVoPrivilege = adminSvc.updatePrivilege(adminNo, adminEmail,adminPassword, adminPrivilege);
+			List<AdminVO> listPrivilege = adminSvc.getAll();
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("listPrivilege", listPrivilege); 
 			String url = "/back-end/admin/listAllAdmin.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);

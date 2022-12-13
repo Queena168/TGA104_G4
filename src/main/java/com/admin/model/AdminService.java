@@ -55,4 +55,15 @@ public class AdminService {
 	public List<AdminVO> getAll(){
 		return dao.getAll();
 	}
+	
+	public AdminVO updatePrivilege(Integer adminNo, String adminEmail, String adminPassword,String adminPrivilege) {
+		AdminVO adminVO = new AdminVO();
+		adminVO.setAdminNo(adminNo);
+		adminVO.setAdminEmail(adminEmail);
+		adminVO.setAdminPassword(adminPassword);
+		adminVO.setAdminPrivilege(adminPrivilege);
+		dao.updatePrivilege(adminVO);
+		
+		return dao.findByPrimaryKey(adminNo);
+	}
 }
