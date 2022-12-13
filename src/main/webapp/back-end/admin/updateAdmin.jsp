@@ -5,7 +5,8 @@
 <%@ page import="com.admin.model.*"%>
 
 <%
-AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java (Concroller) 存入req的AdminVO物件 (包括幫忙取出的AdminVO, 也包括輸入資料錯誤時的AdminVO物件)
+AdminVO adminVoUpdate = (AdminVO) request.getAttribute("adminVoUpdate"); //AdminServlet.java (Concroller) 存入req的AdminVO物件 (包括幫忙取出的AdminVO, 也包括輸入資料錯誤時的AdminVO物件)
+AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 %>
 
 <!DOCTYPE html>
@@ -110,7 +111,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-Portfolio.html" class="menu-link">
+								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -338,7 +339,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 								<div
 									class="d-flex align-items-start align-items-sm-center gap-4">
 									<img
-										src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+										src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoUpdate.adminNo}"
 										alt="user-avatar" class="d-block rounded-circle " height="100"
 										width="100" />
 								</div>
@@ -351,12 +352,12 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 										<div class="mb-3 col-md-6">
 											<label for="email" class="form-label">管理員E-mail</label> <input
 												class="form-control" type="text" id="email"
-												name="adminEmail" value="<%=adminVO.getAdminEmail()%>" />
+												name="adminEmail" value="<%=adminVoUpdate.getAdminEmail()%>" />
 										</div>
 										<!-- 排版用區塊  隱藏權限-->
 										<div class="mb-3 col-md-6">
 											<input type="TEXT" hidden name="adminPrivilege"
-												value="<%=adminVO.getAdminPrivilege()%>" />
+												value="<%=adminVoUpdate.getAdminPrivilege()%>" />
 										</div>
 										<!-- /排版用區塊  隱藏權限-->
 										<div class="mb-3 col-md-6 form-password-toggle">
@@ -364,7 +365,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 											<div class="input-group input-group-merge">
 												<input class="form-control" type="password" id="firstName"
 													name="adminPassword"
-													value="<%=adminVO.getAdminPassword()%>" /> <span
+													value="<%=adminVoUpdate.getAdminPassword()%>" /> <span
 													class="input-group-text cursor-pointer"><i
 													class="bx bx-hide"></i></span>
 											</div>
@@ -375,7 +376,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 										<div class="mb-3 col-md-6">
 											<label for="firstName" class="form-label">管理員名稱</label> <input
 												class="form-control" type="text" id="firstName"
-												name="adminName" value="<%=adminVO.getAdminName()%>" />
+												name="adminName" value="<%=adminVoUpdate.getAdminName()%>" />
 										</div>
 										<!-- 排版用區塊  -->
 										<div class="mb-3 col-md-6"></div>
@@ -383,7 +384,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 										<div class="mb-3 col-md-6 ">
 											<label for="firstName" class="form-label">大頭貼</label>
 												<img
-													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoUpdate.adminNo}"
 													alt="user-avatar" class="d-block rounded" height="100"
 													width="100" id="uploadedAvatar" />
 											<br>
@@ -391,7 +392,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 												<label for="upload" class="btn btn-secondary" tabindex="0">
 													<input type="file" id="upload" class="account-file-input"
 													accept="image/png, image/jpeg" name="adminPic"
-													value="<%=adminVO.getAdminPic()%>" />
+													value="<%=adminVoUpdate.getAdminPic()%>" />
 												</label>
 												<p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max
 													size of 800K</p>
@@ -404,7 +405,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java
 												changes</button>
 											<input type="hidden" name="action" value="update"> <input
 												type="hidden" name="adminNo"
-												value="<%=adminVO.getAdminNo()%>">
+												value="<%=adminVoUpdate.getAdminNo()%>">
 										</div>
 								</form>
 							</div>

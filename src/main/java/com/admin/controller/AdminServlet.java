@@ -101,10 +101,10 @@ public class AdminServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			AdminService adminSvc = new AdminService();
-			AdminVO adminVO = adminSvc.getOneAdmin(adminNo);
+			AdminVO adminVoUpdate = adminSvc.getOneAdmin(adminNo);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("adminVO", adminVO); // 資料庫取出的AdminVO物件,存入req
+			req.setAttribute("adminVoUpdate", adminVoUpdate); // 資料庫取出的AdminVO物件,存入req
 			String url = "/back-end/admin/updateAdmin.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);

@@ -106,7 +106,7 @@
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-Portfolio.html" class="menu-link">
+								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>

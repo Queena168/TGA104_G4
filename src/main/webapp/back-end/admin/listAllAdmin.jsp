@@ -73,7 +73,7 @@ pageContext.setAttribute("list", list);
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="../index.html" class="app-brand-link"> <span
+					<a href="index.jsp" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -112,7 +112,8 @@ pageContext.setAttribute("list", list);
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-Portfolio.html" class="menu-link">
+								href="../designer_portfolio/listAllPortfolio.jsp"
+								class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -333,7 +334,6 @@ pageContext.setAttribute("list", list);
 											<th>新增時間</th>
 											<th>上傳管理員</th>
 											<th>修改</th>
-											<th>刪除</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
@@ -363,7 +363,8 @@ pageContext.setAttribute("list", list);
 														</label>
 													</form>
 												</td>
-												<td>
+												<%-- 移除刪除資料按鈕 --%>
+												<%-- <td>
 													<form method="post"
 														action="<%=request.getContextPath()%>/back-end/admin/admin.do">
 														<label class="btn btn-primary" tabindex="0"> <span
@@ -374,7 +375,7 @@ pageContext.setAttribute("list", list);
 															<input type="hidden" name="action" value="delete">
 														</label>
 													</form>
-												</td>
+												</td> --%>
 											</tr>
 										</c:forEach>
 									</tbody>

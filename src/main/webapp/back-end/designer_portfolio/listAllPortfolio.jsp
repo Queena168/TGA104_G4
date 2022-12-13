@@ -1,15 +1,23 @@
+<%@page import="com.portfolio.model.PortfolioService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.admin.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.portfolio.model.*"%>
 
 <%
-AdminVO adminVoSelect = (AdminVO) request.getAttribute("adminVoSelect");
 AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
-AdminService adminSvc = new AdminService();
+PortfolioService portfolioSvc = new PortfolioService();
+List<PortfolioVO> list = portfolioSvc.getAll();
+pageContext.setAttribute("list", list);
 %>
 
+
 <!DOCTYPE html>
+
+
 
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
 	data-theme="theme-default" data-assets-path="../assets/"
@@ -72,7 +80,7 @@ AdminService adminSvc = new AdminService();
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="index.jsp" class="app-brand-link"> <span
+					<a href="../index.jsp" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -99,8 +107,8 @@ AdminService adminSvc = new AdminService();
 						</ul></li>
 
 					<!-- Designer設計師管理 -->
-					<li class="menu-item"><a href="javascript:void(0);"
-						class="menu-link menu-toggle"> <i
+					<li class="menu-item active open"><a
+						href="javascript:void(0);" class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-solid fa-user"></i>
 							<div data-i18n="Designer">設計師管理</div>
 					</a>
@@ -110,8 +118,8 @@ AdminService adminSvc = new AdminService();
 								class="menu-link">
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
-							<li class="menu-item"><a
-								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
+							<li class="menu-item active"><a
+								href="../designer/Admin-Design-Portfolio.html" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -218,14 +226,14 @@ AdminService adminSvc = new AdminService();
 						</ul></li>
 
 					<!-- Admin管理員管理 -->
-					<li class="menu-item active open"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
 							<div data-i18n="Admin">管理員管理</div>
 					</a>
 						<ul class="menu-sub">
-							<li class="menu-item active"><a
-								href="listAllAdmin.jsp" class="menu-link">
+							<li class="menu-item"><a
+								href="../admin/listAllAdmin.jsp" class="menu-link">
 									<div data-i18n="">管理員資料管理</div>
 							</a></li>
 						</ul></li>
@@ -280,23 +288,24 @@ AdminService adminSvc = new AdminService();
 
 									<li><form method="post"
 											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
-											<div class="dropdown-item" > 
-												
-												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
-													<i class="bx bx-user me-2"></i> 
-													<span class="align-middle">My Profile</span> 
-													<input type="hidden" name="adminNo" value="${adminVO.adminNo}"> 
-													<input type="hidden" name="action" value="getOne_For_Profile">
+											<div class="dropdown-item">
+
+												<label class="btn rounded-pill bg-label-secondary"
+													tabindex="0"> <i class="bx bx-user me-2"></i> <span
+													class="align-middle">My Profile</span> <input type="hidden"
+													name="adminNo" value="${adminVO.adminNo}"> <input
+													type="hidden" name="action" value="getOne_For_Profile">
 													<input type="submit" class="account-file-input" hidden />
 												</label>
 											</div>
 										</form></li>
-									<li><a class="dropdown-item" href="../adminLogin/admin-login.jsp">
-												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
-													<i class="bx bx-power-off me-2"></i> 
-													<span class="align-middle">Log Out</span> 
-												</label>
-									</a></li>	
+									<li><a class="dropdown-item"
+										href="../adminLogin/admin-login.jsp"> <label
+											class="btn rounded-pill bg-label-secondary" tabindex="0">
+												<i class="bx bx-power-off me-2"></i> <span
+												class="align-middle">Log Out</span>
+										</label>
+									</a></li>
 								</ul>
 							</li>
 							<!--/ User -->
@@ -312,40 +321,49 @@ AdminService adminSvc = new AdminService();
 
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">MatDesign /</span> 管理員查詢結果
+							<span class="text-muted fw-light">MatDesign /</span> 設計師作品列表
 						</h4>
 
 						<!-- Striped Rows -->
 						<div class="card">
-							<a href="selectPageAdmin.jsp" class="card-header">管理員查詢</a>
 							<div class="table-responsive text-nowrap">
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>管理員編號</th>
-											<th>管理員信箱</th>
-											<th>管理員密碼</th>
-											<th>管理員名稱</th>
-											<th>管理員照片</th>
-											<th>管理員權限</th>
+											<th>作品編號</th>
+											<th>作品名稱</th>
+											<th>設計師名稱</th>
 											<th>新增時間</th>
-											<th>上傳管理員</th>
+											<th>最新修改時間</th>
+											<th>作品明細</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
-										<tr>
-											<td><strong><%=adminVoSelect.getAdminNo()%></strong></td>
-											<td><%=adminVoSelect.getAdminEmail()%></td>
-											<td><%=adminVoSelect.getAdminPassword()%></td>
-											<td><%=adminVoSelect.getAdminName()%></td>
-											<td><img
-												src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoSelect.adminNo}"
-												alt class="w-px-40 rounded-circle avatar" /></td>
-											<td><%=adminVoSelect.getAdminPrivilege()%></td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-													value="${adminVO.createTime}" /></td>
-											<td><%=adminVoSelect.getUploader()%></td>
-										</tr>
+										<c:forEach var="portfolioVO" items="${list}">
+											<tr>
+												<td><strong>${portfolioVO.portfolioNo}</strong></td>
+												<td>${portfolioVO.portfolioName}</td>
+												<td>${portfolioVO.designerNo}</td>
+												<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+														value="${portfolioVO.createTime}" /></td>
+												<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+														value="${portfolioVO.modificationTime}" /></td>
+												
+												<td>
+													<form method="post"
+														action="PortfolioServlet">
+														<label class="btn btn-primary" tabindex="0"> <span
+															class="d-none d-sm-block">作品明細</span> <i
+															class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+															<input type="submit" class="account-file-input" hidden />
+															<input type="hidden" name="portfolioNo"
+															value="${portfolioVO.portfolioNo}"> <input type="hidden"
+															name="action" value="getOne_For_Display">
+														</label>
+													</form>
+												</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

@@ -109,7 +109,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-Portfolio.html" class="menu-link">
+								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -374,16 +374,21 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 												</div>
 											</div>
 											<div class="mb-3">
-												<label for="email" class="form-label">管理員權限</label> <input
+												<label for="email" class="form-label">管理員權限</label> 
+												<%-- <input
 													type="text" class="form-control" id="email"
 													name="adminPrivilege" placeholder="Enter privilege"
-													value="<%=(adminVO == null) ? "" : adminVO.getAdminPrivilege()%>" />
+													value="<%=(adminVO == null) ? "" : adminVO.getAdminPrivilege()%>" /> --%>
+												<select id="selectTypeOpt"
+														class="form-select color-dropdown" name="adminPrivilege">
+														<option value="1">1
+														<option value="2">2
+												</select>
 											</div>
 											<div class="mb-3">
 												<label for="email" class="form-label">上傳管理員</label> <input
 													type="text" class="form-control" id="email" name="uploader"
-													placeholder="Enter uploader"
-													value="<%=(adminVO == null) ? "" : adminVO.getUploader()%>" />
+													value="${adminVO.uploader}" readonly/>
 											</div>
 
 											<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->

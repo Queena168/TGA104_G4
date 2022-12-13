@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.admin.model.*"%>
-
+<%@ page import="com.portfolio.model.*"%>
 <%
-AdminVO adminVoSelect = (AdminVO) request.getAttribute("adminVoSelect");
-AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
-AdminService adminSvc = new AdminService();
+PortfolioVO portfolioVO = (PortfolioVO) request.getAttribute("portfolioVoSelect");
 %>
 
 <!DOCTYPE html>
@@ -72,7 +68,7 @@ AdminService adminSvc = new AdminService();
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="index.jsp" class="app-brand-link"> <span
+					<a href="../admin/index.jsp" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -99,8 +95,8 @@ AdminService adminSvc = new AdminService();
 						</ul></li>
 
 					<!-- Designer設計師管理 -->
-					<li class="menu-item"><a href="javascript:void(0);"
-						class="menu-link menu-toggle"> <i
+					<li class="menu-item active open"><a
+						href="javascript:void(0);" class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-solid fa-user"></i>
 							<div data-i18n="Designer">設計師管理</div>
 					</a>
@@ -110,8 +106,9 @@ AdminService adminSvc = new AdminService();
 								class="menu-link">
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
-							<li class="menu-item"><a
-								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
+							<li class="menu-item active"><a
+								href="../designer_portfolio/listAllPortfolio.jsp"
+								class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -218,14 +215,14 @@ AdminService adminSvc = new AdminService();
 						</ul></li>
 
 					<!-- Admin管理員管理 -->
-					<li class="menu-item active open"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
 							<div data-i18n="Admin">管理員管理</div>
 					</a>
 						<ul class="menu-sub">
-							<li class="menu-item active"><a
-								href="listAllAdmin.jsp" class="menu-link">
+							<li class="menu-item"><a href="listAllAdmin.jsp"
+								class="menu-link">
 									<div data-i18n="">管理員資料管理</div>
 							</a></li>
 						</ul></li>
@@ -280,23 +277,24 @@ AdminService adminSvc = new AdminService();
 
 									<li><form method="post"
 											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
-											<div class="dropdown-item" > 
-												
-												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
-													<i class="bx bx-user me-2"></i> 
-													<span class="align-middle">My Profile</span> 
-													<input type="hidden" name="adminNo" value="${adminVO.adminNo}"> 
-													<input type="hidden" name="action" value="getOne_For_Profile">
+											<div class="dropdown-item">
+
+												<label class="btn rounded-pill bg-label-secondary"
+													tabindex="0"> <i class="bx bx-user me-2"></i> <span
+													class="align-middle">My Profile</span> <input type="hidden"
+													name="adminNo" value="${adminVO.adminNo}"> <input
+													type="hidden" name="action" value="getOne_For_Profile">
 													<input type="submit" class="account-file-input" hidden />
 												</label>
 											</div>
 										</form></li>
-									<li><a class="dropdown-item" href="../adminLogin/admin-login.jsp">
-												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
-													<i class="bx bx-power-off me-2"></i> 
-													<span class="align-middle">Log Out</span> 
-												</label>
-									</a></li>	
+									<li><a class="dropdown-item"
+										href="../adminLogin/admin-login.jsp"> <label
+											class="btn rounded-pill bg-label-secondary" tabindex="0">
+												<i class="bx bx-power-off me-2"></i> <span
+												class="align-middle">Log Out</span>
+										</label>
+									</a></li>
 								</ul>
 							</li>
 							<!--/ User -->
@@ -312,74 +310,148 @@ AdminService adminSvc = new AdminService();
 
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">MatDesign /</span> 管理員查詢結果
+							<span class="text-muted fw-light">MatDesign /</span> 設計師作品明細
 						</h4>
 
-						<!-- Striped Rows -->
-						<div class="card">
-							<a href="selectPageAdmin.jsp" class="card-header">管理員查詢</a>
-							<div class="table-responsive text-nowrap">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>管理員編號</th>
-											<th>管理員信箱</th>
-											<th>管理員密碼</th>
-											<th>管理員名稱</th>
-											<th>管理員照片</th>
-											<th>管理員權限</th>
-											<th>新增時間</th>
-											<th>上傳管理員</th>
-										</tr>
-									</thead>
-									<tbody class="table-border-bottom-0">
-										<tr>
-											<td><strong><%=adminVoSelect.getAdminNo()%></strong></td>
-											<td><%=adminVoSelect.getAdminEmail()%></td>
-											<td><%=adminVoSelect.getAdminPassword()%></td>
-											<td><%=adminVoSelect.getAdminName()%></td>
-											<td><img
-												src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoSelect.adminNo}"
-												alt class="w-px-40 rounded-circle avatar" /></td>
-											<td><%=adminVoSelect.getAdminPrivilege()%></td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-													value="${adminVO.createTime}" /></td>
-											<td><%=adminVoSelect.getUploader()%></td>
-										</tr>
-									</tbody>
-								</table>
+						<!-- Basic Layout -->
+						<div class="row">
+							<div class="col-xl">
+								<div class="card mb-4">
+									<div
+										class="card-header d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">作品</h5>
+									</div>
+									<div class="card-body">
+										<form>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-fullname">作品名稱</label>
+												<input type="text" class="form-control"
+													id="basic-default-fullname"
+													value="<%=portfolioVO.getPortfolioName()%>" readonly />
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-company">設計師</label>
+												<input type="text" class="form-control"
+													id="basic-default-company"
+													value="<%=portfolioVO.getDesignerVO().getDesignerName()%>"
+													readonly />
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-email">作品圖片</label>
+												<div class="input-group input-group-merge">
+													<!-- Bootstrap carousel -->
+													<div class="col-md">
+														<div id="carouselExample" class="carousel slide"
+															data-bs-ride="carousel">
+															<ol class="carousel-indicators">
+																<li data-bs-target="#carouselExample"
+																	data-bs-slide-to="0" class="active"></li>
+																<li data-bs-target="#carouselExample"
+																	data-bs-slide-to="1"></li>
+																<li data-bs-target="#carouselExample"
+																	data-bs-slide-to="2"></li>
+																<li data-bs-target="#carouselExample"
+																	data-bs-slide-to="3"></li>	
+															</ol>
+															<div class="carousel-inner">
+																<div class="carousel-item active">
+																	<img class="d-block w-100"
+																		src="<%=request.getContextPath()%>/PortfolioPic1?portfolioNo=<%=portfolioVO.getPortfolioNo()%>" alt="First slide" />
+																	<div class="carousel-caption d-none d-md-block">
+																	</div>
+																</div>
+																<div class="carousel-item">
+																	<img class="d-block w-100"
+																		src="<%=request.getContextPath()%>/PortfolioPic2?portfolioNo=<%=portfolioVO.getPortfolioNo()%>" alt="Second slide" />
+																	<div class="carousel-caption d-none d-md-block">
+																	</div>
+																</div>
+																<div class="carousel-item">
+																	<img class="d-block w-100"
+																		src="<%=request.getContextPath()%>/PortfolioPic3?portfolioNo=<%=portfolioVO.getPortfolioNo()%>" alt="Third slide" />
+																	<div class="carousel-caption d-none d-md-block">
+																	</div>
+																</div>
+																<div class="carousel-item">
+																	<img class="d-block w-100"
+																		src="<%=request.getContextPath()%>/PortfolioPic4?portfolioNo=<%=portfolioVO.getPortfolioNo()%>" alt="Fourth slide" />
+																	<div class="carousel-caption d-none d-md-block">
+																	</div>
+																</div>
+															</div>
+															<a class="carousel-control-prev" href="#carouselExample"
+																role="button" data-bs-slide="prev"> <span
+																class="carousel-control-prev-icon" aria-hidden="true"></span>
+																<span class="visually-hidden">Previous</span>
+															</a> <a class="carousel-control-next" href="#carouselExample"
+																role="button" data-bs-slide="next"> <span
+																class="carousel-control-next-icon" aria-hidden="true"></span>
+																<span class="visually-hidden">Next</span>
+															</a>
+														</div>
+													</div>
+													<!-- Bootstrap crossfade carousel -->
+												</div>
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-phone">內容
+												</label> <textarea id="basic-default-message" class="form-control"
+													placeholder="<%=portfolioVO.getDescription()%>" readonly></textarea>
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-message">房屋區域</label>
+												<input type="text" id="basic-default-phone"
+													class="form-control phone-mask"
+													value="<%=portfolioVO.getHouseArea()%>" readonly />
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-message">房屋坪數</label>
+												<input type="text" id="basic-default-phone"
+													class="form-control phone-mask"
+													value="<%=portfolioVO.getHouseSize()%>" readonly />
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="basic-default-message">房屋屋齡</label>
+												<input type="text" id="basic-default-phone"
+													class="form-control phone-mask"
+													value="<%=portfolioVO.getHouseAge()%>" readonly />
+											</div>
+										</form>
+									</div>
+								</div>
 							</div>
 						</div>
-						<!--/ Striped Rows -->
-
+						<!-- /Basic Layout -->
 					</div>
-					<!-- / Content -->
 
-					<!-- Footer -->
-					<footer class="content-footer footer bg-footer-theme">
-						<div
-							class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-							<div class="mb-2 mb-md-0">
-								©
-								<script>
-									document.write(new Date().getFullYear());
-								</script>
-								, made by <a href="#" target="_blank"
-									class="footer-link fw-bolder">MatDesign</a>
-							</div>
-						</div>
-					</footer>
-					<!-- / Footer -->
-
-					<div class="content-backdrop fade"></div>
 				</div>
-				<!-- Content wrapper -->
-			</div>
-			<!-- / Layout page -->
-		</div>
+				<!-- / Content -->
 
-		<!-- Overlay -->
-		<div class="layout-overlay layout-menu-toggle"></div>
+				<!-- Footer -->
+				<footer class="content-footer footer bg-footer-theme">
+					<div
+						class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+						<div class="mb-2 mb-md-0">
+							©
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							, made by <a href="#" target="_blank"
+								class="footer-link fw-bolder">MatDesign</a>
+						</div>
+					</div>
+				</footer>
+				<!-- / Footer -->
+
+				<div class="content-backdrop fade"></div>
+			</div>
+			<!-- Content wrapper -->
+		</div>
+		<!-- / Layout page -->
+	</div>
+
+	<!-- Overlay -->
+	<div class="layout-overlay layout-menu-toggle"></div>
 	</div>
 	<!-- / Layout wrapper -->
 

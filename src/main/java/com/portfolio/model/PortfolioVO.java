@@ -111,5 +111,12 @@ public class PortfolioVO implements java.io.Serializable{
 	public void setHouseArea(String houseArea) {
 		this.houseArea = houseArea;
 	}
+	
+	// for join designerName from designerNo
+	public com.designer.model.DesignerVO getDesignerVO(){
+		com.designer.service.DesignerService designerSvc = new com.designer.service.DesignerService();
+		com.designer.model.DesignerVO designerVO = designerSvc.getOneDesigner(designerNo);
+		return designerVO;
+	}
 
 }
