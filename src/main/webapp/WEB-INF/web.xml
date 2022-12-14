@@ -38,6 +38,42 @@
 		<servlet-name>AdminLoginServlet</servlet-name>
 		<url-pattern>/back-end/adminLogin/AdminLoginServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PicAllReadServlet</servlet-name>
+		<servlet-class>com.productpic.controller.PicAllReadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PicAllReadServlet</servlet-name>
+		<url-pattern>/PicAllReadServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PicServlet</servlet-name>
+		<servlet-class>com.productpic.controller.PicServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PicServlet</servlet-name>
+		<url-pattern>/PicServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PicReadServlet</servlet-name>
+		<servlet-class>com.productpic.controller.PicReadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PicReadServlet</servlet-name>
+		<url-pattern>/PicReadServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PicReadOneServlet</servlet-name>
+		<servlet-class>com.productpic.controller.PicReadOneServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PicReadOneServlet</servlet-name>
+		<url-pattern>/PicReadOneServlet</url-pattern>
+	</servlet-mapping>
 
 	<!-- 以下為Filter的註冊 -->
 	<filter>
