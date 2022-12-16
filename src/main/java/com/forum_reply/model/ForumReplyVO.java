@@ -10,7 +10,6 @@ public class ForumReplyVO {
 	private String nickName;
 	private String reviewResult;
 
-	
 	public Integer getReplyNo() {
 		return replyNo;
 	}

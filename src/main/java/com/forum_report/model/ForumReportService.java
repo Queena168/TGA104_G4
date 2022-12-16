@@ -7,39 +7,19 @@ public class ForumReportService {
 	private ForumReportDAO_interface dao;
 
 	public ForumReportService() {
-		dao = new ForumReportJDBCDAO();
+		dao = new ForumReportDAO();
 	}
 
 	public ForumReportVO addReport(Integer postNo, Integer replyNo, Integer informant, String reportReason) {
-	ForumReportVO forumReportVO = new ForumReportVO();
-	forumReportVO.setPostNo(postNo);
-	forumReportVO.setReplyNo(replyNo);
-	forumReportVO.setInformant(informant);
-	forumReportVO.setReportReason(reportReason);
-	
-	dao.insertReport(forumReportVO);
-	return forumReportVO;
-}
+		ForumReportVO forumReportVO = new ForumReportVO();
+		forumReportVO.setPostNo(postNo);
+		forumReportVO.setReplyNo(replyNo);
+		forumReportVO.setInformant(informant);
+		forumReportVO.setReportReason(reportReason);
 
-//	public ForumReportVO addPostToReport(Integer postNo, Integer informant, String reportReason) {
-//	ForumReportVO forumReportVO = new ForumReportVO();
-//	forumReportVO.setPostNo(postNo);
-//	forumReportVO.setInformant(informant);
-//	forumReportVO.setReportReason(reportReason);
-//	
-//	dao.insertPostReport(forumReportVO);
-//	return forumReportVO;
-//}
-
-//	public ForumReportVO addReplyToReport(Integer replyNo, Integer informant, String reportReason) {
-//		ForumReportVO forumReportVO = new ForumReportVO();
-//		forumReportVO.setReplyNo(replyNo);
-//		forumReportVO.setInformant(informant);
-//		forumReportVO.setReportReason(reportReason);
-//		
-//		dao.insertReplyReport(forumReportVO);
-//		return forumReportVO;
-//	}
+		dao.insert(forumReportVO);
+		return forumReportVO;
+	}
 
 	public ForumReportVO updateReportStatusAndReviewResult(Integer reviewer, String reportStatus, String reviewResult,
 			Integer reportNo) {
@@ -49,7 +29,7 @@ public class ForumReportService {
 		forumReportVO.setReviewResult(reviewResult);
 		forumReportVO.setReportNo(reportNo);
 
-		dao.updateStatus(forumReportVO);
+		dao.update(forumReportVO);
 		return forumReportVO;
 	}
 
@@ -72,10 +52,4 @@ public class ForumReportService {
 	public List<ForumReportVO> getAll() {
 		return dao.getAll();
 	}
-	
-//	//test
-//	public static void main(String[] args) {
-//		ForumReportService forumReportService = new ForumReportService();
-//		forumReportService.addReport(null, 2, 1, "hahah");
-//	}
 }

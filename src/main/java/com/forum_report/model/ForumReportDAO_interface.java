@@ -4,13 +4,9 @@ import java.util.List;
 
 public interface ForumReportDAO_interface {
 	
-	public void insertReport(ForumReportVO forumReportVO);
+	public void insert(ForumReportVO forumReportVO);
 	
-//	public void insertPostReport(ForumReportVO forumReportVO);
-	
-//	public void insertReplyReport(ForumReportVO forumReportVO);
-
-	public void updateStatus(ForumReportVO forumReportVO);
+	public void update(ForumReportVO forumReportVO);
 	
 	public void delete(Integer reportNo);
 

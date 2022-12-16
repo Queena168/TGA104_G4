@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ForumTopicDAO_interface {
+	
 	public void insert(ForumTopicVO forumTopicVO);
 
 	public void update(ForumTopicVO forumTopicVO);

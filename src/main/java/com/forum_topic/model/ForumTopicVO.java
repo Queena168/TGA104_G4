@@ -52,5 +52,4 @@ public class ForumTopicVO {
 		return "ForumTopicVO [topicNo=" + topicNo + ", topicName=" + topicName + ", startDate=" + startDate
 				+ ", modificationDate=" + modificationDate + ", adminNo=" + adminNo + "]";
 	}
-
 }

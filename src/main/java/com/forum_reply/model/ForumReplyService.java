@@ -8,7 +8,7 @@ public class ForumReplyService {
 	private ForumReplyDAO_interface dao;
 
 	public ForumReplyService() {
-		dao = new ForumReplyJDBCDAO();
+		dao = new ForumReplyDAO();
 	}
 
 	public ForumReplyVO addReply(Integer memberNo, Integer replyTo, String content) {
@@ -29,10 +29,6 @@ public class ForumReplyService {
 
 		return forumReplyVO;
 	}
-
-//	public void updateReplyView(Integer view, Integer replyNo) {
-//		dao.updatView(view, replyNo);
-//	}
 
 	public void deleteReply(Integer replyNo) throws SQLException {
 		dao.delete(replyNo);
@@ -65,5 +61,4 @@ public class ForumReplyService {
 	public List<ForumReplyVO> getAll() {
 		return dao.getAll();
 	}
-
 }

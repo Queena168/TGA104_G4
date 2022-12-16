@@ -5,14 +5,14 @@
 	box-sizing: border-box;
 }
 
-html {
+/* html {
 	font-size: 14px;
 	font-family: 'Titillium Web', sans-serif;
 	background-color: rgb(0, 0, 0);
 	color: #FEFEFE;
-}
+} */
 
-a {
+/* a {
 	color: #FF0042;
 	font-weight: bolder;
 	text-decoration: none;
@@ -21,14 +21,13 @@ a {
 h1 {
 	font-size: 16px;
 	font-weight: bolder;
-}
+} */
 
 /* ########################################### */
 /*           Forums.html                       */
 /* ########################################### */
-.container {
-	margin: 20px;
-	padding: 20px;
+.forum_container {
+	margin: 10px;
 }
 
 .subforum {
@@ -44,18 +43,23 @@ h1 {
 
 .subforum-row {
 	display: grid;
-	grid-template-columns: 7% 60% 13% 20%;
+	grid-template-columns: 10% 51% 15% 25% 10%;
 }
 
 .subforum-column {
 	padding: 10px;
 	margin: 4px;
 	border-radius: 5px;
-	background-color: #111314;
+	background-color: #fff3e7;
 }
 
 .subforum-description * {
 	margin-block: 0;
+}
+
+.subforum-description {
+	display: flex;
+	align-items: center;
 }
 
 .center {
@@ -72,54 +76,79 @@ h1 {
 	display: none;
 }
 
+.form {
+	margin: 0px 0px 10px 78%;
+}
+
+.main {
+	display: inline-block;
+	width: 80%;
+}
+
+.hot {
+	display: inline-block;
+	width: 15%;
+	background-color: #fff3e7;
+	border-radius: 5px;
+	vertical-align: top;
+	margin: 5px 0px 0px 18px;
+	padding: 5px 5px 5px 5px;
+}
+
 /* For the smartphones */
-@media screen and (max-width: 460px) {
+/* @media screen and (max-width: 460px) {
 	.container {
 		margin: 10px;
 		padding: 10px;
 	}
+
 	.subforum-row {
 		display: grid;
 		grid-template-columns: 25% 75%;
 		grid-template-rows: 65% 35%;
 	}
+
 	.subforum-devider {
 		display: block;
 		border: 0;
 		height: 1px;
 		background-image: linear-gradient(to right, rgba(190, 190, 190, 0),
-			rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
+				rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
 	}
-}
+} */
 
 /* For the tablets */
-@media screen and (min-width: 460px) and (max-width: 1024px) {
+/* @media screen and (min-width: 460px) and (max-width: 1024px) {
 	.container {
 		margin: 15px;
 		padding: 15px;
 	}
+
 	.subforum-row {
 		display: grid;
 		grid-template-columns: 10% 60% 10% 20%;
 	}
+
 	.subforum-icon i {
 		font-size: 35px;
 	}
+
 	html {
 		font-size: 14px;
 	}
+
 	h1 {
 		font-size: 16px;
 	}
-}
+} */
 
 /*   Header Section    */
-header {
+/* header {
 	margin-inline: 10px;
-}
+} */
 
 /* Nav Bar styles */
-.navbar {
+/* .navbar {
 	display: flex;
 	align-items: center;
 }
@@ -180,10 +209,10 @@ header {
 	font-size: 60px;
 	display: inline-block;
 	font-family: aquire;
-}
+} */
 
 /*Navbar for the smartphones*/
-@media screen and (max-width: 460px) {
+/* @media screen and (max-width: 460px) {
 	.navigation {
 		max-height: auto;
 	}
@@ -203,10 +232,10 @@ header {
 	.brand {
 		font-size: 20px;
 	}
-}
+} */
 
 /* Search Box styles */
-.search-box {
+/* .search-box {
 	border: solid 1px #52057b;
 	margin-top: 20px;
 	padding: 40px;
@@ -233,18 +262,18 @@ header {
 	background-color: #000000;
 	color: #fff;
 	box-shadow: 1px 2px 3px #fff;
-}
+} */
 
 /* search box for smrtphones */
-@media screen and (max-width: 460px) {
+/* @media screen and (max-width: 460px) {
 	.search-box input, .search-box button, .search-box select {
 		min-width: 300px;
 		margin-top: 5px;
 	}
-}
+} */
 
 /* forum info Styling */
-.forum-info {
+/* .forum-info {
 	padding: 20px;
 	background-color: #111314;
 }
@@ -252,16 +281,16 @@ header {
 .chart {
 	font-size: 20px;
 	font-weight: bold;
-}
+} */
 
 /* Footer Styling */
-footer {
+/* footer {
 	margin-top: 20px;
 	padding: 20px;
 	background-color: #52057b;
 	display: block;
 	text-align: center;
-}
+} */
 
 /* ########################################### */
 /*            posts.html                       */
@@ -275,8 +304,10 @@ footer {
 .table-head div {
 	padding: 5px;
 	margin: 2px;
-	background-color: #2C2C2C;
+	background-color: #fff3e7;
 	font-weight: bold;
+	display: flex;
+	align-items: center;
 }
 
 .table-head .status {
@@ -284,7 +315,7 @@ footer {
 }
 
 .table-head .subjects {
-	flex: 70%;
+	flex: 65%;
 }
 
 .table-head .replies {
@@ -295,45 +326,96 @@ footer {
 	flex: 15%;
 }
 
+.table-head .searchstatus {
+	flex: 5%;
+}
+
+.table-head .searchsubjects {
+	flex: 20%;
+}
+
+.table-head .searchcontent {
+	flex: 65%;
+}
+
+.table-head .searchbelong {
+	flex: 10%;
+}
+
 /* posts table's body  */
 .table-row {
 	display: flex;
 }
 
-.table-row .status, .table-row .subjects, .table-row .replies,
-	.table-row .last-reply {
+.table-row .status,
+.table-row .subjects,
+.table-row .replies,
+.table-row .last-reply,
+.table-row .searchstatus,
+.table-row .searchsubjects,
+.table-row .searchcontent,
+.table-row .searchbelong {
 	padding: 5px;
 	margin: 2px;
-	background-color: #131415;
+	background-color: #fff3e7;
 }
 
 .table-row .status {
 	flex: 5%;
-	font-size: 30px;
-	text-align: center;
+	font-size: 1rm;
+	display: flex;
+	align-items: center;
 }
 
 .table-row .subjects {
-	flex: 70%;
+	flex: 65%;
 }
 
 .table-row .replies {
 	flex: 10%;
+	display: flex;
+	align-items: center;
 }
 
 .table-row .last-reply {
 	flex: 15%;
+	display: flex;
+	align-items: center;
+}
+
+.table-row .searchstatus {
+	flex: 5%;
+	font-size: 1rm;
+	display: flex;
+	align-items: center;
+}
+
+.table-row .searchsubjects {
+	flex: 20%;
+}
+
+.table-row .searchcontent {
+	flex: 65%;
+	align-items: center;
+}
+
+.table-row .searchbelong {
+	flex: 10%;
+	display: flex;
+	align-items: center;
 }
 
 /* navigation path*/
 .navigate {
-	margin-block: 20px;
+	display: inline-block;
+	margin-block: 10px;
 	font-weight: lighter;
 	font-size: 24px;
+	width: 1150px;
 }
 
 .navigate a {
-	color: #fff;
+	color: rgb(0, 0, 0);
 }
 
 .navigate a:hover {
@@ -342,7 +424,7 @@ footer {
 }
 
 /* Pagination*/
-.pagination {
+/* .pagination {
 	padding: 20px;
 	font-size: 15px;
 }
@@ -369,30 +451,44 @@ footer {
 	margin-block: 5px;
 }
 
+.note span {
+	font-size: 20px;
+	margin-block: 5px;
+}
+
+.new_post {
+	display: inline-block;
+} */
 /* ########################################### */
 /*            detail.html                      */
 /* ########################################### */
 .head {
 	display: flex;
-	background-color: #2C2C2C;
 	padding: 5px;
 	font-weight: bold;
 	font-size: 15px;
+	border-radius: 10px;
+}
+
+.view {
+	display: flex;
+	align-items: center;
 }
 
 .authors {
-	flex: 20%;
+	flex: 18%;
 }
 
 .content {
-	flex: 80%;
+	flex: 82%;
 }
 
 .body {
 	display: flex;
-	background-color: #131415;
+	background-color: #fff9e7;
 	padding: 10px;
 	margin-top: 5px;
+	border-radius: 10px;
 }
 
 .body .authors .username {
@@ -413,9 +509,27 @@ footer {
 	float: right;
 }
 
+.content .time {
+	margin-top: 9%;
+}
+
+.post_modify_btn {
+	float:right;
+}
+
+.reply_modify_btn {
+	float:right;
+}
+
+.newpost_btn {
+	float:right;
+}
+
 /* comment section */
 .comment-area {
-	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;
 }
 
 .comment-area textarea {
@@ -436,6 +550,14 @@ footer {
 	border: solid 1px #000000;
 }
 
+#post_title {
+	margin-left: 3%;
+}
+
+.postform {
+	background-color: #fff3e7;
+}
+
 /* For report section */
 .modal {
 	display: none;
@@ -450,26 +572,14 @@ footer {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 8;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
+#modal-content {
 	margin: 50px auto;
 	border: 1px solid #999;
 	width: 60%;
 }
 
-.modal-content h2, .modal-content p {
+.modal-content h2,
+.modal-content p {
 	margin: 0 0 20px;
 	font-weight: 400;
 	color: #999;
@@ -488,8 +598,9 @@ footer {
 	background: #eee;
 }
 
-.modal-content input, .modal-content textarea {
-	width: 90%;
+.modal-content input,
+.modal-content textarea {
+	width: 100%;
 	padding: 10px;
 	margin-bottom: 20px;
 	border: 1px solid #1c87c9;
@@ -511,10 +622,31 @@ footer {
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
+	margin-right: 5px;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
 }
+
+.AutoSkip {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* 蓋掉summernote原本的css */
+.note-editable {
+	background-color: white;
+}
+
+/* p {
+	display: block;
+	margin-block-start: 0em;
+	margin-block-end: 0em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+} */

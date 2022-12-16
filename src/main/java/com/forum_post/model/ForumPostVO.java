@@ -66,7 +66,7 @@ public class ForumPostVO {
 	public void setModificationTime(java.util.Date modificationTime) {
 		this.modificationTime = modificationTime;
 	}
-	
+
 	public String getNickName() {
 		return nickName;
 	}

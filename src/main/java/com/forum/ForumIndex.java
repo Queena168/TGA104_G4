@@ -33,6 +33,8 @@ public class ForumIndex extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
+//		session.removeAttribute("account");
+//		session.removeAttribute("memberNo");
 		session.setAttribute("account", "peter");
 		session.setAttribute("memberNo", 2);
 

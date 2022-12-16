@@ -99,5 +99,4 @@ public class ForumReportVO {
 				+ ", reportStatus=" + reportStatus + ", reviewTime=" + reviewTime + ", reviewResult=" + reviewResult
 				+ "]";
 	}
-
 }

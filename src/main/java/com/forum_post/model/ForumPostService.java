@@ -8,7 +8,7 @@ public class ForumPostService {
 	private ForumPostDAO_interface dao;
 
 	public ForumPostService() {
-		dao = new ForumPostJDBCDAO();
+		dao = new ForumPostDAO();
 	}
 
 	public ForumPostVO addPost(Integer memberNo, Integer topicNo, String title, String content) {
@@ -33,10 +33,6 @@ public class ForumPostService {
 		return forumPostVO;
 	}
 
-//	public void updatePostView(Integer view, Integer postNo) {
-//		dao.updateView(view, postNo);
-//	}
-
 	public void deletePost(Integer postNo) throws SQLException {
 		dao.delete(postNo);
 	}
@@ -48,7 +44,7 @@ public class ForumPostService {
 	public ForumPostVO getLastPostTimeByTopicNo(Integer topicNo) {
 		return dao.findLastPostTimeByTopicNo(topicNo);
 	}
-	
+
 	public List<ForumPostVO> getPostsByTopicNo(Integer topicNo) {
 		return dao.findPostByTopicNo(topicNo);
 	}
@@ -56,21 +52,12 @@ public class ForumPostService {
 	public List<ForumPostVO> getPostByMemberNo(Integer memberNo) {
 		return dao.findByMemberNo(memberNo);
 	}
-	
-	public List<ForumPostVO> getPostByKeyword(String keyword) {
-	return dao.findByKeyword(keyword);
-}
 
-//	public List<ForumPostVO> getPostByTitle(String title) {
-//		return dao.findByTitle(title);
-//	}
-//
-//	public List<ForumPostVO> getPostByContent(String content) {
-//		return dao.findByContent(content);
-//	}
+	public List<ForumPostVO> getPostByKeyword(String keyword) {
+		return dao.findByKeyword(keyword);
+	}
 
 	public List<ForumPostVO> getAll() {
 		return dao.getAll();
 	}
-
 }
