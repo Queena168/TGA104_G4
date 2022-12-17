@@ -1,0 +1,96 @@
+/*----------------------------------------*/
+/*           23. Account CSS
+/*----------------------------------------*/
+
+.footer {
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  background-color: $light-gray;
+
+  &__top-row {
+    padding: 2.5rem 0;
+    @include bp-medium {
+      padding: 5.5rem 0;
+    }
+
+    & .footer__content {
+      &:first-child {
+        padding-right: 2rem;
+      }
+
+      @include mx-bp-large {
+        margin-bottom: 1.875rem;
+      }
+
+      & .footer-logo {
+        margin-bottom: 1.75rem;
+      }
+
+      & .footer-heading {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.75rem;
+      }
+
+      & .footer-list {
+        &__item {
+          margin-bottom: 0.75rem;
+          @include transition(.3s ease);
+
+          & a {
+            color: $gray;
+
+            &:hover {
+              color: $dark-gray;
+            }
+          }
+        }
+
+        &-info {
+          & .footer-list__item {
+            color: $gray;
+          }
+        }
+      }
+
+      & .social-media {
+        &__item {
+          display: inline-block;
+          font-size: 1rem;
+          text-align: center;
+          cursor: pointer;
+          @include border-radius(50%);
+
+          & a {
+            color: $dark-gray;
+            padding-right: .5rem;
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+          &:hover {
+            a {
+              color: $yellow;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & .copyright {
+    color: $gray;
+    font-size: 0.875rem;
+    padding: 1.875rem 0;
+    display: block;
+    width: 100%;
+    border-top: 1px solid rgba($gainsboro, 0.45);
+
+    & p {
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+

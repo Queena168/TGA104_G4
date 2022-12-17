@@ -1,0 +1,88 @@
+/*----------------------------------------*/
+/*          07. Testimonial CSS
+/*----------------------------------------*/
+
+.testimonial {
+  &--shadow {
+    padding: 3.25rem 1rem;
+    @include border-radius(.4rem);
+    @include box-shadow(0 1px 4px rgba($black, .075));
+  }
+
+  &__bg {
+    background-color: $light-gray;
+    padding: 3.25rem 0;
+    @include bp-medium {
+      padding: 6.25rem 0;
+    }
+  }
+
+  // testimonials carousel
+  & .carousel-wrapper {
+    color: $dark-gray;
+    //margin-bottom: 1.875rem;
+    @include bp-medium {
+      @include d-flex;
+    }
+
+    &__img {
+      margin: 0 auto;
+      width: 140px;
+      @include bp-medium {
+        margin: 0 1rem 0 0;
+      }
+
+      & img {
+        @include border-radius(50%);
+      }
+    }
+
+    &__content {
+      display: block;
+      overflow: hidden;
+      padding-top: 1.875rem;
+      @include bp-medium {
+        @include flex(1);
+        @include align-self(center);
+        padding-top: 0;
+      }
+
+      & .heading {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+
+        &:after {
+          content: '';
+          background: $light-gray;
+          opacity: .6;
+          height: 1px;
+          width: 50px;
+          display: block;
+          margin: .3rem auto;
+        }
+      }
+
+      & .text {
+        color: $gray;
+        font-style: italic;
+      }
+
+      & .username {
+        font-weight: 600;
+        display: inline-block;
+      }
+    }
+
+  }
+
+  & .owl-carousel {
+    .owl-dots {
+      margin: 0;
+      position: absolute;
+      bottom: -18px;
+      @include bp-medium {
+        bottom: 0;
+      }
+    }
+  }
+}

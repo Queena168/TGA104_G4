@@ -1,0 +1,152 @@
+/*----------------------------------------*/
+/*           04. compare CSS
+/*----------------------------------------*/
+
+.compare-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 0.875rem;
+  @include bp-medium {
+    width: auto;
+  }
+
+  &__item {
+    padding: 0 1rem 2rem 1rem;
+    margin: 0 auto;
+  }
+
+  & th {
+    font-weight: normal;
+    display: none;
+    @include bp-medium {
+      display: table-cell !important;
+    }
+  }
+
+  & td {
+    border: 1px solid rgba($gainsboro, 0.45);
+    empty-cells: show;
+    padding: 0.75rem;
+    @include bp-medium {
+      display: table-cell !important;
+    }
+
+    &:first-child {
+      font-weight: 600;
+    }
+
+    &:not(:first-child) {
+      text-align: center;
+    }
+
+    & + td {
+      text-align: center;
+      display: none;
+      @include bp-medium {
+        width: auto;
+      }
+    }
+
+    &.default {
+      display: table-cell;
+    }
+  }
+
+  & tbody {
+    & tr {
+      &:nth-child(even) {
+        background: $white;
+      }
+
+      &:nth-child(odd) {
+        background: $light-gray;
+      }
+    }
+  }
+
+  & .available {
+    color: $green;
+    font-size: 1.2rem;
+  }
+
+  & .not-available {
+    color: $sunset-orange;
+    font-size: 1.2rem;
+  }
+
+  @include bp-medium {
+    & th + th {
+      width: auto;
+    }
+  }
+}
+
+.mobile-placeholder {
+  position: relative;
+  margin: 1rem 0;
+  display: none;
+
+  & img {
+    width: 100%;
+  }
+
+  & h2 {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    padding: .375rem 1.25rem;
+    font-size: 1rem;
+    background: $dark-gray;
+    color: $white;
+    @include border-radius(1.5rem);
+    @include box-shadow(1px 1px 3px -1px rgba($black, 0.3));
+  }
+
+  @include mx-bp-medium {
+    display: block;
+  }
+}
+
+
+.res-table {
+  & .btn-list {
+    @include bp-small {
+      @include d-flex;
+      top: 0;
+    }
+
+    @include bp-medium {
+      display: none;
+    }
+
+    &__item {
+      margin-bottom: 1rem;
+      @include bp-small {
+        @include flex(1);
+        margin-bottom: 0;
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+      }
+
+      & button {
+        width: 100%;
+        background: $white;
+        height: auto;
+        padding: .375rem 1.25rem;
+        cursor: pointer;
+        border: 1px solid rgba($gainsboro, 0.45);
+        @include border-radius(1.5rem);
+      }
+
+      &.active button {
+        background: $yellow;
+        border-color: $yellow;
+        color: $white;
+      }
+    }
+  }
+}
+
+// end product compare page
