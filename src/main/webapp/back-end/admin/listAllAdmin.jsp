@@ -353,7 +353,7 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 											<th>管理員權限</th>
 											<th>新增時間</th>
 											<th>上傳管理員</th>
-											<th>修改</th>
+											<th>修改權限</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">

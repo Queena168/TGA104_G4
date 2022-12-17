@@ -59,6 +59,7 @@ public class PortfolioPic3 extends HttpServlet {
 				byte[] buf = in.readAllBytes();
 				out.write(buf);
 				in.close();
+				out.close();
 			} else {
 				res.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}

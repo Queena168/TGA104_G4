@@ -80,7 +80,7 @@ pageContext.setAttribute("list", list);
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="../index.jsp" class="app-brand-link"> <span
+					<a href="../admin/index.jsp" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

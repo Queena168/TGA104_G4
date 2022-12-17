@@ -64,6 +64,7 @@ public class PortfolioPic1 extends HttpServlet {
 			}
 			rs.close();
 			stmt.close();
+			out.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

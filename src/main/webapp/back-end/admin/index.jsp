@@ -307,7 +307,13 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 				<!-- Content wrapper -->
 				<div class="content-wrapper">
 					<!-- Content -->
-
+					<div>
+						<form method="post" action="<%=request.getContextPath()%>/back-end/chattest/intochatServlet">
+							聊天室
+							<input type="hidden" name="adminEmail" value="${adminVO.adminEmail}" >
+							<input type="submit">
+						</form>
+					</div>
 
 				</div>
 				<!-- / Content -->

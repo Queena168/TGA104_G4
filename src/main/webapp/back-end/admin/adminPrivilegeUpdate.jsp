@@ -362,8 +362,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 											<div class="input-group input-group-merge">
 												<input class="form-control" type="password" id="firstName"
 													name="adminPassword"
-													value="<%=adminVoUpdate.getAdminPassword()%>" readonly/> <span
-													class="input-group-text cursor-pointer"></span>
+													value="<%=adminVoUpdate.getAdminPassword()%>" readonly/> 
 											</div>
 										</div>
 										<!-- 排版用區塊  -->
