@@ -228,10 +228,11 @@ public class ForumReportServlet extends HttpServlet {
 			Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
 			Integer informant = Integer.valueOf(request.getParameter("informant"));
 			Integer postNo = Integer.valueOf(request.getParameter("postNo"));
+			Integer page = Integer.valueOf(request.getParameter("page"));
 
 			String reportReason = request.getParameter("reportReason");
 			if (reportReason.trim().length() == 0) {
-				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo + "&page=" + page);
 				return;
 			}
 
@@ -247,7 +248,7 @@ public class ForumReportServlet extends HttpServlet {
 			}
 
 			/************************ 3 ************************/
-			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo + "&page=" + page);
 		}
 
 	}

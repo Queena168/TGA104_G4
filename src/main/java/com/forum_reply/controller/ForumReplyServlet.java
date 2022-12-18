@@ -240,11 +240,12 @@ public class ForumReplyServlet extends HttpServlet {
 			Integer replyNo = Integer.valueOf(request.getParameter("replyNo"));
 			Integer replyTo = Integer.valueOf(request.getParameter("postNo"));
 			Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
+			Integer page = Integer.valueOf(request.getParameter("page"));
 
 			String content = request.getParameter("content");
 
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo + "&page=" + page);
 				return;
 			}
 
@@ -252,7 +253,7 @@ public class ForumReplyServlet extends HttpServlet {
 			ForumReplyService forumReplyService = new ForumReplyService();
 			forumReplyService.updateReply(content, replyNo);
 			/************************ 3 ************************/
-			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo + "&page=" + page);
 		}
 
 		// ============================ 新增 ============================
@@ -261,10 +262,11 @@ public class ForumReplyServlet extends HttpServlet {
 			Integer memberNo = Integer.valueOf(request.getParameter("memberNo"));
 			Integer replyTo = Integer.valueOf(request.getParameter("postNo"));
 			Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
+			Integer totalPage = Integer.valueOf(request.getParameter("totalPage"));
 
 			String content = request.getParameter("content");
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo + "&page=" + totalPage);
 				return;
 			}
 
@@ -272,7 +274,7 @@ public class ForumReplyServlet extends HttpServlet {
 			ForumReplyService forumReplyService = new ForumReplyService();
 			forumReplyService.addReply(memberNo, replyTo, content);
 			/************************ 3 ************************/
-			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + replyTo + "&page=" + totalPage);
 		}
 
 	}

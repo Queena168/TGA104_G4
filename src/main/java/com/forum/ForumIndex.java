@@ -35,8 +35,8 @@ public class ForumIndex extends HttpServlet {
 		HttpSession session = request.getSession();
 //		session.removeAttribute("account");
 //		session.removeAttribute("memberNo");
-		session.setAttribute("account", "peter");
-		session.setAttribute("memberNo", 2);
+		session.setAttribute("account", "ma");
+		session.setAttribute("memberNo", 3);
 
 		ForumTopicService forumTopicService = new ForumTopicService();
 		List<ForumTopicVO> forumTopicVOList = forumTopicService.getAll();

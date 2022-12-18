@@ -192,13 +192,13 @@ public class ForumPostServlet extends HttpServlet {
 
 			String title = request.getParameter("title");
 			if (title.trim().length() == 0) {
-				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo + "&page=1");
 				return;
 			}
 
 			String content = request.getParameter("content");
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+				response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo + "&page=1");
 				return;
 			}
 
@@ -206,7 +206,7 @@ public class ForumPostServlet extends HttpServlet {
 			ForumPostService forumPostService = new ForumPostService();
 			forumPostService.updatePost(title, content, postNo);
 			/************************ 3 ************************/
-			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo);
+			response.sendRedirect("posts.do?topicNo=" + topicNo + "&postNo=" + postNo + "&page=1");
 		}
 
 		// ============================ 新增 ============================
@@ -218,13 +218,13 @@ public class ForumPostServlet extends HttpServlet {
 
 			String title = request.getParameter("title");
 			if (title.trim().length() == 0) {
-				response.sendRedirect("posting.do?topicNo=" + topicNo);
+				response.sendRedirect("posting.do?topicNo=" + topicNo + "&page=1");
 				return;
 			}
 
 			String content = request.getParameter("content");
 			if (content.trim().length() == 0 || content.equals("<p><br></p>")) {
-				response.sendRedirect("posting.do?topicNo=" + topicNo);
+				response.sendRedirect("posting.do?topicNo=" + topicNo + "&page=1");
 				return;
 			}
 
@@ -232,7 +232,7 @@ public class ForumPostServlet extends HttpServlet {
 			ForumPostService forumPostService = new ForumPostService();
 			forumPostService.addPost(memberNo, topicNo, title, content);
 			/************************ 3 ************************/
-			response.sendRedirect("topic.do?topicNo=" + topicNo);
+			response.sendRedirect("topic.do?topicNo=" + topicNo + "&page=1");
 		}
 	}
 }
