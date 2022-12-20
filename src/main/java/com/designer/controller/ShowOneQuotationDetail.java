@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.designerOrder.Service.DesignerOrderService;
 import com.designerOrder.model.DesignerOrderVO;
 
-@WebServlet("/ShowOneOrderDetail")
-public class ShowOneOrderDetail extends HttpServlet {
+@WebServlet("/ShowOneQuotationDetail")
+public class ShowOneQuotationDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -26,20 +26,20 @@ public class ShowOneOrderDetail extends HttpServlet {
 		
 		
 		String action=req.getParameter("action");
-		if("getMyOrder".equals(action)) {
+		if("getMyQuotation".equals(action)) {
 			//Integer designerOrderNo=Integer.valueOf(req.getParameter("orderNo"));
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			String str = req.getParameter("orderNo");
 			//System.out.println("DesinerOrderServlet執行");
-			if (str == null || (str.trim()).length() == 0) {
-				
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-
-				return;// 程式中斷
-			}
+//			if (str == null || (str.trim()).length() == 0) {
+//				
+//			}
+//			// Send the use back to the form, if there were errors
+//			if (!errorMsgs.isEmpty()) {
+//
+//				return;// 程式中斷
+//			}
 
 			Integer designerOrderNo = null;
 			try {
@@ -48,15 +48,15 @@ public class ShowOneOrderDetail extends HttpServlet {
 				
 			}
 			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-             
-				return;// 程式中斷
-			}	
+//			if (!errorMsgs.isEmpty()) {
+//             
+//				return;// 程式中斷
+//			}	
 			DesignerOrderService designerOrderScv = new DesignerOrderService();
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());
 			req.setAttribute("designerOrderVO", designerOrderVO);			
-		    String url = "/front-end/designer/listOneOrder.jsp";
+		    String url = "/front-end/designer/listOneQuotation.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);
 		}
@@ -66,20 +66,20 @@ public class ShowOneOrderDetail extends HttpServlet {
 		//===================================================================================
 		
 		
-		if("getmemberMyOrder".equals(action)) {
+		if("getmemberMyQuotation".equals(action)) {
 			//Integer designerOrderNo=Integer.valueOf(req.getParameter("orderNo"));
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			String str = req.getParameter("orderNo");
 			//System.out.println("DesinerOrderServlet執行");
-			if (str == null || (str.trim()).length() == 0) {
-				
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-
-				return;// 程式中斷
-			}
+//			if (str == null || (str.trim()).length() == 0) {
+//				
+//			}
+//			// Send the use back to the form, if there were errors
+//			if (!errorMsgs.isEmpty()) {
+//
+//				return;// 程式中斷
+//			}
 
 			Integer designerOrderNo = null;
 			try {
@@ -88,10 +88,10 @@ public class ShowOneOrderDetail extends HttpServlet {
 				
 			}
 			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-             
-				return;// 程式中斷
-			}	
+//			if (!errorMsgs.isEmpty()) {
+//             
+//				return;// 程式中斷
+//			}	
 			DesignerOrderService designerOrderScv = new DesignerOrderService();
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());

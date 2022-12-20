@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.designerOrder.Service.DesignerOrderService;
 import com.designerOrder.model.DesignerOrderVO;
 
-@WebServlet("/ShowOneOrderDetail")
-public class ShowOneOrderDetail extends HttpServlet {
+@WebServlet("/ShowOneContractDetail")
+public class ShowOneContractDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class ShowOneOrderDetail extends HttpServlet {
 		
 		
 		String action=req.getParameter("action");
-		if("getMyOrder".equals(action)) {
+		if("getMyContract".equals(action)) {
 			//Integer designerOrderNo=Integer.valueOf(req.getParameter("orderNo"));
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -56,7 +56,7 @@ public class ShowOneOrderDetail extends HttpServlet {
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());
 			req.setAttribute("designerOrderVO", designerOrderVO);			
-		    String url = "/front-end/designer/listOneOrder.jsp";
+		    String url = "/front-end/designer/listOneContract.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);
 		}
@@ -66,7 +66,7 @@ public class ShowOneOrderDetail extends HttpServlet {
 		//===================================================================================
 		
 		
-		if("getmemberMyOrder".equals(action)) {
+		if("getmemberMyContract".equals(action)) {
 			//Integer designerOrderNo=Integer.valueOf(req.getParameter("orderNo"));
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -96,7 +96,7 @@ public class ShowOneOrderDetail extends HttpServlet {
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());
 			req.setAttribute("designerOrderVO", designerOrderVO);			
-		    String url = "/front-end/member/listOneOrder.jsp";
+		    String url = "/front-end/member/listOneContract.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);
 		}

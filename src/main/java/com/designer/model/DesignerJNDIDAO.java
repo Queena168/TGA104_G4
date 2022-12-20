@@ -23,58 +23,17 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_DESIGNER = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,?,?)";
-	private static final String INSERT_DESIGNERINFO = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetiail) VALUES (?,?,?,?,?,?,?)";
+	//private static final String INSERT_DESIGNER = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,'審核未成功',null,null,null)";
+	private static final String INSERT_DESIGNERINFO = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_DESIGNER = "SELECT designerNo,designerAccount, designerPassword, designerName,designerCompany,designerPic,approvalStatus,approvalTime,approver,designerStatus FROM Designer";
 	private static final String GET_ONE_DESIGNER = "SELECT designerNo,designerAccount,designerPassword,designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,approver,designerStatus FROM Designer where designerNo = ?";
-	private static final String DELETE = "DELETE FROM Designer where designerNo = ?";
+	//private static final String DELETE = "DELETE FROM Designer where designerNo = ?";
 	private static final String UPDATE = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=? ,designerPic=? where designerNo = ?";
 	private static final String UPDATENOPIC = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=?  where designerNo = ?";
 	private static final String LOGIN = "select designerNo,designerAccount,designerPassword,approvalStatus,designerStatus from designer where designerAccount=? and designerPassword=? and approvalStatus=? and designerStatus=?";
 			
 	@Override
 	public void insert(DesignerVO designerVO) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_DESIGNER);
-			// 使用 setBytes
-			pstmt.setString(1, designerVO.getDesignerAccount());
-			pstmt.setString(2, designerVO.getDesignerPassword());
-			pstmt.setString(3, designerVO.getDesignerName());
-			pstmt.setString(4, designerVO.getDesignerCompany());
-			pstmt.setBytes(5, designerVO.getDesignerPic());
-			pstmt.setString(6, designerVO.getApprovalStatus());
-			pstmt.setObject(7, designerVO.getApprovalTime());
-			pstmt.setInt(8, designerVO.getApprover());
-			pstmt.setBoolean(9, designerVO.getDesignerStatus());
-			pstmt.executeUpdate();
-
-			System.out.println("新增成功");
-
-		} catch (SQLException se) {
-			System.out.println(se);
-		} finally {
-			// 依建立順序關閉資源 (越晚建立越早關閉)
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-		}
 
 	}
 
@@ -94,6 +53,7 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 			pstmt.setBytes(4, designerVO.getDesignerPic());
 			pstmt.setInt(5, designerVO.getDesignerNo());
 			pstmt.executeUpdate();
+			System.out.println("更新成功");
 
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -159,37 +119,7 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 
 	@Override
 	public void delete(Integer designerNo) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE);
-			pstmt.setInt(1, designerNo);
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+	
 
 	}
 
@@ -315,6 +245,9 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 		}
 		return list;
 	}
+	
+	//================================================
+	//設計師註冊資料新增
 
 	@Override
 	public void insertDesigner(DesignerVO designerVO) {
@@ -332,8 +265,11 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 			pstmt.setBytes(5, designerVO.getDesignerPic());
 			pstmt.setString(6, designerVO.getPhone());
 			pstmt.setString(7, designerVO.getDesignerDetail());
+			pstmt.setString(8, "審核未成功");
+			pstmt.setDate(9, null);
+			pstmt.setNull(10, java.sql.Types.INTEGER);
+			pstmt.setBoolean(11, false);
 			pstmt.executeUpdate();
-
 			System.out.println("新增成功++++++++++++++++++++");
 
 		} catch (SQLException se) {
@@ -358,6 +294,8 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 		}
 
 	}
+	//============================================
+	//登入
 
 	@Override
 	public DesignerVO login(String designerAccount, String designerPassword) {

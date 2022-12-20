@@ -1,4 +1,4 @@
-package com.designer.controller;
+package com.designerExpertise.controller;
 
 
 import java.io.IOException;
@@ -10,9 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.designer.model.DesignerExpertiseVO;
-import com.designer.service.DesignerExpertiseService;
+import com.designerExpertise.Service.DesignerExpertiseService;
+import com.designerExpertise.model.DesignerExpertiseVO;
 
 @WebServlet("/designerExpertise")
 public class DesignerExpertiseServlet extends HttpServlet {
@@ -28,13 +29,15 @@ public class DesignerExpertiseServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
-		System.out.println("有進來========================");
 		//HttpSession session = req.getSession();
 		//session.getAttribute("designerVO");
 		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
 		//PrintWriter out = res.getWriter();
 		DesignerExpertiseService designerExpertiseScv=new DesignerExpertiseService();
 		List<DesignerExpertiseVO> list= designerExpertiseScv.getMyExpertise(designerNo);
+		DesignerExpertiseVO designerExpertiseVO = designerExpertiseScv.getMyExpertises(designerNo);
+		HttpSession session = req.getSession();
+		session.setAttribute("designerExpertiseVO", designerExpertiseVO);
 		System.out.println("DesignerExpertiseServlet收到的list內容"+list);
 		req.setAttribute("listXX", list);
 		String url = "/front-end/designer/listOneDesignerINFO.jsp";

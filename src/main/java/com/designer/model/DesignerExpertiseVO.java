@@ -1,9 +1,13 @@
-package com.designer.model;
+package com.designerExpertise.model;
 
+import com.designer.model.DesignerVO;
 import com.designer.service.DesignerService;
-import com.designer.service.ExpertiseService;
+import com.expertise.Service.ExpertiseService;
+import com.expertise.model.ExpertiseVO;
 
-public class DesignerExpertiseVO {
+public class DesignerExpertiseVO implements java.io.Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private Integer designerExpertiseNo;// (設計師專長編號): int, not null
 	private Integer designerNo;// (設計師編號): int,
 	private Integer expertiseNo;// (專長編號): int,
@@ -37,6 +41,7 @@ public class DesignerExpertiseVO {
 		public DesignerVO getDesignerVO() {
 			DesignerService designerSvc = new DesignerService();
 			DesignerVO designerVO = designerSvc.getOneDesigner(designerNo);
+			System.out.println("designerExpertiseVO之designerService被執行");
 			return designerVO;
 
 		}
@@ -46,7 +51,17 @@ public class DesignerExpertiseVO {
 		public ExpertiseVO getExpertiseVO() {
 			ExpertiseService expertiseSvc = new ExpertiseService();
 			ExpertiseVO expertiseVO = expertiseSvc.getOneExpertise(expertiseNo);
+			System.out.println("designerExpertiseVO之expertiseSvc被執行");
 			return expertiseVO;
 		}
+
+		@Override
+		public String toString() {
+			return "DesignerExpertiseVO [designerExpertiseNo=" + designerExpertiseNo + ", designerNo=" + designerNo
+					+ ", expertiseNo=" + expertiseNo + "]";
+		}
+		
+		
+		
 	
 }

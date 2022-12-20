@@ -1,13 +1,16 @@
-package com.designer.model;
+package com.designerOrder.model;
 
 import java.sql.Date;
 import java.util.Arrays;
 
+import com.designer.model.DesignerVO;
 import com.designer.service.DesignerService;
-//import com.member.model.MemberVO;
-//import com.member.service.MemberService;
+import com.member.model.MemberVO;
+import com.member.service.MemberService;
 
 public class DesignerOrderVO implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Integer orderNo;// (諮詢報價單合約訂單案件編號): int, not null
 	private Integer designerNo;// (設計師編號): int, not null
 	private Integer memberNo;// (會員編號): int, not null
@@ -229,11 +232,11 @@ public class DesignerOrderVO implements java.io.Serializable {
 
 	// ================================================================
 	// member
-//	public MemberVO getMemberVO() {
-//		MemberService memberSvc = new MemberService();
-//		MemberVO memberVO = memberSvc.getOneDesigner(memberNo);
-//		return memberVO;
-//	}
+	public MemberVO getMemberVO() {
+		MemberService memberSvc = new MemberService();
+		MemberVO memberVO = memberSvc.getOneMember(memberNo);
+		return memberVO;
+	}
 
 	@Override
 	public String toString() {
