@@ -12,6 +12,7 @@ public class JedisHandleMessage {
 
 	public static List<String> getHistoryMsg(String sender, String receiver) {
 		String key = new StringBuilder(sender).append(":").append(receiver).toString();
+		System.out.println("key = " + key);
 		Jedis jedis = null;
 		jedis = pool.getResource();
 		List<String> historyData = jedis.lrange(key, 0, -1);
@@ -28,6 +29,12 @@ public class JedisHandleMessage {
 		jedis.rpush(receiverKey, message);
 
 		jedis.close();
+	}
+	
+	
+	public static void main(String[] args) {
+		List<String> historyData = JedisHandleMessage.getHistoryMsg("david", "bob");
+		System.out.println("historyData: " + historyData);
 	}
 
 }

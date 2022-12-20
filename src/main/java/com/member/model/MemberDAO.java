@@ -6,7 +6,7 @@ import com.member.model.*;
 
 public class MemberDAO implements Member_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/Matdesign?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
@@ -300,7 +300,52 @@ public class MemberDAO implements Member_interface {
 		
 	}
 	
-
+	private static final String SELECT_FOR_LOGIN = 
+			"select * from Member where memberAccount=? and memberPassword=?";
+	
+	public MemberVO memberLogin(MemberVO memberVO) {
+		boolean status = false; // 利用布林值確認帳號密碼是否匹配 
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_FOR_LOGIN);
+			
+			pstmt.setString(1, memberVO.getMemberAccount());
+			pstmt.setString(2, memberVO.getMemberPassword());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				status = true;
+				
+				memberVO = new MemberVO();
+				memberVO.setMemberNo(rs.getInt("memberNo"));
+				memberVO.setMemberAccount(rs.getString("memberAccount"));
+				memberVO.setMemberPassword(rs.getString("memberPassword"));
+				memberVO.setMemberName(rs.getString("memberName"));
+				memberVO.setNickName(rs.getString("nickName"));
+				memberVO.setGender(rs.getString("gender"));
+				memberVO.setBirthDate(rs.getDate("birthDate"));
+				memberVO.setActivaction(rs.getBoolean("activaction"));
+			}
+			
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			// process sql exception
+			se.printStackTrace(System.err);
+		}
+		
+		
+		
+		return memberVO;
+	}
 
 
 }

@@ -50,9 +50,13 @@ public class ChatWS {
 		ChatMessage chatMessage = gson.fromJson(message, ChatMessage.class);
 		String sender = chatMessage.getSender();
 		String receiver = chatMessage.getReceiver();
+		System.out.println("sender: " + sender + "//receiver: " + receiver);
+		
 		
 		if ("history".equals(chatMessage.getType())) {
+			System.out.println("進入history action");
 			List<String> historyData = JedisHandleMessage.getHistoryMsg(sender, receiver);
+			System.out.println("historyData: " + historyData);
 			String historyMsg = gson.toJson(historyData);
 			ChatMessage cmHistory = new ChatMessage("history", sender, receiver, historyMsg);
 			if (userSession != null && userSession.isOpen()) {
