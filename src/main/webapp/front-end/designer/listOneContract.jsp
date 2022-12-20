@@ -11,7 +11,7 @@
 
 <html>
 <head>
-<title>案件 - listOneOrder.jsp</title>
+<title>合約 - listOneContract.jsp</title>
 
 <meta charset="utf-8" />
 <title>MatDesign</title>
@@ -127,7 +127,7 @@ th, td {
 margin-left: 200px;
 }
 #block2{
-margin-left: 500px;
+margin-left: 50px;
 }
 
 img{
@@ -246,40 +246,70 @@ margin-left: 200px;
 	
 	<!-- Navbar End -->
 <hr size="8px" align="center" width="100%" >
+<div style="text-align:center"><h3>案件合約</h3></div>
 <div align="center">
+<form action="AddContract">
 <table>
-
-	
 		<tr><th>案件編號:</th><td>${designerOrderVO.orderNo}</td></tr>
 		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr>
-		<tr><th>諮詢預算</th><td>${designerOrderVO.inquiryBudget}元</td></tr>
-		<tr><th>諮詢坪數</th><td>${designerOrderVO.inquirySize}坪</td></tr>
-		<tr><th>諮詢內容</th><td>${designerOrderVO.inquiryDetail}</td></tr>
-	    <tr><th>報價金額</th><td>${designerOrderVO.quotationAmount}元</td></tr>
+	    <tr><th>報價狀態</th><td>${designerOrderVO.quotationStatus}  </td></tr>	  
+	    <tr><th>報價同意時間</th><td>${designerOrderVO.quotationApprovalTime}</td></tr>
+	    <tr>
+	    <th>報價金額</th>
+	      <c:choose>
+				<c:when test="${designerOrderVO.quotationAmount==0}">
+	                <td> 元</td>
+	            </c:when>
+	            <c:when test="${designerOrderVO.quotationAmount!=0}">
+	                <td>${designerOrderVO.quotationAmount}元</td>
+	            </c:when>
+	      </c:choose>	    
+	    </tr>
 		<tr><th>報價內容</th><td>${designerOrderVO.quotationDetail}</td></tr>
-		<tr><th>報價時間</th><td>${designerOrderVO.quotationSendTime}</td> </tr>
-		<tr><th>報價是否同意</th><td>${designerOrderVO.quotationStatus}</td> </tr>	
-		<tr><th>報價同意時間</th><td>${designerOrderVO.quotationApprovalTime}</td></tr>
-		<tr><th>合約是否同意</th><td>${designerOrderVO.contractStatus}</td></tr>	
-		<tr><th>合約同意時間</th><td>${designerOrderVO.contractApprovalTime}</td></tr>
-		<tr><th>合約內容</th><td>${designerOrderVO.contractDetail}</td></tr>
-		
-		<tr>
-		   <th>是否結案</th>
-		      <td> 
-		          <c:choose>
-				       <c:when test="${designerOrderVO.finishStatus==true}">
-				           是
-				       </c:when>
-				  <c:when test="${designerOrderVO.finishStatus==false}">
-				           否
-				  </c:when>
-		          </c:choose>	
-		      </td>
-		</tr>
+	   <tr><th>合約狀態</th><td>${designerOrderVO.contractStatus}</td></tr>
 
 </table>
+     <div id="block2">
+              <input type="hidden" name="action" value="insertcontract">
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
+              <input id="showorhidden1" type="submit" value="製作合約" style="display: inline-block;">
+              
+               <input type="hidden" name="action" value="updatecontract">
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
+              <input id="showorhidden2" type="submit" value="修改合約" style="display: inline-block;">
+              
+              <input type="hidden" name="cancel" value="cancel">
+              <input type="hidden" name="designerNo">
+              <input type ="button" onclick="history.back()" value="回上一頁" >
+     </div> 
+</form>
 </div>
+
+<script type="text/javascript">
+
+function DisplayAndHiddenBtn(btnName, type) {
+	 var currentinputbutton = document.getElementById(btnName);
+   if (type == '未進行合約') {
+	   //currentinputbutton.style.display = "inline-block"; //style中的display且橫向排列属性
+	   document.getElementById("showorhidden2").style.display = "none";
+   }else if(type == '退回合約'){
+	   document.getElementById("showorhidden1").style.display = "none";
+	   
+   }else{
+	   currentinputbutton.style.display = "none"; 
+   }
+	 
+}
+
+</script>
+
+     <script> 
+              var type='${designerOrderVO.contractStatus}';
+	          DisplayAndHiddenBtn("showorhidden1",type);
+	          DisplayAndHiddenBtn("showorhidden2",type);
+	  </script>
+
+
 </body>
 </html>

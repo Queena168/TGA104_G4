@@ -11,11 +11,11 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>案件管理 OrderManage.jsp</title>
+<title>合約管理 ContractManage.jsp</title>
 
 
 <meta charset="utf-8" />
-<title>案件資料</title>
+<title>合約資料</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Free HTML Templates" name="keywords" />
 <meta content="Free HTML Templates" name="description" />
@@ -78,6 +78,7 @@
     padding: 5px;
     text-align: center;
   }
+  
   
   .logintitle{
   position: absolute;
@@ -149,39 +150,15 @@
 	
 <hr size="8px" align="center" width="100%" color="gray">
 
-<div style="text-align:center"><h3>案件管理</h3></div>
+<div style="text-align:center"><h3>合約管理</h3></div>
 <div class="content_box_grey">
   <div>
      <div>
 <!-- =============================================================================================== -->
        <div align="center">
            <ul>
-           <table>
-           <form method="post" action="<%=request.getContextPath()%>/DesignerOrder">
-               <input type="hidden" name="action" value="showMyOrder">
-               <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo} "/>
-               <input type="button" value="查看我的所有案子" /> &emsp;&emsp;
-            </form>
-            
-
-           <form method="post" action="<%=request.getContextPath()%>/DesignerOrder">
-               <input type="hidden" name="action" value="showIngOrder">
-               <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo} "/>
-               <input type="button" value="查看進行中案子" /> &emsp;&emsp;
-            </form>
-  
-            
-    
-           <form method="post" action="<%=request.getContextPath()%>/DesignerOrder">            
-               <input type="hidden" name="action" value="showFinishOrder">
-               <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo} "/>
-               <input type="button" value="查看已結案案子"/> &emsp;&emsp;
-            </form>
-            </table>
-            
-            
-           </ul>
-           
+        
+           </ul>          
          </div>  
 <!-- =============================================================================================== -->
    
@@ -195,9 +172,8 @@
 	 	<th>案件編號</th>
 	 	<th>客戶</th>
 	 	<th>接案設計師</th>
-		<th>案件報價狀態</th>
-		<th>案件合約狀態</th>
-		<th>是否結案</th>
+	 	<th>報價狀態</th>
+		<th>合約狀態</th>
 		<th>查看詳細資訊</th>
 	</tr>
 
@@ -207,25 +183,14 @@
 		 	<td>${designerOrderVO.orderNo}</td>
 		 	<td>${designerOrderVO.memberVO.memberName}</td>
 		 	<td>${designerOrderVO.designerVO.designerName}</td>
-			<td>${designerOrderVO.quotationStatus}</td>
+		 	<td>${designerOrderVO.quotationStatus}</td>
 			<td>${designerOrderVO.contractStatus}</td>
-			<!--  
-			<td>${designerOrderVO.finishStatus}</td>
-			-->		
-			<c:choose>
-				<c:when test="${designerOrderVO.finishStatus==true}">
-				<td>是</td>
-				</c:when>
-				<c:when test="${designerOrderVO.finishStatus==false}">
-				<td>否</td>
-				</c:when>
-			</c:choose>
 		 		
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ShowOneOrderDetail" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ShowOneContractDetail" style="margin-bottom: 0px;">
 			     <input type="submit" value="查看">
 			     <input type="hidden" name="orderNo"  value="${designerOrderVO.orderNo}">
-			     <input type="hidden" name="action"	value="getMyOrder">
+			     <input type="hidden" name="action"	value="getMyContract">
 			  </FORM>
 			</td>					
 		</tr>

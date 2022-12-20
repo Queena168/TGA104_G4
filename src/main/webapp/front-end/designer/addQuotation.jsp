@@ -1,21 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*" %>
+<%@ page import="com.designer.model.*" %>
+<%@ page import="com.designerOrder.model.*" %>
+
+<%
+  DesignerVO designerVO=(DesignerVO) session.getAttribute("designerVO");
+  DesignerOrderVO designerOrderVO = (DesignerOrderVO) request.getAttribute("designerOrderVO"); //DesignerServlet.java(Concroller), 存入req的empVO物件
+%>
 
 
-
-
-
-
-<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>案件管理 OrderManage.jsp</title>
-
+<title>製作報價 - addQuotation.jsp</title>
 
 <meta charset="utf-8" />
-<title>案件資料</title>
+<title>MatDesign</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Free HTML Templates" name="keywords" />
 <meta content="Free HTML Templates" name="description" />
@@ -39,13 +38,111 @@
 	rel="stylesheet" />
 
 <!-- Customized Bootstrap Stylesheet -->
+
 <link href="<%=request.getContextPath()%>/front-end/designer/css/style.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/front-end/designer/css/MatDesign.css" rel="stylesheet" />
 
   <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
+
+
+<style>
+table#table-1 {
+	background-color: #CCCCFF;
+	border: 2px solid black;
+	text-align: center;
+}
+
+table#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+}
+
+h4 {
+	color: blue;
+	display: inline;
+}
+</style>
+
+<style>
+table {
+	width: 800px;
+	background-color: white;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+table, th, td {
+	border: 0px solid #CCCCFF;
+}
+
+th, td {
+	padding: 1px;
+}
+</style>
+
+
+<style>
+#preview {
+	border: 1px solid lightgray;
+	display: inline-block;
+	width: 150px;
+	min-height: 200px;
+	position: relative;
+	
+
+	
+}
+
+#preview span.text {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	color: lightgray;
+}
+
+#preview img.preview_img {
+	width: 100%;
+}
+
+
+.wrap{
+    margin: auto;
+    margin-left: 500px;
+}
+.wrap1{
+    margin: auto;
+    margin-left: 300px;
+}
+
+
+#block1{
+margin-left: 200px;
+}
+#block2{
+margin-left: 50px;
+}
+
+img{
+    max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
+    height:auto;
+}
+
+.intro{
+margin-left: 200px;
+
+}
+
+</style>
+
+
 
 <style>
   table#table-1 {
@@ -79,7 +176,8 @@
     text-align: center;
   }
   
-  .logintitle{
+  
+    .logintitle{
   position: absolute;
   width:100px;
   right: 180px;
@@ -93,8 +191,8 @@
 	<div class="container-fluid d-none d-lg-block">
 		<div class="row align-items-center py-4 px-xl-5">
 			<div class="align-item-center-right">
-			<form method="post" action="<%=request.getContextPath()%>/DesignerLogout">
-			<div class="logintitle"><p>設計師${designerVO.designerName}您好</p></div>
+				<form method="post" action="<%=request.getContextPath()%>/DesignerLogout">
+				<div class="logintitle"><p>設計師${designerVO.designerName}您好</p></div>
 			    <input type="hidden" name="logout" value="desginerlogout">
 				<input  type="submit" class="btn btn-primary py-2 px-4 d-none d-lg-block" 
 				 value="登出" style=" color: #fff; background-color: #FF6600; border-color: #FF6600;"
@@ -113,7 +211,8 @@
 		</div>
 	</div>
 	<!-- Topbar End -->
-<!-- Navbar Start -->
+
+	<!-- Navbar Start -->
 	<div class="container-fluid">
 		<div class="row border-top px-xl-5">
 
@@ -146,95 +245,53 @@
 	</div>
 	
 	<!-- Navbar End -->
-	
-<hr size="8px" align="center" width="100%" color="gray">
-
-<div style="text-align:center"><h3>案件管理</h3></div>
-<div class="content_box_grey">
-  <div>
-     <div>
-<!-- =============================================================================================== -->
-       <div align="center">
-           <ul>
-           <table>
-           <form method="post" action="<%=request.getContextPath()%>/DesignerOrder">
-               <input type="hidden" name="action" value="showMyOrder">
-               <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo} "/>
-               <input type="button" value="查看我的所有案子" /> &emsp;&emsp;
-            </form>
-            
-
-           <form method="post" action="<%=request.getContextPath()%>/DesignerOrder">
-               <input type="hidden" name="action" value="showIngOrder">
-               <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo} "/>
-               <input type="button" value="查看進行中案子" /> &emsp;&emsp;
-            </form>
-  
-            
-    
-           <form method="post" action="<%=request.getContextPath()%>/DesignerOrder">            
-               <input type="hidden" name="action" value="showFinishOrder">
-               <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo} "/>
-               <input type="button" value="查看已結案案子"/> &emsp;&emsp;
-            </form>
-            </table>
-            
-            
-           </ul>
-           
-         </div>  
-<!-- =============================================================================================== -->
-   
-     </div>
-  </div>
- 
-</div>
+<hr size="8px" align="center" width="100%" >
+<div style="text-align:center"><h3>製作報價</h3></div>
 <div align="center">
+<form method="post" action="SendQuotation" enctype="multipart/form-data">
 <table>
-	<tr>
-	 	<th>案件編號</th>
-	 	<th>客戶</th>
-	 	<th>接案設計師</th>
-		<th>案件報價狀態</th>
-		<th>案件合約狀態</th>
-		<th>是否結案</th>
-		<th>查看詳細資訊</th>
-	</tr>
-
-	<c:forEach var="designerOrderVO" items="${list}" >	
-		
-		<tr>
-		 	<td>${designerOrderVO.orderNo}</td>
-		 	<td>${designerOrderVO.memberVO.memberName}</td>
-		 	<td>${designerOrderVO.designerVO.designerName}</td>
-			<td>${designerOrderVO.quotationStatus}</td>
-			<td>${designerOrderVO.contractStatus}</td>
-			<!--  
-			<td>${designerOrderVO.finishStatus}</td>
-			-->		
-			<c:choose>
-				<c:when test="${designerOrderVO.finishStatus==true}">
-				<td>是</td>
-				</c:when>
-				<c:when test="${designerOrderVO.finishStatus==false}">
-				<td>否</td>
-				</c:when>
-			</c:choose>
-		 		
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ShowOneOrderDetail" style="margin-bottom: 0px;">
-			     <input type="submit" value="查看">
-			     <input type="hidden" name="orderNo"  value="${designerOrderVO.orderNo}">
-			     <input type="hidden" name="action"	value="getMyOrder">
-			  </FORM>
-			</td>					
+		<tr><th>案件編號:</th><td>${designerOrderVO.orderNo}</td></tr>
+		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
+		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr>
+		<tr><th>諮詢預算</th><td>${designerOrderVO.inquiryBudget}元</td></tr>
+		<tr><th>諮詢坪數</th><td>${designerOrderVO.inquirySize}坪</td></tr>
+		<tr><th>諮詢內容</th><td>${designerOrderVO.inquiryDetail}</td></tr>
+	    <tr>
+	         <th>報價金額</th>
+   
+	    <td>	    
+	      <input type="TEXT" name="quotationAmount" size="45"
+			 value="${designerOrderVO.quotationAmount}"/>	 
+	    </td>
+	    </tr>
+		<tr><th>報價內容</th>
+		<td> 
+		 <textarea rows="10" cols="60"  name="quotationDetail">${designerOrderVO.quotationDetail}</textarea>
+		</td>
 		</tr>
-		</c:forEach>
+		
+		<tr>	    	    
+	    <th>報價附件</th>
+	    <td>
+		<input type="file" name="upfile1" id="fileinp">
+        </td>         
+	    </tr>
+	 
 </table>
+     <div id="block2">
+     	
+              <input type="hidden" name="action" value="sendquotation">
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
+              <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo}">
+              <input type="submit" value="送出報價">
+         
+              <input type="hidden" name="cancel" value="cancel">
+            <!--    <input type="hidden" name="designerNo" value="${param.designerNo}">-->
+              <input type ="button" onclick="history.back()" value="回上一頁" >
+     </div> 
+</form>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-
+	  
+	  
 </body>
 </html>
