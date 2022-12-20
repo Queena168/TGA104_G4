@@ -1,4 +1,4 @@
-package com.designerOrder.model;
+package com.designer.model;
 import java.util.*;
 public interface DesignerOrderDAO_interface {
 	public void insert(DesignerOrderVO designerOrderVO);

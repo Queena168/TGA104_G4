@@ -1,4 +1,4 @@
-package com.designerOrder.controller;
+package com.designer.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.designerOrder.Service.DesignerOrderService;
-import com.designerOrder.model.DesignerOrderVO;
+import com.designer.model.DesignerOrderVO;
+import com.designer.service.DesignerOrderService;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/SendQuotation")
 public class SendQuotation extends HttpServlet {

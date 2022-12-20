@@ -1,4 +1,4 @@
-package com.designerOrder.model;
+package com.designer.model;
 
 import java.sql.Date;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import com.designer.model.DesignerVO;
 import com.designer.service.DesignerService;
 import com.member.model.MemberVO;
-import com.member.service.MemberService;
+//import com.member.service.MemberService;
 
 public class DesignerOrderVO implements java.io.Serializable {
 
@@ -232,11 +232,11 @@ public class DesignerOrderVO implements java.io.Serializable {
 
 	// ================================================================
 	// member
-	public MemberVO getMemberVO() {
-		MemberService memberSvc = new MemberService();
-		MemberVO memberVO = memberSvc.getOneMember(memberNo);
-		return memberVO;
-	}
+//	public MemberVO getMemberVO() {
+//		MemberService memberSvc = new MemberService();
+//		MemberVO memberVO = memberSvc.getOneMember(memberNo);
+//		return memberVO;
+//	}
 
 	@Override
 	public String toString() {

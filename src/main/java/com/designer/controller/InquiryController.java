@@ -1,4 +1,4 @@
-package com.designerOrder.controller;
+package com.designer.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.designerExpertise.Service.DesignerExpertiseService;
-import com.designerExpertise.model.DesignerExpertiseVO;
-import com.designerOrder.Service.DesignerOrderService;
+import com.designer.model.DesignerExpertiseVO;
+import com.designer.service.DesignerExpertiseService;
+import com.designer.service.DesignerOrderService;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/inquiryController")

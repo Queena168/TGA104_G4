@@ -1,7 +1,6 @@
-package com.designerOrder.controller;
+package com.designer.controller;
 
 import java.io.IOException;
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.designerOrder.Service.DesignerOrderService;
-import com.designerOrder.model.DesignerOrderVO;
+import com.designer.model.DesignerOrderVO;
+import com.designer.service.DesignerOrderService;
 
 @WebServlet("/AddQuotation")
 public class AddQuotation extends HttpServlet {
