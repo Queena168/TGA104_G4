@@ -38,7 +38,7 @@
 		<servlet-name>AdminLoginServlet</servlet-name>
 		<url-pattern>/back-end/adminLogin/AdminLoginServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>PicAllReadServlet</servlet-name>
 		<servlet-class>com.productpic.controller.PicAllReadServlet</servlet-class>
@@ -73,6 +73,114 @@
 	<servlet-mapping>
 		<servlet-name>PicReadOneServlet</servlet-name>
 		<url-pattern>/PicReadOneServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CancelOrderServlet</servlet-name>
+		<servlet-class>com.cart.controller.CancelOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CancelOrderServlet</servlet-name>
+		<url-pattern>/CancelOrderServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CartServlet</servlet-name>
+		<servlet-class>com.cart.controller.CartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CartServlet</servlet-name>
+		<url-pattern>/CartServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CheckOutServlet</servlet-name>
+		<servlet-class>com.cart.controller.CheckOutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckOutServlet</servlet-name>
+		<url-pattern>/CheckOutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.cart.controller.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.cart.controller.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderNowServlet</servlet-name>
+		<servlet-class>com.cart.controller.OrderNowServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderNowServlet</servlet-name>
+		<url-pattern>/OrderNowServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>QuantityIncDecServlet</servlet-name>
+		<servlet-class>com.cart.controller.QuantityIncDecServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuantityIncDecServlet</servlet-name>
+		<url-pattern>/QuantityIncDecServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RemoveFromCartServlet</servlet-name>
+		<servlet-class>com.cart.controller.RemoveFromCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveFromCartServlet</servlet-name>
+		<url-pattern>/RemoveFromCartServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddOrderInformServlet</servlet-name>
+		<servlet-class>com.productorderdetail.controller.AddOrderInformServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddOrderInformServlet</servlet-name>
+		<url-pattern>/AddOrderInformServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>BackendOrderDetail</servlet-name>
+		<servlet-class>com.productorderdetail.controller.BackendOrderDetail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BackendOrderDetail</servlet-name>
+		<url-pattern>/BackendOrderDetail</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderDetailServlet</servlet-name>
+		<servlet-class>com.productorderdetail.controller.OrderDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderDetailServlet</servlet-name>
+		<url-pattern>/OrderDetailServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateOrderStatusServlet</servlet-name>
+		<servlet-class>com.productorderdetail.controller.UpdateOrderStatusServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateOrderStatusServlet</servlet-name>
+		<url-pattern>/UpdateOrderStatusServlet</url-pattern>
 	</servlet-mapping>
 
 	<!-- 以下為Filter的註冊 -->
