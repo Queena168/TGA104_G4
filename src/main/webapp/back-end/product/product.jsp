@@ -40,9 +40,9 @@ ProductPicService productPicService = new ProductPicService();
 </head>
 <body bgcolor='white'>
 <h3>所有商品資料 - product.jsp</h3>
-<a href='http://localhost:8081/TGA104G4/back-end/producttype/listAllProductType.jsp'>顯示所有商品類別</a><br>
-<a href='http://localhost:8081/TGA104G4/back-end/product/listAllProduct.jsp'>顯示所有商品</a><br>
-<a href='http://localhost:8081/TGA104G4/back-end/productpic/listAllPic.jsp'>顯示所有商品圖片</a>
+<a href='http://localhost:8080/TGA104_G4/back-end/producttype/listAllProductType.jsp'>顯示所有商品類別</a><br>
+<a href='http://localhost:8080/TGA104_G4/back-end/product/listAllProduct.jsp'>顯示所有商品</a><br>
+<a href='http://localhost:8080/TGA104_G4/back-end/productpic/listAllPic.jsp'>顯示所有商品圖片</a>
 
 <table>
 	<tr>

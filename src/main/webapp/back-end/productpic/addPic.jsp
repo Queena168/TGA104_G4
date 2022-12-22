@@ -43,7 +43,7 @@ th, td {
 		</ul>
 	</c:if>
 	
-	<form METHOD="post" ACTION="/TGA104G4/PicServlet" enctype="multipart/form-data">
+	<form METHOD="post" ACTION="/TGA104_G4/PicServlet" enctype="multipart/form-data">
         <table>
             <tr>
 		    	<td>商品編號:</td>
@@ -60,6 +60,6 @@ th, td {
 		<input type="hidden" name="action" value="addPic"><br>
 		<input type="submit" value="送出新增">
 	</form>
-	<a href="http://localhost:8081/TGA104G4/back-end/productpic/listAllPic.jsp">回首頁</a>
+	<a href="http://localhost:8080/TGA104_G4/back-end/productpic/listAllPic.jsp">回首頁</a>
 </body>
 </html>

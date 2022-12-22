@@ -49,79 +49,147 @@ th, td {
 		
 }
 </style>
+
+
+
+
+<!-- 新模板開始 -->
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon.ico" sizes="32x32">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel='stylesheet' href='../css/fontawesome.min.css'>
+    <!-- Animate -->
+    <link href="../css/animate.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <!-- light box -->
+    <link rel="stylesheet" href="../css/lightbox.min.css">
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <!--    <link rel="stylesheet" href="//basehold.it/24">-->
+
+    <!-- nice select -->
+    <link rel="stylesheet" href="../css/nice-select.min.css">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="../scss/main.css">
+    <link rel="stylesheet" href="../css/forum_style.css">
+<!-- 新模板結束 -->
+
 <style>
-.btn-primary {
+.btn-orange {
     color: #fff;
     background-color: #ff7c07;
     border-color: #ff7c07;
+    padding: 5px 15px
+}
+.btn-black {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+    padding: 5px 15px
 }
 </style>
-
+    
 </head>
 <body bgcolor="#FFFFFF">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<div class="container">
-  <a class="navbar-brand" href="http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp">
-  	<img src="/TGA104_G4/front-end/order/images/MatDesign.JPG" alt="" width="100%" height="45">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">    
+            <img src="/TGA104_G4/front-end/images/MatDesignLogo.png" alt="">
+        </a>
+        <!--  navbar actions -->
+        <div class="main-navbar-action">
+            <div id="mainNavbarDropdown">
+                <!-- navbar user account dropdown -->
+                <div class="dropdown-wrapper" id="usermenu" data-collapse="false">
+                    <div class="account-wrapper">
+                        <!-- login form wrapper -->
+                        
+                        <div class="account-wrapper__content">
+                            <form class="custom-form">
+                                <div class="custom-form__btn">
+                                    <a href="./member/login.jsp">
+                                    <button type="button" class="btn submit-btn">登入/註冊</button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <!-- account links when user is logged in-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
+                        <!--                            class="icon-user-profile"></i></span>Profile</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
+                        <!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
+                        <!--                            class="icon-sign"></i></span>Addresses</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
+                        <!--                            class="icon-wish-list"></i></span>wishlist</a>-->
+                        <!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp">首頁</a></li>
-      <li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp">購物車<span class="badge badge-danger px-1">${cart_list.size()}</span></a></li>
-      <% 
-      if(auth != null){%>
-      	<li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">訂單</a></li>
-        <li class="nav-item"><a class="nav-link" href="/TGA104_G4/LogoutServlet">登出</a></li>
-      <%}else{%>
-      	<li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/login.jsp">登入</a></li>
-      <%}
-      %>
-    </ul>
-  </div>
-  </div>
+                    </div>
+                </div>
+                <!-- navbar cart dropdown -->
+                <div class="" id="cartmenu" data-collapse="false"></div>
+            </div>
+            <!-- navbar user account icon -->
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="usermenu">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+            <!-- navbar cart icon -->
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp">
+                    <span class="cart-badge">${cart_list.size()}</span>
+                    <i class="icon-shopping-bag"></i>
+                </a>
+            </div>
+            
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">
+                    <span class="cart-badge">訂單</span>
+                    <i class="icon-shopping-bag"></i>
+                </a>
+            </div>
+            <!-- navbar actions content -->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+                aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav main-navbar">
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="./designer_protfolio/listAll.html" >找作品</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="#" >找設計師</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="/TGA104_G4/front-end/cart/shopProduct.jsp" >商城</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="#" >論壇</a>
+                </li>
+                <!-- <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
+                </li> -->
+                <li class="nav-item main-navbar__item">
+                    <a class="nav-link" href="contact.html">關於我們</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
-
-
-
-
-
-
-
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="/TGA104_G4/front-end/cart/images/home.jpeg" width="100%" height="400px" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/TGA104_G4/front-end/cart/images/sofa1.jpg" width="100%" height="400px" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/TGA104_G4/front-end/cart/images/curtain.jpg" width="100%" height="400px" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
 <br>
 <br>
 <br>
 	<div class="container">
-		<div class="card-headermy-3"><h3>商品列表</h3></div>
 		<div class="row">
 		<c:forEach var="shopProductVO" items="${list}">
 			<div class="col-md-3 my-3">
@@ -135,8 +203,8 @@ th, td {
 <!-- 							數量： <input type="text" name="quantity" size="1" value=1> -->
 <!-- 						</div> -->
 						<div class="mt-3 d-flex justify-content-between">
-							<a href="<%=request.getContextPath()%>/CartServlet?id=${shopProductVO.productNo}" class="btn btn-dark">加入購物車</a>
-							<a href="<%=request.getContextPath()%>/OrderNowServlet?id=${shopProductVO.productNo}" class="btn btn-primary">直接購買</a>
+							<a href="<%=request.getContextPath()%>/CartServlet?id=${shopProductVO.productNo}" class="btn btn-black">加入購物車</a>
+							<a href="<%=request.getContextPath()%>/OrderNowServlet?id=${shopProductVO.productNo}" class="btn btn-orange">直接購買</a>
 <%-- 							<a href="<%=request.getContextPath()%>/OrderNowServlet?quantity=1&id=${shopProductVO.productNo}" class="btn btn-primary">直接購買</a> --%>
 <!-- 							<input class="btn btn-dark" type="submit" name="Submit" value="加入購物車"> -->
 <!-- 							<input class="btn btn-primary" type="submit" name="Submit" value="直接購買"> -->
@@ -147,34 +215,52 @@ th, td {
 		</c:forEach>	
 		</div>
 	</div>
-	
-	
-
-
-    <!-- Footer Start -->
-    <div
-      id="footer"
-      class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5"
-      style="margin-top: 250PX"
-    >
-      <div class="row pt-5">
-        <div class="col-lg-7 col-md-12">
-          <div class="row">
-            <div class="col-md-6 mb-5">
-              <h5
-                class="text-primary text-uppercase mb-4"
-                style="letter-spacing: 5px"
-              >
-                關於我們
-              </h5>
-              <a href="#" style="font-weight: bold">關於我們</a>
+<br>	
+<br>	
+<br>	
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__top-row">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 footer__content">
+                    <div class="footer-logo">
+                        <img src="../images/MatDesignLogo.png" alt="">
+                    </div>
+                    <p></p>
+                    
+                </div>
+                <div class="col-lg-2 col-md-6 footer__content">
+                    <h5 class="footer-heading">關於我們</h5>
+                    <ul class="footer-list">
+                        <li class="footer-list__item"><a href="index.html">關於我們</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer__content">
+                    <h5 class="footer-heading">網站地圖</h5>
+                    <ul class="footer-list">
+                        <li class="footer-list__item"><a href="#">找作品</a></li>
+                        <li class="footer-list__item"><a href="#">找設計師</a></li>
+                        <li class="footer-list__item"><a href="#">商城</a></li>
+                        <li class="footer-list__item"><a href="#">論壇</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer__content">
+                    <h5 class="footer-heading">Keep in touch</h5>
+                    <ul class="footer-list footer-list-info">
+                        <li class="footer-list__item">
+                            <span><i class="fas fa-envelope"></i></span>
+                            <span>MatDesign@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-6 mb-5">
-            </div>
-          </div>
         </div>
-      </div>
+        <div class="copyright">
+            <p>&#169; copyright 2022. Designed by MatDesign </p>
+        </div>
     </div>
+</footer>
 		
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>

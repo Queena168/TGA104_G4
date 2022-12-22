@@ -44,7 +44,7 @@ public class PicReadServlet extends HttpServlet {
 			
 				Statement stmt = con.createStatement();
 				String id = req.getParameter("productNo").trim();
-				System.out.println("id = " + id);
+//				System.out.println("id = " + id);
 				ResultSet rs = stmt.executeQuery("select pic from ProductPic where productNo=" + id);
 				if (rs.next()) {
 					byte[] b =rs.getBytes("pic");

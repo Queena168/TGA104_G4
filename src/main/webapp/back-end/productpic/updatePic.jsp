@@ -55,8 +55,8 @@ th, td {
 			<td>
 				<h3>商品圖片修改 - update_pic_input.jsp</h3>
 				<h4>
-					<a href="/TGA104G4/back-end/product/selectProduct_page.jsp"><img
-						src="/TGA104G4/back-end/product/images/back.png" width="100"
+					<a href="/TGA104_G4/back-end/product/selectProduct_page.jsp"><img
+						src="/TGA104_G4/back-end/product/images/back.png" width="100"
 						height="32" border="0">回首頁</a>
 				</h4>
 			</td>
@@ -75,7 +75,7 @@ th, td {
 		</ul>
 	</c:if>
 	
-		<form action="/TGA104G4/PicServlet" method=post enctype="multipart/form-data">
+		<form action="/TGA104_G4/PicServlet" method=post enctype="multipart/form-data">
 			<table>
                 <tr>
 					<td>商品圖片編號:<font color=red><b>*</b></font></td>
