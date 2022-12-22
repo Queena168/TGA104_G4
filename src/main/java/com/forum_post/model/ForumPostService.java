@@ -1,6 +1,5 @@
 package com.forum_post.model;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ForumPostService {
@@ -33,10 +32,6 @@ public class ForumPostService {
 		return forumPostVO;
 	}
 
-	public void deletePost(Integer postNo) throws SQLException {
-		dao.delete(postNo);
-	}
-
 	public ForumPostVO getPostByPostNo(Integer postNo) {
 		return dao.findByPostNo(postNo);
 	}
@@ -47,10 +42,6 @@ public class ForumPostService {
 
 	public List<ForumPostVO> getPostsByTopicNo(Integer topicNo) {
 		return dao.findPostByTopicNo(topicNo);
-	}
-
-	public List<ForumPostVO> getPostByMemberNo(Integer memberNo) {
-		return dao.findByMemberNo(memberNo);
 	}
 
 	public List<ForumPostVO> getPostByKeyword(String keyword) {
