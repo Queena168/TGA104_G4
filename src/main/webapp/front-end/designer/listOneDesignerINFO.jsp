@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core"%> <%@ page import="com.designer.model.*"
-%> <%@ page import="java.util.*" %> <%@ page import="com.designer.model.*" %>
-<%@ page import="com.designerExpertise.model.*" %> <%@ page
-import="com.designerExpertise.Service.*" %> <%@ page import="com.member.model.*"
-%>
+pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ page import="java.util.*" %> 
+<%@ page import="com.designer.model.*" %>
+<%@ page import="com.member.model.*"%>
 
 <html>
   <head>
