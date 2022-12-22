@@ -1,0 +1,74 @@
+.btn_style {
+	border: none;
+	border-radius: 5px;
+	background-color: #738d9e;
+	color: white;
+}
+
+.closeReason {
+	border: none;
+	border-radius: 5px;
+	background-color: #CC0000;
+	color: white;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.closeContent {
+	border: none;
+	border-radius: 5px;
+	background-color: #CC0000;
+	color: white;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.reasonPopup {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 25%;
+	border: 3px solid #999999;
+	z-index: 9;
+}
+
+.titlePopup {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 25%;
+	border: 3px solid #999999;
+	z-index: 9;
+}
+
+.contentPopup {
+	display: none;
+	position: fixed;
+	left: 22%;
+	top: 15%;
+	border: 3px solid #999999;
+	z-index: 9;
+	width: 77%;
+	height: 80%;
+}
+
+.reasonContainer {
+	height: 220px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+.titleContainer {
+	height: 130px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+.contentContainer {
+	height: 100%;
+	padding: 10px;
+	background-color: #fff;
+	overflow: scroll;
+}

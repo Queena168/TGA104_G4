@@ -1,7 +1,6 @@
 package com.forum_topic.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ForumTopicDAO implements ForumTopicDAO_interface {
-	
+
 	private static DataSource dataSource = null;
 	static {
 		try {
@@ -53,17 +52,6 @@ public class ForumTopicDAO implements ForumTopicDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer topicNo) throws SQLException {
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement("DELETE FROM ForumTopic WHERE topicNo = ?")) {
-			ps.setInt(1, topicNo);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
 	public ForumTopicVO findByTopicNo(Integer topicNo) {
 		ForumTopicVO forumTopicVO = null;
 		try (Connection connection = dataSource.getConnection();
@@ -85,32 +73,6 @@ public class ForumTopicDAO implements ForumTopicDAO_interface {
 			e.printStackTrace();
 		}
 		return forumTopicVO;
-	}
-
-	@Override
-	public List<ForumTopicVO> findByTopicName(String topicName) {
-		List<ForumTopicVO> list = new ArrayList<ForumTopicVO>();
-		ForumTopicVO forumTopicVO = null;
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(
-						"SELECT topicNo, topicName, startDate, modificationDate, adminNo FROM ForumTopic WHERE topicName LIKE ?")) {
-			ps.setString(1, "%" + topicName + "%");
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				forumTopicVO = new ForumTopicVO();
-				forumTopicVO.setTopicNo(rs.getInt("topicNo"));
-				forumTopicVO.setTopicName(rs.getString("topicName"));
-				forumTopicVO.setStartDate(rs.getDate("startDate"));
-				forumTopicVO.setModificationDate(rs.getDate("modificationDate"));
-				forumTopicVO.setAdminNo(rs.getInt("adminNo"));
-				list.add(forumTopicVO);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
 	}
 
 	@Override

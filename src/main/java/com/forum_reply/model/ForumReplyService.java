@@ -1,6 +1,5 @@
 package com.forum_reply.model;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ForumReplyService {
@@ -30,14 +29,6 @@ public class ForumReplyService {
 		return forumReplyVO;
 	}
 
-	public void deleteReply(Integer replyNo) throws SQLException {
-		dao.delete(replyNo);
-	}
-
-	public ForumReplyVO getReplyByReplyNo(Integer replyNo) {
-		return dao.findByReplyNo(replyNo);
-	}
-
 	public ForumReplyVO getLastReplyTimeByReplyTo(Integer replyTo) {
 		return dao.findLastReplyTimeByReplyTo(replyTo);
 	}
@@ -48,14 +39,6 @@ public class ForumReplyService {
 
 	public List<ForumReplyVO> getReplyByReplyTo(Integer replyTo) {
 		return dao.findByReplyTo(replyTo);
-	}
-
-	public List<ForumReplyVO> getReplyByMemberNo(Integer memberNo) {
-		return dao.findByMemberNo(memberNo);
-	}
-
-	public List<ForumReplyVO> getReplyByContent(String content) {
-		return dao.findByContent(content);
 	}
 
 	public List<ForumReplyVO> getAll() {

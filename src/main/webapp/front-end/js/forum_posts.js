@@ -104,23 +104,3 @@ document.querySelector("#report_submit").addEventListener("click", function () {
 		alert("新增檢舉成功，管理者會進行審核");
 	}
 });
-
-
-//// summernote
-//$('#summernote').summernote({
-//	lang: 'zh-TW',
-//	placeholder: '輸入文字... 或將圖片拖曳至此',
-//	height: 300,
-//	fontNames: ['Arial', 'Comic Sans MS', 'Courier New', 'Impact', 'Times New Roman', '新細明體', '微軟正黑體', '標楷體'],
-//	toolbar: [
-//		['style', ['bold', 'italic', 'underline']],
-//		['font', ['strikethrough', 'superscript', 'subscript']],
-//		['fontname', ['fontname']],
-//		['fontsize', ['fontsize']],
-//		['height', ['height']],
-//		['color', ['color']],
-//		['para', ['ul', 'ol', 'paragraph']],
-//		['insert', ['picture']],
-//		['view', ['codeview']],
-//	],
-//});

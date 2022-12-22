@@ -1,6 +1,5 @@
 package com.forum_topic.model;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ForumTopicService {
@@ -27,16 +26,8 @@ public class ForumTopicService {
 		return forumtopicVO;
 	}
 
-	public void deleteTopic(Integer topicNo) throws SQLException {
-		dao.delete(topicNo);
-	}
-
 	public ForumTopicVO getTopicByTopicNo(Integer topicNo) {
 		return dao.findByTopicNo(topicNo);
-	}
-
-	public List<ForumTopicVO> getTopicByTopicName(String topicName) {
-		return dao.findByTopicName(topicName);
 	}
 
 	public List<ForumTopicVO> getAll() {

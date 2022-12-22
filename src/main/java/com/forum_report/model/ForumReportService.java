@@ -21,32 +21,28 @@ public class ForumReportService {
 		return forumReportVO;
 	}
 
-	public ForumReportVO updateReportStatusAndReviewResult(Integer reviewer, String reportStatus, String reviewResult,
-			Integer reportNo) {
+	public ForumReportVO updateReportStatusByPostNo(Integer reviewer, String reviewResult, Integer postNo) {
 		ForumReportVO forumReportVO = new ForumReportVO();
 		forumReportVO.setReviewer(reviewer);
-		forumReportVO.setReportStatus(reportStatus);
 		forumReportVO.setReviewResult(reviewResult);
-		forumReportVO.setReportNo(reportNo);
+		forumReportVO.setPostNo(postNo);
 
-		dao.update(forumReportVO);
+		dao.updateByPostNo(forumReportVO);
 		return forumReportVO;
 	}
 
-	public void deleteReport(Integer reportNo) {
-		dao.delete(reportNo);
-	}
+	public ForumReportVO updateReportStatusByReplyNo(Integer reviewer, String reviewResult, Integer replyNo) {
+		ForumReportVO forumReportVO = new ForumReportVO();
+		forumReportVO.setReviewer(reviewer);
+		forumReportVO.setReviewResult(reviewResult);
+		forumReportVO.setReplyNo(replyNo);
 
-	public ForumReportVO getReportByReportNo(Integer reportNo) {
-		return dao.findByReportNo(reportNo);
+		dao.updateByReplyNo(forumReportVO);
+		return forumReportVO;
 	}
 
 	public List<ForumReportVO> getReportByReportStatus(String reportStatus) {
 		return dao.findByReportStatus(reportStatus);
-	}
-
-	public List<ForumReportVO> getReportByReviewResult(String reviewResult) {
-		return dao.findByReviewResult(reviewResult);
 	}
 
 	public List<ForumReportVO> getAll() {

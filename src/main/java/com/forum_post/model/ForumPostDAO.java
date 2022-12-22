@@ -1,7 +1,6 @@
 package com.forum_post.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,17 +50,6 @@ public class ForumPostDAO implements ForumPostDAO_interface {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void delete(Integer postNo) throws SQLException {
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement("DELETE FROM ForumPost WHERE postNo = ?")) {
-			ps.setInt(1, postNo);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			throw new SQLException();
 		}
 	}
 
@@ -128,36 +116,6 @@ public class ForumPostDAO implements ForumPostDAO_interface {
 				PreparedStatement ps = connection.prepareStatement(
 						"SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE topicNo = ?")) {
 			ps.setInt(1, topicNo);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				forumPostVO = new ForumPostVO();
-				forumPostVO.setPostNo(rs.getInt("postNo"));
-				forumPostVO.setMemberNo(rs.getInt("memberNo"));
-				forumPostVO.setTopicNo(rs.getInt("topicNo"));
-				forumPostVO.setTitle(rs.getString("title"));
-				forumPostVO.setContent(rs.getString("content"));
-				forumPostVO.setPostTime(rs.getTimestamp("postTime"));
-				forumPostVO.setModificationTime(rs.getTimestamp("modificationTime"));
-				forumPostVO.setNickName(rs.getString("nickName"));
-				forumPostVO.setReviewResult(rs.getString("reviewResult"));
-				list.add(forumPostVO);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	@Override
-	public List<ForumPostVO> findByMemberNo(Integer memberNo) {
-		List<ForumPostVO> list = new ArrayList<ForumPostVO>();
-		ForumPostVO forumPostVO = null;
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(
-						"SELECT DISTINCT P.postNo, P.memberNo, topicNo, title, content, postTime, modificationTime, nickName, reviewResult FROM ForumPost P LEFT JOIN Member M ON P.memberNo = M.memberNo LEFT JOIN ForumReport RP ON P.postNo = RP.postNo WHERE P.memberNo = ?")) {
-			ps.setInt(1, memberNo);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

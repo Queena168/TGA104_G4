@@ -78,19 +78,21 @@ public class Topic extends HttpServlet {
 		// 如果該member當下還不存在(例如新發文)，則新增該member/score設為0。
 
 		// =====資料分頁=====
-		if (!forumPostVOList.isEmpty()) {
+		int page;
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch (NumberFormatException e) {
+			page = 1;
+		}
+		if (!forumReplyVOList.isEmpty()) {
 			int rowsPerPage = 5;
-			int page;
-			try {
-				page = Integer.parseInt(request.getParameter("page"));
-			} catch (NumberFormatException e) {
-				page = 1;
-			}
-			int pageStart = Pagination.pagination(forumPostVOList, page, rowsPerPage)[0];
-			int totalPage = Pagination.pagination(forumPostVOList, page, rowsPerPage)[1];
+			int pageStart = Pagination.pagination(forumReplyVOList, page, rowsPerPage)[0];
+			int totalPage = Pagination.pagination(forumReplyVOList, page, rowsPerPage)[1];
 			request.setAttribute("pageStart", pageStart);
 			request.setAttribute("pageEnd", pageStart + rowsPerPage - 1);
 			request.setAttribute("totalPage", totalPage);
+		} else {
+			request.setAttribute("totalPage", 1);
 		}
 		// 宣告每頁10筆資料，從query string得到page，呼叫分頁方法pagination()，傳入參數為1.要分頁的list 2.目前頁數page
 		// 3.每頁幾筆資料，得到陣列[0]=該分頁內資料起始索引，陣列[1]=總頁數，存入attribute

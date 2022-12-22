@@ -11,6 +11,8 @@ public class ForumReportVO {
 	private String reportStatus;
 	private java.util.Date reviewTime;
 	private String reviewResult;
+	private String postContent;
+	private String replyContent;
 
 	public Integer getReportNo() {
 		return reportNo;
@@ -92,11 +94,27 @@ public class ForumReportVO {
 		this.reviewResult = reviewResult;
 	}
 
+	public String getPostContent() {
+		return postContent;
+	}
+
+	public void setPostContent(String postContent) {
+		this.postContent = postContent;
+	}
+	
+	public String getReplyContent() {
+		return replyContent;
+	}
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+
 	@Override
 	public String toString() {
 		return "ForumReportVO [reportNo=" + reportNo + ", postNo=" + postNo + ", replyNo=" + replyNo + ", informant="
 				+ informant + ", reviewer=" + reviewer + ", reportReason=" + reportReason + ", reportTime=" + reportTime
 				+ ", reportStatus=" + reportStatus + ", reviewTime=" + reviewTime + ", reviewResult=" + reviewResult
-				+ "]";
+				+ ", postContent=" + postContent + ", replyContent=" + replyContent + "]";
 	}
 }

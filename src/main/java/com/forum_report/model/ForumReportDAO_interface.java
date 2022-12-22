@@ -6,15 +6,11 @@ public interface ForumReportDAO_interface {
 	
 	public void insert(ForumReportVO forumReportVO);
 	
-	public void update(ForumReportVO forumReportVO);
+	public void updateByPostNo(ForumReportVO forumReportVO);
 	
-	public void delete(Integer reportNo);
-
-	public ForumReportVO findByReportNo(Integer reportNo);
+	public void updateByReplyNo(ForumReportVO forumReportVO);
 	
 	public List<ForumReportVO> findByReportStatus(String reportStatus);
 	
-	public List<ForumReportVO> findByReviewResult(String reviewResult);
-
 	public List<ForumReportVO> getAll();
 }
