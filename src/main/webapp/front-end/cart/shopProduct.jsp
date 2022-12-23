@@ -136,6 +136,9 @@ th, td {
                 </div>
                 <!-- navbar cart dropdown -->
                 <div class="" id="cartmenu" data-collapse="false"></div>
+                
+            <a class="nav-link " href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp" >訂單</a>
+            
             </div>
             <!-- navbar user account icon -->
             <div class="main-navbar-action__btn nav-dropdown">
@@ -151,12 +154,7 @@ th, td {
                 </a>
             </div>
             
-            <div class="main-navbar-action__btn nav-dropdown">
-                <a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">
-                    <span class="cart-badge">訂單</span>
-                    <i class="icon-shopping-bag"></i>
-                </a>
-            </div>
+            
             <!-- navbar actions content -->
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"

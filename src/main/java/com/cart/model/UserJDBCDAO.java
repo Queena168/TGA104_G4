@@ -11,14 +11,14 @@ import com.product.model.ProductVO;
 
 public class UserJDBCDAO {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/matdesign?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 	
 	private static final String GET_ONE_STMT =
-			"SELECT memberNo, memberName, memberEmail, memberPassword from Member where memberEmail=? and memberPassword=?";
+			"SELECT memberNo, memberName, memberEmail, memberPassword from User where memberEmail=? and memberPassword=?";
 	private static final String GET_MEMBER_STMT = 
-			"SELECT memberNo, memberName, email, password from Member where userNo = ?";
+			"SELECT memberNo, memberName, email, password from User where memberNo = ?";
 	
 	public User findByPrimaryKey(Integer memberNo) {
 

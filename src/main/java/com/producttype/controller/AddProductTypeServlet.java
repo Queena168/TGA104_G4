@@ -12,7 +12,7 @@ import javax.servlet.RequestDispatcher;
 import com.producttype.model.ProductTypeService;
 import com.producttype.model.ProductTypeVO;
 
-@WebServlet("/AddProductTypeServlet")
+@WebServlet("/back-end/producttype/AddProductTypeServlet")
 public class AddProductTypeServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
 	

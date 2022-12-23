@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProductTypeJDBCDAO implements ProductTypeDAO_interface{
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/matdesign?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
  
@@ -272,10 +272,10 @@ public class ProductTypeJDBCDAO implements ProductTypeDAO_interface{
 //		dao.insert(productTypeVO1);
 		
 		// 修改
-		ProductTypeVO productTypeVO = new ProductTypeVO();
-		productTypeVO.setProductTypeNo(4);
-		productTypeVO.setProductTypeName("其他");
-		dao.update(productTypeVO);
+//		ProductTypeVO productTypeVO = new ProductTypeVO();
+//		productTypeVO.setProductTypeNo(4);
+//		productTypeVO.setProductTypeName("其他");
+//		dao.update(productTypeVO);
 		
 		// 查詢
 //		ProductTypeVO productTypeVO2 = dao.findByPrimaryKey(1);		
@@ -284,11 +284,11 @@ public class ProductTypeJDBCDAO implements ProductTypeDAO_interface{
 
 		
 		// 查詢
-//		List<ProductTypeVO> list = dao.getAll();
-//		for (ProductTypeVO aProductType : list) {
-//			System.out.print(aProductType.getProductTypeNo() + ",");
-//			System.out.print(aProductType.getProductTypeName() + ",");
-//			System.out.println();
-//		}
+		List<ProductTypeVO> list = dao.getAll();
+		for (ProductTypeVO aProductType : list) {
+			System.out.print(aProductType.getProductTypeNo() + ",");
+			System.out.print(aProductType.getProductTypeName() + ",");
+			System.out.println();
+		}
 	}
 }

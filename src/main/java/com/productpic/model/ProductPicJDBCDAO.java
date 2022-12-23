@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/matdesign?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
