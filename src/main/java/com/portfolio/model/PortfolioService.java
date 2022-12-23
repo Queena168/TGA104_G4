@@ -29,12 +29,14 @@ public class PortfolioService {
 		return portfolioVO;
 	}
 	
-	public PortfolioVO updatePortfolio(String portfolioName, byte[] portfolioPic1, byte[] portfolioPic2, byte[] portfolioPic3, byte[] portfolioPic4,
+	public PortfolioVO updatePortfolio(Integer portfolioNo ,String portfolioName,Integer designerNo ,byte[] portfolioPic1, byte[] portfolioPic2, byte[] portfolioPic3, byte[] portfolioPic4,
 			String description, String houseAge, String houseSize,String houseArea)  {
 		
 		PortfolioVO portfolioVO = new PortfolioVO();
 		
+		portfolioVO.setPortfolioNo(portfolioNo);
 		portfolioVO.setPortfolioName(portfolioName);
+		portfolioVO.setDesignerNo(designerNo);
 		portfolioVO.setPortfolioPic1(portfolioPic1);
 		portfolioVO.setPortfolioPic2(portfolioPic2);
 		portfolioVO.setPortfolioPic3(portfolioPic3);
@@ -58,5 +60,18 @@ public class PortfolioService {
 	
 	public List<PortfolioVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public List<PortfolioVO> getAllbyDesign(Integer designerNo){
+		PortfolioDAO getAll = new PortfolioDAO();
+		return getAll.getAllbyDesign(designerNo);
+	}
+	
+	
+	
+	public List<PortfolioVO> selectportfolio(String select){
+		PortfolioDAO selectdao = new PortfolioDAO();
+		List<PortfolioVO> selectList = selectdao.selectMatch(select);
+		return selectList;
 	}
 }

@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.portfolio.model.*"%>
 
+<%
+PortfolioService portfolioSvc = new PortfolioService();
+List<PortfolioVO> list = portfolioSvc.getAll();
+pageContext.setAttribute("list", list);
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +38,6 @@
 <link rel="stylesheet" href="../css/nice-select.min.css">
 <!-- Main Styles -->
 <link rel="stylesheet" href="../scss/main.css">
-<link rel="stylesheet" href="../scss/main.css">
 </head>
 
 <body>
@@ -49,25 +57,35 @@
 							<!-- login form wrapper -->
 
 							<div class="account-wrapper__content">
-								<form class="custom-form">
-									<div class="custom-form__btn">
-										<a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
-										<a class="dropdown-item nav-link"
-											href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
+								<div class="custom-form__btn custom-form__input">
+									<div class="account-wrapper__heading">
+										<span>${designerVO.designerAccount}</span>
+										<%-- <span
+											class="account-wrapper__heading--link">${designerVO.memberName}
+										</span> --%>
 									</div>
+								</div>
+								<div class="account-wrapper__content">
+									<div class="form-group custom-form__input">
+										<a class="dropdown-item " href="designerPorfile.jsp"> <span><i
+												class="icon-user-profile"></i></span>設計師資料
+										</a>
 
-								</form>
+									</div>
+									<div class="form-group custom-form__input">
+										<a class="dropdown-item  " href="../index.html"><span><i
+												class="icon-log-out"></i></span>登出</a>
+									</div>
+								</div>
+
 							</div>
 							<!-- account links when user is logged in-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
-							<!--                            class="icon-user-profile"></i></span>Profile</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
 							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
 							<!--                            class="icon-sign"></i></span>Addresses</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
 							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
-							<!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
 
 						</div>
 					</div>
@@ -96,8 +114,7 @@
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
-					</li>
+						class="nav-link " href="listAll.html">找作品</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
@@ -114,87 +131,128 @@
 		</div>
 	</nav>
 	<!-- end main header navbar -->
-	<!-- breadcrumb -->
-	<div class="container header-mt">
-		<div class="row">
-			<div class="col-12">
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb custom-breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-						<li class="breadcrumb-item active" aria-current="page">會員登入/註冊</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
+
+	<!-- header slider -->
+	<div class="container">
+		<div class="slider-area hero-header"></div>
 	</div>
-	<!-- end breadcrumb -->
+	<!-- end header slider -->
 	<!-- main content -->
-	<div class="main-content pb-80">
+	<div class="main-content pt-50 pb-80">
 		<div class="container">
+			<!-- toolbox -->
 			<div class="row">
-				<div class="col-lg-6 col-md-8 col-12 mx-auto ">
-					<div class="custom-form custom-form--box sing-up">
-
-						<%-- 錯誤表列 --%>
-						<c:if test="${not empty errorMsgs}">
-							<div class="mb-3">
-								<ul class="list-unstyled mt-2">
-									<li class="card-header">請修正以下錯誤
-										<ul>
-											<c:forEach var="message" items="${errorMsgs}">
-												<li class="form-text" style="color: red">${message}</li>
-											</c:forEach>
-										</ul>
-									</li>
-								</ul>
+				<div class="col-12">
+					<div class="shop-toolbox">
+						<div class="col-12">
+							<h2 class="main-title wow fadeIn">最新作品</h2>
+						</div>
+						<!-- <div class="toolbox-sort">
+							<form>
+								<div class="form-group">
+									<select class="form-control" id="sortOption">
+										<option selected>Sort by</option>
+										<option>Newest</option>
+										<option>Best sellers</option>
+										<option>Lowest price</option>
+										<option>Highest price</option>
+									</select>
+								</div>
+							</form>
+						</div> -->
+					</div>
+				</div>
+			</div>
+			<!-- end toolbox -->
+			<!-- product list -->
+			<div class="row">
+				<c:forEach var="portfolioVO" items="${list}">
+					<div class="col-lg-4 col-md-6">
+						<div class="blog-post blog-post--grid">
+							<div class="blog-post__img">
+								<div class="blog-post__img--overlay"></div>
+								<form method="post" action="PortfolioListOne">
+									<img
+										src="<%=request.getContextPath()%>/PortfolioPic1?portfolioNo=${ portfolioVO.portfolioNo}"
+										alt="">
+									<button type="submit" class="btn blog-post__btn">Read
+										more</button>
+									<input type="submit" class="account-file-input" hidden /> <input
+										type="hidden" name="portfolioNo"
+										value="${portfolioVO.portfolioNo}"> <input
+										type="hidden" name="action" value="portfolio_GetOne">
+								</form>
 							</div>
-						</c:if>
-						<%-- /錯誤表列 --%>
-
-						<h3 class="custom-form__title">登入</h3>
-						<form action="MemberLoginServlet" method="post">
-							<div class="form-group custom-form__input">
-								<label for="inputEmail">Email 信箱</label> <input type="email"
-									class="form-control ltr" id="inputEmail" placeholder=""
-									name="email">
-							</div>
-							<div class="form-group custom-form__input">
-								<label for="password">密碼</label>
-								<div class="input-box password-box">
-									<input type="password" class="form-control ltr" id="password"
-										placeholder="" name="password">
-									<div class="input-box__icon">
-										<span class="showhidepassword"><i
-											class="far fa-eye-slash"></i></span>
-									</div>
+							<div class="blog-post__inner">
+								<div class="blog-post__inner--title">
+									<h4>${portfolioVO.portfolioName}</h4>
+								</div>
+								<div class="blog-post__inner--details">
+									<span class="author">${portfolioVO.designerVO.designerName}</span>
+									<span class="date"><fmt:formatDate
+											pattern="yyyy-MM-dd HH:mm:ss"
+											value="${portfolioVO.createTime}" /></span>
 								</div>
 							</div>
-							<div class="forgot-pass">
-								<a href="resetpass.html">忘記密碼？</a>
-							</div>
-							
-								<div class="custom-form__btn">
-									<button type="submit" class="btn submit-btn">會員登入</button>
-									<input type="hidden" name="action" value="memberLogin">
-								</div>
-							
-
-							<div class="custom-form__footer">
-								<!-- form footer -->
-								<div class="custom-form__footer--link">
-									<h6>尚未註冊</h6>
-										<div class="custom-form__footer--link">
-											<a href="./member/signup.html" class="btn ">註冊會員</a>
-										</div>
-								</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		<!-- pagination -->
+		<!-- <div class="row">
+			<div class="col-12">
+				<div class="shop-pagination">
+					<nav aria-label="Page navigation">
+						<ul class="pagination custom-pagination">
+							<li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#"><i
+									class="fas fa-chevron-right"></i></a></li>
+						</ul>
+					</nav>
+					<span class="result"> Showing 1-8 of 12 result </span>
+				</div>
+			</div>
+		</div> -->
+		<!-- end pagination -->
+	</div>
+	<!-- end main content -->
+	<!-- Modal search content -->
+	<div class="modal fade modal-search" id="searchModal" tabindex="-1"
+		aria-labelledby="searchModal" aria-hidden="true">
+		<div class="modal-dialog search1" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<ul class="category">
+							<li class="category-option active"><a href="#"
+								class="product-cat">All</a></li>
+							<li class="category-option"><a href="#" class="product-cat">Bedroom</a>
+							</li>
+							<li class="category-option"><a href="#" class="product-cat">Dining</a>
+							</li>
+							<li class="category-option"><a href="#" class="product-cat">Living
+									room</a></li>
+						</ul>
+						<form class="search-form form-row" role="search">
+							<div class="form-group col-12">
+								<input type="search" class="form-control" placeholder="Search">
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-
 		</div>
-
+	</div>
+	<!-- end Modal search content -->
 	</div>
 	<!-- end main content -->
 	<!-- footer -->
@@ -239,6 +297,9 @@
 		</div>
 	</footer>
 	<!-- end footer -->
+	<!-- scroll up btn -->
+	<a id="back-to-top"></a>
+	<!-- end scroll up btn -->
 	<!-- loader -->
 	<div class="loader">
 		<div class="spinner">
@@ -247,7 +308,6 @@
 		</div>
 	</div>
 	<!-- end loader -->
-
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>

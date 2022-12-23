@@ -288,7 +288,141 @@ public class PortfolioDAO implements PortfolioDAO_interface{
 				}
 			}
 		}
+		return list;
+	}
+	
+	private static final String GET_ALL_BYDESIGNER = 
+			"select portfolioNo, portfolioName, designerNo, portfolioPic1, portfolioPic2, portfolioPic3, portfolioPic4, description, createTime, modificationTime, houseAge, houseSize, houseArea from Portfolio where designerNo = ? order by portfolioNo;";
+	
+	public List<PortfolioVO> getAllbyDesign(Integer designerNo) {
+		List<PortfolioVO> list = new ArrayList<PortfolioVO>();
+		PortfolioVO portfolioVO = null;
 		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BYDESIGNER);
+			pstmt.setInt(1, designerNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				portfolioVO = new PortfolioVO();
+				portfolioVO.setPortfolioNo(rs.getInt("portfolioNo"));
+				portfolioVO.setPortfolioName(rs.getString("portfolioName"));
+				portfolioVO.setDesignerNo(rs.getInt("designerNo"));
+				portfolioVO.setPortfolioPic1(rs.getBytes("portfolioPic1"));
+				portfolioVO.setPortfolioPic2(rs.getBytes("portfolioPic2"));
+				portfolioVO.setPortfolioPic3(rs.getBytes("portfolioPic3"));
+				portfolioVO.setPortfolioPic4(rs.getBytes("portfolioPic4"));
+				portfolioVO.setDescription(rs.getString("description"));
+				portfolioVO.setCreateTime(rs.getTimestamp("createTime"));
+				portfolioVO.setModificationTime(rs.getTimestamp("modificationTime"));
+				portfolioVO.setHouseAge(rs.getString("houseAge"));
+				portfolioVO.setHouseSize(rs.getString("houseSize"));
+				portfolioVO.setHouseArea(rs.getString("houseArea"));
+				list.add(portfolioVO);
+				
+			}
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
+	private static final String GET_ALL_MATCH = 
+			"select portfolioNo, portfolioName, designerNo, portfolioPic1, portfolioPic2, portfolioPic3, portfolioPic4, description, createTime, modificationTime, houseAge, houseSize, houseArea from Portfolio where portfolioName like ? order by portfolioNo;";
+	
+	public List<PortfolioVO> selectMatch(String select) {
+		List<PortfolioVO> list = new ArrayList<PortfolioVO>();
+		PortfolioVO portfolioVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_MATCH);
+			pstmt.setString(1, select);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				portfolioVO = new PortfolioVO();
+				portfolioVO.setPortfolioNo(rs.getInt("portfolioNo"));
+				portfolioVO.setPortfolioName(rs.getString("portfolioName"));
+				portfolioVO.setDesignerNo(rs.getInt("designerNo"));
+				portfolioVO.setPortfolioPic1(rs.getBytes("portfolioPic1"));
+				portfolioVO.setPortfolioPic2(rs.getBytes("portfolioPic2"));
+				portfolioVO.setPortfolioPic3(rs.getBytes("portfolioPic3"));
+				portfolioVO.setPortfolioPic4(rs.getBytes("portfolioPic4"));
+				portfolioVO.setDescription(rs.getString("description"));
+				portfolioVO.setCreateTime(rs.getTimestamp("createTime"));
+				portfolioVO.setModificationTime(rs.getTimestamp("modificationTime"));
+				portfolioVO.setHouseAge(rs.getString("houseAge"));
+				portfolioVO.setHouseSize(rs.getString("houseSize"));
+				portfolioVO.setHouseArea(rs.getString("houseArea"));
+				list.add(portfolioVO);
+				
+			}
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 		return list;
 	}
 

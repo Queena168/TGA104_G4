@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.admin.model.AdminDAO;
+import com.designer.model.DesignerJNDIDAO;
+import com.designer.model.DesignerVO;
+import com.designer.service.DesignerService;
 import com.member.model.MemberDAO;
 import com.member.model.MemberVO;
 
@@ -27,7 +30,7 @@ public class MemberLoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-
+		
 		List<String> errorMsgs = new LinkedList<String>();
 		// Store this set in the request scope, in case we need to
 		// send the ErrorPage view.
@@ -80,13 +83,9 @@ public class MemberLoginServlet extends HttpServlet {
 				session.setAttribute("memberVO", memberVO); // 在session內做已經登入過的標識
 				res.sendRedirect(req.getContextPath()+"/front-end/member/index.jsp"); // 成功登入index.jsp
 			}
-			
-			
-			
-			
 		}
 		
-
+		
 	}
 
 }

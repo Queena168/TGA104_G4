@@ -121,7 +121,7 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb custom-breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-						<li class="breadcrumb-item active" aria-current="page">會員登入/註冊</li>
+						<li class="breadcrumb-item active" aria-current="page">設計師登入/註冊</li>
 					</ol>
 				</nav>
 			</div>
@@ -152,11 +152,11 @@
 						<%-- /錯誤表列 --%>
 
 						<h3 class="custom-form__title">登入</h3>
-						<form action="MemberLoginServlet" method="post">
+						<form action="Login" method="post">
 							<div class="form-group custom-form__input">
 								<label for="inputEmail">Email 信箱</label> <input type="email"
 									class="form-control ltr" id="inputEmail" placeholder=""
-									name="email">
+									name="account">
 							</div>
 							<div class="form-group custom-form__input">
 								<label for="password">密碼</label>
@@ -174,8 +174,8 @@
 							</div>
 							
 								<div class="custom-form__btn">
-									<button type="submit" class="btn submit-btn">會員登入</button>
-									<input type="hidden" name="action" value="memberLogin">
+									<button type="submit" class="btn submit-btn">設計師登入</button>
+									<input type="hidden" name="login" value="designerlogin">
 								</div>
 							
 
@@ -184,7 +184,7 @@
 								<div class="custom-form__footer--link">
 									<h6>尚未註冊</h6>
 										<div class="custom-form__footer--link">
-											<a href="./member/signup.html" class="btn ">註冊會員</a>
+											<a href="" class="btn ">註冊設計師</a>
 										</div>
 								</div>
 							</div>

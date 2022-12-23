@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.portfolio.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+
+%>
 
 
 <!DOCTYPE html>
@@ -16,6 +20,8 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel='stylesheet' href='../css/fontawesome.min.css'>
+<script src="https://kit.fontawesome.com/6a35b80892.js"
+	crossorigin="anonymous"></script>
 <!-- Animate -->
 <link href="../css/animate.css" rel="stylesheet">
 <!-- Owl Carousel -->
@@ -29,7 +35,18 @@
 <link rel="stylesheet" href="../css/nice-select.min.css">
 <!-- Main Styles -->
 <link rel="stylesheet" href="../scss/main.css">
-<link rel="stylesheet" href="../scss/main.css">
+<!-- Boxicon -->
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
+<!-- Core CSS -->
+<link rel="stylesheet" href="/back-end/assets/vendor/css/core.css"
+	class="template-customizer-core-css" />
+
+<!-- <link rel='stylesheet'
+	href='https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css'> -->
+<link rel="stylesheet" href="../css/portfoliotable.css">
+
 </head>
 
 <body>
@@ -37,7 +54,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light custom-navbar"
 		id="mainMenu">
 		<div class="container">
-			<a class="navbar-brand" href="../index.html"> <img
+			<a class="navbar-brand" href="index.jsp"> <img
 				src="../images/MatDesignLogo.png" alt="">
 			</a>
 			<!--  navbar actions -->
@@ -49,25 +66,34 @@
 							<!-- login form wrapper -->
 
 							<div class="account-wrapper__content">
-								<form class="custom-form">
-									<div class="custom-form__btn">
-										<a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
-										<a class="dropdown-item nav-link"
-											href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
+								<div class="custom-form__btn custom-form__input">
+									<div class="account-wrapper__heading">
+										<span class="dropdown-item">${designerVO.designerAccount}</span>
+										<%-- <span
+											class="account-wrapper__heading--link">${memberVO.memberName}
+										</span> --%>
 									</div>
+								</div>
+								<div class="account-wrapper__content">
+									<div class="form-group custom-form__input">
+										<a class="dropdown-item " href="memberPorfile.jsp"> <span><i
+												class="icon-user-profile"></i></span>設計師資料
+										</a>
+									</div>
+									<div class="form-group custom-form__input">
+										<a class="dropdown-item  " href="../index.html"><span><i
+												class="icon-log-out"></i></span>登出</a>
+									</div>
+								</div>
 
-								</form>
 							</div>
 							<!-- account links when user is logged in-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
-							<!--                            class="icon-user-profile"></i></span>Profile</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
 							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
 							<!--                            class="icon-sign"></i></span>Addresses</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
 							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
-							<!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
 
 						</div>
 					</div>
@@ -101,7 +127,7 @@
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="#">商城</a></li>
+						class="nav-link " href="./product/productListAll.html">商城</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">論壇</a></li>
 					<!-- <li class="nav-item main-navbar__item dropdown">
@@ -120,8 +146,9 @@
 			<div class="col-12">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb custom-breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-						<li class="breadcrumb-item active" aria-current="page">會員登入/註冊</li>
+						<li class="breadcrumb-item"><a href="index.jsp">首頁</a></li>
+						<li class="breadcrumb-item"><a href="designerPorfile.jsp">作品管理</a></li>
+						<li class="breadcrumb-item active" aria-current="page">${portfolioUpdate.portfolioName}</li>
 					</ol>
 				</nav>
 			</div>
@@ -129,74 +156,108 @@
 	</div>
 	<!-- end breadcrumb -->
 	<!-- main content -->
-	<div class="main-content pb-80">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-8 col-12 mx-auto ">
-					<div class="custom-form custom-form--box sing-up">
-
-						<%-- 錯誤表列 --%>
-						<c:if test="${not empty errorMsgs}">
-							<div class="mb-3">
-								<ul class="list-unstyled mt-2">
-									<li class="card-header">請修正以下錯誤
-										<ul>
-											<c:forEach var="message" items="${errorMsgs}">
-												<li class="form-text" style="color: red">${message}</li>
-											</c:forEach>
-										</ul>
-									</li>
-								</ul>
+	<div class="container">
+		<div class="col-xxl">
+			<div class="card mb-4">
+				<div
+					class="card-header d-flex align-items-center justify-content-between">
+					<h5 class="mb-0">作品編輯</h5>
+				</div>
+				<div class="card-body">
+					<form method="post" action="UpdatedPortfolio" enctype="multipart/form-data">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-default-name">作品名稱</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="basic-default-name"
+									name="portfolioName" value="${portfolioUpdate.portfolioName}" />
 							</div>
-						</c:if>
-						<%-- /錯誤表列 --%>
-
-						<h3 class="custom-form__title">登入</h3>
-						<form action="MemberLoginServlet" method="post">
-							<div class="form-group custom-form__input">
-								<label for="inputEmail">Email 信箱</label> <input type="email"
-									class="form-control ltr" id="inputEmail" placeholder=""
-									name="email">
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="houseArea">房屋區域</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="houseArea"
+									name="houseArea" value="${portfolioUpdate.houseArea}" />
 							</div>
-							<div class="form-group custom-form__input">
-								<label for="password">密碼</label>
-								<div class="input-box password-box">
-									<input type="password" class="form-control ltr" id="password"
-										placeholder="" name="password">
-									<div class="input-box__icon">
-										<span class="showhidepassword"><i
-											class="far fa-eye-slash"></i></span>
-									</div>
-								</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="houseAge">屋齡</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="houseAge"
+									name="houseAge" value="${portfolioUpdate.houseAge}" />
 							</div>
-							<div class="forgot-pass">
-								<a href="resetpass.html">忘記密碼？</a>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="houseSize">坪數</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="houseSize"
+									name="houseSize" value="${portfolioUpdate.houseSize}" />
 							</div>
-							
-								<div class="custom-form__btn">
-									<button type="submit" class="btn submit-btn">會員登入</button>
-									<input type="hidden" name="action" value="memberLogin">
-								</div>
-							
-
-							<div class="custom-form__footer">
-								<!-- form footer -->
-								<div class="custom-form__footer--link">
-									<h6>尚未註冊</h6>
-										<div class="custom-form__footer--link">
-											<a href="./member/signup.html" class="btn ">註冊會員</a>
-										</div>
-								</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-default-phone">Phone
+								No</label>
+							<div class="col-sm-10">
+								<input type="text" id="basic-default-phone"
+									class="form-control phone-mask" placeholder="658 799 8941"
+									aria-label="658 799 8941"
+									aria-describedby="basic-default-phone" />
 							</div>
-						</form>
-					</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="description">作品內文</label>
+							<div class="col-sm-10">
+								<textarea id="description" class="form-control"
+									name="description" rows="8"
+									aria-describedby="basic-icon-default-message2">${portfolioUpdate.description}</textarea>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="formFile " class=" col-sm-2 col-form-label">圖片1</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="file"
+								id="formFile" name="portfolioPic1" accept="image/png, image/jpeg"/>
+							</div> 
+							<div class="col-sm-10">
+								<img src="<%=request.getContextPath()%>/PortfolioPic1?portfolioNo=${portfolioUpdate.portfolioNo}"
+								height="20%" width="20%" alt="">
+							</div> 
+						</div>
+						<div class="row mb-3">
+							<label for="portfolioPic2 " class=" col-sm-2 col-form-label">圖片2</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="file"
+								id="portfolioPic2" name="portfolioPic2" accept="image/png, image/jpeg"/>
+							</div> 
+						</div>
+						<div class="row mb-3">
+							<label for="portfolioPic3 " class=" col-sm-2 col-form-label">圖片3</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="file"
+								id="portfolioPic3" name="portfolioPic3" accept="image/png, image/jpeg"/>
+							</div> 
+						</div>
+						<div class="row mb-3">
+							<label for="portfolioPic4 " class=" col-sm-2 col-form-label">圖片4</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="file"
+								id="portfolioPic4" name="portfolioPic4" accept="image/png, image/jpeg"/>
+							</div> 
+						</div>
+						<div class="row justify-content-end">
+							<!-- <div class="col-sm-10"> -->
+								<button type="submit" class="btn btn-primary">送出</button>
+								<input type="hidden" name="action" value="update"> 
+								<input type="hidden" name="portfolioNo"
+										value="${portfolioUpdate.portfolioNo}" />
+								<input type="hidden" name="designerNo"
+										value="${portfolioUpdate.designerNo}" />
+							<!-- </div> -->
+						</div>
+					</form>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
-	<!-- end main content -->
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
@@ -239,6 +300,9 @@
 		</div>
 	</footer>
 	<!-- end footer -->
+	<!-- scroll up btn -->
+	<a id="back-to-top"></a>
+	<!-- end scroll up btn -->
 	<!-- loader -->
 	<div class="loader">
 		<div class="spinner">
@@ -247,7 +311,6 @@
 		</div>
 	</div>
 	<!-- end loader -->
-
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -271,7 +334,9 @@
 	<script type="text/javascript" src="../js/wow.min.js"></script>
 	<!-- custom js -->
 	<script type="text/javascript" src="../js/custom.js"></script>
+	<!-- table js -->
 
+	<script src="../js/portfoliotable.js"></script>
 
 </body>
 </html>

@@ -36,7 +36,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light custom-navbar"
 		id="mainMenu">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"> <img
+			<a class="navbar-brand" href="../index.html"> <img
 				src="../images/MatDesignLogo.png" alt="">
 			</a>
 			<!--  navbar actions -->
@@ -49,21 +49,27 @@
 
 							<div class="account-wrapper__content">
 								<div class="custom-form__btn custom-form__input">
-									<div class="account-wrapper__heading dropdown-item">
-										<span>${memberVO.memberAccount}</span> <span
-											class="account-wrapper__heading--link dropdown-item">${memberVO.memberName}
-										</span>
+									<div class="account-wrapper__heading">
+										<span>${designerVO.designerAccount}</span> 
+										<%-- <span
+											class="account-wrapper__heading--link">${designerVO.memberName}
+										</span> --%>
 									</div>
 								</div>
 								<div class="account-wrapper__content">
 									<div class="form-group custom-form__input">
-										<a class="dropdown-item "
-											href="memberPorfile.jsp">
-										<span><i class="icon-user-profile"></i></span>會員資料</a>
+										<!-- <a class="dropdown-item "
+											href="designerPorfile.jsp"> -->
+										<form method="post" action="PortfolioByNo">	
+											<button class="btn"><div><i class="icon-user-profile"></i>設計師資料</div> </button>
+											<input type="hidden" name="designerNo" value="${designerVO.designerNo}"> 
+											<input type="hidden" name="action" value="portfolio_GetByNo">
+										</form>
 									</div>
 									<div class="form-group custom-form__input">
-										<a class="dropdown-item  "
-										href="../index.html"><span><i class="icon-log-out"></i></span>登出</a>
+										<form method="post" action="../index.html">	
+											<button class="btn"><div><i class="icon-user-profile"></i>登出</div> </button>
+										</form>
 									</div>
 								</div>
 
@@ -103,7 +109,7 @@
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
+						class="nav-link " href="memFindPortfolio.jsp">找作品</a>
 					</li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
