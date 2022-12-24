@@ -133,7 +133,7 @@
             </span>
 
         </div>
-        <form method="post" id="form" class="postform" action="forumpost.do">
+        <form id="form" class="postform">
             <input id="posting_title" type="text" placeholder="請輸入標題" name="title" value="${forumPostVO.title}"
                 size="50">標題請勿超過50個字
             <br>

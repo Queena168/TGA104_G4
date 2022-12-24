@@ -32,6 +32,7 @@ h1 {
 /* ########################################### */
 .forum_container {
 	margin: 74px 10px 10px 10px;
+	padding-left: 1%;
 }
 
 .subforum {
@@ -47,7 +48,7 @@ h1 {
 
 .subforum-row {
 	display: grid;
-	grid-template-columns: 10% 51% 15% 25% 10%;
+	grid-template-columns: 10% 51% 15% 25%;
 }
 
 .subforum-column {
@@ -80,23 +81,30 @@ h1 {
 	display: none;
 }
 
+.search_div {
+	height: 40px;
+}
+
 .form {
 	float: right;
+	margin-right: 3%;
+	margin-top: 5px;
 }
 
 .main {
-	display: inline-block;
+	display: block;
 	width: 80%;
+	float: left;
 }
 
 .hot {
-	display: inline-block;
-	width: 15%;
+	display: block;
+	width: 16%;
 	background-color: #fff3e7;
 	border-radius: 5px;
-	vertical-align: top;
-	margin: 5px 0px 0px 18px;
-	padding: 5px 5px 5px 5px;
+	margin: 4px 0px 0px 18px;
+	padding: 10px 5px 5px 5px;
+	float: left;
 }
 
 /* For the smartphones */
@@ -351,14 +359,9 @@ h1 {
 	display: flex;
 }
 
-.table-row .status,
-.table-row .subjects,
-.table-row .replies,
-.table-row .last-reply,
-.table-row .searchstatus,
-.table-row .searchsubjects,
-.table-row .searchcontent,
-.table-row .searchbelong {
+.table-row .status, .table-row .subjects, .table-row .replies,
+	.table-row .last-reply, .table-row .searchstatus, .table-row .searchsubjects,
+	.table-row .searchcontent, .table-row .searchbelong {
 	padding: 5px;
 	margin: 2px;
 	background-color: #fff3e7;
@@ -396,6 +399,7 @@ h1 {
 
 .table-row .searchsubjects {
 	flex: 20%;
+	padding-top: 6%;
 }
 
 .table-row .searchcontent {
@@ -526,7 +530,11 @@ h1 {
 
 .newpost_btn {
 	float: right;
-    margin-top: 10px;
+	margin-top: 10px;
+}
+
+#posting_title{
+	margin: 5px 5px 5px 3%;
 }
 
 /* comment section */
@@ -555,7 +563,7 @@ h1 {
 }
 
 #post_title {
-	margin-left: 3%;
+	margin: 5px 5px 5px 3%;
 }
 
 .postform {
@@ -582,8 +590,7 @@ h1 {
 	width: 60%;
 }
 
-.modal-content h2,
-.modal-content p {
+.modal-content h2, .modal-content p {
 	margin: 0 0 20px;
 	font-weight: 400;
 	color: #999;
@@ -602,8 +609,7 @@ h1 {
 	background: #eee;
 }
 
-.modal-content input,
-.modal-content textarea {
+.modal-content input, .modal-content textarea {
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 20px;
@@ -629,8 +635,7 @@ h1 {
 	margin-right: 5px;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;

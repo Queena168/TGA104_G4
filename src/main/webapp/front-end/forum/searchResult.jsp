@@ -160,7 +160,7 @@
                                     <span class="searchcontent">本文因違反論壇規定，已被管理員下架</span>
                                 </c:when>
                                 <c:otherwise>
-                                    <div class="searchcontent AutoSkip" style="height:200px">
+                                    <div class="searchcontent" style="height:200px; overflow-x:auto">
                                         ${forumPostVO.content}
                                     </div>
                                 </c:otherwise>

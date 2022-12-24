@@ -26,10 +26,14 @@ public class AdminForumAll extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 
 		ForumPostService forumPostService = new ForumPostService();
 		ForumReplyService forumReplyService = new ForumReplyService();
+
 		String listname = request.getParameter("listname");
+		// 從query string 取得 listname
+
 		List forumVOList = new ArrayList<>();
 		try {
 			if (listname.equals("post")) {
@@ -39,11 +43,13 @@ public class AdminForumAll extends HttpServlet {
 			}
 		} catch (NullPointerException e) {
 			forumVOList = forumPostService.getAll();
-			listname = "post";
+			listname = "post"; // 第一次進來無query string，設定listname = "post";
 		}
 		request.setAttribute("forumVOList", forumVOList);
 		request.setAttribute("listname", listname);
+		// 將取得的VOList & listname 存入attribute
 
+		// =====資料分頁=====
 		int page;
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -60,6 +66,8 @@ public class AdminForumAll extends HttpServlet {
 		} else {
 			request.setAttribute("totalPage", 1);
 		}
+		// 宣告每頁5筆資料，從query string得到page，呼叫分頁方法pagination()，傳入參數為1.要分頁的list 2.目前頁數page
+		// 3.每頁幾筆資料，得到陣列[0]=該分頁內資料起始索引，陣列[1]=總頁數，存入attribute
 
 		RequestDispatcher successView = request.getRequestDispatcher(
 				"/back-end/forum/Admin-Forum-ForumList.jsp?page=" + page + "&listname=" + listname);

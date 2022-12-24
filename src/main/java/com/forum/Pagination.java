@@ -5,7 +5,7 @@ import java.util.List;
 public class Pagination {
 
 	public static int[] pagination(List list, int page, int rowsPerPage) {
-		
+
 		int[] paging = new int[2];
 		int totalPages; // 總頁數
 		if (list.size() % rowsPerPage != 0) {
@@ -23,7 +23,7 @@ public class Pagination {
 
 		paging[0] = pageStart;
 		paging[1] = totalPages;
-		
+
 		return paging;
 	}
 }

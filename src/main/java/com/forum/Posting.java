@@ -24,6 +24,7 @@ public class Posting extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 
 		Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
 		// 從query string取得topicNo

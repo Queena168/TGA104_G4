@@ -17,7 +17,7 @@ import com.forum_topic.model.ForumTopicVO;
 
 @WebServlet("/back-end/forum/adminTopic.do")
 public class AdminForumTopic extends HttpServlet {
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
@@ -27,16 +27,18 @@ public class AdminForumTopic extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
+		response.setContentType("text/html; charset=UTF-8");
+
 		ForumTopicService forumTopicService = new ForumTopicService();
 		List<ForumTopicVO> forumTopicVOList = forumTopicService.getAll();
 		request.setAttribute("forumTopicVOList", forumTopicVOList);
 		// 取得所有討論區TopicVO，存入attribute
-		
+
 		AdminService adminService = new AdminService();
 		List<AdminVO> adminVOList = adminService.getAll();
 		request.setAttribute("adminVOList", adminVOList);
-		
+		// 取得所有管理員AdminVO，存入attribute
+
 		RequestDispatcher successView = request.getRequestDispatcher("/back-end/forum/Admin-Forum-ForumMaintain.jsp");
 		successView.forward(request, response);
 	}

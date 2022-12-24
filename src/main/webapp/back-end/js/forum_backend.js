@@ -1,9 +1,10 @@
-// 檢舉管理 & 所有文章列表
+
+//檢舉管理 & 所有文章列表
 document.querySelectorAll(".openButton").forEach(function(btn) {
 	btn.addEventListener("click", function() {
 		var popupwindow = document.getElementsByClassName("pop");
-		for (var index = 0; index < popupwindow.length; index++) {
-			popupwindow[index].setAttribute("style", "display:none");
+		for (var i = 0; i < popupwindow.length; i++) {
+			popupwindow[i].setAttribute("style", "display:none");
 		}
 		this.nextElementSibling.style.display = "block"
 	});
@@ -17,10 +18,18 @@ document.querySelectorAll(".close_btn").forEach(function(btn) {
 
 document.querySelectorAll(".review_btn").forEach(function(btn) {
 	btn.addEventListener("click", function() {
-		if (this.parentElement.firstElementChild.value == "") {
-			alert("請選擇處理方式");
-		} else {
-			this.parentElement.parentElement.firstElementChild.submit();
-		}
+		$.ajax({
+			type: "POST",
+			url: "forumreport.do",
+			data: $("#review_form").serialize(),
+			dataType: "JSON",
+			success: function(data) {
+				if ("error" in data) {
+					alert(data.error);
+				} else {
+					window.location.href = data.success;
+				}
+			},
+		});
 	});
 });

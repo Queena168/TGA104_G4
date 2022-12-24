@@ -17,19 +17,35 @@ document.querySelectorAll(".show_update").forEach(function(btn) {
 });
 
 document.querySelector("#add_submit").addEventListener("click", function() {
-	if (document.getElementById("add_topic_name").value == "") {
-		alert("請輸入標題")
-	} else {
-		document.getElementById("add_topic_form").submit();
-		alert("新增討論區成功");
-	}
+	$.ajax({
+		type: "POST",
+		url: "forumtopic.do",
+		data: $("#add_topic_form").serialize(),
+		dataType: "JSON",
+		success: function(data) {
+			if ("error" in data) {
+				alert(data.error);
+			} else {
+				alert("新增討論區成功");
+				window.location.href = data.success;
+			}
+		},
+	});
 });
 
 document.querySelector("#update_submit").addEventListener("click", function() {
-	if (document.getElementById("update_topic_name").value == "") {
-		alert("請輸入標題")
-	} else {
-		document.getElementById("update_topic_form").submit();
-		alert("修改討論區成功");
-	}
+	$.ajax({
+		type: "POST",
+		url: "forumtopic.do",
+		data: $("#update_topic_form").serialize(),
+		dataType: "JSON",
+		success: function(data) {
+			if ("error" in data) {
+				alert(data.error);
+			} else {
+				alert("修改討論區成功");
+				window.location.href = data.success;
+			}
+		},
+	});
 });

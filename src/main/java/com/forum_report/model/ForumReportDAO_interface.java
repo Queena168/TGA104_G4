@@ -11,6 +11,6 @@ public interface ForumReportDAO_interface {
 	public void updateByReplyNo(ForumReportVO forumReportVO);
 	
 	public List<ForumReportVO> findByReportStatus(String reportStatus);
-	
+
 	public List<ForumReportVO> getAll();
 }

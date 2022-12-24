@@ -17,8 +17,6 @@ import com.forum_reply.model.ForumReplyVO;
 import com.forum_topic.model.ForumTopicService;
 import com.forum_topic.model.ForumTopicVO;
 
-import redis.clients.jedis.Jedis;
-
 @WebServlet("/front-end/forum/posts.do")
 public class Post extends HttpServlet {
 
@@ -31,6 +29,7 @@ public class Post extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 
 		Integer postNo = Integer.valueOf(request.getParameter("postNo"));
 		Integer topicNo = Integer.valueOf(request.getParameter("topicNo"));
@@ -52,12 +51,10 @@ public class Post extends HttpServlet {
 		request.setAttribute("forumReplyVOList", forumReplyVOList);
 		// 以postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的所有回應ReplyVO，存入attribute
 
-		Jedis jedis = new Jedis("localhost", 6379);
-		jedis.zincrby("viewZset", 1, postNo.toString());
-		request.setAttribute("view", (jedis.zscore("viewZset", postNo.toString()).intValue()));
+		ForumJedis jedis = new ForumJedis();
+		jedis.setZset(request.getParameter("postNo"));
+		request.setAttribute("view", jedis.getZset(request.getParameter("postNo")));
 		jedis.close();
-		// 用Redis zset紀錄瀏覽次數，key為"viewZset"，member為postNo，score為瀏覽次數，每次進入頁面score自動增加1
-		// 再取出該member的score存入attribute
 
 		// =====資料分頁=====
 		int page;
@@ -76,7 +73,7 @@ public class Post extends HttpServlet {
 		} else {
 			request.setAttribute("totalPage", 1);
 		}
-		// 宣告每頁10筆資料，從query string得到page，呼叫分頁方法pagination()，傳入參數為1.要分頁的list 2.目前頁數page
+		// 宣告每頁5筆資料，從query string得到page，呼叫分頁方法pagination()，傳入參數為1.要分頁的list 2.目前頁數page
 		// 3.每頁幾筆資料，得到陣列[0]=該分頁內資料起始索引，陣列[1]=總頁數，存入attribute
 
 		RequestDispatcher successView = request.getRequestDispatcher("/front-end/forum/posts.jsp");

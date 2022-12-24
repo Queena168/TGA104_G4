@@ -375,13 +375,14 @@
                         <c:choose>
                           <c:when test="${forumReportVOList.reportStatus!='已處理'}">
                             <td>
-                              <form action="forumreport.do" method="post"><select name="reviewResult">
+                              <form id="review_form" method="post"><select name="reviewResult">
                                   <option value="">請選擇
                                   <option value="未違規">未違規
                                   <option value="下架">下架
                                 </select>
                                 <input type="hidden" name="action" value="update">
-                                <input type="hidden" name="reviewer" value="2">
+                                <input type="hidden" name="reviewer" value="1">
+<%--                                 記得換成${adminVO.adminNo} --%>
                                 <input type="hidden" name="postNo" value="${forumReportVOList.postNo}">
                                 <input type="hidden" name="replyNo" value="${forumReportVOList.replyNo}">
                                 <input type="hidden" name="listname" value="${listname}">

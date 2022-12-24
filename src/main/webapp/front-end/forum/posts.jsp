@@ -293,9 +293,10 @@
 			</c:when>
 			<c:otherwise>
 				<h2 id="mode" style="color:red; display:none">您現在是修改模式</h2>
-				<form method="post" id="submitform" action="forumreply.do">
+				<form id="submitform">
+				<span id="limit" style="display:none">
 					<input type="hidden" id="post_title" name="title" value="${forumPostVO.title}" size="50">
-					<span id="limit" style="display:none">標題請勿超過50個字</span>
+					 標題請勿超過50個字</span>
 					<div class="comment-area" id="reply-area">
 						<textarea name="content" id="summernote"></textarea>
 						<input id="submit_btn" type="button" value="送出">
@@ -316,7 +317,7 @@
 			<div class="modal-content" id="modal-content">
 				<div class="contact-form">
 					<a class="close">&times;</a>
-					<form method="post" id="report_form" action="forumreport.do">
+					<form id="report_form">
 						<h3>檢舉</h3>
 						<div>
 							<input type="hidden" name="topicNo" value="${param.topicNo}">
@@ -326,7 +327,7 @@
 							<input type="hidden" name="action" value="insertReport">
 							<input type="hidden" name="page" value="${param.page}">
 						</div>
-						<span>檢舉原因</span>
+						<span>檢舉原因(請勿超過50字)</span>
 						<div>
 							<textarea rows="4" id="reason" name="reportReason"></textarea>
 						</div>

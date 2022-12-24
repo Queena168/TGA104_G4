@@ -122,14 +122,13 @@
 
     <!-- ForumTopics Start -->
     <div class="forum_container">
-        <div>
+        <div class="search_div" >
             <form method="post" id="form" class="form" action="forumpost.do">
                 <input type="text" name="keyword" placeholder="搜尋論壇發文">
                 <input type="hidden" name="action" value="search">
                 <button type="button" onclick="search()">確認</button>
             </form>
         </div>
-
         <div class="main">
             <c:forEach var="forumTopicVO" items="${forumTopicVOList}" varStatus="status">
                 <%--從forumIndex.do傳來的forumTopicVOList--%>
@@ -167,7 +166,7 @@
                     <a href="posts.do?topicNo=${hot.topicNo}&postNo=${hot.postNo}&page=1">${hot.title}</a><br><br>
             </c:forEach> <%--從forumIndex.do傳來的viewList，相同的index--%>
         </div>
-    </div>
+       </div>
     <!-- ForumTopics End -->
 
     <!-- footer -->

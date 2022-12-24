@@ -101,7 +101,7 @@ public class ForumReportVO {
 	public void setPostContent(String postContent) {
 		this.postContent = postContent;
 	}
-	
+
 	public String getReplyContent() {
 		return replyContent;
 	}

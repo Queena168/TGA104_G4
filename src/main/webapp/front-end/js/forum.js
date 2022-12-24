@@ -9,18 +9,18 @@ function search() {
 
 //posting.jsp submit button
 function add() {
-	let content = $('#summernote').summernote('code');
-	let title = document.getElementById("posting_title").value;
-	if ((content == "<p><br></p>" && title == "") || (content == "" && title == "")) {
-		alert("請輸入標題及文章內容");
-	} else if (content == "<p><br></p>" || content == "") {
-		alert("請輸入文章內容");
-	} else if (title == "") {
-		alert("請輸入標題")
-	} else if (title.length > 50) {
-		alert("標題請勿超過50個字")
-	} else {
-		document.querySelector("#form").submit();
-		alert("新增成功");
-	}
+	$.ajax({
+		type: "POST",
+		url: "forumpost.do",
+		data: $("#form").serialize(),
+		dataType: "JSON",
+		success: function(data) {
+			if ("error" in data) {
+				alert(data.error);
+			} else {
+				alert("新增成功");
+				window.location.href = data.success;
+			}
+		},
+	});
 }

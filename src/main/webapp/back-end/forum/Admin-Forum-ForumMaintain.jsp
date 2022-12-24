@@ -344,11 +344,11 @@
             <hr class="my-5" />
             <div class="col-md-6" id="add_topic_div" style="display:none">
               <div class="card mb-4">
-                <form action="forumtopic.do" method="post" id="add_topic_form">
+                <form id="add_topic_form">
                   <div class="card-body demo-vertical-spacing demo-only-element">
                     <h3>新增討論區</h3>
                     <div>
-                      請輸入新討論區名稱
+                      請輸入新討論區名稱(名稱請勿超過20字)
                       <div class="input-group">
                         <input id="add_topic_name" type="text" class="form-control" name="topicName" />
                       </div>
@@ -372,12 +372,12 @@
 
             <div class="col-md-6" id="update_topic_div" style="display:none">
               <div class="card mb-4">
-                <form action="forumtopic.do" method="post" id="update_topic_form">
+                <form id="update_topic_form">
                   <div class="card-body demo-vertical-spacing demo-only-element">
                     <h3>修改討論區</h3>
                     <input id=update_topic_no type="hidden" name="topicNo" value="">
                     <div>
-                      請輸入新討論區名稱
+                      請輸入新討論區名稱(名稱請勿超過20字)
                       <div class="input-group">
                         <input id="update_topic_name" type="text" class="form-control" name="topicName" value="">
                       </div>
