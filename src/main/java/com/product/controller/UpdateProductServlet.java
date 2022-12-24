@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.product.model.ProductService;
 import com.product.model.ProductVO;
+import com.producttype.model.ProductTypeVO;
 
 /**
  * Servlet implementation class UpdateProductServlet
@@ -103,7 +104,8 @@ public class UpdateProductServlet extends HttpServlet {
 			ProductService productSvc = new ProductService();
 			productVO = productSvc.updateProduct(productNo, productTypeNo, productName, stock, price,
 					productDescription, productStatus, adminNo);
-
+			List<ProductVO> list = productSvc.getAll();
+			req.setAttribute("list", list);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("productVO", productVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/back-end/product/listAllProduct.jsp";

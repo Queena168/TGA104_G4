@@ -3,12 +3,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.producttype.model.*"%>
 
-<%
-ProductTypeService productTypeService = new ProductTypeService();
-List<ProductTypeVO> list = productTypeService.getAll();
-pageContext.setAttribute("list", list);
-%>
-
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"

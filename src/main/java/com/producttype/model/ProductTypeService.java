@@ -29,9 +29,6 @@ public class ProductTypeService {
 		return productTypeVO;
 	}
 	
-	public void deleteProductType(Integer productTypeNo) {
-		dao.delete(productTypeNo);
-	}
 	
 	public ProductTypeVO getOneProductType(Integer productTypeNo) {
 		return dao.findByPrimaryKey(productTypeNo);

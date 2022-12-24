@@ -18,7 +18,6 @@ List<Map<String, Object>> list = shopProductService.getAll();
 pageContext.setAttribute("list", list);
 
 
-
 ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
 if(cart_list != null){
 	request.setAttribute("cart_list", cart_list);
@@ -206,7 +205,7 @@ th, td {
 <%-- 							<a href="<%=request.getContextPath()%>/OrderNowServlet?quantity=1&id=${shopProductVO.productNo}" class="btn btn-primary">直接購買</a> --%>
 <!-- 							<input class="btn btn-dark" type="submit" name="Submit" value="加入購物車"> -->
 <!-- 							<input class="btn btn-primary" type="submit" name="Submit" value="直接購買"> -->
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>

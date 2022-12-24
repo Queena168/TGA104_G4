@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.producttype.model.*"%>
 
-<%
-ProductTypeVO productTypeVO = (ProductTypeVO) request.getAttribute("productTypeVO");
-%>
 
 <!DOCTYPE html>
 
@@ -16,7 +13,7 @@ ProductTypeVO productTypeVO = (ProductTypeVO) request.getAttribute("productTypeV
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign Admin</title>
+<title>MatDesign addProductType</title>
 
 <meta name="description" content="" />
 
@@ -329,8 +326,7 @@ ProductTypeVO productTypeVO = (ProductTypeVO) request.getAttribute("productTypeV
 			<label for="#" class="form-label">商品類別名稱:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="productTypeName" placeholder="Enter email"
-				value="<%=(productTypeVO == null) ? "新增" : productTypeVO.getProductTypeName()%>" />
+				name="productTypeName" placeholder="輸入商品類別名稱"/>
 		</div>
 		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
 		<input type="hidden" name="action" value="insertProductType"> <input

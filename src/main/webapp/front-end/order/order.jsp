@@ -13,19 +13,6 @@ if(auth!=null){
 }
 
 %>
-
-<%
-ShopProduct shopProduct = (ShopProduct) request.getAttribute("shopProduct");
-
-Cart cart = (Cart) request.getAttribute("cart");
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
-List<Cart> cartProduct = null;
-if(cart_list != null){
-	ShopProductService shopProductService = new ShopProductService();
-	cartProduct = shopProductService.getCartProducts(cart_list);
-	request.setAttribute("cart_list", cart_list);
-}
-%>
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

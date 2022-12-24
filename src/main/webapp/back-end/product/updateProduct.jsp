@@ -1,11 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@ page import="com.productpic.model.*"%> --%>
 <%@ page import="com.product.model.*"%>
-
-<%
-  ProductVO productVO = (ProductVO) request.getAttribute("productVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
 
 <html>
 <head>
@@ -69,40 +64,43 @@
 <FORM METHOD="post" ACTION="/TGA104_G4/UpdateProductServlet" name="form1">
 <table>
 
-    <tr>
+    <tr>		
 		<td>商品編號:<font color=red><b>*</b></font></td>
-		<td><%=productVO.getProductNo()%></td>
+		<td><input type="hidden" name="productTypeNo" value ="${productVO.productNo}" size="45" readonly="readonly"/>
+		${productVO.productNo}
+		</td>
 	</tr>
 
 	<tr>
 		<td>商品類別編號:</td>
-		<td><input type="TEXT" name="productTypeNo" size="45" value="<%=productVO.getProductTypeNo()%>" /></td>
+		<td><input type="TEXT" name="productTypeNo" size="45" value="${productVO.productTypeNo}" /></td>
 	</tr>
 	
 	<tr>
 		<td>商品名稱:</td>
-		<td><input type="TEXT" name="productName" size="45" value="<%=productVO.getProductName()%>" /></td>
+		<td><input type="TEXT" name="productName" size="45" value="${productVO.productName}" /></td>
 	</tr>
 	
 	<tr>
 		<td>商品庫存量:</td>
-		<td><input type="TEXT" name="stock" size="45" value="<%=productVO.getStock()%>" /></td>
+		<td><input type="TEXT" name="stock" size="45" value="${productVO.stock}" /></td>
 	</tr>
 	<tr>
 		<td>商品單價:</td>
-		<td><input type="TEXT" name="price" size="45" value="<%=productVO.getPrice()%>" /></td>
+		<td><input type="TEXT" name="price" size="45" value="${productVO.price}" /></td>
 	</tr>
 	<tr>
 		<td>商品描述:</td>
-		<td><input type="TEXT" name="productDescription" size="45" value="<%=productVO.getProductDescription()%>" /></td>
+		<td><input type="TEXT" name="productDescription" size="45" value="${productVO.productDescription}" /></td>
 	</tr>
 	<tr>
 		<td>商品狀態:</td>
-		<td><input type="TEXT" name="productStatus" size="45" value="<%=productVO.getProductStatus()%>" /></td>
+		<td><input type="TEXT" name="productStatus" size="45" value="${productVO.productStatus}" /></td>
 	</tr>
 	<tr>
 		<td>管理員編號:</td>
-		<td><input type="TEXT" name="adminNo" size="45" value="<%=productVO.getAdminNo()%>" /></td>
+		<td><input type="hidden" name="adminNo" value ="${productVO.adminNo}" size="45" readonly="readonly"/>
+		${productVO.adminNo}
 	</tr>
 
 
@@ -110,7 +108,7 @@
 </table>
 <br>
 <input type="hidden" name="action" value="updateProduct">
-<input type="hidden" name="productNo" value="<%=productVO.getProductNo()%>">
+<input type="hidden" name="productNo" value="${productVO.productNo}">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

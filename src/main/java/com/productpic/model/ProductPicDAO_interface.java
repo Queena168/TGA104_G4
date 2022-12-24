@@ -6,7 +6,6 @@ import java.util.Map;
 public interface ProductPicDAO_interface {
 	public void insert(ProductPicVO productPicVO);
 	public void update(ProductPicVO productPicVO);
-    public void delete(Integer productPicNo);
     public ProductPicVO findByPrimaryKey(Integer productPicNo);
     public List<ProductPicVO> getAll();
     

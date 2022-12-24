@@ -30,6 +30,7 @@ if(cart_list != null){
 <%
 ProductOrderVO productOrderVO = (ProductOrderVO) request.getAttribute("productOrderVO");
 %>
+
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

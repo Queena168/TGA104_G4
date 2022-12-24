@@ -14,12 +14,12 @@ import com.productorder.model.ProductOrderJDBCDAO;
 import com.productorder.model.ProductOrderVO;
 import com.productorderdetail.model.ProductOrderDetailVO;
 
-//@WebServlet("/OrderDetailServlet")
+@WebServlet("/front-end/order/OrderDetailServlet")
 public class OrderDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("text/html; charset=utf-8");
+		res.setContentType("text/css; charset=utf-8");
 		req.setCharacterEncoding("UTF-8");
 		try(PrintWriter out = res.getWriter()){
 			Integer orderNo = Integer.valueOf(req.getParameter("id"));
@@ -27,7 +27,7 @@ public class OrderDetailServlet extends HttpServlet {
 				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 				List<ProductOrderDetailVO> list = productOrderJDBCDAO.findOrdersById(orderNo);
 				req.setAttribute("ordersDetail", list);
-				req.getRequestDispatcher("front-end/order/showOrderDetail.jsp").forward(req, res);
+				req.getRequestDispatcher("/front-end/order/showOrderDetail.jsp").forward(req, res);
 //				for (ProductOrderDetailVO aProductOrderVO : list) {
 //					out.print(aProductOrderVO.getOrderNo() + ",");
 //					out.print(aProductOrderVO.getProductNo() + ",");

@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.product.model.ProductService;
 import com.product.model.ProductVO;
+import com.producttype.model.ProductTypeVO;
 
-@WebServlet("/AddProductServlet")
+@WebServlet("/back-end/product/AddProductServlet")
 public class AddProductServlet extends HttpServlet {
 	
 private static final long serialVersionUID = 1L;
@@ -83,7 +84,9 @@ private static final long serialVersionUID = 1L;
 			ProductService productSvc = new ProductService();
 			productVO = productSvc.addProduct(productTypeNo, productName, stock, price, productDescription,
 					productStatus, adminNo);
-
+			
+			List<ProductVO> list = productSvc.getAll();
+			req.setAttribute("list", list);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/back-end/product/listAllProduct.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp

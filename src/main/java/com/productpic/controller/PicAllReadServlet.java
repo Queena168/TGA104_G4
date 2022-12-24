@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PicAllReadServlet extends HttpServlet {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/matdesign?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
@@ -46,7 +46,7 @@ public class PicAllReadServlet extends HttpServlet {
 			
 				Statement stmt = con.createStatement();
 				String id = req.getParameter("productPicNo").trim();
-				System.out.println("id = " + id);
+//				System.out.println("id = " + id);
 				ResultSet rs = stmt.executeQuery("select pic from ProductPic where productPicNo=" + id);
 				if (rs.next()) {
 					byte[] b =rs.getBytes("pic");

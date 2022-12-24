@@ -4,16 +4,6 @@
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productpic.model.*"%>
 
-<%
-ProductPicService productPicService = new ProductPicService();
-    
-    List<Map<String, Object>> list = productPicService.listAllProduct();
-    pageContext.setAttribute("list",list);
-%>
-<%
-  ProductPicVO productPicVO = (ProductPicVO) request.getAttribute("productPicVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
-
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
@@ -311,10 +301,6 @@ ProductPicService productPicService = new ProductPicService();
 				</nav>
 
 				<!-- / Navbar -->
-<a href='http://localhost:8080/TGA104_G4/back-end/producttype/listAllProductType.jsp'>顯示所有商品類別</a><br>
-<a href='http://localhost:8080/TGA104_G4/back-end/product/listAllProduct.jsp'>顯示所有商品</a><br>
-<a href='http://localhost:8080/TGA104_G4/back-end/productpic/listAllPic.jsp'>顯示所有商品圖片</a>
-
 <!-- Content wrapper -->
 	<div class="content-wrapper">
 		<!-- Content -->
@@ -360,6 +346,9 @@ ProductPicService productPicService = new ProductPicService();
 							</c:forEach>
 						</tbody>
 					</table>
+							<a href='<%=request.getContextPath()%>/back-end/producttype/SelectAllProductType'>顯示所有商品類別</a><br>
+							<a href='<%=request.getContextPath()%>/back-end/product/SelectAllProduct'>顯示所有商品</a><br>
+							<a href='<%=request.getContextPath()%>/back-end/productpic/SelectAllPic'>顯示所有商品圖片</a>
 				</div>
 			</div>
 			</div>

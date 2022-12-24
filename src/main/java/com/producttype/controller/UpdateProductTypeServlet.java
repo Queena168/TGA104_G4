@@ -57,7 +57,7 @@ public class UpdateProductTypeServlet extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("productTypeVO ", productTypeVO); // 含有輸入格式錯誤的productTypeVO物件,也存入req
+				req.setAttribute("productTypeVO", productTypeVO); // 含有輸入格式錯誤的productTypeVO物件,也存入req
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/producttype/updateProductType.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
@@ -66,7 +66,9 @@ public class UpdateProductTypeServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 *****************************************/
 			ProductTypeService productTypeSvc = new ProductTypeService();
 			productTypeVO = productTypeSvc.updateProductType(productTypeNo, productTypeName);
-
+			
+			List<ProductTypeVO> list = productTypeSvc.getAll();
+			req.setAttribute("list", list);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("productTypeVO", productTypeVO); // 資料庫update成功後,正確的productTypeVO物件,存入req
 			String url = "/back-end/producttype/listAllProductType.jsp";

@@ -8,13 +8,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import com.producttype.model.ProductTypeVO;
+
 
 
 public class CartJDBCDAO implements CartDAO_interface{
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/matdesign?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO Cart (memberNo, productNo, qty) VALUES (?, ?, ?)";
@@ -29,261 +41,87 @@ public class CartJDBCDAO implements CartDAO_interface{
 		
 		@Override
 		public void insert(CartVO cartVO) {
-
-			Connection con = null;
-			PreparedStatement pstmt = null;
-
-			try {
-
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
-				pstmt = con.prepareStatement(INSERT_STMT);
-
+			
+			try (Connection connection = dataSource.getConnection();
+					PreparedStatement pstmt = connection.prepareStatement(INSERT_STMT)) {
 				pstmt.setInt(1, cartVO.getMemberNo());
 				pstmt.setInt(2, cartVO.getProductNo());
 				pstmt.setInt(3, cartVO.getQty());
-
-
-				pstmt.executeUpdate();
-
-				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-				// Clean up JDBC resources
-			} finally {
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}
-
 		}
 
 		@Override
 		public void update(CartVO cartVO) {
-
-			Connection con = null;
-			PreparedStatement pstmt = null;
-
-			try {
-
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
-				pstmt = con.prepareStatement(UPDATE);
-
+			
+			try (Connection connection = dataSource.getConnection();
+					PreparedStatement pstmt = connection.prepareStatement(UPDATE)) {
 				pstmt.setInt(1, cartVO.getMemberNo());
 				pstmt.setInt(2, cartVO.getProductNo());
 				pstmt.setInt(3, cartVO.getQty());
 				pstmt.setInt(4, cartVO.getCartNo());
-				pstmt.executeUpdate();
-
-				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-				// Clean up JDBC resources
-			} finally {
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}
-
 		}
 
 		@Override
 		public void delete(Integer cartNo) {
 
-			Connection con = null;
-			PreparedStatement pstmt = null;
-
-			try {
-
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
-				pstmt = con.prepareStatement(DELETE);
-
+			try (Connection connection = dataSource.getConnection();
+					PreparedStatement pstmt = connection.prepareStatement(DELETE)) {
 				pstmt.setInt(1, cartNo);
-				pstmt.executeUpdate();
-
-				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-				// Clean up JDBC resources
-			} finally {
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}
-
 		}
 
 		@Override    
 		public CartVO findByPrimaryKey(Integer cartNo) {
 
 			CartVO cartVO = null;
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-
-			try {
-
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
-				pstmt = con.prepareStatement(GET_ONE_STMT);
-
+			
+			try (Connection connection = dataSource.getConnection();
+					PreparedStatement pstmt = connection.prepareStatement(GET_ONE_STMT)) {
 				pstmt.setInt(1, cartNo);
-
-				rs = pstmt.executeQuery();
-
-				while (rs.next()) {
-					// empVo 也稱為 Domain objects
-					cartVO = new CartVO();
-					cartVO.setCartNo(rs.getInt("cartNo"));
-					cartVO.setMemberNo(rs.getInt("memberNo"));
-					cartVO.setProductNo(rs.getInt("productNo"));
-					cartVO.setQty(rs.getInt("qty"));
-				}
-				
-				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-				// Clean up JDBC resources
-			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
+					ResultSet rs = pstmt.executeQuery();
+					while (rs.next()) {
+						cartVO = new CartVO();
+						cartVO.setCartNo(rs.getInt("cartNo"));
+						cartVO.setMemberNo(rs.getInt("memberNo"));
+						cartVO.setProductNo(rs.getInt("productNo"));
+						cartVO.setQty(rs.getInt("qty"));
 					}
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}
-			return cartVO;
+			    return cartVO;
 		}
 
 		@Override
 		public List<CartVO> getAll() {
 			List<CartVO> list = new ArrayList<CartVO>();
 			CartVO cartVO = null;
-
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-
-			try {
-
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
-				pstmt = con.prepareStatement(GET_ALL_STMT);
-				rs = pstmt.executeQuery();
-
-				while (rs.next()) {
-					// empVO 也稱為 Domain objects
-					cartVO = new CartVO();
-					cartVO.setCartNo(rs.getInt("cartNo"));
-					cartVO.setMemberNo(rs.getInt("memberNo"));
-					cartVO.setProductNo(rs.getInt("productNo"));
-					cartVO.setQty(rs.getInt("qty"));
-					list.add(cartVO); // Store the row in the list
-				}
-
-				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-				// Clean up JDBC resources
-			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
+			
+			try (Connection connection = dataSource.getConnection();
+					PreparedStatement pstmt = connection.prepareStatement(GET_ALL_STMT)) {
+					ResultSet rs = pstmt.executeQuery();
+					while (rs.next()) {
+						cartVO = new CartVO();
+						cartVO.setCartNo(rs.getInt("cartNo"));
+						cartVO.setMemberNo(rs.getInt("memberNo"));
+						cartVO.setProductNo(rs.getInt("productNo"));
+						cartVO.setQty(rs.getInt("qty"));
+						list.add(cartVO); // Store the row in the list
 					}
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}
-			return list;
+				return list;
 		}
 
 		public static void main(String[] args) {
