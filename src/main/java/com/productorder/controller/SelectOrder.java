@@ -28,6 +28,7 @@ public class SelectOrder extends HttpServlet {
 			req.setAttribute("auth", auth);
 //		     orders = new ProductOrderJDBCDAO().useOrders(auth.getUserNo());
 			   orders = new ProductOrderJDBCDAO().userOrders(auth.getUserNo());
+			   req.setAttribute("orders", orders);
 			   String url = "/front-end/order/order.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);

@@ -27,7 +27,7 @@ public class OrderDetailServlet extends HttpServlet {
 				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 				List<ProductOrderDetailVO> list = productOrderJDBCDAO.findOrdersById(orderNo);
 				req.setAttribute("ordersDetail", list);
-				req.getRequestDispatcher("/front-end/order/showOrderDetail.jsp").forward(req, res);
+				req.getRequestDispatcher("/ShowFinalDetail").forward(req, res);
 //				for (ProductOrderDetailVO aProductOrderVO : list) {
 //					out.print(aProductOrderVO.getOrderNo() + ",");
 //					out.print(aProductOrderVO.getProductNo() + ",");
