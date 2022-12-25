@@ -55,4 +55,9 @@ public class MemberService {
 	public List<MemberVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public Boolean accountUsed (String memberAccount) {
+		MemberDAO dao = new MemberDAO();
+		return dao.accountUsed(memberAccount);
+	}
 }

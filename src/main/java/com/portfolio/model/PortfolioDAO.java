@@ -425,5 +425,5 @@ public class PortfolioDAO implements PortfolioDAO_interface{
 		}
 		return list;
 	}
-
+	
 }

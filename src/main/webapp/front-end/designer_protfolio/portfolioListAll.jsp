@@ -266,8 +266,6 @@
 													<div class="col-md-6">
 														<input type="text" class="form-control ltr"
 															id="oldPassInput" placeholder="" name="portfolioName">
-														<input type="hidden" name="action"
-															value="inputPortfolioName_For_Display">
 													</div>
 													<div class="col-md-6 profile-address__card--footer select"
 														style="padding-top: 0px;">
@@ -275,25 +273,24 @@
 															value="inputPortfolioName_For_Display">
 														<button type="submit" class="btn btn-blue"
 															style="margin-top: 0">送出</button>
-														<!-- <input type="hidden" name="action"
-														value="inputPortfolioName_For_Display"> -->
-
 													</div>
 												</div>
 											</div>
 										</form>
 										<jsp:useBean id="portfolioSelectSvc" scope="page"
 											class="com.portfolio.model.PortfolioService" />
-										<form class="change-pass">
+										<form class="change-pass" method="post"
+											action="PortfolioListOne">
 											<div class="form-group custom-form__input"
 												style="padding-bottom: 0px;">
 												<label for="oldPassInput">選擇作品名稱</label>
 												<div class="input-box row">
 													<div class="col-md-6">
-														<select class="form-control ltr" id="oldPassInput">
-															<c:forEach var="portfolioVO"
-																items="${portfolioSelectSvc.all}">
-																<option value="${portfolioVO.portfolioNo}">${portfolioVO.portfolioName}
+														<select class="form-control ltr" id="oldPassInput"
+															name="portfolioNo">
+															<c:forEach var="portfolioListByNo"
+																items="${portfolioListByNo}">
+																<option value="${portfolioListByNo.portfolioNo}">${portfolioListByNo.portfolioName}
 															</c:forEach>
 														</select>
 													</div>
@@ -301,27 +298,8 @@
 														style="padding-top: 0px;">
 														<button type="submit" class="btn btn-blue"
 															style="margin-top: 0">送出</button>
-
-													</div>
-												</div>
-											</div>
-										</form>
-										<form class="change-pass">
-											<div class="form-group custom-form__input ">
-												<label for="oldPassInput">選擇作品房屋區域</label>
-												<div class="input-box row">
-													<div class="col-md-6">
-														<select class="form-control ltr" id="oldPassInput">
-															<c:forEach var="portfolioVO"
-																items="${portfolioSelectSvc.all}">
-																<option value="${portfolioVO.portfolioNo}">${portfolioVO.houseArea}
-															</c:forEach>
-														</select>
-													</div>
-													<div class="col-md-6 profile-address__card--footer"
-														style="padding-top: 0px;">
-														<button type="submit" class="btn btn-blue"
-															style="margin-top: 0">送出</button>
+														<input type="hidden" name="action"
+															value="portfolio_GetOne">
 													</div>
 												</div>
 											</div>

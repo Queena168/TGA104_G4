@@ -39,7 +39,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light custom-navbar"
 		id="mainMenu">
 		<div class="container">
-			<a class="navbar-brand" href="index.html"> <img
+			<a class="navbar-brand" href="index.jsp"> <img
 				src="../images/MatDesignLogo.png" alt="">
 			</a>
 			<!--  navbar actions -->
@@ -149,18 +149,16 @@
 							data-toggle="pill" href="#v-pills-profile" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>會員資料
-						</a> 
-						<a class="nav-link" id="v-pills-order-tab" data-toggle="pill"
+						</a> <a class="nav-link" id="v-pills-order-tab" data-toggle="pill"
 							href="#v-pills-productorder" role="tab"
 							aria-controls="v-pills-order" aria-selected="false"> <span><i
 								class='bx bx-shopping-bag'></i></span>商品訂單
-						</a> 
-						<a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
+						</a> <a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
 							href="#v-pills-designorder" role="tab"
 							aria-controls="v-pills-wishlist" aria-selected="false"> <span><i
 								class='bx bx-file'></i></span>合約案件
 						</a>
-						<form method="post"
+						<%-- <form method="post"
 									action="<%=request.getContextPath()%>/front-end/chat/intochatServlet"> 
 							<label class="nav-link profile-info__action">
 							
@@ -170,7 +168,7 @@
 								<button type="submit" class="btn"></button>
 							
 							</label>
-						</form> 
+						</form>  --%>
 						<a class="nav-link" href="../index.html" role="tab"
 							aria-selected="false"> <span><i class="icon-log-out"></i></span>登出
 						</a>
@@ -187,22 +185,35 @@
 									<div class="profile-info profile-info--main">
 										<div class="profile-info__row">
 											<div class="profile-info__col">
-												<span class="content"><span>Full name:</span> <span>John
-														Doe</span> </span>
+												<span class="content"> <span>會員帳號</span> <span>${memberVO.memberAccount}</span>
+												</span>
 											</div>
 											<div class="profile-info__col">
-												<span class="content"><span>Email Address:</span><span
-													class="profile-info__col--value ltr">Sample@sample.com</span></span>
+												<span class="content"> <span>會員名稱</span> <span
+													class="profile-info__col--value ltr">${memberVO.memberName}</span>
+												</span>
 											</div>
 										</div>
 										<div class="profile-info__row">
 											<div class="profile-info__col">
-												<span class="content"><span>Phone:</span> <span
-													class="profile-info__col--value">917-353-7335</span> </span>
+												<span class="content"> <span>暱稱</span> <span
+													class="profile-info__col--value">${memberVO.nickName}</span>
+												</span>
 											</div>
 											<div class="profile-info__col">
-												<span class="content"><span>Username:</span> <span>John
-														Doe</span> </span>
+												<span class="content"> <span>性別</span> <span>${memberVO.gender}</span>
+												</span>
+											</div>
+										</div>
+										<div class="profile-info__row">
+											<div class="profile-info__col">
+												<span class="content"> <span>生日</span> <span
+													class="profile-info__col--value">${memberVO.birthDate}</span>
+												</span>
+											</div>
+											<div class="profile-info__col">
+												<span class="content"> <span>會員頭貼</span> <span></span>
+												</span>
 											</div>
 										</div>
 										<div class="profile-info__action">
@@ -262,7 +273,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- Modal edit profile -->
+							<!-- edit profile -->
 							<div class="modal fade profile-info__modal" id="editProfileModal"
 								tabindex="-1" role="dialog"
 								aria-labelledby="editProfileModalTitle" aria-hidden="true">
@@ -278,7 +289,7 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form class="custom-form">
+											<!-- <form class="custom-form">
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group custom-form__input">
@@ -308,7 +319,45 @@
 														</div>
 													</div>
 												</div>
-											</form>
+											</form> -->
+											<div class="card-body">
+												<form>
+													<div class="mb-3">
+														<label class="form-label" for="basic-default-fullname">Full
+															Name</label> <input type="text" class="form-control"
+															id="basic-default-fullname" placeholder="John Doe" />
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="basic-default-company">Company</label>
+														<input type="text" class="form-control"
+															id="basic-default-company" placeholder="ACME Inc." />
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="basic-default-email">Email</label>
+														<div class="input-group input-group-merge">
+															<input type="text" id="basic-default-email"
+																class="form-control" placeholder="john.doe"
+																aria-label="john.doe"
+																aria-describedby="basic-default-email2" />
+															<span class="input-group-text" id="basic-default-email2">@example.com</span>
+														</div>
+														<div class="form-text">You can use letters, numbers
+															& periods</div>
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="basic-default-phone">Phone
+															No</label> <input type="text" id="basic-default-phone"
+															class="form-control phone-mask"
+															placeholder="658 799 8941" />
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="basic-default-message">Message</label>
+														<textarea id="basic-default-message" class="form-control"
+															placeholder="Hi, Do you have a moment to talk Joe?"></textarea>
+													</div>
+													
+												</form>
+											</div>
 										</div>
 										<div class="modal-footer custom-form__btn">
 											<button type="button" class="btn btn-close"
@@ -319,7 +368,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- end Modal edit profile -->
+							<!-- end edit profile -->
 						</div>
 						<!-- orders tab -->
 						<div class="tab-pane fade" id="v-pills-productorder"
@@ -641,14 +690,7 @@
 	<!-- scroll up btn -->
 	<a id="back-to-top"></a>
 	<!-- end scroll up btn -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
+
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>

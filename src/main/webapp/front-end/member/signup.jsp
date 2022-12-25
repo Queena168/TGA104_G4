@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.portfolio.model.*"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
-
-%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +15,6 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel='stylesheet' href='../css/fontawesome.min.css'>
-<script src="https://kit.fontawesome.com/6a35b80892.js"
-	crossorigin="anonymous"></script>
 <!-- Animate -->
 <link href="../css/animate.css" rel="stylesheet">
 <!-- Owl Carousel -->
@@ -35,18 +28,6 @@
 <link rel="stylesheet" href="../css/nice-select.min.css">
 <!-- Main Styles -->
 <link rel="stylesheet" href="../scss/main.css">
-<!-- Boxicon -->
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-	rel='stylesheet'>
-<!-- Core CSS -->
-<link rel="stylesheet" href="/back-end/assets/vendor/css/core.css"
-	class="template-customizer-core-css" />
-
-<!-- <link rel='stylesheet'
-	href='https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css'> -->
-<link rel="stylesheet" href="../css/portfoliotable.css">
-
 </head>
 
 <body>
@@ -54,7 +35,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light custom-navbar"
 		id="mainMenu">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"> <img
+			<a class="navbar-brand" href="../index.html"> <img
 				src="../images/MatDesignLogo.png" alt="">
 			</a>
 			<!--  navbar actions -->
@@ -66,34 +47,28 @@
 							<!-- login form wrapper -->
 
 							<div class="account-wrapper__content">
-								<div class="custom-form__btn custom-form__input">
-									<div class="account-wrapper__heading">
-										<span class="dropdown-item">${designerVO.designerAccount}</span>
-										<%-- <span
-											class="account-wrapper__heading--link">${memberVO.memberName}
-										</span> --%>
+								<form class="custom-form">
+									<div class="custom-form__btn">
+										<a href="">
+											<button type="submit" class="btn submit-btn">Login</button>
 									</div>
-								</div>
-								<div class="account-wrapper__content">
-									<div class="form-group custom-form__input">
-										<a class="dropdown-item " href="memberPorfile.jsp"> <span><i
-												class="icon-user-profile"></i></span>設計師資料
-										</a>
+									<div class="form-group custom-form__input"></div>
+									<div class="custom-form__btn">
+										<a href=""></a>
+										<button type="submit" class="btn submit-btn">Login</button>
 									</div>
-									<div class="form-group custom-form__input">
-										<a class="dropdown-item  " href="../index.html"><span><i
-												class="icon-log-out"></i></span>登出</a>
-									</div>
-								</div>
-
+								</form>
 							</div>
 							<!-- account links when user is logged in-->
+							<!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
+							<!--                            class="icon-user-profile"></i></span>Profile</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
 							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
 							<!--                            class="icon-sign"></i></span>Addresses</a>-->
 							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
 							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
+							<!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
 
 						</div>
 					</div>
@@ -122,12 +97,12 @@
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
+						class="nav-link " href="../designer_protfolio/listAll.html">找作品</a>
 					</li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./product/productListAll.html">商城</a></li>
+						class="nav-link " href="#">商城</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">論壇</a></li>
 					<!-- <li class="nav-item main-navbar__item dropdown">
@@ -146,9 +121,8 @@
 			<div class="col-12">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb custom-breadcrumb">
-						<li class="breadcrumb-item"><a href="index.jsp">首頁</a></li>
-						<li class="breadcrumb-item"><a href="designerPorfile.jsp">作品管理</a></li>
-						<li class="breadcrumb-item active" aria-current="page">${portfolioUpdate.portfolioName}</li>
+						<li class="breadcrumb-item"><a href="../index.html">首頁</a></li>
+						<li class="breadcrumb-item active" aria-current="page">會員註冊</li>
 					</ol>
 				</nav>
 			</div>
@@ -158,106 +132,135 @@
 	<!-- main content -->
 	<div class="main-content pb-80">
 		<div class="container">
-			<div>
-				<form class="comments__form" method="POST" action="UpdatedPortfolio"
-					enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-lg-6 col-md-8 col-12 mx-auto">
+					<div class="custom-form custom-form--box">
+						<h3 class="custom-form__title">會員註冊</h3>
 
-					<!-- single blog posts -->
-					<div class="col-lg-9 col-md-8 single-post">
-
-						<h4 class="single-post__title">
-							<label for="portfolioName">作品名稱</label>
-						</h4>
-						<input type="text" class="form-control" id="portfolioName"
-							name="portfolioName" value="${portfolioUpdate.portfolioName}">
-						<br>
-						<div class="single-post__body">
-							<label for="description">作品內文</label>
-							<textarea class="form-control" id="description" rows="10"
-								placeholder="" name="description">${portfolioUpdate.description}</textarea>
-						</div>
-						<br>
-						<div class="single-post__body">
-							<h4>房屋資訊</h4>
-							<label for="houseArea">房屋區域</label> <input type="text"
-								class="form-control" id="houseArea" name="houseArea"
-								value="${portfolioUpdate.houseArea}"> <label
-								for="houseAge">屋齡</label> <input type="text"
-								class="form-control" id="houseAge" name="houseAge"
-								value="${portfolioUpdate.houseAge}"> <label
-								for="houseSize">坪數</label> <input type="text"
-								class="form-control" id="houseSize" name="houseSize"
-								value="${portfolioUpdate.houseSize}">
-						</div>
-						<%-- <div class="single-post__footer">
-							<div class="post-details">
-								<span class="author">Post by: <a href="#">${portfolioUpdate.designerVO.designerName}</a></span>
-								<br> <span class="author">發布時間<fmt:formatDate
-										pattern="yyyy-MM-dd HH:mm:ss"
-										value="${portfolioUpdate.createTime}" /></span> <span>最新修改時間<fmt:formatDate
-										pattern="yyyy-MM-dd HH:mm:ss"
-										value="${portfolioUpdate.modificationTime}" /></span>
+						<%-- 錯誤表列 --%>
+						<c:if test="${not empty errorMsgs}">
+							<div class="mb-3">
+								<ul class="list-unstyled mt-2">
+									<li class="">
+										<ul>
+											<c:forEach var="message" items="${errorMsgs}">
+												<li class="form-text" style="color: red">${message}</li>
+											</c:forEach>
+										</ul>
+									</li>
+								</ul>
 							</div>
-						</div> --%>
-						<!-- end single blog post -->
-						<!-- product image gallery -->
-						<br>
-						
-							
-							<%-- <label for="portfolioPic1">作品圖片1</label> 
-							<img
-								src="<%=request.getContextPath()%>/PortfolioPic1?portfolioNo=${portfolioUpdate.portfolioNo}"
-								height="50%" width="50%" alt=""> 
-								<input type="file"
-								id="portfolioPic1" name="portfolioPic1"
-								value="${portfolioUpdate.portfolioPic1}"
-								accept="image/png, image/jpeg" /> 
-							
-							
-							<label for="portfolioPic2">作品圖片2</label>
-							<img
-								src="<%=request.getContextPath()%>/PortfolioPic2?portfolioNo=${portfolioUpdate.portfolioNo}"
-								height="50%" width="50%" alt=""> 
-								<input type="file"
-								id="portfolioPic2" name="portfolioPic2"
-								value="${portfolioUpdate.portfolioPic2}"
-								accept="image/png, image/jpeg" /> 
-							
-							<label for="portfolioPic3">作品圖片3</label>
-							<img
-								src="<%=request.getContextPath()%>/PortfolioPic3?portfolioNo=${portfolioUpdate.portfolioNo}"
-								height="50%" width="50%" alt=""> 
-								<input type="file"
-								id="portfolioPic3" name="portfolioPic3"
-								value="${portfolioUpdate.portfolioPic3}"
-								accept="image/png, image/jpeg" /> 
-							
-							
-							<label for="portfolioPic4">作品圖片4</label>
-							<img
-								src="<%=request.getContextPath()%>/PortfolioPic4?portfolioNo=${portfolioUpdate.portfolioNo}"
-								height="50%" width="50%" alt=""> 
-								<input type="file"
-								id="portfolioPic4" name="portfolioPic4"
-								value="${portfolioUpdate.portfolioPic4}"
-								accept="image/png, image/jpeg" /> --%>
-							
-						
-						<!-- blog post comments -->
-						<!--  comments -->
-								<div class="col-12 comments__form--btn">
-									<button type="submit" class="btn submit-btn">送出</button>
-									<input type="hidden" name="action" value="update"> <input
-										type="hidden" name="portfolioNo"
-										value="${portfolioUpdate.portfolioNo}" />
+						</c:if>
+						<%-- /錯誤表列 --%>
+
+						<form method="post" action="MemberSignup">
+							<div class="form-group custom-form__input">
+								<label for="memberAccount">會員帳號(信箱)</label> <input type="email"
+									required="required" class="form-control" id="memberAccount"
+									placeholder="" name="memberAccount">
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="memberPassword">密碼</label>
+								<div class="input-box password-box">
+									<input type="password" class="form-control ltr"
+										required="required" id="memberPassword" placeholder=""
+										name="memberPassword">
+									<div class="input-box__icon">
+										<span class="showhidepassword"><i
+											class="far fa-eye-slash"></i></span>
+									</div>
 								</div>
-						<!--  end comments -->
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="confirmedPassword">確認密碼</label>
+								<div class="input-box password-box">
+									<input type="password" class="form-control ltr"
+										required="required" id="confirmedPassword" placeholder=""
+										name="confirmedPassword">
+									<div class="input-box__icon">
+										<span class="showhidepassword"><i
+											class="far fa-eye-slash"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="memberName">會員名稱</label> <input type=text
+									required="required" class="form-control ltr" id="memberName"
+									placeholder="" name="memberName">
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="nickName">會員暱稱</label> <input type=text
+									required="required" class="form-control ltr" id="nickName"
+									placeholder="" name="nickName">
+							</div>
+							<div class="form-group custom-form__input">
+								<label>會員性別</label>
+								<div class="row">
+									<div class="col-md">
+										<div class="form-check form-check-inline mt-3">
+											<input class="form-check-input" type="radio" name="gender"
+												id="inlineRadio1" value="男性" /> <label
+												class="form-check-label" for="inlineRadio1"
+												style="font-size: 15px;">男性</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="gender"
+												id="inlineRadio2" value="女性" /> <label
+												class="form-check-label" for="inlineRadio2"
+												style="font-size: 15px;">女性</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="gender"
+												id="inlineRadio3" value="其他" /> <label
+												class="form-check-label" for="inlineRadio3"
+												style="font-size: 15px;">其他</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="nickName">會員生日</label>
+								<div class="">
+									<input class="form-control" type="date" value=""
+										id="html5-date-input" name="birthDate" />
+								</div>
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="valistr">驗證碼</label>
+								<div >
+									<input type="text" name="valistr" id="valistr"
+									onblur="checkNull('valistr','驗證碼不能為空！')"> 
+									<img
+									id="yzm_img"
+									src="${pageContext.request.contextPath}/ValiImgServlet"
+									style="cursor: pointer" onclick="changeYZM(this)" /> 
+									<span id="valistr_msg"></span>
+									<input type="hidden" name="valistrin" value="${valistr}">
+								</div> 
+							</div>
+							<div class="forgot-pass">
+								<a href=""> </a>
+							</div>
+							<div class="custom-form__btn">
+								<button type="submit" class="btn submit-btn">註冊</button>
+								<input type="hidden" name="action" value="memberSignup">
+							</div>
+							<div class="custom-form__footer">
+								<!-- login/sign up with social media -->
+
+								<!-- form footer -->
+								<div class="custom-form__footer--link">
+									<h6>已註冊帳號</h6>
+									<a href="login.jsp" class="btn">登入</a>
+								</div>
+							</div>
+						</form>
 					</div>
-					<!-- end blog post comments -->
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- end main content -->
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
@@ -300,18 +303,29 @@
 		</div>
 	</footer>
 	<!-- end footer -->
-	<!-- scroll up btn -->
-	<a id="back-to-top"></a>
-	<!-- end scroll up btn -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
 
+	<!-- 驗證碼 -->
+	<script>
+	    <!-- 校驗欄位是否為空 -->
+	    function checkNull(name,msg){
+	        setMsg(name,"")
+	        var v = document.getElementsByName(name)[0].value;
+	        if(v == ""){
+	            setMsg(name,msg)
+	            return false;
+	        }
+	        return true;
+	    }     
+	    <!-- 為輸入項設定提示訊息 -->
+	    function setMsg(name,msg){
+	        var span = document.getElementById(name+"_msg");
+	        span.innerHTML="<font color='red'>"+msg+"</font>";
+	    }
+	    <!-- 點選更換驗證碼 --> 
+	    function changeYZM(imgObj){
+	        imgObj.src = "${pageContext.request.contextPath}/ValiImgServlet?time="+"${java.util.Date.getTime()}";
+	    }
+	</script>
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/popper.min.js"></script>
@@ -334,9 +348,7 @@
 	<script type="text/javascript" src="../js/wow.min.js"></script>
 	<!-- custom js -->
 	<script type="text/javascript" src="../js/custom.js"></script>
-	<!-- table js -->
 
-	<script src="../js/portfoliotable.js"></script>
 
 </body>
 </html>

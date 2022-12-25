@@ -165,15 +165,15 @@ pageContext.setAttribute("list", list);
 				<div class="col-lg-3">
 					<div class="nav flex-column nav-pills account-pills account-tabs"
 						id="v-pills-tab" role="tablist" aria-orientation="vertical">
-						<a class="nav-link " id="v-pills-profile-tab" data-toggle="pill"
-							href="#v-pills-portfolioListAll" role="tab"
+						<a class="nav-link " id="v-pills-profile-tab"
+							data-toggle="pill" href="#v-pills-portfolioListAll" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>作品列表
-						</a> <a class="nav-link active" id="v-pills-order-tab"
-							data-toggle="pill" href="#v-pills-portfolioSelect" role="tab"
+						</a> <a class="nav-link" id="v-pills-order-tab" data-toggle="pill"
+							href="#v-pills-portfolioSelect" role="tab"
 							aria-controls="v-pills-order" aria-selected="false"> <span><i
 								class='bx bx-shopping-bag'></i></span>作品查詢
-						</a> <a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
+						</a> <a class="nav-link active" id="v-pills-wishlist-tab" data-toggle="pill"
 							href="#v-pills-portfolioAdd" role="tab"
 							aria-controls="v-pills-wishlist" aria-selected="false"> <span><i
 								class='bx bx-file'></i></span>新增作品
@@ -184,8 +184,9 @@ pageContext.setAttribute("list", list);
 				<div class="col-lg-9">
 					<div class="tab-content account-content" id="v-pills-tabContent">
 						<!-- portfolioListAll tab -->
-						<div class="tab-pane fade " id="v-pills-portfolioListAll"
-							role="tabpanel" aria-labelledby="v-pills-order-tab">
+						<div class="tab-pane fade "
+							id="v-pills-portfolioListAll" role="tabpanel"
+							aria-labelledby="v-pills-order-tab">
 							<div class="order-table order-table__collapse">
 								<div class="panel">
 									<div class="panel-body">
@@ -242,9 +243,8 @@ pageContext.setAttribute("list", list);
 
 						</div>
 						<!-- portfolioSelect tab -->
-						<div class="tab-pane fade show active"
-							id="v-pills-portfolioSelect" role="tabpanel"
-							aria-labelledby="v-pills-profile-tab">
+						<div class="tab-pane fade " id="v-pills-portfolioSelect"
+							role="tabpanel" aria-labelledby="v-pills-profile-tab">
 							<!-- select form -->
 							<div class="row">
 								<div class="col-md-12">
@@ -313,73 +313,23 @@ pageContext.setAttribute("list", list);
 												</div>
 											</div>
 										</form>
-										<div class="form-group custom-form__input"
-											style="padding-bottom: 0px;">
-											<label for="oldPassInput">搜尋結果</label>
-											<div class="order-table order-table__collapse">
-												<div class="panel">
-													<div class="panel-body">
-														<table
-															class="table table-bordered bordered table-striped table-condensed datatable">
-															<thead>
-																<tr>
-																	<th>作品編號</th>
-																	<th>作品名稱</th>
-																	<th>新增時間</th>
-																	<th>最新修改時間</th>
-																	<th>作品明細</th>
-																</tr>
-															</thead>
-															<tbody>
-																<c:forEach var="portfolioVO" items="${selectlist}">
-																	<tr>
-																		<td><strong>${portfolioVO.portfolioNo}</strong></td>
-																		<td>${portfolioVO.portfolioName}</td>
-																		<td><small><fmt:formatDate
-																					pattern="yyyy-MM-dd HH:mm:ss"
-																					value="${portfolioVO.createTime}" /></small></td>
-																		<td><small><fmt:formatDate
-																					pattern="yyyy-MM-dd HH:mm:ss"
-																					value="${portfolioVO.modificationTime}" /></small></td>
 
-																		<td>
-																			<form method="post" action="PortfolioListOne">
-																				<label class="btn btn-primary" tabindex="0">
-																					<span class="d-none d-sm-block"
-																					style="color: white">作品明細</span> <i
-																					class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
-																					<input type="submit" class="account-file-input"
-																					hidden /> <input type="hidden" name="portfolioNo"
-																					value="${portfolioVO.portfolioNo}"> <input
-																					type="hidden" name="action"
-																					value="portfolio_GetOne">
-																				</label>
-																			</form>
-																		</td>
-																	</tr>
-																</c:forEach>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- portfolioAdd tab -->
-						<div class="tab-pane fade" id="v-pills-portfolioAdd"
+						<div class="tab-pane fade " id="v-pills-portfolioAdd"
 							role="tabpanel" aria-labelledby="v-pills-order-tab">
 							<div class="col-xxl">
 								<div class="card mb-4">
 									<div
 										class="card-header d-flex align-items-center justify-content-between">
-										<h5 class="mb-0">作品編輯</h5>
+										<h5 class="mb-0">新增作品</h5>
 									</div>
 									<div class="card-body">
-										<form method="post" action="UpdatedPortfolio"
+										<form method="post" action="InsertPortfolio"
 											enctype="multipart/form-data">
 											<div class="row mb-3">
 												<label class="col-sm-2 col-form-label"
@@ -393,8 +343,13 @@ pageContext.setAttribute("list", list);
 											<div class="row mb-3">
 												<label class="col-sm-2 col-form-label" for="houseArea">房屋區域</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" id="houseArea"
-														name="houseArea" value="${portfolioUpdate.houseArea}" />
+													<select class="form-control" id="houseArea" name="houseArea" >
+														<option value="北部">北部
+														<option value="中部">中部
+														<option value="南部">南部
+														<option value="東部">東部
+														<option value="離島">離島
+													</select>
 												</div>
 											</div>
 											<div class="row mb-3">
@@ -454,18 +409,19 @@ pageContext.setAttribute("list", list);
 											</div>
 											<div class="row justify-content-end">
 												<!-- <div class="col-sm-10"> -->
-												<button type="submit" class="btn btn-primary">送出</button>
-												<input type="hidden" name="action" value="update"> <input
-													type="hidden" name="portfolioNo"
-													value="${portfolioUpdate.portfolioNo}" /> <input
-													type="hidden" name="designerNo"
-													value="${portfolioUpdate.designerNo}" />
+												<button type="submit" class="btn btn-primary" style="margin-right: 15px;">送出</button>
+												<input type="hidden" name="action" value="insert"> 
+												<input type="hidden" name="designerNo"
+													value="${designerVO.designerNo}" />
 												<!-- </div> -->
 											</div>
 										</form>
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="tab-pane fade show active">
+							作品新增成功!!!
 						</div>
 
 					</div>
@@ -519,7 +475,14 @@ pageContext.setAttribute("list", list);
 	<!-- scroll up btn -->
 	<a id="back-to-top"></a>
 	<!-- end scroll up btn -->
-	
+	<!-- loader -->
+	<div class="loader">
+		<div class="spinner">
+			<div class="cube1"></div>
+			<div class="cube2"></div>
+		</div>
+	</div>
+	<!-- end loader -->
 
 	<!-- stopPropagation -->
 	<script>
