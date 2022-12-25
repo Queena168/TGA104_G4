@@ -1,26 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.* , com.cart.model.*"%>
-<%
-User auth = (User)request.getSession().getAttribute("auth");
-if(auth!=null){
-	request.setAttribute("auth", auth);
-}
-%>
 
-<%
-Cart cart = (Cart) request.getAttribute("cart");
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
-List<Cart> cartProduct = null;
-if(cart_list != null){
-	ShopProductService shopProductService = new ShopProductService();
-	cartProduct = shopProductService.getCartProducts(cart_list);
-	request.setAttribute("cart_list", cart_list);
-	
-	Integer total = shopProductService.getTotalCartPrice(cart_list);
-	request.setAttribute("total", total);
-}
-%>
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -177,7 +158,7 @@ if(cart_list != null){
 <div class="d-flex py-3">
 <h3>目前累積價格：$ ${(total>0)?total:0}</h3>
 <!-- <a class="mx-3 btn btn-primary" href="/TGA104G4/CheckOutServlet">結帳</a> -->
-<a class="mx-3 btn btn-orange" href="http://localhost:8080/TGA104_G4/front-end/order/orderDetail.jsp">結帳</a>
+<a class="mx-3 btn btn-orange" href="/TGA104_G4/ShowOrderDetail">結帳</a>
 <!-- <a class="mx-3 btn btn-primary" href="http://localhost:8081/TGA104G4/CheckOutServlet">結帳測試選擇</a> -->
 </div>
 <table class="table table-Lought">
@@ -191,29 +172,26 @@ if(cart_list != null){
 </tr>
 </thead>
 <tbody>
-<% 
-if(cart_list != null){
-	for(Cart c:cart_list){%>
+    <c:forEach var="c" items="${cart_list}">
 		<tr>
-		<td><%= c.getProductNo() %></td>
-		<td><%= c.getProductName() %></td>
-		<td><%= c.getPrice() * c.getQuantity()%></td>
+		<td>${c.productNo}</td>
+		<td>${c.productName}</td>
+		<td>${c.price}</td>
+		<td>${c.quantity}</td>
 		<td>
 		<form action="/TGA104_G4/OrderNowServlet" method="post" class="form-inline">
-		<input type="hidden" name="id" value="<%= c.getProductNo() %>" class="form-input">
+		<input type="hidden" name="id" value="${c.productNo}" class="form-input">
 		<div class="form-group d-flex justify-content-between w-50">
-		<a class="btn-sm btn-decre" href="/TGA104_G4/QuantityIncDecServlet?action=dec&id=<%= c.getProductNo()%>"><i class="fas fa-minus-square"></i></a>
-		<input type="text" name="quantity" class="form-control w-50" value="<%= c.getQuantity()%>" readonly>
-		<a class="btn-sm btn-incre" href="<%=request.getContextPath()%>/QuantityIncDecServlet?action=inc&id=<%= c.getProductNo()%>"><i class="fas fa-plus-square"></i></a>
+		<a class="btn-sm btn-decre" href="/TGA104_G4/QuantityIncDecServlet?action=dec&id=${c.productNo}"><i class="fas fa-minus-square"></i></a>
+		<input type="text" name="quantity" class="form-control w-50" value="${c.quantity}" readonly>
+		<a class="btn-sm btn-incre" href="<%=request.getContextPath()%>/QuantityIncDecServlet?action=inc&id=${c.productNo}"><i class="fas fa-plus-square"></i></a>
 		</div>
 <!-- 		<button type="submit" class="btn btn-primary btn-sm">直接購買</button> -->
 		</form>
 		</td>
-		<td><a class="btn btn-sm btn-danger" href="<%=request.getContextPath()%>/RemoveFromCartServlet?id=<%= c.getProductNo()%>">刪除</a></td>
+		<td><a class="btn btn-sm btn-danger" href="<%=request.getContextPath()%>/RemoveFromCartServlet?id=${c.productNo}">刪除</a></td>
 		</tr>
-			<%}
-	    }
-		%>
+	</c:forEach>
 </tbody>
 </table>
 </div>

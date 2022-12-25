@@ -1,35 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.* , com.cart.model.*, com.productorder.model.*"%>
-<%
-User auth = (User)request.getSession().getAttribute("auth");
-List<ProductOrderVO> orders = null;
-if(auth!=null){
-	request.setAttribute("auth", auth);
-    orders = new ProductOrderJDBCDAO().userOrders(auth.getUserNo());
-}else{
-	response.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/login.jsp");
-}
-%>
-
-<%
-ShopProduct shopProduct = (ShopProduct) request.getAttribute("shopProduct");
-
-Cart cart = (Cart) request.getAttribute("cart");
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
-List<Cart> cartProduct = null;
-if(cart_list != null){
-	ShopProductService shopProductService = new ShopProductService();
-	cartProduct = shopProductService.getCartProducts(cart_list);
-	request.setAttribute("cart_list", cart_list);
-	
-	Integer total = shopProductService.getTotalCartPrice(cart_list);
-	request.setAttribute("total", total);
-}
-%>
-<%
-ProductOrderVO productOrderVO = (ProductOrderVO) request.getAttribute("productOrderVO");
-%>
 
 <html>
 <head>
@@ -193,16 +164,25 @@ ProductOrderVO productOrderVO = (ProductOrderVO) request.getAttribute("productOr
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>收件人姓名</label>
-      <input type="text" class="form-control" name="rname" value="<%=(productOrderVO == null) ? "姓名" : productOrderVO.getReceiverName()%>" placeholder="請輸入">
+      <input
+	      type="text" class="form-control" id="#"
+	      name="rname" placeholder="輸入收件人姓名"
+	  />
     </div>
     <div class="form-group col-md-6">
       <label>收件人電話</label>
-      <input type="text" class="form-control" name="rphone" value="<%=(productOrderVO == null) ? "電話" : productOrderVO.getReceiverPhone()%>" placeholder="請輸入">
+      <input
+	      type="text" class="form-control" id="#"
+	      name="rphone" placeholder="輸入收件人電話"
+	  />
     </div>
   </div>
   <div class="form-group">
     <label>收件人地址</label>
-    <input type="text" class="form-control" name="raddress" value="<%=(productOrderVO == null) ? "地址" : productOrderVO.getReceiverPhone()%>" placeholder="請輸入">
+    <input
+	      type="text" class="form-control" id="#"
+	      name="raddress" placeholder="輸入收件人地址"
+	  />
   </div>
 <br>
 <h3>付款方式</h3>
