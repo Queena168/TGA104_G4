@@ -114,7 +114,7 @@ pageContext.setAttribute("list", list);
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="listAll.html">找作品</a></li>
+						class="nav-link " href="memFindPortfolio.jsp">找作品</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
@@ -300,14 +300,7 @@ pageContext.setAttribute("list", list);
 	<!-- scroll up btn -->
 	<a id="back-to-top"></a>
 	<!-- end scroll up btn -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
+	
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>

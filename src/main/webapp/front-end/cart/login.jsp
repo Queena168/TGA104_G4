@@ -9,16 +9,16 @@ if(auth!=null){
 }
 %>
 <%
-ShopProductService shopProductService = new ShopProductService();
-ShopProduct shopProductVO = (ShopProduct) request.getAttribute("shopProductVO");
+// ShopProductService shopProductService = new ShopProductService();
+// ShopProduct shopProductVO = (ShopProduct) request.getAttribute("shopProductVO");
 
-List<Map<String, Object>> list = shopProductService.getAll();
-pageContext.setAttribute("list", list);
+// List<Map<String, Object>> list = shopProductService.getAll();
+// pageContext.setAttribute("list", list);
 
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list");
-if (cart_list != null) {
-	request.setAttribute("cart_list", cart_list);
-}
+// ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list");
+// if (cart_list != null) {
+// 	request.setAttribute("cart_list", cart_list);
+// }
 %>
 <html>
 <head>

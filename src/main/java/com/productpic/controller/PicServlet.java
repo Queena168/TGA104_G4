@@ -38,11 +38,6 @@ import com.producttype.model.ProductTypeVO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class PicServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/matdesign?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -64,8 +59,9 @@ public class PicServlet extends HttpServlet {
 			productPicVO.setProductNo(productNo);
 			productPicVO.setPic(pic);
 			dao.insert(productPicVO);
-			
-			req.setAttribute("productPicVO", productPicVO);
+			List<ProductPicVO> list = dao.getAll();
+			req.setAttribute("list", list);
+//			req.setAttribute("productPicVO", productPicVO);
 			RequestDispatcher failureView = req.getRequestDispatcher("/back-end/productpic/listAllPic.jsp"); // 以集合物件為判斷式，如果有加入任何錯誤訊息，就forward回出發頁面
 			failureView.forward(req, res);
 			return;// 程式中斷
@@ -118,7 +114,8 @@ public class PicServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 *****************************************/
 			ProductPicService productPicSvc = new ProductPicService();
 			productPicVO = productPicSvc.updateProductPic(productPicNo, productNo, pic);
-
+			List<ProductPicVO> list = productPicSvc.getAll();
+			req.setAttribute("list", list);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("productPicVO", productPicVO); // 資料庫update成功後,正確的productTypeVO物件,存入req
 			String url = "/back-end/productpic/listAllPic.jsp";

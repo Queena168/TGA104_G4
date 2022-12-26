@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.product.model.*"%>
 
-<%
-ProductVO productVO = (ProductVO) request.getAttribute("productVO");
-%>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
@@ -15,7 +12,7 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign Admin</title>
+<title>MatDesign addProduct</title>
 
 <meta name="description" content="" />
 
@@ -325,55 +322,55 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 		</ul>
 	</c:if>
 	
-	<form id="#" class="mb-3"  METHOD="post" action="/TGA104_G4/AddProductServlet" name="form1">
+	<form id="#" class="mb-3"  METHOD="post" action="AddProductServlet" name="form1">
 		<div class="mb-3">
 			<label for="#" class="form-label">商品類別編號:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="productTypeNo" placeholder="Enter email"
-				value="<%=(productVO == null) ? "1" : productVO.getProductTypeNo()%>" />
+				name="productTypeNo" placeholder="輸入商品編號"
+			/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品名稱:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="productName" placeholder="Enter email"
-				value="<%=(productVO == null) ? "" : productVO.getProductName()%>" />
+				name="productName" placeholder="輸入商品名稱"
+			/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品庫存量:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="stock" placeholder="Enter email"
-				value="<%=(productVO == null) ? "" : productVO.getStock()%>" />
+				name="stock" placeholder="輸入商品庫存量"
+			/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品價格:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="price" placeholder="Enter email"
-				value="<%=(productVO == null) ? "" : productVO.getPrice()%>" />
+				name="price" placeholder="輸入商品價格"
+			/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品描述:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="productDescription" placeholder="Enter email"
-				value="<%=(productVO == null) ? "" : productVO.getProductDescription()%>" />
+				name="productDescription" placeholder="輸入商品描述"
+			/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品狀態:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="productStatus" placeholder="Enter email"
-				value="<%=(productVO == null) ? "" : productVO.getProductStatus()%>" />
+				name="productStatus" placeholder="輸入商品狀態"
+			/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">管理員:</label> 
 			<input
 				type="text" class="form-control" id="#"
-				name="adminNo" placeholder="Enter email"
-				value="<%=(productVO == null) ? "1" : productVO.getAdminNo()%>" />
+				name="adminNo"
+			/>
 		</div>
 		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
 		<input type="hidden" name="action" value="insertProduct"> <input

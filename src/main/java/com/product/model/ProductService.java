@@ -44,10 +44,6 @@ public class ProductService {
 		return productVO;
 	}
 	
-	public void deleteProduct(Integer productNo) {
-		dao.delete(productNo);
-	}
-	
 	public ProductVO getOneProduct(Integer productno) {
 		return dao.findByPrimaryKey(productno);
 	}

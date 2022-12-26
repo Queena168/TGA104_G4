@@ -6,14 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.product.model.ProductJDBCDAO;
 import com.product.model.ProductVO;
+import com.producttype.model.ProductTypeVO;
 
 public class UserJDBCDAO {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String GET_ONE_STMT =
 			"SELECT memberNo, memberName, memberEmail, memberPassword from User where memberEmail=? and memberPassword=?";
@@ -21,118 +32,44 @@ public class UserJDBCDAO {
 			"SELECT memberNo, memberName, email, password from User where memberNo = ?";
 	
 	public User findByPrimaryKey(Integer memberNo) {
-
 		User user = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_MEMBER_STMT);
-
+		
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_MEMBER_STMT)) {
 			pstmt.setInt(1, memberNo);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-
-				user = new User();
-				user.setUserNo(rs.getInt("memberNo"));
-				user.setName(rs.getString("memberName"));
-				user.setEmail(rs.getString("email"));
-				user.setPassword(rs.getString("password"));
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					user = new User();
+					user.setUserNo(rs.getInt("memberNo"));
+					user.setName(rs.getString("memberName"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return user;
+		    return user;
 	}
 	
 	public User userLogin(String email, String password) {
 		User user = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-
+		
+		
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_ONE_STMT)) {
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				user = new User();
-				user.setUserNo(rs.getInt("memberNo"));
-				user.setName(rs.getString("memberName"));
-				user.setEmail(rs.getString("memberEmail"));
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+			ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					user = new User();
+					user.setUserNo(rs.getInt("memberNo"));
+					user.setName(rs.getString("memberName"));
+					user.setEmail(rs.getString("memberEmail"));
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return user;
+		    return user;
 	}
 	
 	public static void main(String[] args) {

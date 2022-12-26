@@ -10,14 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.product.model.ProductVO;
 
 public class ShopProductJDBCDAO implements ShopProductDAOInterface {
 
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String GET_ALL_STMT = "select Product.productNo, Product.productName, min(pic), Product.price "
 			+ "from Product join ProductPic on Product.productNo = ProductPic.productNo "
@@ -27,8 +37,8 @@ public class ShopProductJDBCDAO implements ShopProductDAOInterface {
 
 	@Override
 	public List<Map<String, Object>> getAll() {
-		try (Connection con = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = con.prepareStatement(GET_ALL_STMT);
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_ALL_STMT);
 				ResultSet rs = pstmt.executeQuery();) {
 			List<Map<String, Object>> list = new ArrayList<>();
 			while (rs.next()) {
@@ -48,8 +58,8 @@ public class ShopProductJDBCDAO implements ShopProductDAOInterface {
 
 	public List<Cart> getCartProducts(ArrayList<Cart> cartList) {
 
-		try (Connection con = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = con.prepareStatement(GET_CARTPRODUCT_STMT);) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_CARTPRODUCT_STMT);) {
 			
 			    Cart cart = new Cart();
 			    List<Cart> products = new ArrayList<Cart>();    
@@ -77,11 +87,11 @@ public class ShopProductJDBCDAO implements ShopProductDAOInterface {
 	public Integer getTotalCartPrice(ArrayList<Cart> cartList) {
 		Integer sum = 0;
 
-		try (Connection con = DriverManager.getConnection(url, userid, passwd)) {
+		try (Connection connection = dataSource.getConnection();) {
 			Cart cart = new Cart();
 			if (cartList.size() > 0) {
 				for (Cart item : cartList) {
-					PreparedStatement pstmt = con.prepareStatement(GET_PRODUCTPRICE_STMT);
+					PreparedStatement pstmt = connection.prepareStatement(GET_PRODUCTPRICE_STMT);
 					pstmt.setInt(1, item.getProductNo());
 					ResultSet rs = pstmt.executeQuery();
 
@@ -100,18 +110,11 @@ public class ShopProductJDBCDAO implements ShopProductDAOInterface {
 	public ShopProduct getSingleProduct(Integer productNo) {
 
 		ShopProduct row = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement("select productNo, productName, price from product where productNo=?");
-
+		
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement("select productNo, productName, price from product where productNo=?")) {
 			pstmt.setInt(1, productNo);
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 
@@ -122,34 +125,8 @@ public class ShopProductJDBCDAO implements ShopProductDAOInterface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return row;
 	}

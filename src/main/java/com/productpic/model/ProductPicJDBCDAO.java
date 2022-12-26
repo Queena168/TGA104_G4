@@ -16,14 +16,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import com.producttype.model.ProductTypeVO;
 
 public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = "insert into ProductPic(productNo, pic) values(?, ?)";
 	private static final String GET_ONE_STMT = "select productPicNo, productNo, pic from ProductPic where productPicNo=?";
@@ -40,183 +51,46 @@ public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 
 	@Override
 	public void insert(ProductPicVO productPicVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(INSERT_STMT)) {
 			pstmt.setInt(1, productPicVO.getProductNo());
 			pstmt.setBytes(2, productPicVO.getPic());
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
 
 	@Override
 	public void update(ProductPicVO productPicVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE)) {
 			pstmt.setInt(1, productPicVO.getProductNo());
 			pstmt.setBytes(2, productPicVO.getPic());
 			pstmt.setInt(3, productPicVO.getProductPicNo());
-
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
-	}
-
-	@Override
-	public void delete(Integer productPicNo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
-
-			pstmt.setInt(1, productPicNo);
-
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
 	}
 
 	@Override
 	public ProductPicVO findByPrimaryKey(Integer productNo) {
 		ProductPicVO productPicVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_ONE_STMT)) {
 			pstmt.setInt(1, productNo);
-
-			rs = pstmt.executeQuery();
-
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
 				productPicVO = new ProductPicVO();
 				productPicVO.setProductPicNo(rs.getInt("productPicNo"));
 				productPicVO.setProductNo(rs.getInt("productNo"));
 				productPicVO.setPic(rs.getBytes("pic"));
 			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return productPicVO;
 	}
@@ -225,54 +99,19 @@ public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 	public List<ProductPicVO> getAll() {
 		List<ProductPicVO> list = new ArrayList<ProductPicVO>();
 		ProductPicVO productPicVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_ALL_STMT)) {
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ProductVO 也稱為 Domain objects
 				productPicVO = new ProductPicVO();
 				productPicVO.setProductPicNo(rs.getInt("productPicNo"));
 				productPicVO.setProductNo(rs.getInt("productNo"));
 				productPicVO.setPic(rs.getBytes("pic"));
 				list.add(productPicVO); // Store the row in the list
 			}
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return list;
 	}
@@ -280,56 +119,18 @@ public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 	@Override
 	public ProductPicVO showOnePic(Integer productNo) {
 		ProductPicVO productPicVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SHOW_ONE_STMT);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SHOW_ONE_STMT)) {
 			pstmt.setInt(1, productNo);
-
-			rs = pstmt.executeQuery();
-
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
 				productPicVO = new ProductPicVO();
 				productPicVO.setProductNo(rs.getInt("productNo"));
 				productPicVO.setPic(rs.getBytes("pic"));
 			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return productPicVO;
 	}
@@ -338,61 +139,26 @@ public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 	public List<ProductPicVO> showAllPic() {
 		List<ProductPicVO> list = new ArrayList<ProductPicVO>();
 		ProductPicVO productPicVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SHOW_ALL_STMT);
-			rs = pstmt.executeQuery();
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SHOW_ALL_STMT)) {
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ProductVO 也稱為 Domain objects
 				productPicVO = new ProductPicVO();
 				productPicVO.setProductNo(rs.getInt("productNo"));
 				productPicVO.setPic(rs.getBytes("min(pic)"));
 				list.add(productPicVO); // Store the row in the list
 			}
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return list;
 	}
 
 	public List<Map<String, Object>> showAll2() {
-		try (Connection con = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = con.prepareStatement(SHOW);
-				ResultSet rs = pstmt.executeQuery();) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SHOW)) {
+			ResultSet rs = pstmt.executeQuery();
 			List<Map<String, Object>> list = new ArrayList<>();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<>();
@@ -411,9 +177,9 @@ public class ProductPicJDBCDAO implements ProductPicDAO_interface {
 
 	@Override
 	public List<Map<String, Object>> listAllProduct() {
-		try (Connection con = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = con.prepareStatement(LIST_ALL_PRODUCT);
-				ResultSet rs = pstmt.executeQuery();) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(LIST_ALL_PRODUCT)) {
+			ResultSet rs = pstmt.executeQuery();
 			List<Map<String, Object>> list = new ArrayList<>();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<>();

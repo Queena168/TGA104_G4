@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.productpic.model.*"%>
 
-<%
-ProductPicVO productPicVO = (ProductPicVO) request.getAttribute("productPicVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
-
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -79,21 +75,23 @@ th, td {
 			<table>
                 <tr>
 					<td>商品圖片編號:<font color=red><b>*</b></font></td>
-					<td><%=productPicVO.getProductPicNo()%></td>
+					<td><input type="hidden" name="productPicNo" value ="${productPicVO.productPicNo}" size="45" readonly="readonly"/>
+		${productPicVO.productPicNo}
+					</td>
 				</tr>
 				<tr>
 					<td>商品編號:<font color=red><b>*</b></font></td>
-					<td><input type="TEXT" name="productNo" size="45" value="<%=productPicVO.getProductNo()%>" /></td>
+					<td><input type="TEXT" name="productNo" size="45" value="${productPicVO.productNo}" /></td>
 				</tr>
 				<tr>
 	    			<td>上傳圖片:</td>
 					<td>
-					<input type="file" name="pic" value="<%=productPicVO.getPic()%>" />
+					<input type="file" name="pic" value="${productPicVO.pic}" />
 					</td>
 			    </tr>
 			</table>
 			<input type="hidden" name="action" value="updatePic">
-			<input type="hidden" name="productPicNo" value="<%=productPicVO.getProductPicNo()%>">
+			<input type="hidden" name="productPicNo" value="${productPicVO.productPicNo}">
 			<input type="submit" value="上傳" name="upload" />
 		</form>
 </body>

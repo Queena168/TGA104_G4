@@ -200,7 +200,7 @@ public class CheckOutServlet extends HttpServlet {
 		productOrderJDBCDAO.addOrders(productOrderVO);
 		cart_list.clear(); //完成訂單後清空購物車
 //		System.out.println(productOrderVO.getOrderNo());
-		res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/order/order.jsp"); // order.jsp
+		res.sendRedirect("front-end/order/SelectOrder"); // order.jsp
 		} catch (Exception e) {
 		e.printStackTrace();
 	}

@@ -1,30 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.* , com.cart.model.*, com.productorder.model.*, com.productorderdetail.model.*"%>
-<%
-User auth = (User)request.getSession().getAttribute("auth");
-List<ProductOrderDetailVO> orders = (List<ProductOrderDetailVO>)request.getAttribute("ordersDetail");
-if(auth!=null){
-	request.setAttribute("auth", auth);
-//     orders = new ProductOrderJDBCDAO().useOrders(auth.getUserNo());
-//  	   orders = new ProductOrderJDBCDAO().findOrdersById(30);
-}else{
-	response.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/login.jsp");
-}
-%>
 
-<%
-ShopProduct shopProduct = (ShopProduct) request.getAttribute("shopProduct");
-
-Cart cart = (Cart) request.getAttribute("cart");
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
-List<Cart> cartProduct = null;
-if(cart_list != null){
-	ShopProductService shopProductService = new ShopProductService();
-	cartProduct = shopProductService.getCartProducts(cart_list);
-	request.setAttribute("cart_list", cart_list);
-}
-%>
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -140,7 +117,7 @@ if(cart_list != null){
                     </a>
                 </div>
                 <div class="main-navbar-action__btn nav-dropdown">
-                	<a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">
+                	<a class="dropdown-link" data-target="cartmenu" href="/front-end/order/SelectOrder">
                     	<span class="cart-badge">訂單</span>
                     	<i class="icon-shopping-bag"></i>
                 	</a>
@@ -192,18 +169,15 @@ if(cart_list != null){
 			</tr>
 		</thead>
 		<tbody>
-		<%
- 			for(ProductOrderDetailVO o:orders){%> 
+		<c:forEach var="o" items="${orders}">
 			<tr>
-				<td><%= o.getOrderNo()%></td>
-				<td><%= o.getProductNo()%></td>
-				<td><%= o.getProductName()%></td>
-				<td><%= o.getPrice()%></td>
-				<td><%= o.getQty()%></td>
-				<td><%= o.getPrice()*o.getQty()%></td>
-			</tr>	
-			<%}
- 		%> 
+				<td>${o.orderNo}</td>
+				<td>${o.productNo}</td>
+				<td>${o.productName}</td>
+				<td>${o.price}</td>
+				<td>${o.qty}</td>
+			</tr>				
+		</c:forEach>		
 		</tbody>
 	</table> 
 </div>

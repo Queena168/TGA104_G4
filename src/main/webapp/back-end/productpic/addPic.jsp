@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.productpic.model.*"%>
 
-<%
-ProductPicVO productPicVO = (ProductPicVO) request.getAttribute("productPicVO");
-%>
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Big5">
@@ -47,13 +43,17 @@ th, td {
         <table>
             <tr>
 		    	<td>商品編號:</td>
-				<td><input type="TEXT" name="productNo"
-					value="<%=(productPicVO == null) ? "0" : productPicVO.getProductNo()%>" /></td>
+				<td>
+				<input
+				type="text" class="form-control" id="#"
+				name="productNo" placeholder="輸入商品編號"
+				/>
+				</td>
 			</tr>
 			<tr>
 	    		<td>上傳圖片:</td>
 				<td>
-				<input type="file" name="photo" value="<%=(productPicVO == null) ? "" : productPicVO.getPic()%>" />
+				<input type="file" name="photo"/>
 				</td>
 			</tr>
 		</table>

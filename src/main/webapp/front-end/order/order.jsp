@@ -1,31 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.* , java.sql.*, com.cart.model.*, com.productorder.model.*"%>
-<%
-User auth = (User)request.getSession().getAttribute("auth");
-List<ProductOrderVO> orders = null;
-if(auth!=null){
-	request.setAttribute("auth", auth);
-//     orders = new ProductOrderJDBCDAO().useOrders(auth.getUserNo());
-	   orders = new ProductOrderJDBCDAO().userOrders(auth.getUserNo());
-}else{
-	response.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/login.jsp");
-}
 
-%>
-
-<%
-ShopProduct shopProduct = (ShopProduct) request.getAttribute("shopProduct");
-
-Cart cart = (Cart) request.getAttribute("cart");
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
-List<Cart> cartProduct = null;
-if(cart_list != null){
-	ShopProductService shopProductService = new ShopProductService();
-	cartProduct = shopProductService.getCartProducts(cart_list);
-	request.setAttribute("cart_list", cart_list);
-}
-%>
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -197,26 +173,22 @@ if(cart_list != null){
 			</tr>
 		</thead>
 		<tbody>
-		<%
-		if(orders != null){
-			for(ProductOrderVO o:orders){%>
+		<c:forEach var="o" items="${orders}">
 			<tr>
-				<td><%= o.getPaidDate()%></td>
-				<td><%= o.getReceiverName()%></td>
-				<td><%= o.getReceiverPhone()%></td>
-				<td><%= o.getReceiverAddress()%></td>
+				<td>${o.paidDate}</td>
+				<td>${o.receiverName}</td>
+				<td>${o.receiverPhone}</td>
+				<td>${o.receiverAddress}</td>
 <%-- 				<td><%= o.getProductName()%></td> --%>
 <%-- 				<td><%= o.getQuantity()%></td> --%>
-                <td><%= o.getTotalQTY()%></td>
+				<td>${o.totalQTY}</td>
 <%-- 				<td><%= o.getPrice()%></td> --%>
-                <td><%= o.getTotalAmount()%></td>
-                <td><%= o.getOrderStatus()%></td>
-                <td><a class="btn btn-sm btn-orange" href="/TGA104_G4/OrderDetailServlet?id=<%= o.getOrderNo() %>">查看</a></td>
-				<td><a class="btn btn-sm btn-danger" href="/TGA104_G4/CancelOrderServlet?id=<%= o.getOrderNo() %>">取消</a></td>
-			</tr>	
-			<%}
-		}
-		%>
+				<td>${o.totalAmount}</td>
+				<td>${o.orderStatus}</td>
+                <td><a class="btn btn-sm btn-orange" href="/TGA104_G4/OrderDetailServlet?id=${o.orderNo}">查看</a></td>
+				<td><a class="btn btn-sm btn-danger" href="/TGA104_G4/CancelOrderServlet?id=${o.orderNo}">取消</a></td>
+			</tr>				
+		</c:forEach>
 		</tbody>
 	</table> 	
 </div>

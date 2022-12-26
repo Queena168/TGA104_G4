@@ -32,11 +32,7 @@ public class ProductPicService {
 
 		return productPicVO;
 	}
-	
-	public void deleteProductPic(Integer productPicNo) {
-		dao.delete(productPicNo);
-	}
-	
+		
 	public ProductPicVO getOnePic(Integer productPicNo) {
 		return dao.findByPrimaryKey(productPicNo);
 	}

@@ -46,36 +46,33 @@
 					<div class="dropdown-wrapper" id="usermenu" data-collapse="false">
 						<div class="account-wrapper">
 							<!-- login form wrapper -->
-
 							<div class="account-wrapper__content">
 								<div class="custom-form__btn custom-form__input">
-									<div class="account-wrapper__heading dropdown-item">
-										<span>${memberVO.memberAccount}</span> <span
-											class="account-wrapper__heading--link dropdown-item">${memberVO.memberName}
+									<div class="account-wrapper__heading">
+										<span>${memberVO.memberAccount}</span> 
+										<span
+											class="account-wrapper__heading--link">${memberVO.memberName}
 										</span>
 									</div>
 								</div>
 								<div class="account-wrapper__content">
 									<div class="form-group custom-form__input">
-										<a class="dropdown-item "
-											href="memberPorfile.jsp">
-										<span><i class="icon-user-profile"></i></span>會員資料</a>
+										<!-- <a class="dropdown-item "
+											href="designerPorfile.jsp"> -->
+										<form method="post" action="MemberServlet">	
+											<button class="btn"><div><i class="icon-user-profile"></i>會員資料</div> </button>
+											<input type="hidden" name="memberNo" value="${memberVO.memberNo}"> 
+											<input type="hidden" name="action" value="portfolio_GetByNo">
+										</form>
 									</div>
 									<div class="form-group custom-form__input">
-										<a class="dropdown-item  "
-										href="../index.html"><span><i class="icon-log-out"></i></span>登出</a>
+										<form method="post" action="../index.html">	
+											<button class="btn"><div><i class="icon-user-profile"></i>登出</div> </button>
+										</form>
 									</div>
 								</div>
 
 							</div>
-							<!-- account links when user is logged in-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
-							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
-							<!--                            class="icon-sign"></i></span>Addresses</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
-							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
-
 						</div>
 					</div>
 					<!-- navbar cart dropdown -->
@@ -480,14 +477,6 @@
 	<!-- scroll up btn -->
 	<a class="back-to-top-btn" id="back-to-top"></a>
 	<!-- end scroll up btn -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>

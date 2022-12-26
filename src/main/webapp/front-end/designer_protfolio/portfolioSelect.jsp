@@ -9,6 +9,7 @@
 PortfolioService portfolioSvc = new PortfolioService();
 List<PortfolioVO> list = portfolioSvc.getAll();
 pageContext.setAttribute("list", list);
+
 %>
 
 <!DOCTYPE html>
@@ -126,8 +127,7 @@ pageContext.setAttribute("list", list);
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
-					</li>
+						class="nav-link " href="memFindPortfolio.jsp">找作品</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
@@ -165,12 +165,12 @@ pageContext.setAttribute("list", list);
 				<div class="col-lg-3">
 					<div class="nav flex-column nav-pills account-pills account-tabs"
 						id="v-pills-tab" role="tablist" aria-orientation="vertical">
-						<a class="nav-link " id="v-pills-profile-tab"
-							data-toggle="pill" href="#v-pills-portfolioListAll" role="tab"
+						<a class="nav-link " id="v-pills-profile-tab" data-toggle="pill"
+							href="#v-pills-portfolioListAll" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>作品列表
-						</a> <a class="nav-link active" id="v-pills-order-tab" data-toggle="pill"
-							href="#v-pills-portfolioSelect" role="tab"
+						</a> <a class="nav-link active" id="v-pills-order-tab"
+							data-toggle="pill" href="#v-pills-portfolioSelect" role="tab"
 							aria-controls="v-pills-order" aria-selected="false"> <span><i
 								class='bx bx-shopping-bag'></i></span>作品查詢
 						</a> <a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
@@ -184,9 +184,8 @@ pageContext.setAttribute("list", list);
 				<div class="col-lg-9">
 					<div class="tab-content account-content" id="v-pills-tabContent">
 						<!-- portfolioListAll tab -->
-						<div class="tab-pane fade "
-							id="v-pills-portfolioListAll" role="tabpanel"
-							aria-labelledby="v-pills-order-tab">
+						<div class="tab-pane fade " id="v-pills-portfolioListAll"
+							role="tabpanel" aria-labelledby="v-pills-order-tab">
 							<div class="order-table order-table__collapse">
 								<div class="panel">
 									<div class="panel-body">
@@ -202,16 +201,21 @@ pageContext.setAttribute("list", list);
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="portfolioVO" items="${list}">
+												<%-- <c:set var="flag" value="true" /> --%>
+												<c:forEach var="portfolioListByNo"
+													items="${portfolioListByNo}">
+													<%-- <c:if test="${(portfolioVO.designerNo == designerVO.designerNo) && flag==true} ">
+														<c:set var="flag" value="false" />
+														<c:forEach var="portfolioVO" items="${list}"> --%>
 													<tr>
-														<td><strong>${portfolioVO.portfolioNo}</strong></td>
-														<td>${portfolioVO.portfolioName}</td>
+														<td><strong>${portfolioListByNo.portfolioNo}</strong></td>
+														<td>${portfolioListByNo.portfolioName}</td>
 														<td><small><fmt:formatDate
 																	pattern="yyyy-MM-dd HH:mm:ss"
-																	value="${portfolioVO.createTime}" /></small></td>
+																	value="${portfolioListByNo.createTime}" /></small></td>
 														<td><small><fmt:formatDate
 																	pattern="yyyy-MM-dd HH:mm:ss"
-																	value="${portfolioVO.modificationTime}" /></small></td>
+																	value="${portfolioListByNo.modificationTime}" /></small></td>
 
 														<td>
 															<form method="post" action="PortfolioListOne">
@@ -220,12 +224,15 @@ pageContext.setAttribute("list", list);
 																	class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
 																	<input type="submit" class="account-file-input" hidden />
 																	<input type="hidden" name="portfolioNo"
-																	value="${portfolioVO.portfolioNo}"> <input
+																	value="${portfolioListByNo.portfolioNo}"> <input
 																	type="hidden" name="action" value="portfolio_GetOne">
 																</label>
 															</form>
 														</td>
+														<%-- <td>${portfolioVO.designerNo}</td> --%>
 													</tr>
+													<%-- </c:forEach>
+													</c:if> --%>
 												</c:forEach>
 											</tbody>
 										</table>
@@ -235,28 +242,29 @@ pageContext.setAttribute("list", list);
 
 						</div>
 						<!-- portfolioSelect tab -->
-						<div class="tab-pane fade show active" id="v-pills-portfolioSelect"
-							role="tabpanel" aria-labelledby="v-pills-profile-tab">
+						<div class="tab-pane fade show active"
+							id="v-pills-portfolioSelect" role="tabpanel"
+							aria-labelledby="v-pills-profile-tab">
 							<!-- select form -->
 							<div class="row">
 								<div class="col-md-12">
 									<div class="custom-form">
-									<%-- 錯誤表列 --%>
-									<c:if test="${not empty errorMsgs}">
-										<div class="custom-form__title">
-											<ul>
-												<li>
-													<ul>
-														<c:forEach var="message" items="${errorMsgs}">
-															<li class="form-text" style="color: red"><small>${message}</small></li>
-														</c:forEach>
-													</ul>
-												</li>
-											</ul>
-										
-										</div>
-									</c:if>
-									<%-- /錯誤表列 --%>
+										<%-- 錯誤表列 --%>
+										<c:if test="${not empty errorMsgs}">
+											<div class="custom-form__title">
+												<ul>
+													<li>
+														<ul>
+															<c:forEach var="message" items="${errorMsgs}">
+																<li class="form-text" style="color: red"><small>${message}</small></li>
+															</c:forEach>
+														</ul>
+													</li>
+												</ul>
+
+											</div>
+										</c:if>
+										<%-- /錯誤表列 --%>
 										<form class="change-pass" method="post"
 											action="PortfolioListOne">
 											<!-- <p class="custom-form__title">作品查詢</p> -->
@@ -267,8 +275,6 @@ pageContext.setAttribute("list", list);
 													<div class="col-md-6">
 														<input type="text" class="form-control ltr"
 															id="oldPassInput" placeholder="" name="portfolioName">
-														<input type="hidden" name="action"
-															value="inputPortfolioName_For_Display">
 													</div>
 													<div class="col-md-6 profile-address__card--footer select"
 														style="padding-top: 0px;">
@@ -276,25 +282,24 @@ pageContext.setAttribute("list", list);
 															value="inputPortfolioName_For_Display">
 														<button type="submit" class="btn btn-blue"
 															style="margin-top: 0">送出</button>
-														<!-- <input type="hidden" name="action"
-														value="inputPortfolioName_For_Display"> -->
-
 													</div>
 												</div>
 											</div>
 										</form>
 										<jsp:useBean id="portfolioSelectSvc" scope="page"
 											class="com.portfolio.model.PortfolioService" />
-										<form class="change-pass">
+										<form class="change-pass" method="post"
+											action="PortfolioListOne">
 											<div class="form-group custom-form__input"
 												style="padding-bottom: 0px;">
 												<label for="oldPassInput">選擇作品名稱</label>
 												<div class="input-box row">
 													<div class="col-md-6">
-														<select class="form-control ltr" id="oldPassInput">
-															<c:forEach var="portfolioVO"
-																items="${portfolioSelectSvc.all}">
-																<option value="${portfolioVO.portfolioNo}">${portfolioVO.portfolioName}
+														<select class="form-control ltr" id="oldPassInput"
+															name="portfolioNo">
+															<c:forEach var="portfolioListByNo"
+																items="${portfolioListByNo}">
+																<option value="${portfolioListByNo.portfolioNo}">${portfolioListByNo.portfolioName}
 															</c:forEach>
 														</select>
 													</div>
@@ -302,227 +307,165 @@ pageContext.setAttribute("list", list);
 														style="padding-top: 0px;">
 														<button type="submit" class="btn btn-blue"
 															style="margin-top: 0">送出</button>
+														<input type="hidden" name="action"
+															value="portfolio_GetOne">
+													</div>
+												</div>
+											</div>
+										</form>
+										<div class="form-group custom-form__input"
+											style="padding-bottom: 0px;">
+											<label for="oldPassInput">搜尋結果</label>
+											<div class="order-table order-table__collapse">
+												<div class="panel">
+													<div class="panel-body">
+														<table
+															class="table table-bordered bordered table-striped table-condensed datatable">
+															<thead>
+																<tr>
+																	<th>作品編號</th>
+																	<th>作品名稱</th>
+																	<th>新增時間</th>
+																	<th>最新修改時間</th>
+																	<th>作品明細</th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach var="portfolioVO" items="${selectlist}">
+																	<tr>
+																		<td><strong>${portfolioVO.portfolioNo}</strong></td>
+																		<td>${portfolioVO.portfolioName}</td>
+																		<td><small><fmt:formatDate
+																					pattern="yyyy-MM-dd HH:mm:ss"
+																					value="${portfolioVO.createTime}" /></small></td>
+																		<td><small><fmt:formatDate
+																					pattern="yyyy-MM-dd HH:mm:ss"
+																					value="${portfolioVO.modificationTime}" /></small></td>
 
+																		<td>
+																			<form method="post" action="PortfolioListOne">
+																				<label class="btn btn-primary" tabindex="0">
+																					<span class="d-none d-sm-block"
+																					style="color: white">作品明細</span> <i
+																					class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+																					<input type="submit" class="account-file-input"
+																					hidden /> <input type="hidden" name="portfolioNo"
+																					value="${portfolioVO.portfolioNo}"> <input
+																					type="hidden" name="action"
+																					value="portfolio_GetOne">
+																				</label>
+																			</form>
+																		</td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</table>
 													</div>
 												</div>
 											</div>
-										</form>
-										<form class="change-pass">
-											<div class="form-group custom-form__input ">
-												<label for="oldPassInput">選擇作品房屋區域</label>
-												<div class="input-box row">
-													<div class="col-md-6">
-														<select class="form-control ltr" id="oldPassInput">
-															<c:forEach var="portfolioVO"
-																items="${portfolioSelectSvc.all}">
-																<option value="${portfolioVO.portfolioNo}">${portfolioVO.houseArea}
-															</c:forEach>
-														</select>
-													</div>
-													<div class="col-md-6 profile-address__card--footer"
-														style="padding-top: 0px;">
-														<button type="submit" class="btn btn-blue"
-															style="margin-top: 0">送出</button>
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-							<!-- Modal edit profile -->
-							<div class="modal fade profile-info__modal" id="editProfileModal"
-								tabindex="-1" role="dialog"
-								aria-labelledby="editProfileModalTitle" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-lg"
-									role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="editProfileModalTitle">Edit
-												your Information</h5>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<form class="custom-form">
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group custom-form__input">
-															<label for="firstName">First Name</label> <input
-																type="text" class="form-control" id="firstName"
-																placeholder="">
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group custom-form__input">
-															<label for="lastName">Last Name</label> <input
-																type="text" class="form-control" id="lastName"
-																placeholder="">
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group custom-form__input">
-															<label for="email">Email Address</label> <input
-																type="email" class="form-control ltr" id="email"
-																placeholder="">
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group custom-form__input">
-															<label for="userName">Username</label> <input type="text"
-																class="form-control" id="userName" placeholder="">
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-										<div class="modal-footer custom-form__btn">
-											<button type="button" class="btn btn-close"
-												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-green">Save
-												changes</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!-- end Modal edit profile -->
 						</div>
 
 						<!-- portfolioAdd tab -->
 						<div class="tab-pane fade" id="v-pills-portfolioAdd"
 							role="tabpanel" aria-labelledby="v-pills-order-tab">
-							<div class="order-table order-table__collapse">
-								<div class="order-table__head">
-									<div class="order-table__row order-table__row--head">
-										<div class="order-table__cell order-table__cell--hash">#</div>
-										<div class="order-table__cell order-table__cell--id">Order
-											Number</div>
-										<div class="order-table__cell order-table__cell--date">Order
-											Date</div>
-										<div class="order-table__cell order-table__cell--receive">Deliver
-											date</div>
-										<div class="order-table__cell order-table__cell--price">Total
-											price</div>
-										<div class="order-table__cell order-table__cell--payment">Payment</div>
-										<div class="order-table__cell order-table__cell--details">Details</div>
+							<div class="col-xxl">
+								<div class="card mb-4">
+									<div
+										class="card-header d-flex align-items-center justify-content-between">
+										<h5 class="mb-0">作品編輯</h5>
 									</div>
-								</div>
-								<div class="order-table__body">
-									<div class="order-table__row">
-										<div class="order-table__cell order-table__cell--hash">1</div>
-										<div class="order-table__cell order-table__cell--id">
-											<div class="order-table__cell--heading">Order number</div>
-											<div class="order-table__cell--content id-content">
-												123456789</div>
-										</div>
-										<div class="order-table__cell order-table__cell--date">
-											<div class="order-table__cell--heading">Order Date</div>
-											<div class="order-table__cell--content date-content">22/06/2019</div>
-										</div>
-										<div class="order-table__cell order-table__cell--receive">
-											<div class="order-table__cell--heading">Deliver State</div>
-											<div class="order-table__cell--content receive-content">
-												<span
-													class="badge order-table__status order-table__status--progress">In
-													progress</span>
+									<div class="card-body">
+										<form method="post" action="UpdatedPortfolio"
+											enctype="multipart/form-data">
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label"
+													for="basic-default-name">作品名稱</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														id="basic-default-name" name="portfolioName"
+														value="${portfolioUpdate.portfolioName}" />
+												</div>
 											</div>
-										</div>
-										<div class="order-table__cell order-table__cell--price">
-											<div class="order-table__cell--heading">Total price</div>
-											<div class="order-table__cell--content  price-content">$1,500</div>
-										</div>
-										<div class="order-table__cell order-table__cell--payment">
-											<div class="order-table__cell--heading">Payment</div>
-											<div class="order-table__cell--content  payment-content">Master
-												card</div>
-										</div>
-										<div class="order-table__cell order-table__cell--details">
-											<div class="order-table__cell--heading">Details</div>
-											<div class="order-table__cell--content  details-content">
-												<a href="order-details.html#v-pills-order-tab">View more</a>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="houseArea">房屋區域</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="houseArea"
+														name="houseArea" value="${portfolioUpdate.houseArea}" />
+												</div>
 											</div>
-										</div>
-									</div>
-									<div class="order-table__row">
-										<div class="order-table__cell order-table__cell--hash">2</div>
-										<div class="order-table__cell order-table__cell--id">
-											<div class="order-table__cell--heading">Order number</div>
-											<div class="order-table__cell--content id-content">
-												123456789</div>
-										</div>
-										<div class="order-table__cell order-table__cell--date">
-											<div class="order-table__cell--heading">Order Date</div>
-											<div class="order-table__cell--content date-content">1/03/2019</div>
-										</div>
-										<div class="order-table__cell order-table__cell--receive">
-											<div class="order-table__cell--heading">Deliver State</div>
-											<div class="order-table__cell--content receive-content">
-												<span
-													class="badge order-table__status order-table__status--cancel">Canceled</span>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="houseAge">屋齡</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="houseAge"
+														name="houseAge" value="${portfolioUpdate.houseAge}" />
+												</div>
 											</div>
-										</div>
-										<div class="order-table__cell order-table__cell--price">
-											<div class="order-table__cell--heading">Total price</div>
-											<div class="order-table__cell--content  price-content">$500</div>
-										</div>
-										<div class="order-table__cell order-table__cell--payment">
-											<div class="order-table__cell--heading">Payment</div>
-											<div class="order-table__cell--content  payment-content">Paypal</div>
-										</div>
-										<div class="order-table__cell order-table__cell--details">
-											<div class="order-table__cell--heading">Details</div>
-											<div class="order-table__cell--content  details-content">
-												<a href="order-details.html#v-pills-order-tab">View more</a>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="houseSize">坪數</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="houseSize"
+														name="houseSize" value="${portfolioUpdate.houseSize}" />
+												</div>
 											</div>
-										</div>
-									</div>
-									<div class="order-table__row">
-										<div class="order-table__cell order-table__cell--hash">3</div>
-										<div class="order-table__cell order-table__cell--id">
-											<div class="order-table__cell--heading">Order number</div>
-											<div class="order-table__cell--content id-content">
-												123456789</div>
-										</div>
-										<div class="order-table__cell order-table__cell--date">
-											<div class="order-table__cell--heading">Order Date</div>
-											<div class="order-table__cell--content date-content">12/02/2019</div>
-										</div>
-										<div class="order-table__cell order-table__cell--receive">
-											<div class="order-table__cell--heading">Deliver State</div>
-											<div class="order-table__cell--content receive-content">
-												<span
-													class="badge order-table__status order-table__status--success">Delivered</span>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="description">作品內文</label>
+												<div class="col-sm-10">
+													<textarea id="description" class="form-control"
+														name="description" rows="8"
+														aria-describedby="basic-icon-default-message2">${portfolioUpdate.description}</textarea>
+												</div>
 											</div>
-										</div>
-										<div class="order-table__cell order-table__cell--price">
-											<div class="order-table__cell--heading">Total price</div>
-											<div class="order-table__cell--content  price-content">$1,850</div>
-										</div>
-										<div class="order-table__cell order-table__cell--payment">
-											<div class="order-table__cell--heading">Payment</div>
-											<div class="order-table__cell--content  payment-content">Master
-												card</div>
-										</div>
-										<div class="order-table__cell order-table__cell--details">
-											<div class="order-table__cell--heading">Details</div>
-											<div class="order-table__cell--content  details-content">
-												<a href="order-details.html#v-pills-order-tab">View more</a>
+											<div class="row mb-3">
+												<label for="formFile " class=" col-sm-2 col-form-label">圖片1</label>
+												<div class="col-sm-10">
+													<input class="form-control" type="file" id="formFile"
+														name="portfolioPic1" accept="image/png, image/jpeg" />
+												</div>
+												<div class="col-sm-10">
+													<img
+														src="<%=request.getContextPath()%>/PortfolioPic1?portfolioNo=${portfolioUpdate.portfolioNo}"
+														height="20%" width="20%" alt="">
+												</div>
 											</div>
-										</div>
+											<div class="row mb-3">
+												<label for="portfolioPic2 " class=" col-sm-2 col-form-label">圖片2</label>
+												<div class="col-sm-10">
+													<input class="form-control" type="file" id="portfolioPic2"
+														name="portfolioPic2" accept="image/png, image/jpeg" />
+												</div>
+											</div>
+											<div class="row mb-3">
+												<label for="portfolioPic3 " class=" col-sm-2 col-form-label">圖片3</label>
+												<div class="col-sm-10">
+													<input class="form-control" type="file" id="portfolioPic3"
+														name="portfolioPic3" accept="image/png, image/jpeg" />
+												</div>
+											</div>
+											<div class="row mb-3">
+												<label for="portfolioPic4 " class=" col-sm-2 col-form-label">圖片4</label>
+												<div class="col-sm-10">
+													<input class="form-control" type="file" id="portfolioPic4"
+														name="portfolioPic4" accept="image/png, image/jpeg" />
+												</div>
+											</div>
+											<div class="row justify-content-end">
+												<!-- <div class="col-sm-10"> -->
+												<button type="submit" class="btn btn-primary">送出</button>
+												<input type="hidden" name="action" value="update"> <input
+													type="hidden" name="portfolioNo"
+													value="${portfolioUpdate.portfolioNo}" /> <input
+													type="hidden" name="designerNo"
+													value="${portfolioUpdate.designerNo}" />
+												<!-- </div> -->
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-							<!-- empty account tab -->
-							<!--                        <div class="row">-->
-							<!--                            <div class="col-12">-->
-							<!--                                <div class="notice-wrapper">-->
-							<!--                                    <p>There is no item added here. <a href="shop-sidebar-right.html" class="notice-wrapper__link">GO Shop</a></p>-->
-							<!--                                </div>-->
-							<!--                            </div>-->
-							<!--                        </div>-->
-							<!-- empty account tab -->
 						</div>
 
 					</div>
@@ -576,14 +519,7 @@ pageContext.setAttribute("list", list);
 	<!-- scroll up btn -->
 	<a id="back-to-top"></a>
 	<!-- end scroll up btn -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
+	
 
 	<!-- stopPropagation -->
 	<script>

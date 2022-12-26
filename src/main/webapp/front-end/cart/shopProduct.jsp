@@ -4,28 +4,6 @@
 <%@ page import="com.productpic.model.*"%>
 <%@ page import="com.cart.model.*"%>
 
-<%
-User auth = (User)request.getSession().getAttribute("auth");
-if(auth!=null){
-	request.setAttribute("auth", auth);
-}
-%>
-
-<%
-ShopProductService shopProductService = new ShopProductService();
-ShopProduct shopProductVO = (ShopProduct) request.getAttribute("shopProductVO");
-List<Map<String, Object>> list = shopProductService.getAll();
-pageContext.setAttribute("list", list);
-
-
-
-ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
-if(cart_list != null){
-	request.setAttribute("cart_list", cart_list);
-}
-%>
-
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -148,7 +126,7 @@ th, td {
             </div>
             <!-- navbar cart icon -->
             <div class="main-navbar-action__btn nav-dropdown">
-                <a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp">
+                <a class="dropdown-link" data-target="cartmenu" href="/TGA104_G4/ShowCart">
                     <span class="cart-badge">${cart_list.size()}</span>
                     <i class="icon-shopping-bag"></i>
                 </a>
@@ -206,7 +184,7 @@ th, td {
 <%-- 							<a href="<%=request.getContextPath()%>/OrderNowServlet?quantity=1&id=${shopProductVO.productNo}" class="btn btn-primary">直接購買</a> --%>
 <!-- 							<input class="btn btn-dark" type="submit" name="Submit" value="加入購物車"> -->
 <!-- 							<input class="btn btn-primary" type="submit" name="Submit" value="直接購買"> -->
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>

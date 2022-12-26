@@ -44,7 +44,9 @@ private static final long serialVersionUID = 1L;
 			/*************************** 2.開始新增資料 ***************************************/
 			ProductTypeService productTypeSvc = new ProductTypeService();
 			productTypeVO = productTypeSvc.addProductType(productTypeName);
-
+			
+			List<ProductTypeVO> list = productTypeSvc.getAll();
+			req.setAttribute("list", list);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/back-end/producttype/listAllProductType.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交selectProduct_page.jsp

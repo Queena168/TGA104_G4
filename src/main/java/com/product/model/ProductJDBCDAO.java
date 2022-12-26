@@ -10,44 +10,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.producttype.model.ProductTypeVO;
 
-public class ProductJDBCDAO implements ProductDAO_interface{
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+public class ProductJDBCDAO implements ProductDAO_interface {
 
-	private static final String GET_ALL_STMT = 
-			"SELECT productNo, productTypeNo, productName, stock, price, productDescription, productStatus, adminNo FROM Product order by productTypeNo";
-	private static final String INSERT_STMT = 
-			"insert into Product(productTypeNo, productName, stock, price, productDescription, productStatus, adminNo)"
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static final String GET_ALL_STMT = "SELECT productNo, productTypeNo, productName, stock, price, productDescription, productStatus, adminNo FROM Product order by productTypeNo";
+	private static final String INSERT_STMT = "insert into Product(productTypeNo, productName, stock, price, productDescription, productStatus, adminNo)"
 			+ " " + "values(?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE = 
-			"UPDATE Product set productTypeNo=?, productName=?, stock=?, price=?, productDescription=?, productStatus=? , adminNo=? where productNo=?";
-	private static final String GET_ONE_STMT = 
-			"SELECT productNo, productTypeNo, productName, stock, price, productDescription, productStatus, adminNo FROM Product where productNo = ?";
-	private static final String DELETE = 
-			"DELETE FROM Product where productNo = ?";
-	private static final String SHOW = 
-			"select ProductType.productTypeName, Product.productName from ProductType join Product on ProductType.productTypeNo = Product.productTypeNo";
-	private static final String LIST_ALL_PRODUCT = 
-			"select Product.productNo, ProductType.productTypeName, Product.productName, Product.stock, Product.price, "
+	private static final String UPDATE = "UPDATE Product set productTypeNo=?, productName=?, stock=?, price=?, productDescription=?, productStatus=? , adminNo=? where productNo=?";
+	private static final String GET_ONE_STMT = "SELECT productNo, productTypeNo, productName, stock, price, productDescription, productStatus, adminNo FROM Product where productNo = ?";
+	private static final String DELETE = "DELETE FROM Product where productNo = ?";
+	private static final String SHOW = "select ProductType.productTypeName, Product.productName from ProductType join Product on ProductType.productTypeNo = Product.productTypeNo";
+	private static final String LIST_ALL_PRODUCT = "select Product.productNo, ProductType.productTypeName, Product.productName, Product.stock, Product.price, "
 			+ "Product.productDescription, Product.productStatus, min(pic), adminNo  "
 			+ "from (ProductType join Product on ProductType.productTypeNo = Product.productTypeNo) "
 			+ "join ProductPic on Product.productNo = ProductPic.productNo group by ProductPic.productNo;";
 
 	@Override
 	public void insert(ProductVO productVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(INSERT_STMT)) {
 			pstmt.setInt(1, productVO.getProductTypeNo());
 			pstmt.setString(2, productVO.getProductName());
 			pstmt.setInt(3, productVO.getStock());
@@ -57,44 +54,15 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 			pstmt.setInt(7, productVO.getAdminNo());
 
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void update(ProductVO productVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE)) {
 			pstmt.setInt(1, productVO.getProductTypeNo());
 			pstmt.setString(2, productVO.getProductName());
 			pstmt.setInt(3, productVO.getStock());
@@ -105,92 +73,20 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 			pstmt.setInt(8, productVO.getProductNo());
 
 			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void delete(Integer productNo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
-
-			pstmt.setInt(1, productNo);
-
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public ProductVO findByPrimaryKey(Integer productNo) {
-
 		ProductVO productVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_ONE_STMT)) {
 			pstmt.setInt(1, productNo);
-
-			rs = pstmt.executeQuery();
-
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-
 				productVO = new ProductVO();
 				productVO.setProductNo(rs.getInt("productNo"));
 				productVO.setProductTypeNo(rs.getInt("productTypeNo"));
@@ -201,36 +97,8 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 				productVO.setProductStatus(rs.getString("productStatus"));
 				productVO.setAdminNo(rs.getInt("adminNo"));
 			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return productVO;
 	}
@@ -239,19 +107,11 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 	public List<ProductVO> getAll() {
 		List<ProductVO> list = new ArrayList<ProductVO>();
 		ProductVO productVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(GET_ALL_STMT)) {
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ProductVO 也稱為 Domain objects
 				productVO = new ProductVO();
 				productVO.setProductNo(rs.getInt("productNo"));
 				productVO.setProductTypeNo(rs.getInt("productTypeNo"));
@@ -263,35 +123,8 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 				productVO.setAdminNo(rs.getInt("adminNo"));
 				list.add(productVO); // Store the row in the list
 			}
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return list;
 	}
@@ -301,19 +134,11 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 		List<ProductVO> list = new ArrayList<ProductVO>();
 		ProductVO productVO = null;
 		ProductTypeVO productTypeVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SHOW);
-			rs = pstmt.executeQuery();
-
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SHOW)) {
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ProductVO 也稱為 Domain objects
 				productVO = new ProductVO();
 				productTypeVO = new ProductTypeVO();
 
@@ -322,43 +147,16 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 
 				list.add(productVO); // Store the row in the list
 			}
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return list;
 	}
 
 	public List<Map<String, Object>> showAll2() {
-		try (Connection con = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = con.prepareStatement(SHOW);
-				ResultSet rs = pstmt.executeQuery();) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SHOW);) {
+			ResultSet rs = pstmt.executeQuery();
 			List<Map<String, Object>> list = new ArrayList<>();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<>();
@@ -375,9 +173,9 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 
 	@Override
 	public List<Map<String, Object>> listAllProduct() {
-		try (Connection con = DriverManager.getConnection(url, userid, passwd);
-				PreparedStatement pstmt = con.prepareStatement(LIST_ALL_PRODUCT);
-				ResultSet rs = pstmt.executeQuery();) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(LIST_ALL_PRODUCT);) {
+			ResultSet rs = pstmt.executeQuery();
 			List<Map<String, Object>> list = new ArrayList<>();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<>();
@@ -459,7 +257,7 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 //		for (Map<String, Object> keys : list) {
 //			System.out.println(keys);
 //		}
-		
+
 		// 查詢商品資訊
 		List<Map<String, Object>> list = dao.listAllProduct();
 		for (Map<String, Object> keys : list) {
