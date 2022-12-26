@@ -357,7 +357,7 @@
 										</form>
 										<br>
 										<jsp:useBean id="adminSvc" scope="page"
-											class="com.admin.model.AdminService" />
+											class="com.tibame.admin.model.AdminService" />
 										<form method="post" action="admin.do">
 											<div class="row gx-3 gy-2 align-items-center">
 												<div class="col-md-3">
