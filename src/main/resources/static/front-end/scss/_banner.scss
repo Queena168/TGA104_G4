@@ -1,0 +1,228 @@
+/*----------------------------------------*/
+/*           05. banner CSS
+/*----------------------------------------*/
+.banner {
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  position: relative;
+
+  /* full width banner style 01 */
+  &-full {
+    &__inner {
+      @include align-self(center);
+      padding: 6.25rem 0;
+      text-transform: capitalize;
+      margin-bottom: .375rem;
+      @include mx-bp-medium {
+        text-align: center;
+        padding: 3.25rem 0;
+      }
+
+      & h3 {
+        color: $sunset-orange;
+        font-weight: 900;
+        font-size: 1.25rem;
+
+        @include bp-medium {
+          font-size: 1.5rem;
+        }
+      }
+
+      h2 {
+        color: $dark-gray;
+        font-size: 1.5rem;
+        font-weight: 900;
+        @include bp-medium {
+          font-size: 2rem;
+        }
+        @include bp-large {
+          font-size: 2.5rem;
+        }
+      }
+
+      & .btn {
+        @extend %btn-dark;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  /* banner style 02 */
+  &.style2 {
+    @include border-radius(.4rem);
+
+    & .banner {
+      &__col {
+        position: relative;
+        overflow: hidden;
+        display: block;
+        @include border-radius(0.4rem);
+        @include mx-bp-large {
+          margin-bottom: 1.875rem;
+        }
+
+        & .banner-img {
+          overflow: hidden;
+
+          & img {
+            width: 100%;
+            @include transform(scale(1));
+            @include transition(all .3s ease-in);
+          }
+        }
+
+        & .banner-inner {
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin-right: auto;
+          max-width: 80%;
+          padding: 1.25rem;
+          color: $dark-gray;
+          text-transform: capitalize;
+          @include transition(all 0.3s ease-in-out);
+          @include bp-medium {
+            padding: 1.625rem 0 2rem 2rem;
+          }
+
+          &--center {
+            top: 50%;
+            text-align: center;
+            @include transform(translateY(-50%));
+          }
+
+          & > a:first-child {
+            display: block;
+          }
+
+          & .title {
+            font-size: 1.1rem;
+            margin: 0;
+            line-height: 30px;
+            @extend %text-truncate;
+            @include bp-medium {
+              font-size: 1.5rem;
+            }
+          }
+
+          & .sub-title {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            color: $dark-gray;
+            @include bp-medium {
+              font-size: 1.75rem;
+            }
+          }
+
+          & .banner-btn {
+            @extend %btn-dark;
+            margin-top: 5px;
+            font-size: 1rem;
+          }
+        }
+
+        &:hover {
+          & .banner-img {
+            & img {
+              @include transform(scale(1.03));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// call to action subscribe
+.newsletter-banner {
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  &:before {
+    content: '';
+    background: $black;
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  &__content {
+    text-align: center;
+    color: $white;
+    padding: 3.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    position: relative;
+    @include bp-medium {
+      padding: 6.25rem 0;
+    }
+
+    & h3 {
+      font-size: 1.25rem;
+      margin-bottom: .5rem;
+      font-weight: 600;
+      @include bp-medium {
+        font-size: 1.75rem;
+      }
+    }
+
+    & span {
+      display: block;
+      font-size: 1rem;
+      text-align: center;
+      color: $yellow;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      text-shadow: -1px 0px 0px rgba($dark-gray, .25);
+      @include bp-medium {
+        font-size: 1.25rem;
+      }
+    }
+
+    & .input-group {
+      margin: 0 auto;
+      margin-bottom: .375rem;
+
+      & .form-control {
+        background: transparent;
+        color: $white;
+        border: none;
+        border-bottom: 1px solid $white;
+        @include border-radius(0);
+
+        &::placeholder {
+          color: $white;
+        }
+
+        &:focus {
+          -webkit-text-fill-color: $white;
+          @include box-shadow(0 0 0px 1000px transparent inset);
+        }
+      }
+
+      & .input-group-append {
+        & .btn {
+          color: $yellow;
+          font-size: 1rem;
+          padding: .375rem .75rem;
+          border: none;
+          border-bottom: 1px solid $white;
+          @include border-radius(0);
+        }
+      }
+    }
+  }
+}
+

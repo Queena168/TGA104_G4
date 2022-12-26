@@ -1,0 +1,70 @@
+/*----------------------------------------*/
+/*           18. contact CSS
+/*----------------------------------------*/
+
+.contact-info {
+  @include mx-bp-large {
+    margin-top: 1.875rem;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    @include bp-medium {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__list {
+    &--item {
+      & strong {
+        width: 85px;
+        display: inline-block;
+        font-size: 1rem;
+      }
+
+      &:not(:last-child) {
+        padding-bottom: .75rem;
+      }
+
+      & span {
+        color: $gray;
+      }
+    }
+  }
+
+  &__social {
+    padding-top: 1rem;
+
+    & > li {
+      display: inline-block;
+      padding: 0 0.5rem 0 0;
+      font-size: 1rem;
+
+      & > a {
+        color: $dark-gray;
+        @include transition(0.3s ease);
+      }
+
+      &:hover {
+        & > a {
+          color: $yellow;
+        }
+      }
+    }
+  }
+}
+
+.location {
+  margin-top: 2.875rem;
+  @include bp-large {
+    margin-top: 4.875rem;
+  }
+
+  #map {
+    height: 400px;
+    width: 100%;
+    background: #F5F5F5;
+  }
+}

@@ -1,0 +1,269 @@
+/*----------------------------------------*/
+/*           17. about CSS
+/*----------------------------------------*/
+
+.about-area {
+  &__content {
+    @include mx-bp-large {
+      padding-top: 1.875rem;
+    }
+
+    & h1 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      @include bp-medium {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+}
+
+/* text box */
+.text-box {
+  position: relative;
+  @include mx-bp-large {
+    margin-bottom: 1.875rem;
+  }
+
+  &__num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba($gainsboro, 0.45);
+    font-size: 4.5rem;
+    font-weight: 600;
+    line-height: 1;
+    writing-mode: vertical-rl;
+    @include transform(rotate(180deg));
+  }
+
+  &__inner {
+    position: relative;
+    padding-left: 85px;
+
+    &--title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      @include bp-medium {
+        font-size: 1.25rem;
+      }
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+
+}
+
+/* video player */
+.video-wrapper {
+  & > div {
+    margin: 0 auto;
+  }
+
+  & video {
+    width: 100%;
+    height: auto;
+  }
+
+  & .play-btn {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-transform: uppercase;
+    color: $dark-gray;
+    background: $white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    display: block;
+    border: 0;
+    @include transform(translate(-50%, -50%));
+    @include border-radius(50%);
+    @include box-shadow(0 0 15px 26px rgba(250, 250, 250, 0.4));
+    @include animation(pulse 3s infinite);
+    @include bp-medium {
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+    }
+
+    &:hover {
+      @include animation(none);
+      @include box-shadow(none);
+    }
+
+    & i {
+      margin-left: .25rem;
+      font-size: 0.875rem;
+      @include bp-medium {
+        font-size: 1.2rem;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(250, 250, 250, 0.4);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 20px rgba(250, 250, 250, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(250, 250, 250, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(250, 250, 250, 0.4);
+    box-shadow: 0 0 0 0 rgba(250, 250, 250, 0.4);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 20px rgba(250, 250, 250, 0);
+    box-shadow: 0 0 0 20px rgba(250, 250, 250, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(250, 250, 250, 0);
+    box-shadow: 0 0 0 0 rgba(250, 250, 250, 0);
+  }
+}
+
+/* clients section */
+.client-slider {
+  border: 1px solid $gainsboro;
+  padding: 2rem;
+
+  & .owl-carousel {
+    & .item {
+      opacity: .4;
+      cursor: pointer;
+      @include transition(opacity .3s);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* team section */
+.team-card {
+  position: relative;
+  cursor: pointer;
+
+  &__overlay {
+    background-color: rgba($dark-blue, 0.8);
+    opacity: 0;
+    visibility: hidden;
+    color: $white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include transition(all 0.3s);
+  }
+
+  &__inner {
+    @include d-flex;
+    @include flex-direction(column);
+    @include align-items(center);
+    @include justify-content(center);
+
+
+    & .team-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      opacity: 0;
+      @include transform(translateY(25px));
+      @include transition(all 0.45s cubic-bezier(0.19, 1, 0.22, 1));
+    }
+
+    & .team-pos {
+      font-size: .8rem;
+      text-transform: capitalize;
+      opacity: 0;
+      @include transform(translateY(25px));
+      @include transition(all 0.45s cubic-bezier(0.19, 1, 0.22, 1));
+      @include transition-delay(0.1s);
+    }
+  }
+
+  &:hover {
+    & .team-card__overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    & .team-card__inner {
+      & .team-name {
+        opacity: 1;
+        @include transform(translateY(0));
+      }
+
+      & .team-pos {
+        opacity: 1;
+        @include transform(translateY(0));
+        @include transition-delay(0.1s);
+      }
+    }
+  }
+}
+
+/* team owl carousel nav custom styles */
+#teamCarousel {
+  &.owl-carousel {
+    & .owl-nav [class*=owl-] {
+      position: absolute;
+      top: 50%;
+      cursor: pointer;
+      color: $gray;
+      background: transparent;
+      border: none;
+      margin: 0;
+      font-size: 1.2rem;
+      opacity: 0;
+      text-shadow: 0 1px 2px $gray;
+      @include transform(translateY(-50%));
+      @include transition(all .4s ease);
+      z-index: 200;
+
+      &.owl-prev {
+        left: -10px;
+      }
+
+      &.owl-next {
+        right: -10px;
+      }
+
+      &:hover {
+        color: $white;
+        background: transparent;
+        border: none;
+      }
+    }
+
+    &:hover {
+      & .owl-nav [class*=owl-] {
+        opacity: 1;
+
+        &.owl-prev {
+          left: 10px;
+        }
+
+        &.owl-next {
+          right: 10px;
+        }
+      }
+    }
+  }
+}
+

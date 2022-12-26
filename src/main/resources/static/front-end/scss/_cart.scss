@@ -1,0 +1,205 @@
+/*----------------------------------------*/
+/*          13. cart CSS
+/*----------------------------------------*/
+
+
+// cart items
+.item-cart {
+  @include mx-bp-large {
+    padding-bottom: 1.875rem;
+  }
+
+  &__row {
+    border-bottom: 1px solid rgba($gainsboro, 0.45);
+    width: 100%;
+    @include d-flex;
+    @include flex-wrap(wrap);
+    @include mx-bp-small {
+      position: relative;
+    }
+
+    &--img {
+      @include d-flex;
+      @include flex(6);
+      @include justify-content(flex-start);
+      @include mx-bp-small {
+        @include flex-wrap(wrap);
+      }
+
+      & img {
+        width: 120px;
+      }
+
+      & .delete-item {
+        @include d-flex;
+        @include align-items(center);
+        padding: 1rem 1rem 1rem 0;
+        font-size: 1.25rem;
+
+        @include mx-bp-small {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          -webkit-flex-basis: 100%;
+          flex-basis: 100%;
+          padding: 0;
+        }
+      }
+
+      & > a {
+        @include d-flex;
+        @include align-items(center);
+        @include mx-bp-small {
+          flex-basis: 100%;
+        }
+
+        & > img {
+          padding: 1rem;
+          border-left: 1px solid rgba($gainsboro, 0.45);
+          @include mx-bp-small {
+            border-left: none;
+          }
+        }
+
+        & > span {
+          @extend %text-truncate;
+          margin-right: .3rem;
+        }
+      }
+    }
+
+    &--details {
+      @include d-flex;
+      @include flex(8);
+      @include justify-content(space-between);
+      @include mx-bp-small {
+        padding-bottom: 1rem;
+        -webkit-flex-basis: 500px;
+        flex-basis: 500px;
+      }
+
+      & .quantity {
+        @include mx-bp-medium {
+          padding: 0 .5rem;
+        }
+
+        &__input {
+          text-align: center;
+          margin: 0 5px;
+        }
+
+        &__minus, &__plus {
+          cursor: pointer;
+        }
+      }
+
+      & > * {
+        @include d-flex;
+        @include align-items(center);
+        @include flex(1);
+        text-align: center;
+        @include justify-content(center);
+        border-left: 1px solid rgba($gainsboro, 0.45);
+        @include mx-bp-small {
+          border-left: none;
+        }
+      }
+    }
+  }
+
+  #noBorder & {
+    &__row {
+      &--img {
+        & > a {
+          & > img {
+            border-left: none;
+          }
+        }
+      }
+
+      &--details {
+        & > * {
+          border-left: none;
+        }
+      }
+    }
+  }
+}
+
+// cart informations
+.cart-info {
+  &--row {
+    @include bp-large {
+      margin-top: 1.875rem;
+    }
+  }
+}
+
+// total cart information
+.total-info {
+  @include d-flex;
+  @include flex-direction(column);
+  padding: 1rem;
+  border: 1px solid rgba($gainsboro, 0.45);
+  background: $white;
+  @include border-radius(.4rem);
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__subprice,
+  &__totalprice {
+    padding: 1rem 0;
+
+    span:last-child {
+      float: right;
+      clear: both;
+    }
+  }
+
+  &__subprice {
+    border-bottom: 1px solid rgba($gainsboro, 0.45);
+  }
+
+  &__btn {
+    text-align: right;
+
+    & .btn {
+      @extend %btn-light-green;
+    }
+  }
+}
+
+// coupon code
+.coupon {
+  &--mt {
+    margin-top: 1.5rem;
+  }
+
+  &__code {
+    & .form-control {
+      border: 1px solid transparent;
+      padding: .375rem 1rem;
+      @include border-radius(1.5rem);
+      background: $white-lilac;
+      height: calc(2.25rem + 6px);
+
+      &:focus {
+        border: 1px solid $yellow;
+        @include transition(border .3s ease-in-out 0s);
+      }
+    }
+
+    &--mt {
+      @include mx-bp-large {
+        margin-top: 1.5rem;
+      }
+    }
+
+    & .btn {
+      @extend %btn-yellow;
+    }
+  }
+}

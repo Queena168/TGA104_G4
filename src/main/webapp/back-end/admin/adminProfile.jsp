@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.admin.model.*"%>
+<%@ page import="com.tibame.admin.model.*"%>
 
 <%
 AdminVO adminVO = (AdminVO) request.getAttribute("adminVO"); //AdminServlet.java (Concroller) 存入req的AdminVO物件 (包括幫忙取出的AdminVO, 也包括輸入資料錯誤時的AdminVO物件)

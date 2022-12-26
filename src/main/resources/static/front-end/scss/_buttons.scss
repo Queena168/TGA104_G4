@@ -1,0 +1,139 @@
+/*----------------------------------------*/
+/*           buttons
+/*----------------------------------------*/
+
+// buttons
+.btn {
+  border: 1px solid;
+  font-size: 1rem;
+  padding: 0.375rem 1.25rem;
+  @include border-radius(1.5rem);
+  @include transition(all .3s ease);
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+%btn-yellow {
+  background: $yellow;
+  border-color: $yellow;
+  color: $white;
+
+  &:hover {
+    background: darken($yellow, 5%);
+    border-color: darken($yellow, 5%);
+    color: $white;
+  }
+}
+
+%btn-yellow-outline {
+  background-color: $white;
+  border-color: $yellow;
+  color: $yellow;
+
+  &:hover {
+    background-color: $yellow;
+    color: $white;
+  }
+}
+
+%btn-light {
+  background-color: $light-gray;
+  border-color: $light-gray;
+  color: $dark-gray;
+
+  &:hover {
+    background: darken($light-gray, 5%);
+    color: $dark-gray;
+  }
+}
+
+%btn-light-outline {
+  background: transparent;
+  border-color: $light-gray;
+  color: $light-gray;
+
+  &:hover {
+    background-color: $light-gray;
+    color: $dark-gray;
+  }
+}
+
+%btn-light-green {
+  background-color: $light-green;
+  border-color: $light-green;
+  color: $white;
+
+  &:hover {
+    background: darken($light-green, 5%);
+    color: $white;
+  }
+}
+
+%btn-blue {
+  background-color: $viking-blue;
+  border-color: $viking-blue;
+  color: $white;
+
+  &:hover {
+    background: darken($viking-blue, 5%);
+    color: $white;
+  }
+}
+
+%btn-red {
+  background-color: $sunset-orange;
+  border-color: $sunset-orange;
+  color: $white;
+
+  &:hover {
+    background: darken($sunset-orange, 5%);
+    color: $white;
+  }
+}
+
+%btn-red-outline {
+  background-color: transparent;
+  border-color: $sunset-orange;
+  color: $sunset-orange;
+
+  &:hover {
+    background-color: $sunset-orange;
+    color: $white;
+  }
+}
+
+%btn-dark {
+  background-color: $dark-gray;
+  border-color: $dark-gray;
+  color: $white;
+
+  &:hover {
+    background: darken($dark-gray, 5%);
+    color: $white;
+  }
+}
+
+%btn-dark-outline {
+  background-color: transparent;
+  border-color: $dark-gray;
+  color: $dark-gray;
+
+  &:hover {
+    background-color: $dark-gray;
+    color: $white;
+  }
+}
+
+%btn-gray {
+  background: $gray;
+  border-color: $gray;
+  color: $white;
+
+  &:hover {
+    background: darken($gray, 5%);
+    border-color: darken($gray, 5%);
+    color: $white;
+  }
+}
