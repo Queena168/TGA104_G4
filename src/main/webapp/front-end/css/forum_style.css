@@ -113,11 +113,11 @@ button {
 }
 
 .table-head .status {
-	flex: 5%;
+	flex: 10%;
 }
 
 .table-head .subjects {
-	flex: 65%;
+	flex: 60%;
 }
 
 .table-head .replies {
@@ -141,13 +141,13 @@ button {
 }
 
 .table-row .status {
-	flex: 5%;
+	flex: 10%;
 	text-align: center;
 	line-height: 72px;
 }
 
 .table-row .subjects {
-	flex: 65%;
+	flex: 60%;
 }
 
 .table-row .replies {
