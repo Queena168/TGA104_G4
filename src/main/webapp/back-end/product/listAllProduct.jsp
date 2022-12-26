@@ -13,7 +13,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign ListAllAdmin</title>
+<title>MatDesign ListAllProduct</title>
 
 <meta name="description" content="" />
 
@@ -31,30 +31,30 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet" href="../../back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/core.css"
+<link rel="stylesheet" href="../../back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="../assets/vendor/css/theme-default.css"
+<link rel="stylesheet" href="../../back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="../assets/css/demo.css" />
+<link rel="stylesheet" href="../../back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+	href="../../back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet"
-	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+	href="../../back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
 
 <!-- Helpers -->
-<script src="../assets/vendor/js/helpers.js"></script>
+<script src="../../back-end/assets/vendor/js/helpers.js"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="../assets/js/config.js"></script>
+<script src="../../back-end/assets/js/config.js"></script>
 </head>
 <body bgcolor='white'>
 <body>
@@ -377,6 +377,20 @@
 							</div>
 						</div>
 					</footer>
+					<!-- Footer -->
+					<footer class="content-footer footer bg-footer-theme">
+						<div
+							class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+							<div class="mb-2 mb-md-0">
+								©
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+								, made by <a href="#" target="_blank"
+									class="footer-link fw-bolder">MatDesign</a>
+							</div>
+						</div>
+					</footer>
 					<!-- / Footer -->
 
 					<div class="content-backdrop fade"></div>
@@ -393,25 +407,24 @@
 
 	<!-- Core JS -->
 	<!-- build:js assets/vendor/js/core.js -->
-	<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="../assets/vendor/libs/popper/popper.js"></script>
-	<script src="../assets/vendor/js/bootstrap.js"></script>
+	<script src="../../back-end/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="../../back-end/assets/vendor/libs/popper/popper.js"></script>
+	<script src="../../back-end/assets/vendor/js/bootstrap.js"></script>
 	<script
-		src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		src="../../back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-	<script src="../assets/vendor/js/menu.js"></script>
+	<script src="../../back-end/assets/vendor/js/menu.js"></script>
 	<!-- endbuild -->
 
 	<!-- Vendors JS -->
-	<script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+	<script src="../../back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 	<!-- Main JS -->
-	<script src="../assets/js/main.js"></script>
-	<script src="../assets/js/main.js"></script>
+	<script src="../../back-end/assets/js/main.js"></script>
 
 
 	<!-- Page JS -->
-	<script src="../assets/js/dashboards-analytics.js"></script>
+	<script src="../../back-end/assets/js/dashboards-analytics.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -16,7 +16,7 @@ import com.producttype.model.ProductTypeVO;
 /**
  * Servlet implementation class UpdateProductServlet
  */
-@WebServlet("/UpdateProductServlet")
+@WebServlet("/back-end/product/UpdateProductServlet")
 public class UpdateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -19,9 +19,7 @@ import com.cart.model.ShopProductService;
 import com.product.model.ProductService;
 import com.product.model.ProductVO;
 
-/**
- * Servlet implementation class ShowShop
- */
+
 @WebServlet("/ShowShop")
 public class ShowShop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,15 +39,11 @@ public class ShowShop extends HttpServlet {
 		}
 		
 		String url = "/front-end/cart/shopProduct.jsp";
-		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+		RequestDispatcher successView = req.getRequestDispatcher(url);
 		successView.forward(req, res);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(req, res);
 	}
 
