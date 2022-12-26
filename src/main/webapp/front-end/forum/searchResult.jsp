@@ -123,7 +123,7 @@
     <!-- Search Start -->
     <div class="forum_container">
         <!--Navigation-->
-        <div class="navigate">
+        <div class="navigate AutoSkip">
             <span><a href="forumIndex.do">論壇首頁</a> </span>
         </div>
         <div class="posts-table">

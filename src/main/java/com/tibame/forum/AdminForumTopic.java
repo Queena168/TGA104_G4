@@ -15,7 +15,7 @@ import com.tibame.admin.model.AdminVO;
 import com.tibame.forum_topic.model.ForumTopicService;
 import com.tibame.forum_topic.model.ForumTopicVO;
 
-@WebServlet("/back-end/forum/adminTopic.do")
+@WebServlet("/back-end/forum/adminForumTopic.do")
 public class AdminForumTopic extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +39,7 @@ public class AdminForumTopic extends HttpServlet {
 		request.setAttribute("adminVOList", adminVOList);
 		// 取得所有管理員AdminVO，存入attribute
 
-		RequestDispatcher successView = request.getRequestDispatcher("/back-end/forum/Admin-Forum-ForumMaintain.jsp");
+		RequestDispatcher successView = request.getRequestDispatcher("/back-end/forum/adminForumTopic.jsp");
 		successView.forward(request, response);
 	}
 }

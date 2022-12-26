@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.tibame.forum_post.model.ForumPostService;
 import com.tibame.forum_reply.model.ForumReplyService;
 
-@WebServlet("/back-end/forum/adminAll.do")
+@WebServlet("/back-end/forum/adminForumAll.do")
 public class AdminForumAll extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -70,7 +70,7 @@ public class AdminForumAll extends HttpServlet {
 		// 3.每頁幾筆資料，得到陣列[0]=該分頁內資料起始索引，陣列[1]=總頁數，存入attribute
 
 		RequestDispatcher successView = request.getRequestDispatcher(
-				"/back-end/forum/Admin-Forum-ForumList.jsp?page=" + page + "&listname=" + listname);
+				"/back-end/forum/adminForumAll.jsp?page=" + page + "&listname=" + listname);
 		successView.forward(request, response);
 	}
 }

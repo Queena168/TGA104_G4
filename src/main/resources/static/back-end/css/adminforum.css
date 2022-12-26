@@ -1,8 +1,49 @@
+.contentPopup {
+	display: none;
+	position: fixed;
+	left: 26%;
+	top: 20%;
+	border: 3px solid #999999;
+	z-index: 9;
+	width: 60%;
+	height: 60%;
+}
+
+.contentContainer {
+	height: 100%;
+	padding: 10px;
+	background-color: #fff;
+	overflow: scroll;
+}
+
+.reasonContainer {
+	height: 220px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+.reasonPopup {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 30%;
+	border: 3px solid #999999;
+	z-index: 9;
+}
+
 .btn_style {
 	border: none;
 	border-radius: 5px;
 	background-color: #738d9e;
 	color: white;
+}
+
+.closeContent {
+	border: none;
+	border-radius: 5px;
+	background-color: #CC0000;
+	color: white;
+	position: absolute;
 }
 
 .closeReason {
@@ -15,60 +56,34 @@
 	right: 10px;
 }
 
-.closeContent {
-	border: none;
-	border-radius: 5px;
-	background-color: #CC0000;
-	color: white;
-	position: absolute;
-	top: 10px;
-	left: 10px;
+/* ########################################### */
+/*                  RWD                        */
+/* ########################################### */
+
+/* For the tablets */
+@media screen and (min-width: 460px) and (max-width: 1024px) {
+	.contentPopup {
+		width: 90%;
+		height: 50%;
+		left: 5%;
+		top: 20%;
+	}
+	.reasonPopup {
+		left: 30%;
+		top: 27%;
+	}
 }
 
-.reasonPopup {
-	display: none;
-	position: fixed;
-	left: 50%;
-	top: 25%;
-	border: 3px solid #999999;
-	z-index: 9;
-}
-
-.titlePopup {
-	display: none;
-	position: fixed;
-	left: 50%;
-	top: 25%;
-	border: 3px solid #999999;
-	z-index: 9;
-}
-
-.contentPopup {
-	display: none;
-	position: fixed;
-	left: 22%;
-	top: 15%;
-	border: 3px solid #999999;
-	z-index: 9;
-	width: 77%;
-	height: 80%;
-}
-
-.reasonContainer {
-	height: 220px;
-	padding: 10px;
-	background-color: #fff;
-}
-
-.titleContainer {
-	height: 130px;
-	padding: 10px;
-	background-color: #fff;
-}
-
-.contentContainer {
-	height: 100%;
-	padding: 10px;
-	background-color: #fff;
-	overflow: scroll;
+/* For the smartphones */
+@media screen and (max-width: 460px) {
+	.contentPopup {
+		width: 90%;
+		height: 38%;
+		left: 5%;
+		top: 45%;
+	}
+	.reasonPopup {
+		left: 19%;
+		top: 45%;
+	}
 }

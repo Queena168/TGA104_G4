@@ -13,10 +13,10 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>檢舉查核</title>
+  <title>文章清單</title>
 
   <meta name="description" content="" />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
   <!-- Page CSS -->
-   <link rel="stylesheet" href="../css/adminforum.css">
+  <link rel="stylesheet" href="../css/adminforum.css">
 
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
@@ -140,7 +140,7 @@
             </ul>
           </li>
 
-     <!-- Forum論壇管理 -->
+          <!-- Forum論壇管理 -->
           <li class="menu-item active open">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons fa-regular fa-pen-to-square"></i>
@@ -148,17 +148,17 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a href="adminTopic.do" class="menu-link">
+                <a href="adminForumTopic.do" class="menu-link">
                   <div data-i18n="">論壇維護</div>
                 </a>
               </li>
-              <li class="menu-item">
-                <a href="adminAll.do" class="menu-link">
+              <li class="menu-item active">
+                <a href="adminForumAll.do" class="menu-link">
                   <div data-i18n="">文章列表</div>
                 </a>
               </li>
-              <li class="menu-item active">
-                <a href="adminReport.do" class="menu-link">
+              <li class="menu-item">
+                <a href="adminForumReport.do" class="menu-link">
                   <div data-i18n="">檢舉查核</div>
                 </a>
               </li>
@@ -231,7 +231,6 @@
       <!-- Layout container -->
       <div class="layout-page">
         <!-- Navbar -->
-
         <nav
           class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar">
@@ -302,181 +301,169 @@
             <!-- Basic Bootstrap Table -->
             <div class="card">
               <div class="card-header">
-                <h5>檢舉查核</h5>
-                <form action="adminReport.do" method="post">
+                <h5>所有文章</h5>
+                <form action="adminForumAll.do" method="post">
                   <select name="listname">
-                    <option value="all" ${listname=="all" ? 'selected' :''}>全部案件
-                    <option value="done" ${listname=="done" ? 'selected' :''}>已處理
-                    <option value="undone" ${listname=="undone" ? 'selected' :''}>未處理
+                    <option value="post" ${listname=="post" ? 'selected' :''}>全部發文
+                    <option value="reply" ${listname=="reply" ? 'selected' :''}>所有留言
                   </select>
                   <button class="sendButton btn_style" type="submit">送出</button>
                 </form>
               </div>
               <div class="table-responsive text-nowrap">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>案件編號</th>
-                      <th>檢舉發文/回應編號</th>
-                      <th>文章內容</th>
-                      <th>檢舉原因</th>
-                      <th>檢舉時間</th>
-                      <th>處理狀態</th>
-                      <th>處理結果</th>
-                      <th>動作</th>
-                      <th>負責管理員</th>
-                      <th>處理時間</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-border-bottom-0">
-                    <c:forEach var="forumReportVOList" items="${forumReportVOList}" begin="${pageStart}"
-                      end="${pageEnd}">
-                      <tr>
-                        <td>${forumReportVOList.reportNo}</td>
-                        <td>
-                          發文編號：${forumReportVOList.postNo ==0?'--':forumReportVOList.postNo}<br>
-                          回文編號： ${forumReportVOList.replyNo ==0? '--':forumReportVOList.replyNo}
-                        </td>
-                        <td>
-                          <button class="openButton btn_style">內容</button>
-                          <div class="contentPopup pop">
-                            <div class="contentContainer">
-                              <button class="closeContent close_btn">關閉</button><br><br>
-                              ${forumReportVOList.postNo==0?'forumReportVOList.replyContent':forumReportVOList.postContent}
-                            </div>
-                          </div>
-                          </td>
-                        <td>
-                          <button class="openButton btn_style">點選展開</button>
-                          <div class="reasonPopup pop">
-                            <div class="reasonContainer">
-                              檢舉人：${forumReportVOList.informant}<br>檢舉原因：<br>
-                              <textarea rows="5" cols="25" readonly>${forumReportVOList.reportReason}</textarea><br>
-                              <button class="closeReason close_btn">關閉</button>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <fmt:formatDate pattern="yyyy-MM-dd" value="${forumReportVOList.reportTime}" />
-                          <br>
-                          <fmt:formatDate pattern="HH:mm:ss" value="${forumReportVOList.reportTime}" />
-                        </td>
-                        <c:choose>
-                          <c:when test="${forumReportVOList.reportStatus=='已處理'}">
-                            <td><label class="badge bg-label-success me-1">${forumReportVOList.reportStatus}</label>
-                            </td>
-                          </c:when>
-                          <c:otherwise>
-                            <td><label class="badge bg-label-warning me-1">${forumReportVOList.reportStatus}</label>
-                            </td>
-                          </c:otherwise>
-                        </c:choose>
-                        <td>${forumReportVOList.reviewResult}</td>
-                        <c:choose>
-                          <c:when test="${forumReportVOList.reportStatus!='已處理'}">
+                <c:choose>
+                  <c:when test="${listname=='post'}">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>發文編號</th>
+                          <th>會員編號</th>
+                          <th>討論區</th>
+                          <th>標題/內容</th>
+                          <th>發文時間</th>
+                          <th>修改時間</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-border-bottom-0">
+                        <c:forEach var="forumVO" items="${forumVOList}" varStatus="status" begin="${pageStart}"
+                          end="${pageEnd}">
+                          <tr>
+                            <td>${forumVO.postNo}</td>
+                            <td>${forumVO.memberNo}</td>
+                            <td>${forumVO.topicNo}</td>
                             <td>
-                              <form id="review_form" method="post"><select name="reviewResult">
-                                  <option value="">請選擇
-                                  <option value="未違規">未違規
-                                  <option value="下架">下架
-                                </select>
-                                <input type="hidden" name="action" value="update">
-                                <input type="hidden" name="reviewer" value="1">
-<%--                                 記得換成${adminVO.adminNo} --%>
-                                <input type="hidden" name="postNo" value="${forumReportVOList.postNo}">
-                                <input type="hidden" name="replyNo" value="${forumReportVOList.replyNo}">
-                                <input type="hidden" name="listname" value="${listname}">
-                                <button class="sendButton btn_style review_btn" type="button">送出</button>
-                              </form>
+                              <button class="openButton btn_style">展開</button>
+                              <div class="contentPopup pop">
+                                <div class="contentContainer">
+                                  <button class="closeContent close_btn">關閉</button>
+                                  <br><br>
+                                  <h5>標題：${forumVO.title}</h5>
+                                  <h5>內容：</h5>${forumVO.content}
+                                </div>
+                              </div>
                             </td>
-                          </c:when>
-                          <c:otherwise>
-                            <td>結案</td>
-                          </c:otherwise>
-                        </c:choose>
-                        <td>
-                          <c:if test="${forumReportVOList.reviewer !=0}">
-                            ${forumReportVOList.reviewer}
-                          </c:if>
-                        </td>
-                        <td>
-                          <fmt:formatDate pattern="yyyy-MM-dd" value="${forumReportVOList.reviewTime}" />
-                          <br>
-                          <fmt:formatDate pattern="HH:mm:ss" value="${forumReportVOList.reviewTime}" />
-                        </td>
-                      </tr>
-                    </c:forEach>
-                  </tbody>
-                </table>
+                            <td>
+                              <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumVO.postTime}" />
+                            </td>
+                            <td>
+                              <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumVO.modificationTime}" />
+                            </td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:when>
+                  <c:otherwise>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>留言編號</th>
+                          <th>會員編號</th>
+                          <th>對應發文</th>
+                          <th>內容</th>
+                          <th>回文時間</th>
+                          <th>修改時間</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-border-bottom-0">
+                        <c:forEach var="forumVO" items="${forumVOList}" varStatus="status" begin="${pageStart}"
+                          end="${pageEnd}">
+                          <tr>
+                            <td>${forumVO.replyNo}</td>
+                            <td>${forumVO.memberNo}</td>
+                            <td>${forumVO.replyTo}</td>
+                            <td>
+                              <button class="openButton btn_style">內容</button>
+                              <div class="contentPopup pop">
+                                <div class="contentContainer">
+                                  <button class="closeContent close_btn">關閉</button><br><br>
+                                  ${forumVO.content}
+                                </div>
+                              </div>
+                            </td>
+
+                            <td>
+                              <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumVO.replyTime}" />
+                            </td>
+                            <td>
+                              <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumVO.modificationTime}" />
+                            </td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
+                  </c:otherwise>
+                </c:choose>
               </div>
             </div>
-            <c:if test="${not empty forumReportVOList}">
+            <c:if test="${not empty forumVOList}">
               <c:if test="${param.page>1}">
-                <a href="adminReport.do?page=${param.page-1}&listname=${listname}">上一頁 </a>
+                <a href="adminForumAll.do?page=${param.page-1}&listname=${listname}">上一頁 </a>
               </c:if>
               <c:if test="${param.page<totalPage}">
-                <a href="adminReport.do?page=${param.page+1}&listname=${listname}">下一頁</a>
+                <a href="adminForumAll.do?page=${param.page+1}&listname=${listname}">下一頁</a>
               </c:if>
               <div style="float:right">
-                <a href="adminReport.do?page=1&listname=${listname}">至第一頁</a>
+                <a href="adminForumAll.do?page=1&listname=${listname}">至第一頁</a>
                 <span>第${param.page}頁 / 共${totalPage}頁</span>
-                <a href="adminReport.do?page=${totalPage}&listname=${listname}">至最後一頁</a>
+                <a href="adminForumAll.do?page=${totalPage}&listname=${listname}">至最後一頁</a>
               </div>
             </c:if>
             <!--/ Basic Bootstrap Table -->
-
-            <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made by
-                  <a href="#" target="_blank" class="footer-link fw-bolder">MatDesign</a>
-                </div>
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
+            <hr class="my-5" />
           </div>
-          <!-- Content wrapper -->
+          <!-- / Content -->
+
+          <!-- Footer -->
+          <footer class="content-footer footer bg-footer-theme">
+            <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+              <div class="mb-2 mb-md-0">
+                ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , made by
+                <a href="#" target="_blank" class="footer-link fw-bolder">MatDesign</a>
+              </div>
+            </div>
+          </footer>
+          <!-- / Footer -->
+
+          <div class="content-backdrop fade"></div>
         </div>
-        <!-- / Layout page -->
+        <!-- Content wrapper -->
       </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
+      <!-- / Layout page -->
     </div>
-    <!-- / Layout wrapper -->
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div>
+  <!-- / Layout wrapper -->
 
-    <script src="../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+  <script src="../assets/vendor/js/menu.js"></script>
+  <!-- endbuild -->
 
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+  <!-- Vendors JS -->
+  <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
-    <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
+  <!-- Main JS -->
+  <script src="../assets/js/main.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Page JS -->
+  <script src="../assets/js/dashboards-analytics.js"></script>
 
-    <script src="../js/forum_backend.js"></script>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <script src="../js/forum_backend.js"></script>
 
 </body>
 

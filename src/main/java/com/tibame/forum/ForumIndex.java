@@ -51,7 +51,7 @@ public class ForumIndex extends HttpServlet {
 
 		List<ForumPostVO> hotList = new ArrayList<ForumPostVO>();
 		List<Integer> viewList = new ArrayList<Integer>();
-		
+
 		ForumJedis jedis = new ForumJedis();
 		for (String a : jedis.getTop5()) {
 			hotList.add(forumPostService.getPostByPostNo(Integer.valueOf(a)));

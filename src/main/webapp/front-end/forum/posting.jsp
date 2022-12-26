@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -125,12 +124,14 @@
 
 	<!-- Posting Start -->
 	<div class="forum_container">
-			<div class="navigate">
-				<span>
-					<a href="forumIndex.do">論壇首頁</a> >> <a href="topic.do?topicNo=${param.topicNo}&page=1">
-						${forumTopicVO.topicName}</a>
-				</span>
-			</div>
+        <!--Navigation-->
+		<div class="navigate AutoSkip">
+			<span>
+				<a href="forumIndex.do">論壇首頁</a> >> <a href="topic.do?topicNo=${param.topicNo}&page=1">
+					${forumTopicVO.topicName}</a>
+			</span>
+		</div>
+		
 		<div class="posting_background">
 			<form id="add_form">
 				<input type="text" name="title" size="35" placeholder="請輸入標題">

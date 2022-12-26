@@ -1,18 +1,18 @@
 //討論區管理
 document.querySelector("#add_btn").addEventListener("click", function() {
-	document.getElementById("add_topic_div").style.display = "block";
-	document.getElementById("update_topic_div").style.display = "none";
-	document.getElementById("add_topic_name").focus();
+	document.querySelector("#add_topic_div").style.display = "block";
+	document.querySelector("#update_topic_div").style.display = "none";
+	document.querySelector("#add_topic_name").focus();
 });
 
 document.querySelectorAll(".show_update").forEach(function(btn) {
 	btn.addEventListener("click", function() {
-		document.getElementById("update_topic_div").style.display = "block";
-		document.getElementById("add_topic_div").style.display = "none";
-		document.getElementById("update_topic_name").focus();
-		document.getElementById("update_topic_no").value = this.parentElement.parentElement.firstElementChild.innerText;
-		document.getElementById("update_topic_name").value = this.parentElement.parentElement.firstElementChild.nextElementSibling.innerText;
-		document.getElementById("update_admin_no").value = this.parentElement.previousElementSibling.innerText;
+		document.querySelector("#update_topic_div").style.display = "block";
+		document.querySelector("#add_topic_div").style.display = "none";
+		document.querySelector("#update_topic_name").focus();
+		document.querySelector("#update_topic_no").value = this.parentElement.parentElement.firstElementChild.innerText;
+		document.querySelector("#update_topic_name").value = this.parentElement.parentElement.firstElementChild.nextElementSibling.innerText;
+		document.querySelector("#update_admin_no").value = this.parentElement.previousElementSibling.innerText;
 	});
 });
 

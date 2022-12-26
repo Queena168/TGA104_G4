@@ -123,7 +123,7 @@
     <!-- Topics Start -->
     <div class="forum_container">
         <!--Navigation-->
-        <div class="navigate">
+        <div class="navigate AutoSkip">
             <span><a href="forumIndex.do">論壇首頁</a> >> <a
                     href="topic.do?topicNo=${param.topicNo}&page=1">${forumTopicVO.topicName}</a></span>
             <c:choose>

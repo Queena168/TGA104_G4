@@ -5,7 +5,7 @@ import java.util.List;
 public class ForumPostService {
 
 	private ForumPostDAO_interface dao;
-
+	
 	public ForumPostService() {
 		dao = new ForumPostDAO();
 	}

@@ -1,8 +1,7 @@
-
 //檢舉管理 & 所有文章列表
 document.querySelectorAll(".openButton").forEach(function(btn) {
 	btn.addEventListener("click", function() {
-		var popupwindow = document.getElementsByClassName("pop");
+		var popupwindow = document.querySelectorAll(".pop");
 		for (var i = 0; i < popupwindow.length; i++) {
 			popupwindow[i].setAttribute("style", "display:none");
 		}
