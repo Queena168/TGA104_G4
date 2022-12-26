@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.model.MailService;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 
@@ -95,7 +97,13 @@ public class MemberServlet extends HttpServlet {
 			java.sql.Date birthDate = java.sql.Date.valueOf(strBirthDate); // string to java.sql.Date
 			
 			String valistr = req.getParameter("valistr");
-			String valistrin = req.getParameter("valistrin");
+			HttpSession session = req.getSession();
+	        session.getAttribute(valistr);
+//			String valistrin = (String) session.getAttribute(valistr);
+			String valistrin = req.getParameter("valistr");
+//			System.out.println("Servlet valistr: " + valistr);
+//			System.out.println("Servlet valistrin: " + valistrin);
+			
 			if (!valistr.equals(valistrin)) {
 				errorMsgs.add("驗證碼錯誤 請重新輸入");
 			}
@@ -123,6 +131,13 @@ public class MemberServlet extends HttpServlet {
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.addMember(memberAccount, memberPassword, memberName, nickName, gender, birthDate,
 					activaction);
+			MailService mail = new MailService();
+			String subject = "【會員註冊通知信】";
+			String messageText = "<h2>Hello! " + memberName + "</h2>" +"<br> <p> 請點擊以下連結啟用帳號</p>" + 
+					 "<a href='http://localhost:8081/TGA104_G4/front-end/index.html'>MatDesign首頁</a><br>";
+			mail.sendMail(memberAccount, subject, messageText);
+			
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/signupSuccess.jsp");
 			successView.forward(req, res);
 		}
