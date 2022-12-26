@@ -1,9 +1,9 @@
 //foorumIndex.jsp search button
 function search() {
-	if (document.getElementsByName("keyword")[0].value == "") {
+	if (document.querySelector("#keyword").value == "") {
 		alert("請輸入文字");
 	} else {
-		document.querySelector("#form").submit();
+		document.querySelector("#search_form").submit();
 	}
 }
 
@@ -12,7 +12,7 @@ function add() {
 	$.ajax({
 		type: "POST",
 		url: "forumpost.do",
-		data: $("#form").serialize(),
+		data: $("#add_form").serialize(),
 		dataType: "JSON",
 		success: function(data) {
 			if ("error" in data) {

@@ -106,7 +106,7 @@
                         <a class="nav-link " href="./product/productListAll.html">商城</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
-                        <a class="nav-link " href="forumIndex.do?">論壇</a>
+                        <a class="nav-link " href="forumIndex.do">論壇</a>
                     </li>
                     <!-- <li class="nav-item main-navbar__item dropdown">
                         <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
@@ -126,74 +126,67 @@
         <div class="navigate">
             <span><a href="forumIndex.do">論壇首頁</a> >> <a
                     href="topic.do?topicNo=${param.topicNo}&page=1">${forumTopicVO.topicName}</a></span>
+            <c:choose>
+                <c:when test="${sessionScope.account!=null}">
+                   	<button type="button" class="add_post_btn" onclick="location.href='posting.do?topicNo=${param.topicNo}'">我要發文</button>
+                </c:when>
+                <c:otherwise>
+                   	<button type="button" class="add_post_btn" onclick="alert('請先登入')">我要發文</button>
+                </c:otherwise>
+            </c:choose>
         </div>
-        <c:choose>
-            <c:when test="${sessionScope.account!=null}">
-                <input type="button" class="newpost_btn" value="我要發文" onclick="location.href='posting.do?topicNo=${param.topicNo}'">
-            </c:when>
-            <c:otherwise>
-                <input type="button" value="我要發文" onclick="alert('請先登入')">
-            </c:otherwise>
-        </c:choose>
-        <!--Display posts table-->
         <div class="posts-table">
             <div class="table-head">
-                <div class="status">筆數</div>
-                <div class="subjects">主題</div>
-                <div class="replies">瀏覽次數<br>回應數</div>
+                <div class="status"></div>
+                <div class="subjects">標題</div>
+                <div class="replies">瀏覽次數/回應數</div>
                 <div class="last-reply">最新回應</div>
             </div>
             <c:choose>
                 <c:when test="${not empty forumPostVOList}">
                     <c:forEach var="forumPostVO" items="${forumPostVOList}" varStatus="status" begin="${pageStart}"
                         end="${pageEnd}">
-                        <%--從topic.do傳來的forumPostVOList，迴圈從pageStart跑到pageEnd做分頁要顯示的資料--%>
-
-                            <div class="table-row">
-                                <div class="status">第${pageStart+status.count}篇</div>
-                                <div class="subjects">
-                                    <a
-                                        href="posts.do?topicNo=${param.topicNo}&postNo=${forumPostVO.postNo}&page=1"><b>${forumPostVO.title}</b></a>
+                        <div class="table-row">
+                            <div class="status">第${pageStart+status.count}篇</div>
+                            <div class="subjects">
+                                <a
+                                    href="posts.do?topicNo=${param.topicNo}&postNo=${forumPostVO.postNo}&page=1"><b>${forumPostVO.title}</b></a>
+                                <br>
+                                <span class="poster">發文者：${forumPostVO.nickName}
                                     <br>
-                                    <span>發文者：<b>${forumPostVO.nickName}</b>
-                                        <br>
-                                        <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
-                                    </span>
-                                </div>
-
-                                <div class="replies">
-                                    ${viewList[status.index]} 次瀏覽<br>
-                                    ${(countList[status.index] == null) ? 0: countList[status.index]} 次回應
-                                    <%--從topic.do傳來的countList & viewList，相同的index--%>
-                                </div>
-                                <div class="last-reply">
-                                    <c:choose> <%-- 用JSTL的choose --%>
-                                            <c:when test="${countList[status.index] != null}">
-                                                <div>
-                                                    <b>${forumReplyVOList[status.index].nickName}</b>
-                                                    <br>
-                                                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-                                                        value="${forumReplyVOList[status.index].replyTime}" />
-                                                    <%--從topic.do傳來的forumReplyVOList，相同的index--%>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                暫無人回應
-                                            </c:otherwise>
-                                    </c:choose>
-                                </div>
+                                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
+                                </span>
                             </div>
+                            <div class="replies">
+                                ${viewList[status.index]} 次瀏覽<br>
+                                ${(countList[status.index] == null) ? 0: countList[status.index]} 次回應
+                            </div>
+                            <div class="last-reply">
+                                <c:choose>
+                                    <c:when test="${countList[status.index] != null}">
+                                    	<b>${forumReplyVOList[status.index].nickName}</b>
+                                        <br>
+                                        <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVOList[status.index].replyTime}" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="no_reply">暫無人回應</div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
                     </c:forEach>
-                    <c:if test="${param.page>1}">
-                        <a href="topic.do?topicNo=${param.topicNo}&page=${param.page-1}">上一頁</a>
-                    </c:if>
-                    <c:if test="${param.page<totalPage}">
-                        <a href="topic.do?topicNo=${param.topicNo}&page=${param.page+1}">下一頁</a>
-                    </c:if>
-                    <div style="float:right">
-                        <a href="topic.do?topicNo=${param.topicNo}&page=1">至第一頁</a>
-                        <span>第${param.page}頁 / 共${totalPage}頁</span>
-                        <a href="topic.do?topicNo=${param.topicNo}&page=${totalPage}">至最後一頁</a>
+                    <div class="next_page">
+                        <c:if test="${param.page>1}">
+                            <a href="topic.do?topicNo=${param.topicNo}&page=${param.page-1}">上一頁</a>
+                        </c:if>
+                        <c:if test="${param.page<totalPage}">
+                            <a href="topic.do?topicNo=${param.topicNo}&page=${param.page+1}">下一頁</a>
+                        </c:if>
+                        <div class="paging">
+	                        <a href="topic.do?topicNo=${param.topicNo}&page=1">至第一頁</a>
+	                        <span>第${param.page}頁 / 共${totalPage}頁</span>
+	                        <a href="topic.do?topicNo=${param.topicNo}&page=${totalPage}">至最後一頁</a>
+                    	</div>
                     </div>
                 </c:when>
                 <c:otherwise>
