@@ -102,7 +102,7 @@ public class MailService {
 	public static void main(String args[]) {
 
 		String to = "marschen82@gmail.com";
-		Integer no = 18;
+		Integer no = 20;
 		String subject = "【會員註冊通知信】";
 
 		String ch_name = "Mars";

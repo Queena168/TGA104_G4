@@ -3,8 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.portfolio.model.*"%>
-<%@ page import="com.portfolio.controller.*"%>
+<%@ page import="com.tibame.portfolio.model.*"%>
+<%@ page import="com.tibame.portfolio.controller.*"%>
 
 <%
 
@@ -278,7 +278,7 @@
 											</div>
 										</form>
 										<jsp:useBean id="portfolioSelectSvc" scope="page"
-											class="com.portfolio.model.PortfolioService" />
+											class="com.tibame.portfolio.model.PortfolioService" />
 										<form class="change-pass" method="post"
 											action="PortfolioListOne">
 											<div class="form-group custom-form__input"
