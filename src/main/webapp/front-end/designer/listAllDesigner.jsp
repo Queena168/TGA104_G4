@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.designer.model.*" %>
-<%@ page import="com.designer.service.*" %>
-<%@ page import="com.designer.controller.*" %>
+<%@ page import="com.tibame.designer.model.*" %>
+<%@ page import="com.tibame.designer.service.*" %>
+<%@ page import="com.tibame.designer.controller.*" %>
 
 
 

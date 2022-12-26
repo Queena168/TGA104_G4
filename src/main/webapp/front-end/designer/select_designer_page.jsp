@@ -160,7 +160,7 @@ h4 {
 		</li>
 
 		<jsp:useBean id="designerSvc" scope="page"
-			class="com.designer.service.DesignerService" />
+			class="com.tibame.designer.service.DesignerService" />
 
 		<li>
 			<FORM METHOD="post" ACTION="designer.do">
