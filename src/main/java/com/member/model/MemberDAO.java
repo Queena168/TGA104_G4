@@ -403,5 +403,51 @@ public class MemberDAO implements Member_interface {
 		}
 		
 	}
+	
+	private static final String UPDATE_ACTIVACTION = 
+			"UPDATE member set activaction=? where memberNo = ?;";
+	
+	public void updateActivaction(Integer memberNo, Boolean activaction) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_ACTIVACTION);
+			pstmt.setBoolean(1, activaction);
+			pstmt.setInt(2, memberNo);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 
 }

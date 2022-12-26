@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 				req.getSession().setAttribute("auth", user);
 //				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp 登入後導到購物區
 				String url = "ShowShop";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 			}else {
 				out.println("user login failed");

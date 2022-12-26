@@ -39,7 +39,7 @@ public class CartServlet extends HttpServlet{
 			if(cart_list == null) {
 				cartList.add(cart);
 				session.setAttribute("cart_list", cartList);
-				req.setAttribute("message","<script type='text/javascript'>alert('加入购物车成功，请前去付款!')</script>");
+				req.setAttribute("message","<script type='text/javascript'>alert('加入購物車成功!')</script>");
 				req.getRequestDispatcher("ShowShop").forward(req, res);
 //				res.sendRedirect("/TGA104_G4/front-end/cart/shopProduct.jsp"); // shopProduct.jsp
 //				String url = "/front-end/cart/cart.jsp";

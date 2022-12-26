@@ -37,27 +37,27 @@ th, td {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Favicon -->
-    <link rel="icon" href="../images/favicon.ico" sizes="32x32">
+    <link rel="icon" href="front-end/images/favicon.ico" sizes="32x32">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="front-end/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel='stylesheet' href='../css/fontawesome.min.css'>
+    <link rel='stylesheet' href='front-end/css/fontawesome.min.css'>
     <!-- Animate -->
-    <link href="../css/animate.css" rel="stylesheet">
+    <link href="front-end/css/animate.css" rel="stylesheet">
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="front-end/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="front-end/css/owl.theme.default.min.css">
     <!-- light box -->
-    <link rel="stylesheet" href="../css/lightbox.min.css">
+    <link rel="stylesheet" href="front-end/css/lightbox.min.css">
     <!-- jquery ui -->
-    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="front-end/css/jquery-ui.min.css">
     <!--    <link rel="stylesheet" href="//basehold.it/24">-->
 
     <!-- nice select -->
-    <link rel="stylesheet" href="../css/nice-select.min.css">
+    <link rel="stylesheet" href="front-end/css/nice-select.min.css">
     <!-- Main Styles -->
-    <link rel="stylesheet" href="../scss/main.css">
-    <link rel="stylesheet" href="../css/forum_style.css">
+    <link rel="stylesheet" href="front-end/scss/main.css">
+    <link rel="stylesheet" href="front-end/css/forum_style.css">
 <!-- 新模板結束 -->
 
 <style>
@@ -80,7 +80,7 @@ th, td {
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
     <div class="container">
         <a class="navbar-brand" href="index.html">    
-            <img src="/TGA104_G4/front-end/images/MatDesignLogo.png" alt="">
+            <img src="front-end/images/MatDesignLogo.png" alt="">
         </a>
         <!--  navbar actions -->
         <div class="main-navbar-action">
@@ -179,8 +179,8 @@ th, td {
 <!-- 							數量： <input type="text" name="quantity" size="1" value=1> -->
 <!-- 						</div> -->
 						<div class="mt-3 d-flex justify-content-between">
-							<a href="<%=request.getContextPath()%>/CartServlet?id=${shopProductVO.productNo}" class="btn btn-black">加入購物車</a>
-							<a href="<%=request.getContextPath()%>/OrderNowServlet?id=${shopProductVO.productNo}" class="btn btn-orange">直接購買</a>
+							<a href="${pageContext.request.contextPath}/CartServlet?id=${shopProductVO.productNo}" class="btn btn-black">加入購物車</a>
+							<a href="${pageContext.request.contextPath}/OrderNowServlet?id=${shopProductVO.productNo}" class="btn btn-orange">直接購買</a>
 <%-- 							<a href="<%=request.getContextPath()%>/OrderNowServlet?quantity=1&id=${shopProductVO.productNo}" class="btn btn-primary">直接購買</a> --%>
 <!-- 							<input class="btn btn-dark" type="submit" name="Submit" value="加入購物車"> -->
 <!-- 							<input class="btn btn-primary" type="submit" name="Submit" value="直接購買"> -->
@@ -201,7 +201,7 @@ th, td {
             <div class="row">
                 <div class="col-lg-4 col-md-6 footer__content">
                     <div class="footer-logo">
-                        <img src="../images/MatDesignLogo.png" alt="">
+                        <img src="front-end/images/MatDesignLogo.png" alt="">
                     </div>
                     <p></p>
                     
