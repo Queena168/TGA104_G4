@@ -133,11 +133,11 @@
 			</div>
 		<div class="posting_background">
 			<form id="add_form">
-				<input type="text" name="title" size="40" placeholder="請輸入標題">
+				<input type="text" name="title" size="35" placeholder="請輸入標題">
 				標題請勿超過50個字
 				<br>
 				<textarea name="content" id="summernote"></textarea>
-				<button type="button" class="add_btn" onclick="add()">送出</button>
+				<button type="button" class="new_post_btn" onclick="add()">送出</button>
 				<input type="hidden" name="action" value="insert">
 				<input type="hidden" name="topicNo" value="${param.topicNo}">
 				<input type="hidden" name="memberNo" value="${sessionScope.memberNo}">

@@ -133,7 +133,7 @@
             <c:forEach var="forumTopicVO" items="${forumTopicVOList}" varStatus="status">
                 <div class="subforum-row">
                     <div class="subforum-icon subforum-column center">
-                        <i class="fas fa-archway"></i>
+                        <i class="fa fa-comments"></i>
                     </div>
                     <div class="subforum-description subforum-column">
                         <a href="topic.do?topicNo=${forumTopicVO.topicNo}&page=1">${forumTopicVO.topicName}</a>
@@ -141,7 +141,7 @@
                     <div class="subforum-stats subforum-column center">
                         <span>開版日期 <br>${forumTopicVO.startDate}</span>
                     </div>
-                    <div class="subforum-info subforum-column">
+                    <div class="subforum-info subforum-column AutoSkip">
                         <b>最新文章：<a
                                 href="posts.do?topicNo=${forumPostVOList[status.index].topicNo}&postNo=${forumPostVOList[status.index].postNo}&page=1">${forumPostVOList[status.index].title}</a></b>
                         <br>發文者：<b>${forumPostVOList[status.index].nickName}</b>
@@ -150,14 +150,13 @@
                             value="${forumPostVOList[status.index].postTime}" />
                     </div>
                 </div>
-                <hr class="subforum-devider">
             </c:forEach>
-            <div class="hot AutoSkip">
-                <h4>--熱門文章--</h4>
-                <c:forEach var="hot" items="${hotList}" varStatus="status">
+            <div class="hot">
+                <div class="hot_title">熱門文章</div>
+                <div class="hot_detail AutoSkip"><c:forEach var="hot" items="${hotList}" varStatus="status">
                     <b>[第${status.count}名]</b> <span>${viewList[status.index]}次瀏覽</span><br>
                     <a href="posts.do?topicNo=${hot.topicNo}&postNo=${hot.postNo}&page=1">${hot.title}</a><br><br>
-                </c:forEach>
+                </c:forEach></div>
             </div>
         </div>
     </div>

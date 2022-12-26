@@ -156,7 +156,9 @@
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-                    <h4>查無資料</h4>
+  		            <div class="table-row">
+        	            <h4>查無資料</h4>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </div>

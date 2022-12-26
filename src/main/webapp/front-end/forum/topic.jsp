@@ -148,7 +148,7 @@
                         end="${pageEnd}">
                         <div class="table-row">
                             <div class="status">第${pageStart+status.count}篇</div>
-                            <div class="subjects">
+                            <div class="subjects AutoSkip">
                                 <a
                                     href="posts.do?topicNo=${param.topicNo}&postNo=${forumPostVO.postNo}&page=1"><b>${forumPostVO.title}</b></a>
                                 <br>

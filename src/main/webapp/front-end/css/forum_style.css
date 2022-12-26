@@ -38,7 +38,7 @@ button {
 
 .subforum-row {
 	display: grid;
-	grid-template-columns: 5% 35% 15% 23%;
+	grid-template-columns: 5% 38% 15% 20%;
 }
 
 .subforum-column {
@@ -47,9 +47,19 @@ button {
 	border-bottom: 1px solid rgb(220, 220, 220);
 }
 
-/* .subforum-description * { */
-/* 	margin-block: 0; */
-/* } */
+.subforum-description {
+	font-size: 20px;
+	line-height: 72px;
+}
+
+.subforum-stats {
+	font-size: 14px;
+}
+
+.subforum-info {
+	font-size: 14px;
+	line-height: 24px;
+}
 
 .center {
 	display: flex;
@@ -58,7 +68,8 @@ button {
 }
 
 .subforum-icon i {
-	font-size: 45px;
+	font-size: 30px;
+	color: #C45454;
 }
 
 .subforum-devider {
@@ -67,51 +78,27 @@ button {
 
 .hot {
 	background-color: rgb(245, 245, 245);
-	padding: 10px;
 	width: 20%;
 	position: absolute;
 	right: 40px;
-	top: 134px;
+	top: 145px;
 }
 
-/* For the smartphones */
-@media screen and (max-width: 460px) {
-	.forum_container {
-		margin: 50px 10px 10px 10px;
-		padding: 10px;
-	}
-	.subforum-row {
-		display: grid;
-		grid-template-columns: 25% 75%;
-		grid-template-rows: 65% 35%;
-	}
-	.subforum-devider {
-		display: block;
-		border: 0;
-		height: 1px;
-		background-image: linear-gradient(to right, rgba(190, 190, 190, 0),
-			rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
-	}
+.hot_title {
+	background-color: black;
+	color: #FFFFFF;
+	padding: 10px;
 }
 
-/* For the tablets */
-@media screen and (min-width: 460px) and (max-width: 1024px) {
-	.forum_container {
-		margin: 50px 15px 15px 15px;
-		padding: 15px;
-	}
-	.subforum-row {
-		display: grid;
-		grid-template-columns: 10% 60% 10% 20%;
-	}
-	.subforum-icon i {
-		font-size: 35px;
-	}
+.hot_detail {
+	padding: 10px;
+	font-size: 14px;
 }
 
 /* ########################################### */
 /*             topic.jsp                       */
 /* ########################################### */
+/* For the smartphones */
 .table-head {
 	display: flex;
 	color: #FFFFFF;
@@ -130,11 +117,11 @@ button {
 }
 
 .table-head .subjects {
-	flex: 60%;
+	flex: 65%;
 }
 
 .table-head .replies {
-	flex: 10%;
+	flex: 15%;
 }
 
 .table-head .last-reply {
@@ -160,11 +147,11 @@ button {
 }
 
 .table-row .subjects {
-	flex: 60%;
+	flex: 65%;
 }
 
 .table-row .replies {
-	flex: 10%;
+	flex: 15%;
 	position: relative;
 	transform: translateY(10px);
 }
@@ -203,23 +190,27 @@ button {
 /*           searchResult.jsp                  */
 /* ########################################### */
 .table-head .search_result {
-	flex: 80%;
+	flex: 85%;
 }
 
 .table-head .search_topic {
-	flex: 20%;
+	flex: 15%;
+	text-align: center;
 }
 
 .table-row .search_result {
-	flex: 80%;
+	flex: 85%;
 	border-bottom: 2px solid #262626;
-	height: 80px;
+	height: 90px;
 	margin-top: 5px;
+	padding-left: 5px;
 }
 
 .table-row .search_topic {
-	flex: 20%;
+	flex: 15%;
 	border-bottom: 2px solid #262626;
+	line-height: 83px;
+	text-align: center;
 }
 
 /* ########################################### */
@@ -362,15 +353,15 @@ button {
 	float: right;
 }
 
-.reply_modify_btn {
-	float: right;
-}
-
 .post_modify_btn {
 	float: right;
 }
 
-.add_btn {
+.reply_modify_btn {
+	float: right;
+}
+
+.new_post_btn {
 	float: right;
 }
 
@@ -381,4 +372,142 @@ button {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+/* ########################################### */
+/*                  RWD                        */
+/* ########################################### */
+
+/* For the tablets */
+@media screen and (min-width: 460px) and (max-width: 1024px) {
+	/* ForumIndex.jsp*/
+	.forum_container {
+		margin: 50px 15px 15px 15px;
+		padding: 15px;
+	}
+	.subforum-row {
+		display: grid;
+		grid-template-columns: 10% 33% 13% 20%;
+	}
+	/* Topic.jsp*/
+	.table-head .status {
+		flex: 10%;
+	}
+	.table-head .subjects {
+		flex: 45%;
+	}
+	.table-head .replies {
+		flex: 25%;
+	}
+	.table-head .last-reply {
+		flex: 20%;
+	}
+	.table-row .status {
+		flex: 10%;
+	}
+	.table-row .subjects {
+		flex: 45%;
+	}
+	.table-row .replies {
+		flex: 25%;
+	}
+	.table-row .last-reply {
+		flex: 20%;
+	}
+	/* SearchResult.jsp*/
+	.table-row .search_topic {
+		font-size: 10px;
+	}
+}
+
+/* For the smartphones */
+@media screen and (max-width: 460px) {
+	/* ForumIndex.jsp*/
+	.forum_container {
+		margin: 50px 10px 10px 10px;
+		padding: 10px;
+	}
+	.subforum-row {
+		display: grid;
+		grid-template-columns: 30% 70%;
+		grid-template-rows: 50% 45%;
+	}
+	.hot {
+		background-color: rgb(245, 245, 245);
+		width: 100%;
+		position: relative;
+		right: 0;
+		top: 0;
+	}
+	/* topic.jsp*/
+	.table-head .status {
+		flex: 5%;
+	}
+	.table-head .subjects {
+		flex: 40%;
+	}
+	.table-head .replies {
+		flex: 25%;
+	}
+	.table-head .last-reply {
+		flex: 30%;
+	}
+	.table-row .status {
+		flex: 5%;
+		line-height: 24px;
+	}
+	.table-row .subjects {
+		flex: 40%;
+	}
+	.table-row .replies {
+		flex: 25%;
+	}
+	.table-row .last-reply {
+		flex: 30%;
+	}
+	.table-row {
+		margin-bottom: 3px;
+	}
+	/* Posts.jsp*/
+	.title {
+		flex: 78%;
+	}
+	.view {
+		flex: 22%;
+	}
+	.authors {
+		flex: 25%;
+	}
+	.content {
+		flex: 75%;
+		position: relative;
+	}
+	.post_modify_btn, .post_report_btn, .reply_modify_btn, .reply_report_btn,
+		.add_post_btn {
+		font-size: 10px;
+	}
+	.time {
+		font-size: 12px;
+	}
+	.modal_report {
+		width: 90%;
+	}
+	/* SearchResult.jsp*/
+	.table-head .search_result {
+		flex: 70%;
+	}
+	.table-head .search_topic {
+		flex: 30%;
+	}
+	.table-row .search_result {
+		flex: 70%;
+	}
+	.table-row .search_topic {
+		flex: 30%;
+		font-size: 10px;
+	}
+	/* Page*/
+	.next_page {
+		font-size: 14px;
+	}
 }
