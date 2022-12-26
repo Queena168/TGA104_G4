@@ -1,5 +1,7 @@
 package com.forum;
 
+import java.util.Set;
+
 import redis.clients.jedis.Jedis;
 
 public class ForumJedis {
@@ -22,6 +24,10 @@ public class ForumJedis {
 
 	public void addZset(String postNo) {
 		jedis.zadd("viewZset", 0, postNo);
+	}
+	
+	public Set<String> getTop5() {
+		return jedis.zrevrange("viewZset", 0, 4);
 	}
 
 	public void close() {

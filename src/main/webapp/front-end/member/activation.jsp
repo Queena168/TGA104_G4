@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +28,6 @@
 <link rel="stylesheet" href="../css/nice-select.min.css">
 <!-- Main Styles -->
 <link rel="stylesheet" href="../scss/main.css">
-<link rel="stylesheet" href="../scss/main.css">
 </head>
 
 <body>
@@ -51,11 +49,14 @@
 							<div class="account-wrapper__content">
 								<form class="custom-form">
 									<div class="custom-form__btn">
-										<a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
-										<a class="dropdown-item nav-link"
-											href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
+										<a href="">
+											<button type="submit" class="btn submit-btn">Login</button>
 									</div>
-
+									<div class="form-group custom-form__input"></div>
+									<div class="custom-form__btn">
+										<a href=""></a>
+										<button type="submit" class="btn submit-btn">Login</button>
+									</div>
 								</form>
 							</div>
 							<!-- account links when user is logged in-->
@@ -96,7 +97,7 @@
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
+						class="nav-link " href="../designer_protfolio/listAll.html">找作品</a>
 					</li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">找設計師</a></li>
@@ -120,8 +121,8 @@
 			<div class="col-12">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb custom-breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-						<li class="breadcrumb-item active" aria-current="page">設計師登入/註冊</li>
+						<li class="breadcrumb-item"><a href="../index.html">首頁</a></li>
+						<li class="breadcrumb-item active" aria-current="page">會員註冊</li>
 					</ol>
 				</nav>
 			</div>
@@ -132,9 +133,9 @@
 	<div class="main-content pb-80">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 col-md-8 col-12 mx-auto ">
-					<div class="custom-form custom-form--box sing-up">
-
+				<div class="col-lg-6 col-md-8 col-12 mx-auto">
+					<div class="custom-form custom-form--box">
+					
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
 							<div class="mb-3">
@@ -150,51 +151,17 @@
 							</div>
 						</c:if>
 						<%-- /錯誤表列 --%>
-
-						<h3 class="custom-form__title">登入</h3>
-						<form action="Login" method="post">
-							<div class="form-group custom-form__input">
-								<label for="inputEmail">Email 信箱</label> <input type="email"
-									class="form-control ltr" id="inputEmail" placeholder=""
-									name="account">
-							</div>
-							<div class="form-group custom-form__input">
-								<label for="password">密碼</label>
-								<div class="input-box password-box">
-									<input type="password" class="form-control ltr" id="password"
-										placeholder="" name="password">
-									<div class="input-box__icon">
-										<span class="showhidepassword"><i
-											class="far fa-eye-slash"></i></span>
-									</div>
-								</div>
-							</div>
-							<div class="forgot-pass">
-								<a href="resetpass.html">忘記密碼？</a>
-							</div>
-							
-								<div class="custom-form__btn">
-									<button type="submit" class="btn submit-btn">設計師登入</button>
-									<input type="hidden" name="login" value="designerlogin">
-								</div>
-							
-
-							<div class="custom-form__footer">
-								<!-- form footer -->
-								<div class="custom-form__footer--link">
-									<h6>尚未註冊</h6>
-										<div class="custom-form__footer--link">
-											<a href="" class="btn ">註冊設計師</a>
-										</div>
-								</div>
-							</div>
-						</form>
+					
+						<h3 class="custom-form__title">註冊成功</h3>
+						<div class="mb-3 form-group custom-form__title">
+							<form method="get" action="Activation">
+								<button class="btn">啟動帳號</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
 	<!-- end main content -->
 	<!-- footer -->

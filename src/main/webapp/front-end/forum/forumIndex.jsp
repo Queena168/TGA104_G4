@@ -106,7 +106,7 @@
                         <a class="nav-link " href="./product/productListAll.html">商城</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
-                        <a class="nav-link " href="forumIndex.do?">論壇</a>
+                        <a class="nav-link " href="forumIndex.do">論壇</a>
                     </li>
                     <!-- <li class="nav-item main-navbar__item dropdown">
                         <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
@@ -120,54 +120,47 @@
     </nav>
     <!-- end main header navbar -->
 
-    <!-- ForumTopics Start -->
+    <!-- ForumIndex Start -->
     <div class="forum_container">
-        <div class="search_div" >
-            <form method="post" id="form" class="form" action="forumpost.do">
-                <input type="text" name="keyword" placeholder="搜尋論壇發文">
-                <input type="hidden" name="action" value="search">
-                <button type="button" onclick="search()">確認</button>
-            </form>
-        </div>
-        <div class="main">
+        <div class="subforum">
+            <div class="subforum-title">
+                <form method="post" id="search_form" action="forumpost.do">
+                    <input type="text" id="keyword" name="keyword" placeholder="搜尋論壇發文">
+                    <input type="hidden" name="action" value="search">
+                    <button type="button" class="search_btn" onclick="search()">確認</button>
+                </form>
+            </div>
             <c:forEach var="forumTopicVO" items="${forumTopicVOList}" varStatus="status">
-                <%--從forumIndex.do傳來的forumTopicVOList--%>
-                    <div class="subforum-row">
-
-                        <div class="subforum-icon subforum-column center">
-                            <i class="fas fa-archway" style="color:black"></i>
-                        </div>
-
-                        <div class="subforum-description subforum-column">
-                            <h4><a href="topic.do?topicNo=${forumTopicVO.topicNo}&page=1">${forumTopicVO.topicName}</a>
-                            </h4>
-                        </div>
-
-                        <div class="subforum-stats subforum-column center">
-                            <span>開版日期 <br>${forumTopicVO.startDate}</span>
-                        </div>
-
-                        <div class="subforum-info subforum-column AutoSkip">
-                            <b>最新文章：<a
-                                    href="posts.do?topicNo=${forumPostVOList[status.index].topicNo}&postNo=${forumPostVOList[status.index].postNo}&page=1">${forumPostVOList[status.index].title}</a></b>
-                            <br>發文者：<b>${forumPostVOList[status.index].nickName}</b>
-                            <%--從forumIndex.do傳來的forumPostVOList，相同的index--%>
-                                <br>
-                                <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-                                    value="${forumPostVOList[status.index].postTime}" />
-                        </div>
+                <div class="subforum-row">
+                    <div class="subforum-icon subforum-column center">
+                        <i class="fa fa-comments"></i>
                     </div>
+                    <div class="subforum-description subforum-column">
+                        <a href="topic.do?topicNo=${forumTopicVO.topicNo}&page=1">${forumTopicVO.topicName}</a>
+                        </div>
+                    <div class="subforum-stats subforum-column center">
+                        <span>開版日期 <br>${forumTopicVO.startDate}</span>
+                    </div>
+                    <div class="subforum-info subforum-column AutoSkip">
+                        <b>最新文章：<a
+                                href="posts.do?topicNo=${forumPostVOList[status.index].topicNo}&postNo=${forumPostVOList[status.index].postNo}&page=1">${forumPostVOList[status.index].title}</a></b>
+                        <br>發文者：<b>${forumPostVOList[status.index].nickName}</b>
+                        <br>
+                        <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+                            value="${forumPostVOList[status.index].postTime}" />
+                    </div>
+                </div>
             </c:forEach>
-        </div>
-        <div class="hot AutoSkip">
-            <h4>熱門文章</h4>
-            <c:forEach var="hot" items="${hotList}" varStatus="status"> <%--從forumIndex.do傳來的hotList--%>
-                    <b>[第${status.count}名]</b> <span style="color:lightgray;">${viewList[status.index]}次瀏覽</span><br>
+            <div class="hot">
+                <div class="hot_title">熱門文章</div>
+                <div class="hot_detail AutoSkip"><c:forEach var="hot" items="${hotList}" varStatus="status">
+                    <b>[第${status.count}名]</b> <span>${viewList[status.index]}次瀏覽</span><br>
                     <a href="posts.do?topicNo=${hot.topicNo}&postNo=${hot.postNo}&page=1">${hot.title}</a><br><br>
-            </c:forEach> <%--從forumIndex.do傳來的viewList，相同的index--%>
+                </c:forEach></div>
+            </div>
         </div>
-       </div>
-    <!-- ForumTopics End -->
+    </div>
+    <!-- ForumIndex End -->
 
     <!-- footer -->
     <footer class="footer">

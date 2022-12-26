@@ -184,7 +184,7 @@
 								<div class="custom-form__footer--link">
 									<h6>尚未註冊</h6>
 										<div class="custom-form__footer--link">
-											<a href="./member/signup.html" class="btn ">註冊會員</a>
+											<a href="signup.jsp" class="btn ">註冊會員</a>
 										</div>
 								</div>
 							</div>
@@ -239,15 +239,7 @@
 		</div>
 	</footer>
 	<!-- end footer -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
-
+	
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>

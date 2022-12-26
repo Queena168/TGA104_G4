@@ -17,8 +17,6 @@ import com.forum_post.model.ForumPostVO;
 import com.forum_topic.model.ForumTopicService;
 import com.forum_topic.model.ForumTopicVO;
 
-import redis.clients.jedis.Jedis;
-
 @WebServlet("/front-end/forum/forumIndex.do")
 public class ForumIndex extends HttpServlet {
 
@@ -34,8 +32,6 @@ public class ForumIndex extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 
 		HttpSession session = request.getSession();
-//		session.removeAttribute("account");
-//		session.removeAttribute("memberNo");
 		session.setAttribute("account", "ma");
 		session.setAttribute("memberNo", 3);
 
@@ -53,12 +49,13 @@ public class ForumIndex extends HttpServlet {
 		request.setAttribute("forumPostVOList", forumPostVOList);
 		// 從TopicVO中得到topicNo作為參數，用ForumPostService呼叫方法取得每個討論區的最新一篇文章，存入attribute
 
-		Jedis jedis = new Jedis("localhost", 6379);
 		List<ForumPostVO> hotList = new ArrayList<ForumPostVO>();
 		List<Integer> viewList = new ArrayList<Integer>();
-		for (String a : jedis.zrevrange("viewZset", 0, 4)) {
+		
+		ForumJedis jedis = new ForumJedis();
+		for (String a : jedis.getTop5()) {
 			hotList.add(forumPostService.getPostByPostNo(Integer.valueOf(a)));
-			viewList.add(jedis.zscore("viewZset", a).intValue());
+			viewList.add(jedis.getZset(a));
 		}
 		jedis.close();
 		request.setAttribute("hotList", hotList);

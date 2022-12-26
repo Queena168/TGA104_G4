@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../scss/main.css">
     <link rel="stylesheet" href="../css/forum_style.css">
 
-    <title>搜尋結果</title>
+    <title>搜尋</title>
 
 </head>
 
@@ -106,7 +106,7 @@
                         <a class="nav-link " href="./product/productListAll.html">商城</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
-                        <a class="nav-link " href="forumIndex.do?">論壇</a>
+                        <a class="nav-link " href="forumIndex.do">論壇</a>
                     </li>
                     <!-- <li class="nav-item main-navbar__item dropdown">
                         <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
@@ -120,60 +120,50 @@
     </nav>
     <!-- end main header navbar -->
 
-    <!-- Searching Start -->
+    <!-- Search Start -->
     <div class="forum_container">
         <!--Navigation-->
         <div class="navigate">
-            <span><a href="forumIndex.do">論壇首頁</a> >> <a
-                    href="topic.do?topicNo=${param.topicNo}">${forumTopicVO.topicName}</a></span>
+            <span><a href="forumIndex.do">論壇首頁</a> </span>
         </div>
-
-        <!--Display posts table-->
         <div class="posts-table">
             <div class="table-head">
-                <div class="searchstatus">筆數</div>
-                <div class="searchsubjects">主題</div>
-                <div class="searchcontent">內容</div>
-                <div class="searchbelong">所屬討論區</div>
+                <div class="search_result">搜尋結果</div>
+                <div class="search_topic">所屬討論區</div>
             </div>
-
             <c:choose>
-                <c:when test="${empty resultList}">
-                    <h3>查無資料</h3>
-                </c:when>
-                <c:otherwise>
+                <c:when test="${not empty resultList}">
                     <c:forEach var="forumPostVO" items="${resultList}" varStatus="status">
-
                         <div class="table-row">
-                            <div class="searchstatus">第${status.count}筆</div>
-                            <div class="searchsubjects AutoSkip">
-                                <a
-                                    href="posts.do?topicNo=${forumPostVO.topicNo}&postNo=${forumPostVO.postNo}&page=1"><b>${forumPostVO.title}</b></a>
-                                <br>
+                            <div class="search_result AutoSkip">
+                                <a href="posts.do?topicNo=${forumPostVO.topicNo}&postNo=${forumPostVO.postNo}&page=1"><b>${forumPostVO.title}</b></a><br>
                                 <span>發文者：<b>${forumPostVO.nickName}</b>
-                                    <br>
                                     <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
                                 </span>
+                                <div>
+                                <c:choose>
+                                    <c:when test="${forumPostVO.reviewResult =='下架'}">
+                                        本文因違反論壇規定，已被管理員下架
+                                    </c:when>
+                                    <c:otherwise>
+                                            ${forumPostVO.content}
+                                    </c:otherwise>
+                                </c:choose>
+                                </div>
                             </div>
-                            <c:choose>
-                                <c:when test="${forumPostVO.reviewResult =='下架'}">
-                                    <span class="searchcontent">本文因違反論壇規定，已被管理員下架</span>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="searchcontent" style="height:200px; overflow-x:auto">
-                                        ${forumPostVO.content}
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                            <div class="searchbelong">${topicNameList[status.index]}</div>
+                            <div class="search_topic">${topicNameList[status.index]}</div>
                         </div>
                     </c:forEach>
+                </c:when>
+                <c:otherwise>
+  		            <div class="table-row">
+        	            <h4>查無資料</h4>
+                    </div>
                 </c:otherwise>
-
             </c:choose>
         </div>
     </div>
-    <!-- Searching End -->
+    <!-- Search End -->
 
     <!-- footer -->
     <footer class="footer">

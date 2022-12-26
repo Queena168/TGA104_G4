@@ -194,16 +194,6 @@
 							</div>
 						</div>
 						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label" for="basic-default-phone">Phone
-								No</label>
-							<div class="col-sm-10">
-								<input type="text" id="basic-default-phone"
-									class="form-control phone-mask" placeholder="658 799 8941"
-									aria-label="658 799 8941"
-									aria-describedby="basic-default-phone" />
-							</div>
-						</div>
-						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label" for="description">作品內文</label>
 							<div class="col-sm-10">
 								<textarea id="description" class="form-control"
@@ -245,7 +235,7 @@
 						</div>
 						<div class="row justify-content-end">
 							<!-- <div class="col-sm-10"> -->
-								<button type="submit" class="btn btn-primary">送出</button>
+								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">送出</button>
 								<input type="hidden" name="action" value="update"> 
 								<input type="hidden" name="portfolioNo"
 										value="${portfolioUpdate.portfolioNo}" />
@@ -303,14 +293,7 @@
 	<!-- scroll up btn -->
 	<a id="back-to-top"></a>
 	<!-- end scroll up btn -->
-	<!-- loader -->
-	<div class="loader">
-		<div class="spinner">
-			<div class="cube1"></div>
-			<div class="cube2"></div>
-		</div>
-	</div>
-	<!-- end loader -->
+	
 
 	<!-- All Jquery -->
 	<script type="text/javascript" src="../js/jquery.min.js"></script>

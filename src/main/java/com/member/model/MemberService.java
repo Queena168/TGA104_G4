@@ -23,7 +23,13 @@ public class MemberService {
 		memberVO.setBirthDate(birthDate);
 		memberVO.setActivaction(activaction);
 		dao.insert(memberVO);
-
+		
+//		MailService mail = new MailService();
+//		String subject = "【會員註冊通知信】";
+//		String messageText = "<h2>Hello! " + memberName + "</h2>" +"<br> <p> 請點擊以下連結啟用帳號</p>" + 
+//				 "<a href='http://localhost:8081/TGA104_G4/front-end/index.html'>MatDesign首頁</a><br>";
+//		mail.sendMail(memberAccount, subject, messageText);
+		
 		return memberVO;
 	}
 
@@ -54,5 +60,15 @@ public class MemberService {
 
 	public List<MemberVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public Boolean accountUsed (String memberAccount) {
+		MemberDAO dao = new MemberDAO();
+		return dao.accountUsed(memberAccount);
+	}
+	
+	public void updateActivaction(Integer memberNo, Boolean activaction) {
+		MemberDAO dao = new MemberDAO();
+		dao.updateActivaction(memberNo, activaction);
 	}
 }

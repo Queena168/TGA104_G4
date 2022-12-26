@@ -109,7 +109,7 @@
 						<a class="nav-link " href="./product/productListAll.html">商城</a>
 					</li>
 					<li class="nav-item main-navbar__item dropdown">
-						<a class="nav-link " href="forumIndex.do?">論壇</a>
+						<a class="nav-link " href="forumIndex.do">論壇</a>
 					</li>
 					<!-- <li class="nav-item main-navbar__item dropdown">
                         <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
@@ -124,216 +124,203 @@
 	<!-- end main header navbar -->
 
 	<!-- Posts Start -->
-	<div class="forum_container"> 現在登入的是：${sessionScope.account}<br>
+	<div class="forum_container">
 		<!--Navigation-->
 		<div class="navigate AutoSkip">
 			<span><a href="forumIndex.do">論壇首頁</a> >> <a
-					href="topic.do?topicNo=${param.topicNo}&page=1">${forumTopicVO.topicName} </a>
-				>>
-				<a
+					href="topic.do?topicNo=${param.topicNo}&page=1">${forumTopicVO.topicName} </a> >> <a
 					href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=1">${forumPostVO.title}</a></span>
-			<%--從posts.do傳來的forumTopicVO & forumTopicVO--%>
+			<c:choose>
+				<c:when test="${sessionScope.account!=null}">
+					<button type="button" class="add_post_btn"
+						onclick="location.href='posting.do?topicNo=${param.topicNo}'">我要發文</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" class="add_post_btn" onclick="alert('請先登入')">我要發文</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
-		<c:choose>
-			<c:when test="${sessionScope.account!=null}">
-				<input type="button" class="newpost_btn" value="我要發文"
-					onclick="location.href='posting.do?topicNo=${param.topicNo}'">
-			</c:when>
-			<c:otherwise>
-				<input type="button" class="newpost_btn" value="我要發文" onclick="alert('請先登入')">
-			</c:otherwise>
-		</c:choose>
 
-		<!--Topic Section-->
-		<div class="topic-container">
-			<!--Original thread-->
-			<div class="head">
-				<div class="content" id="anchor_title">
-					<h2>${forumPostVO.title}</h2>
+		<!--Post Section-->
+		<div class="head">
+			<div class="title" id="anchor_title">${forumPostVO.title}</div>
+			<div class="view">瀏覽次數: ${view}次</div>
+		</div>
+		<div class="body">
+			<div class="authors">
+				發文者：
+				<div class="username">
+					<b>${forumPostVO.nickName}</b>
 				</div>
-				<div class="view">瀏覽次數: ${view}次</div>
+				原PO<br><br><br>
+				<c:choose>
+					<c:when test="${(sessionScope.account!=null) and (sessionScope.memberNo!= forumPostVO.memberNo)}">
+						<button class="post_report_btn">檢舉此文</button>
+					</c:when>
+					<c:when test="${(sessionScope.account!=null) and (sessionScope.memberNo== forumPostVO.memberNo)}">
+						<button class="post_report_btn" style="display: none"></button>
+					</c:when>
+					<c:otherwise>
+						<button class="post_report_btn" style="display: none"></button>
+						<button class="post_report_btn no" onclick="alert('請先登入')">檢舉此文</button>
+					</c:otherwise>
+				</c:choose>
 			</div>
-			<div class="body" style="background-color: #fff3e7">
-				<div class="authors">
-					發文者：
-					<div class="username">
-						<b>${forumPostVO.nickName}</b><br><br><br>
-					</div>
-					原PO<br>
-					<c:choose>
-						<c:when
-							test="${(sessionScope.account!=null) and (sessionScope.memberNo!= forumPostVO.memberNo)}">
-							<button class="post_report_btn">檢舉此文</button>
-						</c:when>
-						<c:when
-							test="${(sessionScope.account!=null) and (sessionScope.memberNo== forumPostVO.memberNo)}">
-							<button class="post_report_btn" style="display: none"></button>
-						</c:when>
-						<c:otherwise>
-							<button class="post_report_btn" style="display: none"></button>
-							<button class="post_report_btn_no" onclick="alert('請先登入')">檢舉此文</button>
-						</c:otherwise>
-					</c:choose>
+			<div class="content">
+				<c:choose>
+					<c:when test="${forumPostVO.reviewResult =='下架'}">
+						<span class="post_spn_no">本文因違反論壇規定，已被管理員下架</span>
+					</c:when>
+					<c:otherwise>
+						<span class="post_spn">${forumPostVO.content}</span>
+					</c:otherwise>
+				</c:choose>
+				<br><br><br><div class="time">
+					<c:if test="${not empty forumPostVO.modificationTime}">
+						修改時間
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.modificationTime}" /><br>
+					</c:if>
+					發文時間
+					<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
 				</div>
-				<div class="content">
-					<c:choose>
-						<c:when test="${forumPostVO.reviewResult =='下架'}">
-							<span class="post_spn_no">本文因違反論壇規定，已被管理員下架</span>
-						</c:when>
-						<c:otherwise>
-							<span class="post_spn">${forumPostVO.content}</span>
-						</c:otherwise>
-					</c:choose>
-					<div class="time">
-						<c:if test="${not empty forumPostVO.modificationTime}">
-							修改時間
-							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.modificationTime}" /><br>
-						</c:if>
-						發文時間
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumPostVO.postTime}" />
-						<c:choose>
-							<c:when
-								test="${(sessionScope.memberNo == forumPostVO.memberNo)&&(forumPostVO.reviewResult !='下架')}">
-								<button class="post_modify_btn">我要修改</button>
-							</c:when>
-							<c:otherwise>
-								<button class="post_modify_btn" style="display: none"></button>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
+				<c:choose>
+					<c:when
+						test="${(sessionScope.memberNo == forumPostVO.memberNo)&&(forumPostVO.reviewResult !='下架')}">
+						<button class="post_modify_btn">我要修改</button>
+					</c:when>
+					<c:otherwise>
+						<button class="post_modify_btn" style="display: none"></button>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
-		<!--Comments Section-->
+		<!--Reply Section-->
 		<c:choose>
 			<c:when test="${not empty forumReplyVOList}">
 				<c:forEach var="forumReplyVO" items="${forumReplyVOList}" varStatus="status" begin="${pageStart}"
 					end="${pageEnd}">
-					<%--從posts.do傳來的forumReplyVOList--%>
-						<div class="comments-container">
-							<input type="hidden" class="hidden_replyNo" value="${forumReplyVO.replyNo}">
-							<div class="body">
-								<div class="authors">
-									回文者：
-									<div class="username">
-										<b>${forumReplyVO.nickName}</b><br><br><br>
-									</div>
-									#${pageStart+status.count}樓<br>
-									<c:choose>
-										<c:when
-											test="${(sessionScope.account!=null) and (sessionScope.memberNo!= forumReplyVO.memberNo)}">
-											<button class="reply_report_btn">檢舉此文</button>
-										</c:when>
-										<c:when
-											test="${(sessionScope.account!=null) and (sessionScope.memberNo== forumReplyVO.memberNo)}">
-											<button class="reply_report_btn" style="display: none"></button>
-										</c:when>
-										<c:otherwise>
-											<button class="reply_report_btn" style="display: none"></button>
-											<button class="reply_report_btn_no" onclick="alert('請先登入')">檢舉此文</button>
-										</c:otherwise>
-									</c:choose>
-								</div>
-								<div class="content">
-									<c:choose>
-										<c:when test="${forumReplyVO.reviewResult =='下架'}">
-											<span class="reply_spn_no">本文因違反論壇規定，已被管理員下架</span>
-										</c:when>
-										<c:otherwise>
-											<span class="reply_spn">${forumReplyVO.content}</span>
-										</c:otherwise>
-									</c:choose>
-									<div class="time">
-										<c:if test="${not empty forumReplyVO.modificationTime}">
-											修改時間
-											<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-												value="${forumReplyVO.modificationTime}" /><br>
-										</c:if>
-										回應時間
-										<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-											value="${forumReplyVO.replyTime}" />
-										<c:choose>
-											<c:when
-												test="${sessionScope.memberNo == forumReplyVO.memberNo&&(forumReplyVO.reviewResult !='下架')}">
-												<button class="reply_modify_btn">我要修改</button>
-											</c:when>
-											<c:otherwise>
-												<button class="reply_modify_btn" style="display: none"></button>
-											</c:otherwise>
-										</c:choose>
-									</div>
-								</div>
+					<input type="hidden" class="hidden_replyNo" value="${forumReplyVO.replyNo}">
+					<div class="body">
+						<div class="authors">
+							回文者：
+							<div class="username">
+								<b>${forumReplyVO.nickName}</b>
 							</div>
+							#${pageStart+status.count}樓<br><br><br>
+							<c:choose>
+								<c:when
+									test="${(sessionScope.account!=null) and (sessionScope.memberNo!= forumReplyVO.memberNo)}">
+									<button class="reply_report_btn">檢舉此文</button>
+								</c:when>
+								<c:when
+									test="${(sessionScope.account!=null) and (sessionScope.memberNo== forumReplyVO.memberNo)}">
+									<button class="reply_report_btn" style="display: none"></button>
+								</c:when>
+								<c:otherwise>
+									<button class="reply_report_btn" style="display: none"></button>
+									<button class="reply_report_btn_no" onclick="alert('請先登入')">檢舉此文</button>
+								</c:otherwise>
+							</c:choose>
 						</div>
+						<div class="content">
+							<c:choose>
+								<c:when test="${forumReplyVO.reviewResult =='下架'}">
+									<span class="reply_spn_no">本文因違反論壇規定，已被管理員下架</span>
+								</c:when>
+								<c:otherwise>
+									<span class="reply_spn">${forumReplyVO.content}</span>
+								</c:otherwise>
+							</c:choose>
+							<br><br><br><div class="time">
+								<c:if test="${not empty forumReplyVO.modificationTime}">
+									修改時間
+									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+										value="${forumReplyVO.modificationTime}" /><br>
+								</c:if>
+								回應時間
+								<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${forumReplyVO.replyTime}" />
+							</div>
+							<c:choose>
+								<c:when
+									test="${sessionScope.memberNo == forumReplyVO.memberNo&&(forumReplyVO.reviewResult !='下架')}">
+									<button class="reply_modify_btn">我要修改</button>
+								</c:when>
+								<c:otherwise>
+									<button class="reply_modify_btn" style="display: none"></button>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
 				</c:forEach>
-				<c:if test="${param.page>1}">
-					<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=${param.page-1}">上一頁</a>
-				</c:if>
-				<c:if test="${param.page<totalPage}">
-					<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=${param.page+1}">下一頁</a>
-				</c:if>
-				<div style="float:right">
-					<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=1">至第一頁</a>
-					<span>第${param.page}頁 / 共${totalPage}頁</span>
-					<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=${totalPage}">至最後一頁</a>
+				<div class="next_page">
+					<c:if test="${param.page>1}">
+						<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=${param.page-1}">上一頁</a>
+					</c:if>
+					<c:if test="${param.page<totalPage}">
+						<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=${param.page+1}">下一頁</a>
+					</c:if>
+					<div class="paging">
+						<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=1">至第一頁</a>
+						<span>第${param.page}頁 / 共${totalPage}頁</span>
+						<a href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=${totalPage}">至最後一頁</a>
+					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
+			<div class="body">
 				<h4>暫無人回應...</h4>
+			</div><br>
 			</c:otherwise>
 		</c:choose>
 
-		<!--Reply Area-->
-		<br>
+		<!--Comment & Modify Area-->
 		<c:choose>
 			<c:when test="${sessionScope.account ==null}">
 				<h4> 登入後可留言... </h4>
-				<input id="submit_btn" type="button" style="display: none">
+				<button id="submit_btn" type="button" style="display: none">送出</button>
 			</c:when>
 			<c:otherwise>
-				<h2 id="mode" style="color:red; display:none">您現在是修改模式</h2>
-				<form id="submitform">
-				<span id="limit" style="display:none">
-					<input type="hidden" id="post_title" name="title" value="${forumPostVO.title}" size="50">
-					 標題請勿超過50個字</span>
-					<div class="comment-area" id="reply-area">
+				<div>
+					<h2 id="mode" style="display:none">您現在是修改模式</h2>
+					<form id="submit_form">
+						<span id="limit" style="display:none">
+							<input type="hidden" id="post_title" name="title" value="${forumPostVO.title}" size="40">
+							標題請勿超過50個字</span>
 						<textarea name="content" id="summernote"></textarea>
-						<input id="submit_btn" type="button" value="送出">
-					</div>
-					<input id="act" type="hidden" name="action" value="insert">
-					<input type="hidden" name="memberNo" value="${sessionScope.memberNo}">
-					<input type="hidden" name="replyNo" value="">
-					<input type="hidden" name="topicNo" value="${param.topicNo}">
-					<input type="hidden" name="postNo" value="${param.postNo}">
-					<input type="hidden" name="page" value="${param.page}">
-					<input type="hidden" name="totalPage" value="${totalPage}">
-				</form>
+						<button id="submit_btn" type="button">送出</button>
+						<input id="act" type="hidden" name="action" value="insert">
+						<input type="hidden" name="memberNo" value="${sessionScope.memberNo}">
+						<input type="hidden" id="modify_replyNo" name="replyNo" value="">
+						<input type="hidden" name="topicNo" value="${param.topicNo}">
+						<input type="hidden" name="postNo" value="${param.postNo}">
+						<input type="hidden" name="page" value="${param.page}">
+						<input type="hidden" name="totalPage" value="${totalPage}">
+					</form>
+				</div>
 			</c:otherwise>
 		</c:choose>
 
 		<!--Report Area-->
-		<div id="modalOne" class="modal">
-			<div class="modal-content" id="modal-content">
-				<div class="contact-form">
-					<a class="close">&times;</a>
-					<form id="report_form">
-						<h3>檢舉</h3>
-						<div>
-							<input type="hidden" name="topicNo" value="${param.topicNo}">
-							<input type="hidden" id="postNo" name="postNo" value="${param.postNo}">
-							<input type="hidden" id="replyNo" name="replyNo" value="">
-							<input type="hidden" name="informant" value="${sessionScope.memberNo}">
-							<input type="hidden" name="action" value="insertReport">
-							<input type="hidden" name="page" value="${param.page}">
-						</div>
-						<span>檢舉原因(請勿超過50字)</span>
-						<div>
-							<textarea rows="4" id="reason" name="reportReason"></textarea>
-						</div>
-						<button id="report_submit" type="button">送出檢舉</button>
-					</form>
-				</div>
+		<div class="report_area">
+			<div class="modal_report">
+				<a class="report_close_btn">&times;</a>
+				<form id="report_form">
+					<h3>檢舉</h3>
+					<div>
+						<input type="hidden" name="topicNo" value="${param.topicNo}">
+						<input type="hidden" name="postNo" value="${param.postNo}">
+						<input type="hidden" id="report_replyNo" name="replyNo" value="">
+						<input type="hidden" name="informant" value="${sessionScope.memberNo}">
+						<input type="hidden" name="action" value="insertReport">
+						<input type="hidden" name="page" value="${param.page}">
+					</div>
+					<span>檢舉原因(請勿超過50字)</span>
+					<div>
+						<textarea rows="4" name="reportReason"></textarea>
+					</div>
+					<button id="report_submit_btn" type="button">送出檢舉</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -440,7 +427,6 @@
 				['color', ['color']],
 				['para', ['ul', 'ol', 'paragraph']],
 				['insert', ['picture']],
-				['view', ['codeview']],
 			],
 		});
 	</script>

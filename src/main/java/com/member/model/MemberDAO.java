@@ -346,6 +346,108 @@ public class MemberDAO implements Member_interface {
 		
 		return memberVO;
 	}
+	
+	private static final String CHECK_MEMBERACCOUNT = 
+			"select memberNo from Member where memberAccount = ?;";
+	
+	public Boolean accountUsed(String memberAccount) {
+		Boolean used = null; // 裝判斷後結果
+		MemberVO memberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
 
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(CHECK_MEMBERACCOUNT);
+			pstmt.setString(1, memberAccount);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setMemberNo(rs.getInt("memberNo"));
+			}
+			
+			if(memberVO==null) {
+				used = false;
+				return used; // 帳號尚未被使用 
+			}
+			used = true; //帳號被使用過
+			return used;
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	private static final String UPDATE_ACTIVACTION = 
+			"UPDATE member set activaction=? where memberNo = ?;";
+	
+	public void updateActivaction(Integer memberNo, Boolean activaction) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_ACTIVACTION);
+			pstmt.setBoolean(1, activaction);
+			pstmt.setInt(2, memberNo);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 
 }
