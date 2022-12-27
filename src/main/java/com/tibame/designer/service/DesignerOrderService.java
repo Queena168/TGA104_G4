@@ -1,11 +1,10 @@
-package com.tibame.designer.service;
+package designer.service;
 
-import java.sql.Date;
 import java.util.List;
 
-import com.tibame.designer.model.DesignerOrderDAO_interface;
-import com.tibame.designer.model.DesignerOrderJNDIDAO;
-import com.tibame.designer.model.DesignerOrderVO;
+import designer.model.DesignerOrderDAO_interface;
+import designer.model.DesignerOrderJNDIDAO;
+import designer.model.DesignerOrderVO;
 
 public class DesignerOrderService {
 
@@ -15,60 +14,45 @@ public class DesignerOrderService {
 		dao = new DesignerOrderJNDIDAO();
 	}
 
-
-	public DesignerOrderVO updateDesignerOrder(Integer orderNo, Integer quotationAmount, String quotationDetail,
-			Date quotationSendTime, byte[] quotationAtt, String quotationStatus, String contractDetail,
-			byte[] contractAtt, String contractStatus, Date contractApprovalTime, Date contractModificationTime,
-			String quotationNote, String contractNote, Boolean finishStatus) {
+	
+	public DesignerOrderVO updateQuotation(Integer orderNo,Integer quotationAmount,String quotationDetail,byte[] quotationAtt) {
 
 		DesignerOrderVO designerOrderVO = new DesignerOrderVO();
 
 		designerOrderVO.setOrderNo(orderNo);
 		designerOrderVO.setQuotationAmount(quotationAmount);	
-		designerOrderVO.setQuotationDetail(quotationDetail);		
-		designerOrderVO.setQuotationSendTime(quotationSendTime);	
-		designerOrderVO.setQuotationAtt(quotationAtt);	
-		designerOrderVO.setQuotationStatus(quotationStatus);		
-		designerOrderVO.setContractDetail(contractDetail);	
-		designerOrderVO.setContractAtt(contractAtt);		
-		designerOrderVO.setContractStatus(contractStatus);		
-		designerOrderVO.setContractApprovalTime(contractApprovalTime);
-		designerOrderVO.setContractModificationTime(contractModificationTime);
-		designerOrderVO.setQuotationNote(quotationNote);
-		designerOrderVO.setContractNote(contractNote);
-		designerOrderVO.setFinishStatus(finishStatus);
-		dao.update(designerOrderVO);
-
-		return dao.findDesignerOrder(orderNo);
-	}
-
-	// ========================================================================================
-	
-	
-	public DesignerOrderVO updateQuotation(Integer orderNo,Integer quotationAmount,String quotationDetail) {
-
-		DesignerOrderVO designerOrderVO = new DesignerOrderVO();
-
-		designerOrderVO.setOrderNo(orderNo);
-		designerOrderVO.setQuotationAmount(quotationAmount);	
-		designerOrderVO.setQuotationDetail(quotationDetail);			
+		designerOrderVO.setQuotationDetail(quotationDetail);
+		designerOrderVO.setQuotationAtt(quotationAtt);
 		dao.updateQuotation(designerOrderVO);
 
-		return designerOrderVO;    /*dao.findDesignerOrder(orderNo);*/
+		return designerOrderVO; 
 	}
 	
 	
 	//====================================================================================
 	
-	public DesignerOrderVO updateContract(Integer orderNo,String contractDetail) {
+	public DesignerOrderVO updateContract(Integer orderNo,String contractDetail,byte[] contractAtt) {
 
 		DesignerOrderVO designerOrderVO = new DesignerOrderVO();
 
 		designerOrderVO.setOrderNo(orderNo);
-		designerOrderVO.setContractDetail(contractDetail);			
+		designerOrderVO.setContractDetail(contractDetail);	
+		designerOrderVO.setContractAtt(contractAtt);
 		dao.updateContract(designerOrderVO);
 
-		return designerOrderVO;    /*dao.findDesignerOrder(orderNo);*/
+		return designerOrderVO; 
+	}
+
+	//===================================================================================
+	
+	
+	public DesignerOrderVO updateFinishedStatus(Integer orderNo) {
+
+		DesignerOrderVO designerOrderVO = new DesignerOrderVO();
+
+		designerOrderVO.setOrderNo(orderNo);		
+		dao.updateFinished(designerOrderVO);
+		return designerOrderVO; 
 	}
 	
     //===================================================================================
@@ -95,12 +79,6 @@ public class DesignerOrderService {
 		return dao.findDesignerOrder(designerOrderNo);
 	}
 
-	public List<DesignerOrderVO> getAll() {
-		return dao.getAll();
-	}
-	
-	
-	
 	
     //查詢該設計師的所有案件
 	public List<DesignerOrderVO> getAllMyOrder(Integer designerNo) {
@@ -109,11 +87,11 @@ public class DesignerOrderService {
 	
 	
     //查詢該設計師的進行中案件
-//	public List<DesignerOrderVO> getAllMyINGOrder(Integer designerNo) {
-//		return dao.getAllMyINGOrder(designerNo);
-//	}
-//	
-	 //如結案狀態為未結案則取得設計師進行中訂單，如結案狀態為結案則取得設計師結案訂單
+	public List<DesignerOrderVO> getAllMyINGOrder(Integer designerNo) {
+		return dao.getAllMyINGOrder(designerNo);
+	}
+	
+	 //如結案狀態為結案則取得設計師結案訂單
 	public List<DesignerOrderVO> getAllMyisFinishOrder(Integer designerNo) {
 		return dao.getAllMyisFinishOrder(designerNo);
 	}
