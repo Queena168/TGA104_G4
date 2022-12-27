@@ -1,4 +1,4 @@
-package designer.controller;
+package com.tibame.designer.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import designer.model.DesignerOrderPhaseVO;
-import designer.service.DesignerOrderPhaseService;
+import com.tibame.designer.model.DesignerOrderPhaseVO;
+import com.tibame.designer.service.DesignerOrderPhaseService;
 
 @WebServlet("/SendOrderPhase")
 public class SendOrderPhase extends HttpServlet {

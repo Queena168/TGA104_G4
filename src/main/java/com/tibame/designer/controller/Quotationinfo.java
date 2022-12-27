@@ -1,4 +1,4 @@
-package designer.controller;
+package com.tibame.designer.controller;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
