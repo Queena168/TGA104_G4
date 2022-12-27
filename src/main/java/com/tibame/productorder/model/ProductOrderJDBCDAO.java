@@ -12,19 +12,23 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
+@Repository
 public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
-	
-	private static DataSource dataSource = null;
-	static {
-		try {
-			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	@Autowired
+	private DataSource dataSource;
+//	static {
+//		try {
+//			Context context = new InitialContext();
+//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private static final String GET_ALL_STMT = "SELECT orderNo, memberNo, receiverName, receiverPhone, receiverAddress, totalQTY, totalAmount, invoiceNo, "
 			+ "businessNumber, paidDate, shipDate, orderStatus FROM ProductOrder order by orderNo";
@@ -191,7 +195,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 		boolean result = false;
 		
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(INSERTORDER)) {
+			PreparedStatement pstmt = connection.prepareStatement(INSERTORDER)) {
 			pstmt.setInt(1, productOrderVO.getMemberNo());
 			pstmt.setString(2, productOrderVO.getReceiverName());
 			pstmt.setString(3, productOrderVO.getReceiverPhone());
@@ -204,7 +208,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 			pstmt.executeUpdate();
 			
 			List<ProductOrderDetailVO> items  = productOrderVO.getItems();
-			if (items != null && items.size() > 0) {// 订单项中 有东西，才添加进数据库中的订单项表
+			if (items != null && items.size() > 0) {// 訂單明細中 有東西，才添加到資料庫中訂單細項表
 				PreparedStatement ps = connection.prepareStatement(INSERTORDERITEM);
 //				Object pps[][] = new Object[items.size()][];
 				for (int i = 0; i < items.size(); i++) {

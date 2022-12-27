@@ -5,17 +5,24 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tibame.cart.model.Cart;
 import com.tibame.product.model.ProductService;
 import com.tibame.product.model.ProductVO;
 
-
+@WebServlet("/CartServlet")
 public class CartServlet extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private ProductService psSvc;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("text/html; charset=UTF-8");
 		
@@ -23,7 +30,6 @@ public class CartServlet extends HttpServlet{
 			ArrayList<Cart> cartList = new ArrayList<Cart>();
 			
 			int id = Integer.parseInt(req.getParameter("id"));
-			ProductService psSvc = new ProductService();
 			ProductVO productVO = psSvc.getOneProduct(id);
 			Cart cart = new Cart();
 			cart.setProductNo(id);

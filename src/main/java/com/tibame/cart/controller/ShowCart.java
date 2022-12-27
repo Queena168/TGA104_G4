@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tibame.cart.model.Cart;
 import com.tibame.cart.model.ShopProductService;
 
@@ -21,7 +23,9 @@ import com.tibame.cart.model.ShopProductService;
 @WebServlet("/ShowCart")
 public class ShowCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	@Autowired
+	private ShopProductService shopProductService;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
@@ -30,7 +34,6 @@ public class ShowCart extends HttpServlet {
 		ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
 		List<Cart> cartProduct = null;
 		if(cart_list != null){
-			ShopProductService shopProductService = new ShopProductService();
 			cartProduct = shopProductService.getCartProducts(cart_list);
 			req.setAttribute("cart_list", cart_list);
 			

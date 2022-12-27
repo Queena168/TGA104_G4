@@ -12,18 +12,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 
+@Repository
 public class ProductOrderDetailJDBCDAO implements ProductOrderDetailDAO_interface{
-	private static DataSource dataSource = null;
-	static {
-		try {
-			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	@Autowired
+	private DataSource dataSource;
+//	static {
+//		try {
+//			Context context = new InitialContext();
+//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO ProductOrderDetail (orderNo, productNo, qty) VALUES (?, ?, ?)";

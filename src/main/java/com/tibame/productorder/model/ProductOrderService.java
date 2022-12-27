@@ -2,6 +2,9 @@ package com.tibame.productorder.model;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ProductOrderService {
 	private ProductOrderDAO_interface dao;
 	

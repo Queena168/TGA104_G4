@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.* , com.cart.model.*"%>
+<%@ page import="java.util.* , com.tibame.cart.model.*"%>
 
 <html>
 <head>
@@ -158,7 +158,7 @@
 <div class="d-flex py-3">
 <h3>目前累積價格：$ ${(total>0)?total:0}</h3>
 <!-- <a class="mx-3 btn btn-primary" href="/TGA104G4/CheckOutServlet">結帳</a> -->
-<a class="mx-3 btn btn-orange" href="/TGA104_G4/ShowOrderDetail">結帳</a>
+<a class="mx-3 btn btn-orange" href="ShowOrderDetail">結帳</a>
 <!-- <a class="mx-3 btn btn-primary" href="http://localhost:8081/TGA104G4/CheckOutServlet">結帳測試選擇</a> -->
 </div>
 <table class="table table-Lought">
@@ -182,9 +182,9 @@
 		<form action="/TGA104_G4/OrderNowServlet" method="post" class="form-inline">
 		<input type="hidden" name="id" value="${c.productNo}" class="form-input">
 		<div class="form-group d-flex justify-content-between w-50">
-		<a class="btn-sm btn-decre" href="/TGA104_G4/QuantityIncDecServlet?action=dec&id=${c.productNo}"><i class="fas fa-minus-square"></i></a>
+		<a class="btn-sm btn-decre" href="/QuantityIncDecServlet?action=dec&id=${c.productNo}"><i class="fas fa-minus-square"></i></a>
 		<input type="text" name="quantity" class="form-control w-50" value="${c.quantity}" readonly>
-		<a class="btn-sm btn-incre" href="<%=request.getContextPath()%>/QuantityIncDecServlet?action=inc&id=${c.productNo}"><i class="fas fa-plus-square"></i></a>
+		<a class="btn-sm btn-incre" href="/QuantityIncDecServlet?action=inc&id=${c.productNo}"><i class="fas fa-plus-square"></i></a>
 		</div>
 <!-- 		<button type="submit" class="btn btn-primary btn-sm">直接購買</button> -->
 		</form>

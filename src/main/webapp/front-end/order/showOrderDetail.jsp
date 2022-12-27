@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.* , com.cart.model.*, com.productorder.model.*, com.productorderdetail.model.*"%>
+<%@ page import="java.util.* , com.tibame.cart.model.*, com.tibame.productorder.model.*, com.tibame.productorderdetail.model.*"%>
 
 <html>
 <head>
@@ -31,27 +31,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Favicon -->
-    <link rel="icon" href="front-end/images/favicon.ico" sizes="32x32">
+    <link rel="icon" href="../../front-end/images/favicon.ico" sizes="32x32">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="front-end/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../front-end/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel='stylesheet' href='front-end/css/fontawesome.min.css'>
+    <link rel='stylesheet' href='../../front-end/css/fontawesome.min.css'>
     <!-- Animate -->
-    <link href="front-end/css/animate.css" rel="stylesheet">
+    <link href="../../front-end/css/animate.css" rel="stylesheet">
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="front-end/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="front-end/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../front-end/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../front-end/css/owl.theme.default.min.css">
     <!-- light box -->
-    <link rel="stylesheet" href="front-end/css/lightbox.min.css">
+    <link rel="stylesheet" href="../../front-end/css/lightbox.min.css">
     <!-- jquery ui -->
-    <link rel="stylesheet" href="front-end/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../front-end/css/jquery-ui.min.css">
     <!--    <link rel="stylesheet" href="//basehold.it/24">-->
 
     <!-- nice select -->
-    <link rel="stylesheet" href="front-end/css/nice-select.min.css">
+    <link rel="stylesheet" href="../../front-end/css/nice-select.min.css">
     <!-- Main Styles -->
-    <link rel="stylesheet" href="front-end/scss/main.css">
-    <link rel="stylesheet" href="front-end/css/forum_style.css">
+    <link rel="stylesheet" href="../../front-end/scss/main.css">
+    <link rel="stylesheet" href="../../front-end/css/forum_style.css">
     
     <title>商城首頁</title>
 <style type="text/css">
@@ -68,7 +68,7 @@
     <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="front-end/images/MatDesignLogo.png" alt="">
+                <img src="../../front-end/images/MatDesignLogo.png" alt="">
             </a>
             <!--  navbar actions -->
             <div class="main-navbar-action">
@@ -161,7 +161,7 @@
 		<thead> 
 			<tr>
 				<th scope="col">訂單編號</th>
-				<th scope="col">商品編號</th>
+<!-- 				<th scope="col">商品編號</th> -->
 				<th scope="col">商品名稱</th>
 				<th scope="col">單價</th>
 				<th scope="col">數量</th>
@@ -172,7 +172,7 @@
 		<c:forEach var="o" items="${orders}">
 			<tr>
 				<td>${o.orderNo}</td>
-				<td>${o.productNo}</td>
+<%-- 				<td>${o.productNo}</td> --%>
 				<td>${o.productName}</td>
 				<td>${o.price}</td>
 				<td>${o.qty}</td>
@@ -189,7 +189,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 footer__content">
                         <div class="footer-logo">
-                            <img src="front-end/images/MatDesignLogo.png" alt="">
+                            <img src="../../front-end/images/MatDesignLogo.png" alt="">
                         </div>
                         <p></p>
 

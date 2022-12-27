@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,7 @@ import com.tibame.productorder.model.ProductOrderJDBCDAO;
 import com.tibame.productorder.model.ProductOrderVO;
 
 
-//@WebServlet("/CancelOrderServlet")
+@WebServlet("/CancelOrderServlet")
 public class CancelOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

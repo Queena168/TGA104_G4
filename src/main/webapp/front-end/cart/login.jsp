@@ -1,12 +1,12 @@
 <%@ page import="java.util.*"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.cart.model.*, com.productorder.model.*"%>
+<%@ page import="com.tibame.cart.model.*, com.tibame.productorder.model.*"%>
 <%
-User auth = (User)request.getSession().getAttribute("auth");
-if(auth!=null){
-	response.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp");
-}
+// User auth = (User)request.getSession().getAttribute("auth");
+// if(auth!=null){
+// 	response.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp");
+// }
 %>
 <%
 // ShopProductService shopProductService = new ShopProductService();
@@ -61,14 +61,14 @@ if(auth!=null){
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp">首頁</a></li>
       <li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp">購物車<span class="badge badge-danger px-1">${cart_list.size()}</span></a></li>
-       <% 
-      if(auth != null){%>
-      	<li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">訂單</a></li>
-        <li class="nav-item"><a class="nav-link" href="/TGA104_G4/LogoutServlet">登出</a></li>
-      <%}else{%>
-      	<li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/login.jsp">登入</a></li>
-      <%}
-      %>
+<%--        <%  --%>
+<%--       if(auth != null){%> --%>
+<!--       	<li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">訂單</a></li> -->
+<!--         <li class="nav-item"><a class="nav-link" href="/TGA104_G4/LogoutServlet">登出</a></li> -->
+<%--       <%}else{%> --%>
+<!--       	<li class="nav-item"><a class="nav-link" href="http://localhost:8080/TGA104_G4/front-end/cart/login.jsp">登入</a></li> -->
+<%--       <%} --%>
+<%--       %> --%>
     </ul>
   </div>
   </div>
@@ -78,7 +78,7 @@ if(auth!=null){
 		<div class="card w-50 mx-auto my-5">
 			<div class="card-header text-center">用戶登入</div>
 			<div class="card-body">
-				<form action="/TGA104_G4/LoginServlet" method="post">
+				<form action="../../LoginServlet" method="post">
 
 					<div class="form-group">
 						<label>信箱</label> <input type="email" class="form-control"

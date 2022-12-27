@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.* , java.sql.*, com.cart.model.*, com.productorder.model.*"%>
+<%@ page import="java.util.* , java.sql.*, com.tibame.cart.model.*, com.tibame.productorder.model.*"%>
 
 <html>
 <head>
@@ -185,8 +185,8 @@
 <%-- 				<td><%= o.getPrice()%></td> --%>
 				<td>${o.totalAmount}</td>
 				<td>${o.orderStatus}</td>
-                <td><a class="btn btn-sm btn-orange" href="/TGA104_G4/OrderDetailServlet?id=${o.orderNo}">查看</a></td>
-				<td><a class="btn btn-sm btn-danger" href="/TGA104_G4/CancelOrderServlet?id=${o.orderNo}">取消</a></td>
+                <td><a class="btn btn-sm btn-orange" href="OrderDetailServlet?id=${o.orderNo}">查看</a></td>
+				<td><a class="btn btn-sm btn-danger" href="CancelOrderServlet?id=${o.orderNo}">取消</a></td>
 			</tr>				
 		</c:forEach>
 		</tbody>

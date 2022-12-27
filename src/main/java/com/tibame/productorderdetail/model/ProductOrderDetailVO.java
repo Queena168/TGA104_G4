@@ -1,7 +1,10 @@
 package com.tibame.productorderdetail.model;
 
+import org.springframework.stereotype.Component;
+
 import com.tibame.cart.model.ShopProduct;
 
+@Component(value = "ProductOrderDetailVO")
 public class ProductOrderDetailVO implements java.io.Serializable{
 	private Integer orderDetailNo; 
 	private Integer orderNo;

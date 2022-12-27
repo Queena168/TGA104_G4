@@ -8,11 +8,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tibame.cart.model.Cart;
+import com.tibame.cart.model.ShopProductService;
 import com.tibame.cart.model.User;
 import com.tibame.productorder.model.ProductOrderJDBCDAO;
 import com.tibame.productorder.model.ProductOrderVO;
@@ -21,10 +26,15 @@ import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 /**
  * Servlet implementation class CkeckOutServlet
  */
-//@WebServlet("/CheckOutServlet")
+@WebServlet("/CheckOutServlet")
 public class CheckOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	@Autowired
+	private ProductOrderVO productOrderVO;
+	@Autowired
+	private ProductOrderDetailVO productOrderDetailVO;
+	@Autowired
+	private ProductOrderJDBCDAO productOrderJDBCDAO;
 //	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 //		try (PrintWriter out = res.getWriter()) {
 //			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
@@ -149,14 +159,14 @@ public class CheckOutServlet extends HttpServlet {
 //		String so = st.format(Date);
 //		String number = Integer.toString((int)(Math.random()*10000 + 100));
 //		String orderNo = so.concat(number);
-		
+		HttpSession session = req.getSession();
 		User auth = (User) req.getSession().getAttribute("auth");
 		if (auth == null) {
-			res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/login.jsp"); // login.jsp
+			res.sendRedirect("/front-end/cart/login.jsp"); // login.jsp
 			return;
 		}
 		ArrayList<Cart> cart_list = (ArrayList<Cart>) req.getSession().getAttribute("cart_list");
-		ProductOrderVO productOrderVO = new ProductOrderVO();
+//		ProductOrderVO productOrderVO = new ProductOrderVO();
 		
 		Integer QTY = 0;
 		Integer price = 0;
@@ -183,7 +193,7 @@ public class CheckOutServlet extends HttpServlet {
 		
 		List<ProductOrderDetailVO> ordersItems = new ArrayList<ProductOrderDetailVO>();
 		for (Cart c : cart_list) {
-		ProductOrderDetailVO productOrderDetailVO = new ProductOrderDetailVO();
+//		ProductOrderDetailVO productOrderDetailVO = new ProductOrderDetailVO();
 		productOrderDetailVO.setOrderNo(productOrderVO.getOrderNo());
 		productOrderDetailVO.setProductNo(c.getProductNo());
 		productOrderDetailVO.setProductName(c.getProductName());
@@ -192,9 +202,9 @@ public class CheckOutServlet extends HttpServlet {
 		ordersItems.add(productOrderDetailVO);
 	    }
 		productOrderVO.setItems(ordersItems);
-		ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
+//		ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 		productOrderJDBCDAO.addOrders(productOrderVO);
-		cart_list.clear(); //完成訂單後清空購物車
+		session.removeAttribute("cart_list");//付款後，清空session中的購物車
 //		System.out.println(productOrderVO.getOrderNo());
 		res.sendRedirect("front-end/order/SelectOrder"); // order.jsp
 		} catch (Exception e) {

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.productpic.model.*"%>
-<%@ page import="com.product.model.*"%>
+<%@ page import="com.tibame.productpic.model.*"%>
+<%@ page import="com.tibame.product.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <!DOCTYPE html>
@@ -74,7 +74,7 @@
 <h3>所有商品圖片 - listAllPic.jsp</h3>
 
 
-<jsp:useBean id="productPicSrc" scope="page" class="com.productpic.model.ProductPicService" />
+<jsp:useBean id="productPicSrc" scope="page" class="com.tibame.productpic.model.ProductPicService" />
 <a href='http://localhost:8080/TGA104_G4/back-end/productpic/addPic.jsp'>新增圖片</a>
 
 <table>

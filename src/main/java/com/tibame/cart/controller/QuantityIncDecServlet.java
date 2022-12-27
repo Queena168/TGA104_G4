@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +16,7 @@ import com.tibame.cart.model.Cart;
 /**
  * Servlet implementation class QuantityIncDecServlet
  */
-
+@WebServlet("/QuantityIncDecServlet")
 public class QuantityIncDecServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +39,10 @@ public class QuantityIncDecServlet extends HttpServlet {
 							Integer quantity = c.getQuantity();
 							quantity++;
 							c.setQuantity(quantity);
-							res.sendRedirect("/TGA104_G4/ShowCart"); // cart.jsp
+							String url = "ShowCart";
+							RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+							successView.forward(req, res);
+//							res.sendRedirect("ShowCart"); // cart.jsp
 						}
 					}
 				}
@@ -48,16 +53,25 @@ public class QuantityIncDecServlet extends HttpServlet {
 							Integer quantity = c.getQuantity();
 							quantity--;
 							c.setQuantity(quantity);
-							break;
+							String url = "ShowCart";
+							RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+							successView.forward(req, res);
+//							break;
 						}
 					}
-					res.sendRedirect("/TGA104_G4/ShowCart"); // cart.jsp
+//					res.sendRedirect("ShowCart"); // cart.jsp
+//					String url = "ShowCart";
+//					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+//					successView.forward(req, res);
 				}
-			}else {
-				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp
+			}
+//			else {
+//				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp
+//				String url = "ShowCart";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+//				successView.forward(req, res);
 			}
 			
 		}
-	}
 
 }

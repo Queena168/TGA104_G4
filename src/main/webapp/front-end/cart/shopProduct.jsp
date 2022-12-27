@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.productpic.model.*"%>
-<%@ page import="com.cart.model.*"%>
+<%@ page import="com.tibame.productpic.model.*"%>
+<%@ page import="com.tibame.cart.model.*"%>
 
 <html>
 <head>
@@ -126,7 +126,7 @@ th, td {
             </div>
             <!-- navbar cart icon -->
             <div class="main-navbar-action__btn nav-dropdown">
-                <a class="dropdown-link" data-target="cartmenu" href="/TGA104_G4/ShowCart">
+                <a class="dropdown-link" data-target="cartmenu" href="ShowCart">
                     <span class="cart-badge">${cart_list.size()}</span>
                     <i class="icon-shopping-bag"></i>
                 </a>

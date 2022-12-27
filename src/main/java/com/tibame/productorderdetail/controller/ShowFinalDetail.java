@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.tibame.cart.model.User;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
-/**
- * Servlet implementation class ShowFinalDetail
- */
+
 @WebServlet("/ShowFinalDetail")
 public class ShowFinalDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;

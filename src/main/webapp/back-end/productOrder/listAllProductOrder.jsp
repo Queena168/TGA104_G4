@@ -1,12 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.productorder.model.*"%>
+<%@ page import="com.tibame.productorder.model.*"%>
 
 <%
-	ProductOrderService productOrderService = new ProductOrderService();
-	List<ProductOrderVO> list = productOrderService.getAll();
-	pageContext.setAttribute("list",list);
+// 	ProductOrderService productOrderService = new ProductOrderService();
+// 	List<ProductOrderVO> list = productOrderService.getAll();
+// 	pageContext.setAttribute("list",list);
 %>
 
 <!DOCTYPE html>

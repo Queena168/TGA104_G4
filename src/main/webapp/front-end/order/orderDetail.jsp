@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.* , com.cart.model.*, com.productorder.model.*"%>
+<%@ page import="java.util.* , com.tibame.cart.model.*, com.tibame.productorder.model.*"%>
 
 <html>
 <head>
@@ -160,7 +160,7 @@
 <h3>本次消費金額：$ ${(total>0)?total:0}</h3>
 <br>
 <h3>收貨資訊</h3>
-<form METHOD="get" ACTION="/TGA104_G4/CheckOutServlet">
+<form METHOD="get" ACTION="CheckOutServlet">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>收件人姓名</label>

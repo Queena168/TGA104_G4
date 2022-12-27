@@ -1,13 +1,17 @@
 package com.tibame.productorder.model;
 
+import java.beans.JavaBean;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.tibame.cart.model.ShopProduct;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
+@Component(value = "ProductOrderVO")
 public class ProductOrderVO extends ShopProduct implements java.io.Serializable{
 	private Integer ooNo;
 	private Integer orderNo;
