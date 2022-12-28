@@ -30,6 +30,12 @@ public class CartServlet extends HttpServlet{
 			ArrayList<Cart> cartList = new ArrayList<Cart>();
 			
 			int id = Integer.parseInt(req.getParameter("id"));
+			
+			// 不符合商品編號
+			if(id < 0 || id > 18) {
+				req.getRequestDispatcher("ShowShop").forward(req, res);
+			}
+			
 			ProductVO productVO = psSvc.getOneProduct(id);
 			Cart cart = new Cart();
 			cart.setProductNo(id);

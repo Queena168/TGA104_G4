@@ -32,10 +32,10 @@ public class RemoveFromCartServlet extends HttpServlet {
 							break;
 						}
 					}
-					res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp
+					res.sendRedirect("ShowCart"); // cart.jsp
 				}
 			}else {
-				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp
+				res.sendRedirect("ShowCart"); // cart.jsp
 			}
 		}
 	}

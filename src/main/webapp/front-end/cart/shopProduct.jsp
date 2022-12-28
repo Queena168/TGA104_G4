@@ -115,7 +115,7 @@ th, td {
                 <!-- navbar cart dropdown -->
                 <div class="" id="cartmenu" data-collapse="false"></div>
                 
-            <a class="nav-link " href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp" >訂單</a>
+            <a class="nav-link " href="/front-end/order/SelectOrder" >訂單</a>
             
             </div>
             <!-- navbar user account icon -->
@@ -147,7 +147,7 @@ th, td {
                     <a class="nav-link " href="#" >找設計師</a>
                 </li>
                 <li class="nav-item main-navbar__item dropdown">
-                    <a class="nav-link " href="/TGA104_G4/front-end/cart/shopProduct.jsp" >商城</a>
+                    <a class="nav-link " href="/ShowShop" >商城</a>
                 </li>
                 <li class="nav-item main-navbar__item dropdown">
                     <a class="nav-link " href="#" >論壇</a>

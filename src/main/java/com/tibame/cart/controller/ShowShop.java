@@ -30,12 +30,12 @@ public class ShowShop extends HttpServlet {
 
 		List<Map<String, Object>> list = shopProductService.getAll();
 		
-		req.setAttribute("list", list);
+		req.setAttribute("list", list); // 顯示所有商品
 		
 		HttpSession session = req.getSession();
 		ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list"); 
 		if(cart_list != null){
-			req.setAttribute("cart_list", cart_list);
+			req.setAttribute("cart_list", cart_list); // 一般購物車
 		}
 		
 		String url = "/front-end/cart/shopProduct.jsp";

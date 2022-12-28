@@ -103,6 +103,7 @@
                     <!-- navbar cart dropdown -->
                     <div class="" id="cartmenu" data-collapse="false"></div>
                 </div>
+                <a class="nav-link " href="/front-end/order/SelectOrder" >訂單</a>
                 <!-- navbar user account icon -->
                 <div class="main-navbar-action__btn nav-dropdown">
                     <a class="dropdown-link" data-target="usermenu">
@@ -111,16 +112,10 @@
                 </div>
                 <!-- navbar cart icon -->
                 <div class="main-navbar-action__btn nav-dropdown">
-                    <a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp">
+                    <a class="dropdown-link" data-target="cartmenu" href="ShowCart">
                         <span class="cart-badge">${cart_list.size()}</span>
                         <i class="icon-shopping-bag"></i>
                     </a>
-                </div>
-                <div class="main-navbar-action__btn nav-dropdown">
-                	<a class="dropdown-link" data-target="cartmenu" href="http://localhost:8080/TGA104_G4/front-end/order/order.jsp">
-                    	<span class="cart-badge">訂單</span>
-                    	<i class="icon-shopping-bag"></i>
-                	</a>
                 </div>
                 <!-- navbar actions content -->
             </div>
@@ -135,7 +130,7 @@
                         <a class="nav-link " href="#">找設計師</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
-                        <a class="nav-link " href="/TGA104_G4/front-end/cart/shopProduct.jsp">商城</a>
+                        <a class="nav-link " href="/ShowShop">商城</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
                         <a class="nav-link " href="forumIndex.do?">論壇</a>
@@ -179,17 +174,17 @@
 		<td>${c.price}</td>
 		<td>${c.quantity}</td>
 		<td>
-		<form action="/TGA104_G4/OrderNowServlet" method="post" class="form-inline">
+		<form action="OrderNowServlet" method="post" class="form-inline">
 		<input type="hidden" name="id" value="${c.productNo}" class="form-input">
 		<div class="form-group d-flex justify-content-between w-50">
-		<a class="btn-sm btn-decre" href="/QuantityIncDecServlet?action=dec&id=${c.productNo}"><i class="fas fa-minus-square"></i></a>
+		<a class="btn-sm btn-decre" href="QuantityIncDecServlet?action=dec&id=${c.productNo}"><i class="fas fa-minus-square"></i></a>
 		<input type="text" name="quantity" class="form-control w-50" value="${c.quantity}" readonly>
-		<a class="btn-sm btn-incre" href="/QuantityIncDecServlet?action=inc&id=${c.productNo}"><i class="fas fa-plus-square"></i></a>
+		<a class="btn-sm btn-incre" href="QuantityIncDecServlet?action=inc&id=${c.productNo}"><i class="fas fa-plus-square"></i></a>
 		</div>
 <!-- 		<button type="submit" class="btn btn-primary btn-sm">直接購買</button> -->
 		</form>
 		</td>
-		<td><a class="btn btn-sm btn-danger" href="<%=request.getContextPath()%>/RemoveFromCartServlet?id=${c.productNo}">刪除</a></td>
+		<td><a class="btn btn-sm btn-danger" href="RemoveFromCartServlet?id=${c.productNo}">刪除</a></td>
 		</tr>
 	</c:forEach>
 </tbody>

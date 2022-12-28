@@ -42,7 +42,7 @@ public class OrderNowServlet extends HttpServlet {
 			if(cart_list == null) {
 				cartList.add(cart);
 				session.setAttribute("cart_list", cartList);
-				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // shopProduct.jsp
+				res.sendRedirect("ShowCart"); // shopProduct.jsp
 //				String url = "/front-end/cart/cart.jsp";
 //				RequestDispatcher rd = req.getRequestDispatcher(url);
 //				rd.forward(req, res);
@@ -54,7 +54,7 @@ public class OrderNowServlet extends HttpServlet {
 					if(c.getProductNo() == id) {
 						exist = true;
 						c.setQuantity(c.getQuantity() + 1);
-						res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // shopProduct.jsp
+						res.sendRedirect("ShowCart"); // shopProduct.jsp
 //						out.println("<h3 style='color:crimson; text-align:center'> Item already exist in Cart.<a href='http://localhost:8081/TGA104G4/front-end/cart/cart.jsp'>Go to Cart Page</a></h3>");
 					}
 //					String url = "/front-end/cart/cart.jsp";
@@ -63,7 +63,7 @@ public class OrderNowServlet extends HttpServlet {
 				}
 				if(!exist) {
 					cartList.add(cart);
-					res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // shopProduct.jsp
+					res.sendRedirect("ShowCart"); // shopProduct.jsp
 //					String url = "/front-end/cart/cart.jsp";
 //					RequestDispatcher rd = req.getRequestDispatcher(url);
 //					rd.forward(req, res);
