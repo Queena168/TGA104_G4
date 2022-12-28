@@ -3,9 +3,10 @@ import java.util.List;
 public interface DesignerOrderPhaseDAO_interface {
 	public void insert(DesignerOrderPhaseVO designerOrderPhaseVO);
 	public void update(DesignerOrderPhaseVO designerOrderPhaseVO);
-	public void delete(Integer phaseNo);
-	public DesignerOrderPhaseVO findDesignerOrderPhase(Integer phaseNo);
+	public void InsertDesignerOrderPhaseConstruction(DesignerOrderPhaseVO designerOrderPhaseVO);
+	public void InsertDesignerOrderPhasePayment(DesignerOrderPhaseVO designerOrderPhaseVO);
+	public List<DesignerOrderPhaseVO> findDesignerOrderPhase(Integer orderNo);
+	public  DesignerOrderPhaseVO findOneDesignerOrderPhase(Integer orderNo);
 	public List<DesignerOrderPhaseVO> getAll();
-	// 萬用複合查詢(傳入參數型態Map)(回傳 List)
-//     public List<EmpVO> getAll(Map<String, String[]> map); 
+
 }

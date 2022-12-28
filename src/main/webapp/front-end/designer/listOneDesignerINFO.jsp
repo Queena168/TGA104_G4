@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ page import="java.util.*" %> 
 <%@ page import="com.tibame.designer.model.*" %>
+<%@ page import="com.tibame.designer.service.*" %> 
 <%@ page import="com.tibame.member.model.*"%>
 
 <html>
@@ -601,21 +601,18 @@ pageEncoding="UTF-8"%>
                 <c:forEach var="designerExpertiseVO" items="${listXX}">
                   <u style="color: orange"
                     ><span
-                      >${designerExpertiseVO.expertiseVO.expertiseName}</span
-                    ></u
-                  >
+                      >${designerExpertiseVO.expertiseVO.expertiseName}</span></u>
                 </c:forEach>
               </h4>
               <br /><br />
 
               <!-- 諮詢按鈕開始 -->
 
-              <div>
-                <form
-                  method="post"
-                  action="<%=request.getContextPath()%>/inquiry"
-                >
-                  <input
+          <div>
+           <c:forEach var="designerExpertiseVO" items="${listXX}" begin="0" end="0">
+            <form method="get" action="<%=request.getContextPath()%>/inquiry">
+                <input type="hidden" name="designerNo" value="${designerExpertiseVO.designerNo}"/>
+               <input
                     class="btn btn-dark btn-block border-0 py-3"
                     style="
                       color: #fff;
@@ -625,18 +622,15 @@ pageEncoding="UTF-8"%>
                     type="submit"
                     value="我要諮詢"
                   />
-                  <input
-                    type="hidden"
-                    name="designerNo"
-                    value="${designerExpertiseVO.designerNo} "
-                  />
-                  <input
+                  
+               <!--     <input
                     type="hidden"
                     name="memberNo"
                     value="${memberVO.memberNo}"
-                  />
-                  <input type="hidden" name="inquiry" value="inquiry" />
+                  />-->
+               
                 </form>
+                </c:forEach>
               </div>
 
               <!-- 諮詢按鈕結束 -->

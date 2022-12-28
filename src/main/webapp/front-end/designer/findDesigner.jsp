@@ -2,23 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.tibame.designer.model.*" %>
-<%@ page import="com.tibame.designer.service.*" %>
 
 
 
-
-<%-- 此頁練習採用 EL 的寫法取值 --%>
-
-<%
-    //DesignerService designerSvc = new DesignerService();
-    //List<DesignerVO> list = designerSvc.getAll();
-    //pageContext.setAttribute("list",list);
-%>
 
 
 <html>
 <head>
-<title>所有設計師資料</title>
+<title>所有設計師資料-findDesigner.jsp</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Free HTML Templates" name="keywords" />
 <meta content="Free HTML Templates" name="description" />
@@ -160,7 +151,8 @@
 											<div>
 											    <input type="hidden" id="loginattr" name="login" value="memberlogin"/> 
 												<input  class="btn btn-dark btn-block border-0 py-3"
-													type="submit" value="登入">
+													type="submit" value="登入"  style=" color: #fff;
+                                                    background-color: #44425A;border-color: #44425A;">
 											</div>
 									<!-- 	</form> -->
 										<!-- Footer -->
@@ -221,7 +213,7 @@
 						id="navbarCollapse">
 						<div class="navbar-nav py-0">
 							<div id="selfedit" style="width: 200px"><a  href="index.html" class="nav-item nav-link"><b>找作品</b></a></div>
-							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/designer.do" class="nav-item nav-link"><b>找設計師</b></a></div>
+							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/ShowDesignerPage" class="nav-item nav-link"><b>找設計師</b></a></div>
 							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>商城</b></a></div>
 							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>論壇</b></a></div>
 							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>報導文章</b></a></div>
@@ -306,32 +298,22 @@
 	
 	
 	
-		<script >
-	
-	
+		<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/lib/easing/easing.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/lib/owlcarousel/owl.carousel.min.js"></script>
 
-	  
-	    $(document).on("click","#designerlogin",function(){
-        ($("#loginattr").removeAttr("value"))
-        ($("#loginattr").attr("value","designerlogin"));
-        });
-	    
-	    
-	    $(document).on("click","#memberlogin",function(){
-	        ($("#loginattr").removeAttr("value"))
-	        ($("#loginattr").attr("value","memberlogin"));
-	        });
-	    
-	    
-		//var flag=document.getElementById("errorFlag").value;
-		//if(flag==null||flag==""){
-			
-		//}else{
-			//var flag="${errorFlag}";
-			//alert("flag:"+flag);
-		//}
-		
-	    
-	</script>
+	<!-- Contact Javascript File -->
+	<script src="<%=request.getContextPath()%>/front-end/designer/mail/jqBootstrapValidation.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/designer/mail/contact.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="<%=request.getContextPath()%>/front-end/designer/js/main.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
+	<script src="<%=request.getContextPath()%>/front-end/designer/js/login.js"></script>
+	
+	
 </body>
 </html>
