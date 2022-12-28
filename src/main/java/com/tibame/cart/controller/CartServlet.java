@@ -42,7 +42,6 @@ public class CartServlet extends HttpServlet{
 			if(cart_list == null) {
 				cartList.add(cart);
 				session.setAttribute("cart_list", cartList);
-				req.setAttribute("message","<script type='text/javascript'>alert('加入購物車成功!')</script>");
 				req.getRequestDispatcher("ShowShop").forward(req, res);
 //				res.sendRedirect("/TGA104_G4/front-end/cart/shopProduct.jsp"); // shopProduct.jsp
 //				String url = "/front-end/cart/cart.jsp";
@@ -56,7 +55,6 @@ public class CartServlet extends HttpServlet{
 					if(c.getProductNo() == id) {
 						exist = true;
 						c.setQuantity(c.getQuantity() + 1);
-						req.setAttribute("message","<script type='text/javascript'>alert('加入购物车成功，请前去付款!')</script>");
 						req.getRequestDispatcher("ShowShop").forward(req, res);
 //						res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp"); // shopProduct.jsp
 //						out.println("<h3 style='color:crimson; text-align:center'> Item already exist in Cart.<a href='http://localhost:8081/TGA104G4/front-end/cart/cart.jsp'>Go to Cart Page</a></h3>");
@@ -67,7 +65,6 @@ public class CartServlet extends HttpServlet{
 				}
 				if(!exist) {
 					cartList.add(cart);
-					req.setAttribute("message","<script type='text/javascript'>alert('加入购物车成功，请前去付款!')</script>");
 					req.getRequestDispatcher("ShowShop").forward(req, res);
 //					res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/shopProduct.jsp"); // shopProduct.jsp
 //					String url = "/front-end/cart/cart.jsp";

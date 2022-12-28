@@ -31,8 +31,8 @@ public class CheckOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private ProductOrderVO productOrderVO;
-	@Autowired
-	private ProductOrderDetailVO productOrderDetailVO;
+	//@Autowired
+	//private ProductOrderDetailVO productOrderDetailVO;
 	@Autowired
 	private ProductOrderJDBCDAO productOrderJDBCDAO;
 //	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -193,19 +193,27 @@ public class CheckOutServlet extends HttpServlet {
 		
 		List<ProductOrderDetailVO> ordersItems = new ArrayList<ProductOrderDetailVO>();
 		for (Cart c : cart_list) {
-//		ProductOrderDetailVO productOrderDetailVO = new ProductOrderDetailVO();
+		ProductOrderDetailVO productOrderDetailVO = new ProductOrderDetailVO();
 		productOrderDetailVO.setOrderNo(productOrderVO.getOrderNo());
 		productOrderDetailVO.setProductNo(c.getProductNo());
 		productOrderDetailVO.setProductName(c.getProductName());
 		productOrderDetailVO.setQty(c.getQuantity());
 		productOrderDetailVO.setPrice(c.getPrice());
 		ordersItems.add(productOrderDetailVO);
+		System.out.println("cart_list" + cart_list.get(0).getProductName());
+		System.out.println("cart_list" + cart_list.get(1).getProductName());
 	    }
+		System.out.println("ordersItems" + ordersItems.get(0).getProductName());
+		System.out.println("ordersItems" + ordersItems.get(1).getProductName());
 		productOrderVO.setItems(ordersItems);
 //		ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 		productOrderJDBCDAO.addOrders(productOrderVO);
+		System.out.println("ordersItems_2" + ordersItems.get(0).getProductName());
+		System.out.println("ordersItems_2" + ordersItems.get(1).getProductName());
 		session.removeAttribute("cart_list");//付款後，清空session中的購物車
 //		System.out.println(productOrderVO.getOrderNo());
+		System.out.println("ordersItems_3" + ordersItems.get(0).getProductName());
+		System.out.println("ordersItems_3" + ordersItems.get(1).getProductName());
 		res.sendRedirect("front-end/order/SelectOrder"); // order.jsp
 		} catch (Exception e) {
 		e.printStackTrace();

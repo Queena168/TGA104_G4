@@ -212,6 +212,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 				PreparedStatement ps = connection.prepareStatement(INSERTORDERITEM);
 //				Object pps[][] = new Object[items.size()][];
 				for (int i = 0; i < items.size(); i++) {
+					System.out.println("items.size()"+ items.size());
 					ProductOrderDetailVO productOrderDetailVO = items.get(i);
 					ps.setInt(1, productOrderVO.getOrderNo());
 					ps.setInt(2, productOrderDetailVO.getProductNo());

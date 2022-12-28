@@ -36,7 +36,6 @@ public class ShowCart extends HttpServlet {
 		if(cart_list != null){
 			cartProduct = shopProductService.getCartProducts(cart_list);
 			req.setAttribute("cart_list", cart_list);
-			
 			Integer total = shopProductService.getTotalCartPrice(cart_list);
 			req.setAttribute("total", total);
 		}
