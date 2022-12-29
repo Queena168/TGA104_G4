@@ -29,6 +29,22 @@ public class PortfolioServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		// 來自/front-end/designer_protfolio/index.jsp點擊設計師資料的請求
+
+		/*************************** 1.接收請求參數 **********************/
+		String str = req.getParameter("designerNo");
+		Integer designerNo = Integer.valueOf(str);
+
+		/*************************** 2.查詢資料 *****************************************/
+		PortfolioService portfolioSvc = new PortfolioService();
+		List<PortfolioVO> portfolioListByNo = portfolioSvc.getAllbyDesign(designerNo);
+
+		/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+		HttpSession session = req.getSession();
+		session.setAttribute("portfolioListByNo", portfolioListByNo);
+		RequestDispatcher successView = req.getRequestDispatcher("/front-end/designer_protfolio/designerPorfile.jsp");
+		successView.forward(req, res);
+
 		doPost(req, res);
 	}
 
@@ -237,7 +253,7 @@ public class PortfolioServlet extends HttpServlet {
 			/*************************** 1.接收請求參數 **********************/
 			String str = req.getParameter("designerNo");
 			Integer designerNo = Integer.valueOf(str);
-			
+
 			/*************************** 2.查詢資料 *****************************************/
 			PortfolioService portfolioSvc = new PortfolioService();
 			List<PortfolioVO> portfolioListByNo = portfolioSvc.getAllbyDesign(designerNo);
@@ -322,14 +338,13 @@ public class PortfolioServlet extends HttpServlet {
 			}
 			/*************************** 2.開始新增資料 *****************************************/
 			PortfolioService portfolioSvc = new PortfolioService();
-			insertPortfolioVO = portfolioSvc.addPortfolio(portfolioName, designerNo, portfolioPic1, 
-														  portfolioPic2, portfolioPic3, portfolioPic4, description, 
-														  houseAge, houseSize, househouseArea);
+			insertPortfolioVO = portfolioSvc.addPortfolio(portfolioName, designerNo, portfolioPic1, portfolioPic2,
+					portfolioPic3, portfolioPic4, description, houseAge, houseSize, househouseArea);
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			RequestDispatcher successView = req
 					.getRequestDispatcher("/front-end/designer_protfolio/insertPortfolio.jsp");
 			successView.forward(req, res);
-			
+
 		}
 
 	}

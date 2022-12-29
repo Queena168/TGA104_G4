@@ -152,7 +152,7 @@
 						<%-- /錯誤表列 --%>
 
 						<h3 class="custom-form__title">登入</h3>
-						<form action="Login" method="post">
+						<form action="<%=request.getContextPath()%>/Login" method="post">
 							<div class="form-group custom-form__input">
 								<label for="inputEmail">Email 信箱</label> <input type="email"
 									class="form-control ltr" id="inputEmail" placeholder=""

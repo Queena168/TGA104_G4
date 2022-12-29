@@ -88,9 +88,9 @@
 						<div class="navbar-nav py-0">	                        
 							<div id="selfedit" style="width: 200px"><a href="<%=request.getContextPath()%>/DesignerEdit?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>編輯簡介</b></a></div>					
 						    <div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerOrder?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>案件管理</b></a></div>					
-							<div id="quotation" style="width: 200px"><a  href="course.html" class="nav-item nav-link"><b>報價</b></a></div>
-							<div id="contract" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>合約</b></a></div>
-							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>作品管理</b></a></div>
+							<div id="quotation" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerQuotationController?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>報價管理</b></a></div>
+                            <div id="contract" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerContractController?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>合約管理</b></a></div>
+							<div id="portfolio" style="width: 200px"><a  href="<%=request.getContextPath()%>/front-end/designer_protfolio/PortfolioByNo?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>作品管理</b></a></div>
 						</div>
 					</div>
 					
