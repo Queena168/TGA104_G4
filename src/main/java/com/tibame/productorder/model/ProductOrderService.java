@@ -2,15 +2,17 @@ package com.tibame.productorder.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductOrderService {
+	@Autowired
 	private ProductOrderDAO_interface dao;
 	
-	public ProductOrderService() {
-		dao = new ProductOrderJDBCDAO();
-	}
+//	public ProductOrderService() {
+//		dao = new ProductOrderJDBCDAO();
+//	}
 	
 	public ProductOrderVO addProductOrder(
 			Integer memberNo, String  receiverName, String receiverPhone, String receiverAddress, 

@@ -14,17 +14,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class ProductPicJDBCDAO implements ProductPicDAO_interface {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-	private static DataSource dataSource = null;
-	static {
-		try {
-			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+@Repository
+public class ProductPicJDBCDAO implements ProductPicDAO_interface {
+	
+	@Autowired
+	private DataSource dataSource;
+//	static {
+//		try {
+//			Context context = new InitialContext();
+//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private static final String INSERT_STMT = "insert into ProductPic(productNo, pic) values(?, ?)";
 	private static final String GET_ONE_STMT = "select productPicNo, productNo, pic from ProductPic where productPicNo=?";

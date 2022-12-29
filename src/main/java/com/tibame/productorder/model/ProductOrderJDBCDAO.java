@@ -162,7 +162,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 					productOrderVO.setTotalAmount(rs.getInt("totalAmount"));
 					productOrderVO.setInvoiceNo(rs.getString("invoiceNo"));
 					productOrderVO.setBusinessNumber(rs.getString("businessNumber"));
-//					productOrderVO.setPaidDate(rs.getDate("paidDate"));
+					productOrderVO.setPaidDate(rs.getTimestamp("paidDate"));
 					productOrderVO.setShipDate(rs.getDate("shipDate"));
 					productOrderVO.setOrderStatus(rs.getString("orderStatus"));
 					list.add(productOrderVO); // Store the row in the list

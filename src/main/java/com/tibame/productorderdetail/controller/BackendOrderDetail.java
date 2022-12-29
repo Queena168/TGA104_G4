@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.tibame.cart.model.ShopProductService;
 import com.tibame.productorder.model.ProductOrderJDBCDAO;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
@@ -17,27 +20,18 @@ import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 @WebServlet("/BackendOrderDetail")
 public class BackendOrderDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BackendOrderDetail() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	@Autowired
+	private ProductOrderJDBCDAO productOrderJDBCDAO;   
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("text/html; charset=utf-8");
 		req.setCharacterEncoding("UTF-8");
 		try(PrintWriter out = res.getWriter()){
-			Integer orderNo = Integer.valueOf(req.getParameter("id"));
+			Integer orderNo = Integer.valueOf(req.getParameter("productOrderNo"));
 			if(orderNo!=null) {
-				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
-				List<ProductOrderDetailVO> list = productOrderJDBCDAO.findOrdersById(orderNo);
-				req.setAttribute("ordersDetail", list);
+//				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
+				List<ProductOrderDetailVO> ordersDetail = productOrderJDBCDAO.findOrdersById(orderNo);
+				req.setAttribute("ordersDetail", ordersDetail);
 				req.getRequestDispatcher("back-end/productOrder/listProductOrderDetail.jsp").forward(req, res);
 //				for (ProductOrderDetailVO aProductOrderVO : list) {
 //					out.print(aProductOrderVO.getOrderNo() + ",");

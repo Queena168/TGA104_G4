@@ -166,7 +166,7 @@
 				<th scope="col">商品名稱</th>
 				<th scope="col">單價</th>
 				<th scope="col">數量</th>
-				<th scope="col">金額</th>
+<!-- 				<th scope="col">金額</th> -->
 			</tr>
 		</thead>
 		<tbody>

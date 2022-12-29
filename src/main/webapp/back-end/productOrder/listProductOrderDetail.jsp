@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.tibame.product.model.*"%>
-<%@ page import="com.tibame.productpic.model.*"%>
+<%@ page
+	import="java.util.* , com.tibame.cart.model.*, com.tibame.productorder.model.*, com.tibame.productorderdetail.model.*"%>
 
 <!DOCTYPE html>
 
@@ -32,32 +31,34 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="/back-end/assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet"
+	href="../../back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="/back-end/assets/vendor/css/core.css"
+<link rel="stylesheet" href="../../back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="/back-end/assets/vendor/css/theme-default.css"
+<link rel="stylesheet"
+	href="../../back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="/back-end/assets/css/demo.css" />
+<link rel="stylesheet" href="../../back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	href="/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+	href="../../back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet"
-	href="/back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
+	href="../../back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
 
 <!-- Helpers -->
-<script src="/back-end/assets/vendor/js/helpers.js"></script>
+<script src="../../back-end/assets/vendor/js/helpers.js"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="/back-end/assets/js/config.js"></script>
+<script src="../../back-end/assets/js/config.js"></script>
 </head>
-
+<body bgcolor='white'>
 <body>
 	<!-- Layout wrapper -->
 	<div class="layout-wrapper layout-content-navbar">
@@ -213,8 +214,8 @@
 						</ul></li>
 
 					<!-- Admin管理員管理 -->
-					<li class="menu-item"><a
-						href="javascript:void(0);" class="menu-link menu-toggle"> <i
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
 							<div data-i18n="Admin">管理員管理</div>
 					</a>
@@ -301,109 +302,95 @@
 				</nav>
 
 				<!-- / Navbar -->
-<!-- Content wrapper -->
-	<div class="content-wrapper">
-		<!-- Content -->
+				<div class="content-wrapper">
+					<!-- Content -->
 
-		<div class="container-xxl flex-grow-1 container-p-y">
-			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">MatDesign /</span> 所有商品列表
-			</h4>
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">MatDesign /</span> 商品訂單明細列表
+						</h4>
 
-			<!-- Striped Rows -->
-			<div class="card">
-				<div class="table-responsive text-nowrap">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>商品編號</th>
-								<th>商品類別名稱</th>
-								<th>商品名稱</th>
-								<th>商品庫存量</th>
-								<th>商品單價</th>
-								<th>商品描述</th>
-								<th>商品狀態</th>
-								<th>商品圖片</th>
-								<th>管理員編號</th>
-							</tr>
-						</thead>
-						<tbody class="table-border-bottom-0">
-							<c:forEach var="productPicVO" items="${list}">
-								<tr>
-									<td>${productPicVO.productNo}</td>
-									<td>${productPicVO.productTypeName}</td>
-									<td>${productPicVO.productName}</td>
-									<td>${productPicVO.stock}</td>
-									<td>${productPicVO.price}</td>
-									<td>${productPicVO.productDescription}</td> 
-									<td>${productPicVO.productStatus}</td>
-									<td>
-										<img src="<%=request.getContextPath()%>/PicReadServlet?productNo=${productPicVO.productNo}"
-						     			     alt="image" style="width: 100px; height: 100px;">
-						     		</td>
-									<td>${productPicVO.adminNo}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-							<a href='<%=request.getContextPath()%>/back-end/producttype/SelectAllProductType'>顯示所有商品類別</a><br>
-							<a href='<%=request.getContextPath()%>/back-end/product/SelectAllProduct'>顯示所有商品</a><br>
-							<a href='<%=request.getContextPath()%>/back-end/productpic/SelectAllPic'>顯示所有商品圖片</a>
-				</div>
-			</div>
-			</div>
-			<!--/ Striped Rows -->
-		</div>
-		<!-- / Content -->
-<!-- Footer -->
-					<footer class="content-footer footer bg-footer-theme">
-						<div
-							class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-							<div class="mb-2 mb-md-0">
-								©
-								<script>
-									document.write(new Date().getFullYear());
-								</script>
-								, made by <a href="#" target="_blank"
-									class="footer-link fw-bolder">MatDesign</a>
+						<!-- Striped Rows -->
+						<div class="card">
+							<div class="table-responsive text-nowrap">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th scope="col">訂單編號</th>
+											<!-- 				<th scope="col">商品編號</th> -->
+											<th scope="col">商品名稱</th>
+											<th scope="col">單價</th>
+											<th scope="col">數量</th>
+											<!-- 				<th scope="col">金額</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="o" items="${ordersDetail}">
+											<tr>
+												<td>${o.orderNo}</td>
+												<%-- 				<td>${o.productNo}</td> --%>
+												<td>${o.productName}</td>
+												<td>${o.price}</td>
+												<td>${o.qty}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
 							</div>
 						</div>
-					</footer>
-<!-- / Footer -->
-
-					<div class="content-backdrop fade"></div>
+					</div>
+					<!--/ Striped Rows -->
 				</div>
-				<!-- Content wrapper -->
-			</div>
-			<!-- / Layout page -->
-		</div>
+				<!-- / Content -->
+				<!-- Footer -->
+				<footer class="content-footer footer bg-footer-theme">
+					<div
+						class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+						<div class="mb-2 mb-md-0">
+							©
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							, made by <a href="#" target="_blank"
+								class="footer-link fw-bolder">MatDesign</a>
+						</div>
+					</div>
+				</footer>
+				<!-- / Footer -->
 
-		<!-- Overlay -->
-		<div class="layout-overlay layout-menu-toggle"></div>
+				<div class="content-backdrop fade"></div>
+			</div>
+			<!-- Content wrapper -->
+		</div>
+		<!-- / Layout page -->
+	</div>
+
+	<!-- Overlay -->
+	<div class="layout-overlay layout-menu-toggle"></div>
 	</div>
 	<!-- / Layout wrapper -->
 
 	<!-- Core JS -->
 	<!-- build:js assets/vendor/js/core.js -->
-	<script src="/back-end/assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="/back-end/assets/vendor/libs/popper/popper.js"></script>
-	<script src="/back-end/assets/vendor/js/bootstrap.js"></script>
+	<script src="../../back-end/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="../../back-end/assets/vendor/libs/popper/popper.js"></script>
+	<script src="../../back-end/assets/vendor/js/bootstrap.js"></script>
 	<script
-		src="/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		src="../../back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-	<script src="/back-end/assets/vendor/js/menu.js"></script>
+	<script src="../../back-end/assets/vendor/js/menu.js"></script>
 	<!-- endbuild -->
 
 	<!-- Vendors JS -->
-	<script src="/back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+	<script
+		src="../../back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 	<!-- Main JS -->
-	<script src="/back-end/assets/js/main.js"></script>
-	<script src="/back-end/assets/js/main.js"></script>
+	<script src="../../back-end/assets/js/main.js"></script>
 
 
 	<!-- Page JS -->
-	<script src="/back-end/assets/js/dashboards-analytics.js"></script>
+	<script src="../../back-end/assets/js/dashboards-analytics.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

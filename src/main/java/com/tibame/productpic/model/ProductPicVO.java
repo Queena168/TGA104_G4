@@ -1,5 +1,8 @@
 package com.tibame.productpic.model;
 
+import org.springframework.stereotype.Component;
+
+@Component(value = "ProductPicVO")
 public class ProductPicVO implements java.io.Serializable{
 	private Integer productPicNo;
 	private Integer productNo;
