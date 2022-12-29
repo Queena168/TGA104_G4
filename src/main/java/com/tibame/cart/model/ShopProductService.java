@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShopProductService {
-	@Autowired
+//	@Autowired
 	private ShopProductDAOInterface dao;
 	
-//	public ShopProductService() {
-//		dao = new ShopProductJDBCDAO();
-//	}
+	public ShopProductService() {
+		dao = new ShopProductJDBCDAO();
+	}
 
 	public List<Map<String, Object>> getAll() {
 		return dao.getAll();

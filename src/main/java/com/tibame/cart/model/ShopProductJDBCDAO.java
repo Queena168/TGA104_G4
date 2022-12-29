@@ -9,23 +9,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class ShopProductJDBCDAO implements ShopProductDAOInterface {
-	@Autowired
-	private DataSource dataSource;
-//	static {
-//		try {
-//			Context context = new InitialContext();
-//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
+//	@Autowired
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String GET_ALL_STMT = "select Product.productNo, Product.productName, min(pic), Product.price "
 			+ "from Product join ProductPic on Product.productNo = ProductPic.productNo "

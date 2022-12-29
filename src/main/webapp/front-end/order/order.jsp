@@ -31,27 +31,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Favicon -->
-    <link rel="icon" href="../images/favicon.ico" sizes="32x32">
+    <link rel="icon" href="front-end/images/favicon.ico" sizes="32x32">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="front-end/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel='stylesheet' href='../css/fontawesome.min.css'>
+    <link rel='stylesheet' href='front-end/css/fontawesome.min.css'>
     <!-- Animate -->
-    <link href="../css/animate.css" rel="stylesheet">
+    <link href="front-end/css/animate.css" rel="stylesheet">
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="front-end/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="front-end/css/owl.theme.default.min.css">
     <!-- light box -->
-    <link rel="stylesheet" href="../css/lightbox.min.css">
+    <link rel="stylesheet" href="front-end/css/lightbox.min.css">
     <!-- jquery ui -->
-    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="front-end/css/jquery-ui.min.css">
     <!--    <link rel="stylesheet" href="//basehold.it/24">-->
 
     <!-- nice select -->
-    <link rel="stylesheet" href="../css/nice-select.min.css">
+    <link rel="stylesheet" href="front-end/css/nice-select.min.css">
     <!-- Main Styles -->
-    <link rel="stylesheet" href="../scss/main.css">
-    <link rel="stylesheet" href="../css/forum_style.css">
+    <link rel="stylesheet" href="front-end/scss/main.css">
+    <link rel="stylesheet" href="front-end/css/forum_style.css">
 
     <title>商城首頁</title>
 <style type="text/css">
@@ -68,7 +68,7 @@
     <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="../images/MatDesignLogo.png" alt="">
+                <img src="front-end/images/MatDesignLogo.png" alt="">
             </a>
             <!--  navbar actions -->
             <div class="main-navbar-action">
@@ -180,8 +180,8 @@
 <%-- 				<td><%= o.getPrice()%></td> --%>
 				<td>${o.totalAmount}</td>
 				<td>${o.orderStatus}</td>
-                <td><a class="btn btn-sm btn-orange" href="OrderDetailServlet?id=${o.orderNo}">查看</a></td>
-				<td><a class="btn btn-sm btn-danger" href="CancelOrderServlet?id=${o.orderNo}">取消</a></td>
+                <td><a class="btn btn-sm btn-orange" href="front-end/order/OrderDetailServlet?id=${o.orderNo}">查看</a></td>
+				<td><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/CancelOrderServlet?id=${o.orderNo}">取消</a></td>
 			</tr>				
 		</c:forEach>
 		</tbody>
@@ -195,7 +195,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 footer__content">
                         <div class="footer-logo">
-                            <img src="../images/MatDesignLogo.png" alt="">
+                            <img src="front-end/images/MatDesignLogo.png" alt="">
                         </div>
                         <p></p>
 

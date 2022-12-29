@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.tibame.cart.model.ShopProductDAOInterface;
 
-@Service
+
 public class ProductService {
-	@Autowired	
+
 	private ProductDAO_interface dao;
 
-//	public ProductService() {
-//		dao = new ProductJDBCDAO();
-//	}
+	public ProductService() {
+		dao = new ProductJDBCDAO();
+	}
 	
 	public ProductVO addProduct(Integer productTypeNo, String  productName,
 			Integer stock, Integer price, String productDescription, String productStatus, Integer adminNo) {

@@ -11,17 +11,20 @@ import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 
-
+@WebServlet("/PicAllReadServlet")
 public class PicAllReadServlet extends HttpServlet {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private DataSource dataSource;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doGet(req, res);
@@ -33,9 +36,7 @@ public class PicAllReadServlet extends HttpServlet {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			// Handle any driver errors
+				con = dataSource.getConnection();
 			
 				Statement stmt = con.createStatement();
 				String id = req.getParameter("productPicNo").trim();
@@ -48,9 +49,6 @@ public class PicAllReadServlet extends HttpServlet {
 					out.write(buf);
 					in.close();
 			    }	
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -73,5 +71,4 @@ public class PicAllReadServlet extends HttpServlet {
 		}
 
 	}
-
 }

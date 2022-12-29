@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tibame.productpic.model.ProductPicService;
 import com.tibame.productpic.model.ProductPicVO;
 
@@ -18,14 +20,16 @@ import com.tibame.productpic.model.ProductPicVO;
  * Servlet implementation class SelectAllPic
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
-@WebServlet("/back-end/productpic/SelectAllPic")
+@WebServlet("/SelectAllPic")
 public class SelectAllPic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	@Autowired
+	private ProductPicService productPicService;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		ProductPicService productPicService = new ProductPicService();
+//		ProductPicService productPicService = new ProductPicService();
 		List<ProductPicVO> list = productPicService.getAll();
 		
 		req.setAttribute("list", list);

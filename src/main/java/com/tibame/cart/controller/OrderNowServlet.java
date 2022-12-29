@@ -20,8 +20,8 @@ import com.tibame.product.model.ProductVO;
 @WebServlet("/OrderNowServlet")
 public class OrderNowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ProductService psSvc;
+//	@Autowired
+//	private ProductService psSvc;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("text/html; charset=UTF-8");
@@ -30,6 +30,7 @@ public class OrderNowServlet extends HttpServlet {
 			ArrayList<Cart> cartList = new ArrayList<Cart>();
 			
 			int id = Integer.parseInt(req.getParameter("id"));
+			ProductService psSvc = new ProductService();
 			ProductVO productVO = psSvc.getOneProduct(id);
 			Cart cart = new Cart();
 			cart.setProductNo(id);

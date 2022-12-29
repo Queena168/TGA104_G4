@@ -346,9 +346,9 @@
 							</c:forEach>
 						</tbody>
 					</table>
-							<a href='<%=request.getContextPath()%>/back-end/producttype/SelectAllProductType'>顯示所有商品類別</a><br>
-							<a href='<%=request.getContextPath()%>/back-end/product/SelectAllProduct'>顯示所有商品</a><br>
-							<a href='<%=request.getContextPath()%>/back-end/productpic/SelectAllPic'>顯示所有商品圖片</a>
+							<a href='SelectAllProductType'>顯示所有商品類別</a><br>
+							<a href='SelectAllProduct'>顯示所有商品</a><br>
+							<a href='SelectAllPic'>顯示所有商品圖片</a>
 				</div>
 			</div>
 			</div>

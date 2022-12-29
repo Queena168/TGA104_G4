@@ -327,7 +327,7 @@
 									<td><strong>${productTypeVO.productTypeNo}</strong></td>
 									<td>${productTypeVO.productTypeName}</td>
 									<td>
-										<form method="post" action="http://localhost:8080/TGA104_G4/UpdateProductTypeServlet">
+										<form method="post" action="UpdateProductTypeServlet">
 											<label class="btn btn-primary" tabindex="0"> 
 											<span class="d-none d-sm-block">修改</span> 
 											<i class="fa-regular fa-pen-to-square d-block d-sm-none"></i> 
@@ -343,7 +343,7 @@
 					</table>
 				</div>
 				<a
-					href="http://localhost:8080/TGA104_G4/back-end/producttype/addProductType.jsp"
+					href="/back-end/producttype/addProductType.jsp"
 					class="card-header">新增商品類別</a>
 			</div>
 			</div>

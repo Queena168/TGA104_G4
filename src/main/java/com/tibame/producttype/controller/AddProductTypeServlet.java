@@ -11,12 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tibame.producttype.model.ProductTypeService;
 import com.tibame.producttype.model.ProductTypeVO;
 
-@WebServlet("/back-end/producttype/AddProductTypeServlet")
+@WebServlet("/AddProductTypeServlet")
 public class AddProductTypeServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
+	@Autowired 
+	private ProductTypeService productTypeSvc;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -44,13 +48,13 @@ private static final long serialVersionUID = 1L;
 			}
 
 			/*************************** 2.開始新增資料 ***************************************/
-			ProductTypeService productTypeSvc = new ProductTypeService();
+//			ProductTypeService productTypeSvc = new ProductTypeService();
 			productTypeVO = productTypeSvc.addProductType(productTypeName);
 			
 			List<ProductTypeVO> list = productTypeSvc.getAll();
 			req.setAttribute("list", list);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/producttype/listAllProductType.jsp";
+			String url = "SelectAllProductType";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交selectProduct_page.jsp
 			successView.forward(req, res);
 		}

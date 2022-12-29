@@ -155,7 +155,7 @@
 <h3>本次消費金額：$ ${(total>0)?total:0}</h3>
 <br>
 <h3>收貨資訊</h3>
-<form METHOD="get" ACTION="CheckOutServlet">
+<form METHOD="get" ACTION="${pageContext.request.contextPath}/CheckOutServlet">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>收件人姓名</label>

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.tibame.cart.model.ShopProduct;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
-@Component(value = "ProductOrderVO")
+
 public class ProductOrderVO extends ShopProduct implements java.io.Serializable{
 	private Integer ooNo;
 	private Integer orderNo;

@@ -28,7 +28,7 @@ public class CancelOrderServlet extends HttpServlet {
 				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 				productOrderJDBCDAO.delete(productOrderVO);
 			}
-			res.sendRedirect("front-end/order/SelectOrder"); // order.jsp
+			res.sendRedirect("SelectOrder"); // order.jsp
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -6,14 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public class ProductPicService {
-	@Autowired
+
 	private ProductPicDAO_interface dao;
 
-//	public ProductPicService() {
-//		dao = new ProductPicJDBCDAO();
-//	}
+	public ProductPicService() {
+		dao = new ProductPicJDBCDAO();
+	}
 	
 	public ProductPicVO addProductPic(Integer productNo, byte[] pic) {
 

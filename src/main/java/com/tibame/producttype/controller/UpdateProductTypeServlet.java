@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.tibame.productpic.model.ProductPicService;
 import com.tibame.producttype.model.ProductTypeService;
 import com.tibame.producttype.model.ProductTypeVO;
 
@@ -18,7 +21,10 @@ import com.tibame.producttype.model.ProductTypeVO;
 @WebServlet("/UpdateProductTypeServlet")
 public class UpdateProductTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Autowired
+	private ProductTypeService productTypeSvc; 
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -32,7 +38,7 @@ public class UpdateProductTypeServlet extends HttpServlet {
 			Integer productTypeNo = Integer.valueOf(req.getParameter("productTypeNo"));
 
 			/*************************** 2.開始查詢資料 ****************************************/
-			ProductTypeService productTypeSvc = new ProductTypeService();
+//			ProductTypeService productTypeSvc = new ProductTypeService();
 			ProductTypeVO productTypeVO = productTypeSvc.getOneProductType(productTypeNo);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/

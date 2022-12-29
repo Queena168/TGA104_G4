@@ -154,7 +154,7 @@
 		<div class="card w-50 mx-auto my-5">
 			<div class="card-header text-center">用戶登入</div>
 			<div class="card-body">
-				<form action="../../LoginServlet" method="post">
+				<form action="/TGA104_G4/LoginServlet" method="post">
 
 					<div class="form-group">
 						<label>信箱</label> <input type="email" class="form-control"

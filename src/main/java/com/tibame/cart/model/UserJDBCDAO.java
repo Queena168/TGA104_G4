@@ -13,18 +13,17 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class UserJDBCDAO {
-	@Autowired
-	private DataSource dataSource;
-//	static {
-//		try {
-//			Context context = new InitialContext();
-//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String GET_ONE_STMT =
 			"SELECT memberNo, memberName, memberEmail, memberPassword from User where memberEmail=? and memberPassword=?";

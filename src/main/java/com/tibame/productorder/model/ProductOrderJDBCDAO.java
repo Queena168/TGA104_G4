@@ -17,18 +17,17 @@ import org.springframework.stereotype.Repository;
 
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
-@Repository
+
 public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
-	@Autowired
-	private DataSource dataSource;
-//	static {
-//		try {
-//			Context context = new InitialContext();
-//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String GET_ALL_STMT = "SELECT orderNo, memberNo, receiverName, receiverPhone, receiverAddress, totalQTY, totalAmount, invoiceNo, "
 			+ "businessNumber, paidDate, shipDate, orderStatus FROM ProductOrder order by orderNo";
@@ -212,7 +211,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 				PreparedStatement ps = connection.prepareStatement(INSERTORDERITEM);
 //				Object pps[][] = new Object[items.size()][];
 				for (int i = 0; i < items.size(); i++) {
-					System.out.println("items.size()"+ items.size());
+//					System.out.println("items.size()"+ items.size());
 					ProductOrderDetailVO productOrderDetailVO = items.get(i);
 					ps.setInt(1, productOrderVO.getOrderNo());
 					ps.setInt(2, productOrderDetailVO.getProductNo());

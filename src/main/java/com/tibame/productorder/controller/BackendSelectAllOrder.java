@@ -18,15 +18,15 @@ import com.tibame.productorder.model.ProductOrderVO;
 
 
 
-@WebServlet("/BackendSelectAllOrder")
+@WebServlet("/back-end/productOrder/BackendSelectAllOrder")
 public class BackendSelectAllOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ProductOrderService productOrderService; 
+//	@Autowired
+//	private ProductOrderService productOrderService; 
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-//	 	ProductOrderService productOrderService = new ProductOrderService();
+	 	ProductOrderService productOrderService = new ProductOrderService();
 	 	List<ProductOrderVO> list = productOrderService.getAll();
 	 	req.setAttribute("list", list);
 		String url = "/back-end/productOrder/listAllProductOrder.jsp";

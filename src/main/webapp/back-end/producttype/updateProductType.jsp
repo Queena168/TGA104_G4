@@ -321,7 +321,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="/TGA104_G4/UpdateProductTypeServlet" name="form1">
+<FORM METHOD="post" ACTION="UpdateProductTypeServlet" name="form1">
 <table>
 
     <tr>

@@ -147,7 +147,7 @@ th, td {
                     <a class="nav-link " href="#" >找設計師</a>
                 </li>
                 <li class="nav-item main-navbar__item dropdown">
-                    <a class="nav-link " href="/ShowShop" >商城</a>
+                    <a class="nav-link " href="${pageContext.request.contextPath}/ShowShop" >商城</a>
                 </li>
                 <li class="nav-item main-navbar__item dropdown">
                     <a class="nav-link " href="#" >論壇</a>

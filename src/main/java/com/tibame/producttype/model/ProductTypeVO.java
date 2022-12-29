@@ -1,5 +1,8 @@
 package com.tibame.producttype.model;
 
+import org.springframework.stereotype.Component;
+
+@Component(value = "ProductTypeVO")
 public class ProductTypeVO implements java.io.Serializable{
 	private Integer productTypeNo;
 	private String productTypeName;

@@ -10,17 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tibame.producttype.model.ProductTypeService;
 import com.tibame.producttype.model.ProductTypeVO;
 
-@WebServlet("/back-end/producttype/SelectAllProductType")
+@WebServlet("/SelectAllProductType")
 public class SelectAllProductType extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	@Autowired
+	private ProductTypeService productTypeService;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		ProductTypeService productTypeService = new ProductTypeService();
+//		ProductTypeService productTypeService = new ProductTypeService();
 		List<ProductTypeVO> list = productTypeService.getAll();
 		
 		req.setAttribute("list", list);

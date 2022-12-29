@@ -19,19 +19,19 @@ import org.springframework.stereotype.Repository;
 
 import com.tibame.producttype.model.ProductTypeVO;
 
-@Repository
+
 public class ProductJDBCDAO implements ProductDAO_interface {
 
-	@Autowired
-	private DataSource dataSource;
-//	static {
-//		try {
-//			Context context = new InitialContext();
-//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/DBPool");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String GET_ALL_STMT = "SELECT productNo, productTypeNo, productName, stock, price, productDescription, productStatus, adminNo FROM Product order by productTypeNo";
 	private static final String INSERT_STMT = "insert into Product(productTypeNo, productName, stock, price, productDescription, productStatus, adminNo)"

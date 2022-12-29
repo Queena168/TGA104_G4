@@ -15,16 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tibame.productpic.model.ProductPicService;
 
-@WebServlet("/SelectAll")
+@WebServlet("/back-end/product/SelectAll")
 public class SelectAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ProductPicService productPicService;  
+//	@Autowired
+//	private ProductPicService productPicService;  
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-//		ProductPicService productPicService = new ProductPicService();
+		ProductPicService productPicService = new ProductPicService();
 		List<Map<String, Object>> list = productPicService.listAllProduct();
 		
 		req.setAttribute("list", list);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.tibame.cart.model.Cart;
 import com.tibame.cart.model.ShopProductService;
@@ -23,10 +26,11 @@ import com.tibame.productorder.model.ProductOrderVO;
 @WebServlet("/ShowOrderDetail")
 public class ShowOrderDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ShopProductService shopProductService;
-	@Autowired
-	private ProductOrderJDBCDAO productOrderJDBCDAO;
+//	@Autowired
+//	private ShopProductService shopProductService;
+//	@Autowired
+//	private ProductOrderJDBCDAO productOrderJDBCDAO;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
@@ -35,6 +39,7 @@ public class ShowOrderDetail extends HttpServlet {
 		List<ProductOrderVO> orders = null;
 		if (auth != null) {
 			req.setAttribute("auth", auth);
+			ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 			orders = productOrderJDBCDAO.userOrders(auth.getUserNo());
 		} else {
 //			res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/login.jsp");
@@ -48,6 +53,7 @@ public class ShowOrderDetail extends HttpServlet {
 		HttpSession session = req.getSession();
 		ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list");
 		List<Cart> cartProduct = null;
+		ShopProductService shopProductService = new ShopProductService();
 		if (cart_list != null) {
 			cartProduct = shopProductService.getCartProducts(cart_list);
 			req.setAttribute("cart_list", cart_list);
