@@ -1,9 +1,9 @@
-package com.tibame.designer.model;
+package designer.model;
 
 import java.sql.Date;
 import java.util.Arrays;
 
-import com.tibame.designer.service.DesignerOrderService;
+import designer.service.DesignerOrderService;
 
 public class DesignerOrderPhaseVO implements java.io.Serializable {
 
@@ -18,18 +18,13 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 	private byte[] paymentAtt;// (付款證明附檔): blob
 	private Date modificationTime;// (修改時間): timestamp
 	private Integer orderNo;// (報價單合約訂單表單流水號): int, not null
+	private Integer totalOrderPhase;
+	private Integer totalamount;
 	
 
 
 	
 
-	@Override
-	public String toString() {
-		return "DesignerOrderPhaseVO [phaseNo=" + phaseNo + ", orderPhase=" + orderPhase + ", amount=" + amount
-				+ ", constructionStatus=" + constructionStatus + ", orderPhaseDetail=" + orderPhaseDetail
-				+ ", paymentPhase=" + paymentPhase + ", paymentStatus=" + paymentStatus + ", paymentAtt="
-				+ Arrays.toString(paymentAtt) + ", modificationTime=" + modificationTime + ", orderNo=" + orderNo + "]";
-	}
 
 	public Integer getPhaseNo() {
 		return phaseNo;
@@ -115,6 +110,24 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 
 	public void setOrderPhaseDetail(String orderPhaseDetail) {
 		this.orderPhaseDetail = orderPhaseDetail;
+	}
+
+	
+	
+	public Integer getTotalOrderPhase() {
+		return totalOrderPhase;
+	}
+
+	public void setTotalOrderPhase(Integer totalOrderPhase) {
+		this.totalOrderPhase = totalOrderPhase;
+	}
+
+	public Integer getTotalamount() {
+		return totalamount;
+	}
+
+	public void setTotalamount(Integer totalamount) {
+		this.totalamount = totalamount;
 	}
 
 	public DesignerOrderVO getDesignerOrderVO() {

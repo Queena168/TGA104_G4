@@ -1,10 +1,10 @@
-package com.tibame.designer.service;
+package designer.service;
 
 import java.util.List;
 
-import com.tibame.designer.model.DesignerOrderPhaseDAO_interface;
-import com.tibame.designer.model.DesignerOrderPhaseJNDIDAO;
-import com.tibame.designer.model.DesignerOrderPhaseVO;
+import designer.model.DesignerOrderPhaseDAO_interface;
+import designer.model.DesignerOrderPhaseJNDIDAO;
+import designer.model.DesignerOrderPhaseVO;
 
 public class DesignerOrderPhaseService {
 
@@ -15,13 +15,13 @@ public class DesignerOrderPhaseService {
 	}
 	
 	
-	public  DesignerOrderPhaseVO insertDesignerOrderPhase(Integer orderNo, Integer orderPhase, Integer amount, byte[] contractAtt) {
+	public  DesignerOrderPhaseVO insertDesignerOrderPhase(Integer orderNo, Integer totalOrderPhase, Integer totalamount) {
 
 		DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
 		designerOrderPhaseVO.setOrderNo(orderNo);
-		designerOrderPhaseVO.setOrderPhase(orderPhase);
-		designerOrderPhaseVO.setAmount(amount);
-		
+		designerOrderPhaseVO.setTotalOrderPhase(totalOrderPhase);
+		designerOrderPhaseVO.setTotalamount(totalamount);	
+		System.out.println("正要開始執行insert");
 		dao.insert(designerOrderPhaseVO);
 		return designerOrderPhaseVO;
 	}

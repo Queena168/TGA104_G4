@@ -1,6 +1,7 @@
-package com.tibame.designer.controller;
+package designer.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -19,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.tibame.designer.model.DesignerOrderVO;
-import com.tibame.designer.service.DesignerOrderService;
+import designer.model.DesignerOrderVO;
+import designer.service.DesignerOrderService;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/SendQuotation")
@@ -105,28 +106,28 @@ public class SendQuotation extends HttpServlet {
 			
 			Part part = req.getPart("upfilequotation");
 			//====================================================			
-//			PrintWriter out = res.getWriter();
-			//System.out.println("ContentType=" + req.getContentType()); // 測試用
-			String realPath = getServletContext().getRealPath(saveDirectory);
-			System.out.println("realPath=" + realPath); // 測試用
-			File fsaveDirectory = new File(realPath);
-//			if (!fsaveDirectory.exists()) 
-//				fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
-//			Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
-//			for (Part part : parts) {
-//				String filename = part.getSubmittedFileName();
-//				if (filename != null && filename.length() != 0 && part.getContentType() != null) {
-					// 建立 SimpleDateFormat 物件
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-					// 取得當前時間戳
-				    long timestamp = new Date().getTime();
-				    // 將時間戳格式化為指定的格式
-				    String formattedTimestamp = sdf.format(timestamp);
-				    // 將檔名命名為 formattedTimestamp
-				    String filename1 = formattedTimestamp + ".pdf";
-					File f = new File(fsaveDirectory, filename1);
-					// 利用File物件,寫入目地目錄,上傳成功
-//					part.write(f.toString());			
+////			PrintWriter out = res.getWriter();
+//			//System.out.println("ContentType=" + req.getContentType()); // 測試用
+//			String realPath = getServletContext().getRealPath(saveDirectory);
+//			System.out.println("realPath=" + realPath); // 測試用
+//			File fsaveDirectory = new File(realPath);
+////			if (!fsaveDirectory.exists()) 
+////				fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
+////			Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
+////			for (Part part : parts) {
+////				String filename = part.getSubmittedFileName();
+////				if (filename != null && filename.length() != 0 && part.getContentType() != null) {
+//					// 建立 SimpleDateFormat 物件
+//					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+//					// 取得當前時間戳
+//				    long timestamp = new Date().getTime();
+//				    // 將時間戳格式化為指定的格式
+//				    String formattedTimestamp = sdf.format(timestamp);
+//				    // 將檔名命名為 formattedTimestamp
+//				    String filename1 = formattedTimestamp + ".pdf";
+//					File f = new File(fsaveDirectory, filename1);
+//					// 利用File物件,寫入目地目錄,上傳成功
+////					part.write(f.toString());			
 			//===================================================
 			InputStream in = part.getInputStream();
 			byte[] quotationAtt = new byte[in.available()];

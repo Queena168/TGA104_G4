@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.tibame.designer.model.*" %>
-
-
-<%
-  DesignerVO designerVO=(DesignerVO) session.getAttribute("designerVO");
-  DesignerOrderVO designerOrderVO = (DesignerOrderVO) request.getAttribute("designerOrderVO"); //DesignerServlet.java(Concroller), 存入req的empVO物件
-%>
+<%@ page import="designer.model.*" %>
 
 
 <html>
@@ -82,6 +76,21 @@ table, th, td {
 
 th, td {
 	padding: 1px;
+}
+
+#t1td{
+  width: 870px;
+  height: 200px;
+
+}
+
+
+#t1 {
+   height: 100%; /*高度填充*/
+   width: 100%;
+   padding: 0; /*防止textarea超過td邊框*/
+   vertical-align: bottom; /*chrome的td有margin-top情況 用此CSS調整*/
+   border: none; /*border用td的*/
 }
 </style>
 
@@ -250,30 +259,29 @@ margin-left: 200px;
 <div align="center">
 <form method="post" action="SendQuotation" enctype="multipart/form-data">
 <table>
-		<tr><th>案件編號:</th><td>${designerOrderVO.orderNo}</td></tr>
-		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
+		<tr><th>案件編號</th><td>${designerOrderVO.orderNo}</td></tr>
+		<tr><th>客戶</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr>
 		<tr><th>諮詢預算</th><td>${designerOrderVO.inquiryBudget}元</td></tr>
 		<tr><th>諮詢坪數</th><td>${designerOrderVO.inquirySize}坪</td></tr>
 		<tr><th>諮詢內容</th><td>${designerOrderVO.inquiryDetail}</td></tr>
 	    <tr>
 	         <th>報價金額</th>
-   
 	    <td>	    
-	      <input type="TEXT" name="quotationAmount" size="45"
-			 value="${designerOrderVO.quotationAmount}"/>	 
+	      <input type="number" name="quotationAmount" size="10"
+			 value="${designerOrderVO.quotationAmount}"/>元 
 	    </td>
 	    </tr>
-		<tr><th>報價內容</th>
-		<td> 
-		 <textarea rows="10" cols="60"  name="quotationDetail">${designerOrderVO.quotationDetail}</textarea>
+		<tr><th>報價內容</th>	
+		<td id="t1td"> 
+		<textarea id="t1"  placeholder="請輸入內容!" name="quotationDetail">${designerOrderVO.quotationDetail}</textarea>
 		</td>
 		</tr>
 		
 		<tr>	    	    
 	    <th>報價附件</th>
 	    <td>
-		<input type="file" name="upfile1" id="fileinp">
+		<input type="file" name="upfilequotation" id="fileinp">
         </td>         
 	    </tr>
 	 

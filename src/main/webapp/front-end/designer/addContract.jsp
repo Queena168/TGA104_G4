@@ -3,10 +3,9 @@
 <%@ page import="designer.model.*" %>
 
 
-
 <html>
 <head>
-<title>合約 - listOneContract.jsp</title>
+<title>製作合約 - addContract.jsp</title>
 
 <meta charset="utf-8" />
 <title>MatDesign</title>
@@ -135,6 +134,21 @@ margin-left: 200px;
 
 }
 
+
+#t1td{
+  width: 870px;
+  height: 200px;
+
+}
+
+#t1 {
+   height: 100%; /*高度填充*/
+   width: 100%;
+   padding: 0; /*防止textarea超過td邊框*/
+   vertical-align: bottom; /*chrome的td有margin-top情況 用此CSS調整*/
+   border: none; /*border用td的*/
+}
+
 </style>
 
 
@@ -241,66 +255,59 @@ margin-left: 200px;
 	
 	<!-- Navbar End -->
 <hr size="8px" align="center" width="100%" >
-<div style="text-align:center"><h3>案件合約</h3></div>
+<div style="text-align:center"><h3>製作合約</h3></div>
 <div align="center">
-<form action="AddContract">
+<form method="post" action="SendContract" enctype="multipart/form-data">
 <table>
 		<tr><th>案件編號</th><td>${designerOrderVO.orderNo}</td></tr>
 		<tr><th>客戶</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr>
-	    <!--<tr><th>報價狀態</th><td>${designerOrderVO.quotationStatus}  </td></tr>	  
-	    <tr><th>報價同意時間</th><td>${designerOrderVO.quotationApprovalTime}</td></tr>-->    
-	   <tr>
-	     <th>報價金額</th>
-	      <c:choose>
-				<c:when test="${designerOrderVO.quotationAmount==0}">
-	                <td> 元</td>
-	            </c:when>
-	            <c:when test="${designerOrderVO.quotationAmount!=0}">
-	                <td>${designerOrderVO.quotationAmount}元</td>
-	            </c:when>
-	      </c:choose>	    
-	    </tr>
-		<tr><th>報價內容</th><td>${designerOrderVO.quotationDetail}</td></tr>
+		<tr>
+		<th>合約期數</th>
+		<c:choose>
+		  <c:when test="${designerOrderPhaselist.size()==0}">
+		  <td><input type="number" name="totalOrderPhase" style="width: 50px" value="${param.totalOrderPhase}">期</td>
+		  </c:when>
+		  
+		  <c:when test="${designerOrderPhaselist.size()!=0}">
+		    <td>
+		    <c:forEach var="designerOrderPhaselist" items="${designerOrderPhaselist}"> 
+		       <input type="number" name="totalOrderPhase" style="width: 50px" value="${designerOrderPhaselist.totalOrderPhase}">
+		     </c:forEach> 
+		   期</td>		   
+		  </c:when>
+		</c:choose>
+        </tr>
+        <tr><th>合約金額</th><td><input type="number" size="10" name="totalamount" value="${designerOrderVO.quotationAmount}">元</td></tr>
 		
-        <tr><th>合約附件</th>
-        <c:choose>
-        <c:when test="${designerOrderVO.contractAtt!=null}">
-        <td><a href="#" onclick="window.open(
-	    '<%=request.getContextPath()%>/Contractinfo?orderNo=${designerOrderVO.orderNo}'
-	    , '_blank').focus();">下載合約</a></td>
-	    </c:when>
-	    
-	    <c:when test="${designerOrderVO.contractAtt==null}">
-	    <td>無合約附件</td>
-	    </c:when>
-	    </c:choose>
-	    </tr> 
-	    <tr><th>合約狀態</th><td>${designerOrderVO.contractStatus}</td></tr>
-	    <tr><th>合約內容</th><td>${designerOrderVO.contractDetail}</td></tr>
-	  
-
+		
+		<tr><th>合約內容</th>
+		<td id="t1td"> 
+		 <textarea id="t1"  placeholder="請輸入內容!" name="contractDetail">${param.contractDetail}</textarea>
+		</td>
+		</tr>
+				
+		<tr>	    	    
+	    <th>合約附件</th>
+	    <td>
+		<input type="file" name="upfilecontract" id="fileinp">
+        </td>         
+	    </tr>
+	 
 </table>
      <div id="block2">
-              <input type="hidden" name="action" value="insertcontract">
+     	
+              <input type="hidden" name="action" value="sendcontract">
               <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
-              <input id="showorhidden1" type="submit" value="製作合約" style="display: inline-block;">
-              
-               <input type="hidden" name="action" value="updatecontract">
-              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
-              <input id="showorhidden2" type="submit" value="修改合約" style="display: inline-block;">
-              
+              <input type="hidden" name="designerNo" value="${designerOrderVO.designerNo}">
+              <input type="submit" value="送出合約">
+         
+              <input type="hidden" name="cancel" value="cancel">
               <input type ="button" onclick="history.back()" value="回上一頁" >
      </div> 
 </form>
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/designer/js/btnscontrolcontract.js"></script>
-<script type="text/javascript">
-var log1 = '${designerOrderVO.orderNo}';
-var type='${designerOrderVO.contractStatus}';
-DisplayAndHiddenBtn("showorhidden1",type);
-DisplayAndHiddenBtn("showorhidden2",type);
-</script>
-
+	  
+	  
 </body>
 </html>
