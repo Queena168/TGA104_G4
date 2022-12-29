@@ -289,7 +289,7 @@
 							標題請勿超過50個字</span>
 						<textarea name="content" id="summernote"></textarea>
 						<button id="submit_btn" type="button">送出</button>
-						<input id="act" type="hidden" name="action" value="insert">
+						<input id="act" type="hidden" name="action"><!-- value="insert"> --> 
 						<input type="hidden" name="memberNo" value="${sessionScope.memberNo}">
 						<input type="hidden" id="modify_replyNo" name="replyNo" value="">
 						<input type="hidden" name="topicNo" value="${param.topicNo}">
@@ -312,7 +312,7 @@
 						<input type="hidden" name="postNo" value="${param.postNo}">
 						<input type="hidden" id="report_replyNo" name="replyNo" value="">
 						<input type="hidden" name="informant" value="${sessionScope.memberNo}">
-						<input type="hidden" name="action" value="insertReport">
+						<input type="hidden" name="action"><!-- value="insertReport"> --> 
 						<input type="hidden" name="page" value="${param.page}">
 					</div>
 					<span>檢舉原因(請勿超過50字)</span>

@@ -379,7 +379,7 @@
                                   <option value="未違規">未違規
                                   <option value="下架">下架
                                 </select>
-                                <input type="hidden" name="action" value="update">
+                                <input type="hidden" name="action"> <!-- value="update">  -->
                                 <input type="hidden" name="reviewer" value="1">
                                 <%-- 記得換成${adminVO.adminNo} --%>
                                   <input type="hidden" name="postNo" value="${forumReportVOList.postNo}">

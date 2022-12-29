@@ -2,13 +2,14 @@ package com.tibame.forum_reply.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class ForumReplyService {
 
+	@Autowired
 	private ForumReplyDAO_interface dao;
-
-	public ForumReplyService() {
-		dao = new ForumReplyDAO();
-	}
 
 	public ForumReplyVO addReply(Integer memberNo, Integer replyTo, String content) {
 		ForumReplyVO forumReplyVO = new ForumReplyVO();

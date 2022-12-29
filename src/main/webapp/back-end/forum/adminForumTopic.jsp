@@ -352,13 +352,12 @@
                       請選擇負責管理員<br>
                       <select name="adminNo" class="form-control">
                         <c:forEach var="adminVO" items="${adminVOList}">
-                          <option value="${adminVO.adminNo}" ${(adminVO.adminNo==forumTopicVO.adminNo)? 'selected' :''
-                            }>
+                          <option value="${adminVO.adminNo}">
                             ${adminVO.adminNo}. ${adminVO.adminName}
                         </c:forEach>
                       </select>
                     </div>
-                    <input type="hidden" name="action" value="insert">
+                    <input type="hidden" name="action"><!-- value="insert"> --> 
                     <input class="btn_style" type="button" id="add_submit" value="送出">
                   </div>
                 </form>
@@ -380,13 +379,12 @@
                       請選擇負責管理員<br>
                       <select name="adminNo" class="form-control" id="update_admin_no">
                         <c:forEach var="adminVO" items="${adminVOList}">
-                          <option value="${adminVO.adminNo}" ${(adminVO.adminNo==forumTopicVO.adminNo)? 'selected' :''
-                            }>
+                          <option value="${adminVO.adminNo}">
                             ${adminVO.adminNo}. ${adminVO.adminName}
                         </c:forEach>
                       </select>
                     </div>
-                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="action"><!-- value="update"> --> 
                     <input class="btn_style" type="button" id="update_submit" value="送出">
                   </div>
                 </form>

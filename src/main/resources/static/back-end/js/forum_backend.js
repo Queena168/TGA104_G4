@@ -19,7 +19,8 @@ document.querySelectorAll(".review_btn").forEach(function(btn) {
 	btn.addEventListener("click", function() {
 		$.ajax({
 			type: "POST",
-			url: "forumreport.do",
+			url: "updateReport",
+//			url: "forumreport.do",
 			data: $("#review_form").serialize(),
 			dataType: "JSON",
 			success: function(data) {
