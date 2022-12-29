@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.tibame.product.model.ProductService;
 import com.tibame.product.model.ProductVO;
 
-@WebServlet("/back-end/product/AddProductServlet")
+@WebServlet("/AddProductServlet")
 public class AddProductServlet extends HttpServlet {
 	
 private static final long serialVersionUID = 1L;

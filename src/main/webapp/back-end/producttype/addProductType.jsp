@@ -321,7 +321,7 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	<form id="#" class="mb-3"  METHOD="post" action="AddProductTypeServlet" name="form1">
+	<form id="#" class="mb-3"  METHOD="post" action="../../AddProductTypeServlet" name="form1">
 		<div class="mb-3">
 			<label for="#" class="form-label">商品類別名稱:</label> 
 			<input
@@ -333,7 +333,7 @@
 			class="btn btn-primary d-grid w-100" type="submit"
 			value="送出新增">
 	</form>
-	
+	<a href="../../SelectAllProductType">回商品類別頁</a>
 </div>
 								</div>
 								<!-- Register Card -->

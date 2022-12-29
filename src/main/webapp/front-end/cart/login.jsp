@@ -6,26 +6,8 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <title>cart.jsp</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
- <style type="text/css">
- .table tbody td{
- 	vartical-align: middle;
- }
- 
- .btn-incre, .btn-decre{
- 	box-shadow: none;
- 	font-size: 18px;
- 	color: #ff7c07;	
- }
- 
- .btn-primary {
-    color: #fff;
-    background-color: #ff7c07;
-    border-color: #ff7c07;
-}
- </style>
+ <title>login.jsp</title>
+
  
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,28 +132,70 @@
 <br>
 <br>
 <br>
-	<div class="container">
-		<div class="card w-50 mx-auto my-5">
-			<div class="card-header text-center">用戶登入</div>
-			<div class="card-body">
-				<form action="/TGA104_G4/LoginServlet" method="post">
+	<div class="main-content pb-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-8 col-12 mx-auto ">
+					<div class="custom-form custom-form--box sing-up">
 
-					<div class="form-group">
-						<label>信箱</label> <input type="email" class="form-control"
-							name="login-email" placeholder="請輸入信箱" required>
-					</div>
-					<div class="form-group">
-						<label>密碼</label> <input type="password" class="form-control"
-							name="login-password" placeholder="*****" required>
-					</div>
+						<%-- 錯誤表列 --%>
+						<c:if test="${not empty errorMsgs}">
+							<div class="mb-3">
+								<ul class="list-unstyled mt-2">
+									<li class="card-header">請修正以下錯誤
+										<ul>
+											<c:forEach var="message" items="${errorMsgs}">
+												<li class="form-text" style="color: red">${message}</li>
+											</c:forEach>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</c:if>
+						<%-- /錯誤表列 --%>
+						<h3 class="custom-form__title">登入</h3>
+						<form action="/TGA104_G4/LoginServlet" method="post">
+							<div class="form-group custom-form__input">
+								<label for="inputEmail">Email 信箱</label> <input type="email"
+									class="form-control ltr" id="inputEmail" placeholder=""
+									name="login-email" required>
+							</div>
+							<div class="form-group custom-form__input">
+								<label for="password">密碼</label>
+								<div class="input-box password-box">
+									<input type="password" class="form-control ltr" id="password"
+										placeholder="*****" name="login-password" required>
+									<div class="input-box__icon">
+										<span class="showhidepassword"><i
+											class="far fa-eye-slash"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="forgot-pass">
+								<a href="resetpass.html">忘記密碼？</a>
+							</div>
+							
+								<div class="custom-form__btn">
+									<button type="submit" class="btn submit-btn">會員登入</button>
+								</div>
+							
 
-					<div class="text-center">
-						<button type="submit" class="btn btn-orange">登入</button>
+							<div class="custom-form__footer">
+								<!-- form footer -->
+								<div class="custom-form__footer--link">
+									<h6>尚未註冊</h6>
+										<div class="custom-form__footer--link">
+											<a href="signup.jsp" class="btn ">註冊會員</a>
+										</div>
+								</div>
+							</div>
+						</form>
 					</div>
-
-				</form>
+				</div>
 			</div>
+
 		</div>
+
 	</div>
 <!-- footer -->
     <footer class="footer">

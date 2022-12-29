@@ -20,7 +20,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -32,30 +32,30 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="/back-end/assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet" href="back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="/back-end/assets/vendor/css/core.css"
+<link rel="stylesheet" href="back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="/back-end/assets/vendor/css/theme-default.css"
+<link rel="stylesheet" href="back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="/back-end/assets/css/demo.css" />
+<link rel="stylesheet" href="back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	href="/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+	href="back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet"
-	href="/back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
+	href="back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
 
 <!-- Helpers -->
-<script src="/back-end/assets/vendor/js/helpers.js"></script>
+<script src="back-end/assets/vendor/js/helpers.js"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="/back-end/assets/js/config.js"></script>
+<script src="back-end/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -307,7 +307,7 @@
 
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">MatDesign /</span> 所有商品列表
+				<span class="text-muted fw-light">MatDesign /</span> 所有商品資訊
 			</h4>
 
 			<!-- Striped Rows -->
@@ -385,25 +385,25 @@
 
 	<!-- Core JS -->
 	<!-- build:js assets/vendor/js/core.js -->
-	<script src="/back-end/assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="/back-end/assets/vendor/libs/popper/popper.js"></script>
-	<script src="/back-end/assets/vendor/js/bootstrap.js"></script>
+	<script src="back-end/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="back-end/assets/vendor/libs/popper/popper.js"></script>
+	<script src="back-end/assets/vendor/js/bootstrap.js"></script>
 	<script
-		src="/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		src="back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-	<script src="/back-end/assets/vendor/js/menu.js"></script>
+	<script src="back-end/assets/vendor/js/menu.js"></script>
 	<!-- endbuild -->
 
 	<!-- Vendors JS -->
-	<script src="/back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+	<script src="back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 	<!-- Main JS -->
-	<script src="/back-end/assets/js/main.js"></script>
-	<script src="/back-end/assets/js/main.js"></script>
+	<script src="back-end/assets/js/main.js"></script>
+	<script src="back-end/assets/js/main.js"></script>
 
 
 	<!-- Page JS -->
-	<script src="/back-end/assets/js/dashboards-analytics.js"></script>
+	<script src="back-end/assets/js/dashboards-analytics.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

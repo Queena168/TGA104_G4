@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class ProductTypeService {
-	@Autowired
+//	@Autowired
 	private ProductTypeDAO_interface dao;
 
-//	public ProductTypeService() {
-//		dao = new ProductTypeJDBCDAO();
-//	}
+	public ProductTypeService() {
+		dao = new ProductTypeJDBCDAO();
+	}
 	
 	public ProductTypeVO addProductType(String productTypeName) {
 

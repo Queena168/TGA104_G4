@@ -22,6 +22,8 @@ import com.tibame.cart.model.Cart;
 import com.tibame.cart.model.ShopProductService;
 import com.tibame.cart.model.User;
 import com.tibame.cart.model.UserJDBCDAO;
+import com.tibame.member.model.MemberDAO;
+import com.tibame.member.model.MemberVO;
 
 /**
  * Servlet implementation class LoginServlet
@@ -57,6 +59,9 @@ public class LoginServlet extends HttpServlet {
 
 			UserJDBCDAO userJDBCDAO = new UserJDBCDAO();
 			User user = userJDBCDAO.userLogin(email, password);
+		    
+//			MemberDAO memberDAO = new MemberDAO();
+//			MemberVO memberVO  = memberDAO.memberLogin(memberVO);
 
 			Cart cart = (Cart) req.getAttribute("cart");
 			HttpSession session = req.getSession();

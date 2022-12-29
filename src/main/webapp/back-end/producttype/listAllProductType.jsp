@@ -13,7 +13,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign ListAllAdmin</title>
+<title>MatDesign ListAllProductType</title>
 
 <meta name="description" content="" />
 
@@ -309,7 +309,7 @@
 			<h4 class="fw-bold py-3 mb-4">
 				<span class="text-muted fw-light">MatDesign /</span> 商品類別列表
 			</h4>
-
+<a href="back-end/producttype/addProductType.jsp" class="card-header">新增商品類別</a>
 			<!-- Striped Rows -->
 			<div class="card">
 				<div class="table-responsive text-nowrap">
@@ -342,15 +342,12 @@
 						</tbody>
 					</table>
 				</div>
-				<a
-					href="/back-end/producttype/addProductType.jsp"
-					class="card-header">新增商品類別</a>
 			</div>
 			</div>
 			<!--/ Striped Rows -->
 		</div>
 		<!-- / Content -->
-
+<a href="SelectAll">回商品列表頁</a>
 					<!-- Footer -->
 					<footer class="content-footer footer bg-footer-theme">
 						<div

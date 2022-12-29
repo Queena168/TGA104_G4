@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tibame.productpic.model.ProductPicService;
 
-@WebServlet("/back-end/product/SelectAll")
+@WebServlet("/SelectAll")
 public class SelectAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 //	@Autowired

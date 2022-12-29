@@ -3,7 +3,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.tibame.productpic.model.*"%>
 <%@ page import="com.tibame.product.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <!DOCTYPE html>
 
@@ -15,13 +14,13 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign ListAllAdmin</title>
+<title>MatDesign ListAllProduct</title>
 
 <meta name="description" content="" />
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -33,14 +32,14 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet" href="back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
 <link rel="stylesheet" href="back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="/assets/vendor/css/theme-default.css"
+<link rel="stylesheet" href="back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="/assets/css/demo.css" />
+<link rel="stylesheet" href="back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
@@ -58,8 +57,259 @@
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="back-end/assets/js/config.js"></script>
 </head>
-<body bgcolor='white'>
 
+<body>
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+
+			<aside id="layout-menu"
+				class="layout-menu menu-vertical menu bg-menu-theme">
+				<div class="app-brand demo">
+					<a href="../index.html" class="app-brand-link"> <span
+						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
+					</a> <a href="javascript:void(0);"
+						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+						<i class="bx bx-chevron-left bx-sm align-middle"></i>
+					</a>
+				</div>
+
+				<div class="menu-inner-shadow"></div>
+
+				<ul class="menu-inner py-1">
+
+					<!-- Member會員管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-regular fa-user "></i>
+							<div data-i18n="Member">會員管理</div>
+					</a>
+
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../member/Admin-Member-MemberInfo.html" class="menu-link">
+									<div data-i18n="">會員資料管理</div>
+							</a></li>
+						</ul></li>
+
+					<!-- Designer設計師管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-solid fa-user"></i>
+							<div data-i18n="Designer">設計師管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../designer/Admin-Design-DesignerInfo.html"
+								class="menu-link">
+									<div data-i18n="">設計師資料管理</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../designer/Admin-Design-Portfolio.html" class="menu-link">
+									<div data-i18n="">作品管理</div>
+							</a></li>
+						</ul></li>
+
+					<!-- Designer_Order設計師訂單管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-regular fa-file"></i>
+							<div data-i18n="Designer_Order">合約案件管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../order/Admin-Order-OrderList.html" class="menu-link">
+									<div data-i18n="">合約案件列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../order/Admin-Order-OrderListDetail.html"
+								class="menu-link">
+									<div data-i18n="">合約案件明細</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../order/Admin-Order-ReviewList.html" class="menu-link">
+									<div data-i18n="">評價列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../order/Admin-Order-OrderReportCheck.html"
+								class="menu-link">
+									<div data-i18n="">評價檢舉查核</div>
+							</a></li>
+						</ul></li>
+
+					<!-- Forum論壇管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-regular fa-pen-to-square"></i>
+							<div data-i18n="Forum">論壇管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../forum/Admin-Forum-ForumMaintain.html" class="menu-link">
+									<div data-i18n="">論壇維護</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../forum/Admin-Forum-ForumList.html" class="menu-link">
+									<div data-i18n="">發文列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../forum/Admin-Forum-ForumReportCheck.html"
+								class="menu-link">
+									<div data-i18n="">發文檢舉查核</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../forum/Admin-Forum-ReplyList.html" class="menu-link">
+									<div data-i18n="">留言列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../forum/Admin-Forum-ReplyReportCheck.html"
+								class="menu-link">
+									<div data-i18n="">留言檢舉查核</div>
+							</a></li>
+						</ul></li>
+
+					<!-- Product商品管理 -->
+					<li class="menu-item active open"><a href="javascript:void(0)"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons bx bx-shopping-bag"></i>
+							<div data-i18n="Product">商品管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../product/Admin-Product-ProductList.html"
+								class="menu-link">
+									<div data-i18n="">商品列表</div>
+							</a></li>
+							<li class="menu-item active"><a
+								href="/back-end/producttype/listAllProductType.jsp"
+								class="menu-link">
+									<div data-i18n="">商品類別</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../product/Admin-Product-ProductOrderList.html"
+								class="menu-link">
+									<div data-i18n="">商品訂單管理</div>
+							</a></li>
+						</ul></li>
+
+					<!-- Article報導文章管理 -->
+					<li class="menu-item"><a href="javascript:void(0)"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons bx bx-copy"></i>
+							<div data-i18n="Article">報導文章管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../article/Admin-Article-ArticleList.html"
+								class="menu-link">
+									<div data-i18n="">報導文章列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../article/Admin-Article-ArticleType.html"
+								class="menu-link">
+									<div data-i18n="">報導文章類別</div>
+							</a></li>
+						</ul></li>
+
+					<!-- Admin管理員管理 -->
+					<li class="menu-item"><a
+						href="javascript:void(0);" class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
+							<div data-i18n="Admin">管理員管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a href="listAllAdmin.jsp"
+								class="menu-link">
+									<div data-i18n="">管理員資料管理</div>
+							</a></li>
+						</ul></li>
+				</ul>
+			</aside>
+			<!-- / Menu -->
+
+			<!-- Layout container -->
+			<div class="layout-page">
+				<!-- Navbar -->
+
+				<nav
+					class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+					id="layout-navbar">
+					<div
+						class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+						<a class="nav-item nav-link px-0 me-xl-4"
+							href="javascript:void(0)"> <i class="bx bx-menu bx-sm"></i>
+						</a>
+					</div>
+
+					<div class="navbar-nav-right d-flex align-items-center"
+						id="navbar-collapse">
+
+						<ul class="navbar-nav flex-row align-items-center ms-auto">
+							<!-- User -->
+							<li class="nav-item navbar-dropdown dropdown-user dropdown">
+								<a class="nav-link dropdown-toggle hide-arrow"
+								href="javascript:void(0);" data-bs-toggle="dropdown">
+									<div class="avatar avatar-online">
+										<img
+											src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+											alt class="w-px-40 rounded-circle" />
+									</div>
+							</a>
+								<ul class="dropdown-menu dropdown-menu-end">
+									<li><a class="dropdown-item" href="#">
+											<div class="d-flex">
+												<div class="flex-shrink-0 me-3">
+													<div class="avatar avatar-online">
+														<img
+															src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+															alt class="w-px-40  rounded-circle" />
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<span class="fw-semibold d-block">${adminVO.adminName}</span>
+													<small class="text-muted">${adminVO.adminEmail}</small>
+												</div>
+											</div>
+									</a></li>
+
+									<li><form method="post"
+											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+											<div class="dropdown-item">
+
+												<label class="btn rounded-pill bg-label-secondary"
+													tabindex="0"> <i class="bx bx-user me-2"></i> <span
+													class="align-middle">My Profile</span> <input type="hidden"
+													name="adminNo" value="${adminVO.adminNo}"> <input
+													type="hidden" name="action" value="getOne_For_Profile">
+													<input type="submit" class="account-file-input" hidden />
+												</label>
+											</div>
+										</form></li>
+									<li><a class="dropdown-item"
+										href="../adminLogin/admin-login.jsp"> <label
+											class="btn rounded-pill bg-label-secondary" tabindex="0">
+												<i class="bx bx-power-off me-2"></i> <span
+												class="align-middle">Log Out</span>
+										</label>
+									</a></li>
+								</ul>
+							</li>
+							<!--/ User -->
+						</ul>
+					</div>
+				</nav>
+
+				<!-- / Navbar -->
+
+<!-- Content wrapper -->
+	<div class="content-wrapper">
+		<!-- Content -->
+
+		<div class="container-xxl flex-grow-1 container-p-y">
+			<h4 class="fw-bold py-3 mb-4">
+				<span class="text-muted fw-light">MatDesign /</span> 商品圖片列表
+			</h4>
 <%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -71,39 +321,47 @@
 	</c:if>
 
 
-<h3>所有商品圖片 - listAllPic.jsp</h3>
-
-
 <jsp:useBean id="productPicSrc" scope="page" class="com.tibame.productpic.model.ProductPicService" />
-<a href='http://localhost:8080/TGA104_G4/back-end/productpic/addPic.jsp'>新增圖片</a>
-
-<table>
-	<tr>
-		<th>商品圖片編號</th>
-		<th>商品編號</th>
-		<th>商品圖片</th>
-		<th>修改</th>
-	</tr>
-
-	<c:forEach var="productPicVO" items="${list}">
-			<td>${productPicVO.productPicNo}</td>
-			<td>${productPicVO.productNo}</td>
-			<td>
-			<img src="<%=request.getContextPath()%>/PicAllReadServlet?productPicNo=${productPicVO.productPicNo}"
-     			 alt="image" style="width: 100px; height: 100px;">
-     		</td>
-     		<td>
-			  <FORM METHOD="post" ACTION="http://localhost:8080/TGA104_G4/PicServlet" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="productPicNo"  value="${productPicVO.productPicNo}">
-			     <input type="hidden" name="action"	value="getProductPic_For_Update">
-			  </FORM>
-			</td>
-            <tr></tr>
-	</c:forEach>
-
-</table>
-<a href="http://localhost:8081/TGA104G4/back-end/product/product.jsp">回首頁</a>
+<a href='back-end/productpic/addPic.jsp'>新增圖片</a>
+			<!-- Striped Rows -->
+			<div class="card">
+				<div class="table-responsive text-nowrap">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>商品圖片編號</th>
+								<th>商品編號</th>
+								<th>商品圖片</th>
+								<th>修改</th>
+							</tr>
+					    </thead>
+					    <tbody class="table-border-bottom-0">
+						<c:forEach var="productPicVO" items="${list}">
+								<td>${productPicVO.productPicNo}</td>
+								<td>${productPicVO.productNo}</td>
+								<td>
+								<img src="<%=request.getContextPath()%>/PicAllReadServlet?productPicNo=${productPicVO.productPicNo}"
+					     			 alt="image" style="width: 100px; height: 100px;">
+					     		</td>
+					     		<td>
+									<form method="post"
+										action="http://localhost:8080/TGA104_G4/PicServlet">
+										<label class="btn btn-primary" tabindex="0"> <span
+											class="d-none d-sm-block">修改</span> <i
+											class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+											<input type="submit" class="account-file-input" hidden />
+											<input type="hidden" name="productPicNo"
+											value="${productPicVO.productPicNo}"> <input
+											type="hidden" name="action"
+											value="getProductPic_For_Update">
+										</label>
+									</form>
+								</td>
+					            <tr></tr>
+						</c:forEach>
+						</tbody>
+					</table>
+<a href="SelectAll">回商品列表頁</a>
 					<!-- Footer -->
 					<footer class="content-footer footer bg-footer-theme">
 						<div

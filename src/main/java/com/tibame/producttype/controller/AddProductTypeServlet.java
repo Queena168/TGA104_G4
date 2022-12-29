@@ -19,8 +19,8 @@ import com.tibame.producttype.model.ProductTypeVO;
 @WebServlet("/AddProductTypeServlet")
 public class AddProductTypeServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
-	@Autowired 
-	private ProductTypeService productTypeSvc;
+//	@Autowired 
+//	private ProductTypeService productTypeSvc;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -42,13 +42,13 @@ private static final long serialVersionUID = 1L;
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("productTypeVO", productTypeVO); // 含有輸入格式錯誤的productType物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/producttype/addProductType.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("back-end/producttype/addProductType.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 2.開始新增資料 ***************************************/
-//			ProductTypeService productTypeSvc = new ProductTypeService();
+			ProductTypeService productTypeSvc = new ProductTypeService();
 			productTypeVO = productTypeSvc.addProductType(productTypeName);
 			
 			List<ProductTypeVO> list = productTypeSvc.getAll();

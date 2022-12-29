@@ -12,7 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign Admin</title>
+<title>MatDesign updateProductType</title>
 
 <meta name="description" content="" />
 
@@ -321,28 +321,34 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="UpdateProductTypeServlet" name="form1">
-<table>
+									<form id="#" class="mb-3"  METHOD="post" action="UpdateProductTypeServlet" name="form1">
+		<div class="mb-3">
+			<label for="#" class="form-label">商品類別編號:<font color=red><b>*</b></font></label> 			
+			<input type="hidden" class="form-control" 
+				name="productTypeNo" value ="${productTypeVO.productTypeNo}" 
+				size="45" readonly="readonly"/>${productTypeVO.productTypeNo}
+		</div>
+		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
+		<div class="mb-3">
+			<label for="#" class="form-label">商品類別名稱:</label> 			
+			<input type="text" class="form-control" 
+				name="productTypeName" size="45" placeholder="輸入商品類別名稱"/>
+		</div>				
+		<input type="hidden" name="action" value="updateProductType"> 
+		<input type="hidden" name="productTypeNo">
+		<input
+			class="btn btn-primary d-grid w-10" type="submit"
+			value="送出修改">
+	</form>
+<a href="SelectAllProductType">回商品類別列表</a>
+							</div>
+							<!-- /Account -->
+						</div>
+						<!--/ Update Admin Info -->
 
-    <tr>
-		<td>商品類別編號:<font color=red><b>*</b></font></td>
-		<td><input type="hidden" name="productTypeNo" value ="${productTypeVO.productTypeNo}" size="45" readonly="readonly"/>${productTypeVO.productTypeNo}</td>
-	</tr>
-	
-	<tr>
-		<td>商品類別名稱:</td>
-		<td><input type="TEXT" name="productTypeName" size="45" placeholder="輸入商品類別名稱" /></td>
-	</tr>
+					</div>
+					<!-- / Content -->
 
-
-
-</table>
-<br>
-<input type="hidden" name="action" value="updateProductType">
-<input type="hidden" name="productTypeNo">
-<input type="submit" value="送出修改">
-</FORM>
-<a href="http://localhost:8080/TGA104_G4/back-end/producttype/listAllProductType.jsp">上一頁</a>
 					<!-- Footer -->
 					<footer class="content-footer footer bg-footer-theme">
 						<div
