@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tibame.designer.model.DesignerOrderVO;
+
 public class MemberDAO implements Member_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/MatdesignDB?serverTimezone=Asia/Taipei";
@@ -453,5 +455,182 @@ public class MemberDAO implements Member_interface {
 		}
 
 	}
+	
+	private static final String SELECT_DO_BYMN = 
+			"select * from DesignerOrder where memberNo=?;";
+	
+	public List<DesignerOrderVO> findByMemberNo(Integer memberNo) {
+		List<DesignerOrderVO> list = new ArrayList<DesignerOrderVO>();
+		DesignerOrderVO designerOrderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_DO_BYMN);
+
+			pstmt.setInt(1, memberNo);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				designerOrderVO=new DesignerOrderVO();
+				designerOrderVO.setOrderNo(rs.getInt("orderNo"));
+				designerOrderVO.setDesignerNo(rs.getInt("designerNo"));
+				designerOrderVO.setMemberNo(rs.getInt("memberNo"));
+				designerOrderVO.setInquiryBudget(rs.getInt("inquiryBudget"));
+				designerOrderVO.setInquirySize(rs.getInt("inquirySize"));
+				designerOrderVO.setInquiryDetail(rs.getString("inquiryDetail"));
+				designerOrderVO.setQuotationDetail(rs.getString("quotationDetail"));
+				designerOrderVO.setQuotationAmount(rs.getInt("quotationAmount"));
+				designerOrderVO.setQuotationSendTime(rs.getDate("quotationSendTime"));
+				designerOrderVO.setQuotationApprovalTime(rs.getDate("quotationApprovalTime"));
+				designerOrderVO.setQuotationAtt(rs.getBytes("quotationAtt"));
+				designerOrderVO.setQuotationStatus(rs.getString("quotationStatus"));
+				designerOrderVO.setContractStatus(rs.getString("contractDetail"));
+				designerOrderVO.setContractAtt(rs.getBytes("contractAtt"));
+				designerOrderVO.setContractStatus(rs.getString("contractStatus"));
+				designerOrderVO.setContractApprovalTime(rs.getDate("contractApprovalTime"));
+				designerOrderVO.setContractModificationTime(rs.getDate("contractModificationTime"));
+				designerOrderVO.setQuotationNote(rs.getString("quotationNote"));
+				designerOrderVO.setContractNote(rs.getString("contractNote"));
+				designerOrderVO.setReviewStars(rs.getInt("reviewStars"));
+				designerOrderVO.setReviewDetail(rs.getString("reviewDetail"));
+				designerOrderVO.setReviewTime(rs.getDate("reviewTime"));
+				designerOrderVO.setFinishStatus(rs.getBoolean("finishStatus"));
+				list.add(designerOrderVO);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	private static final String UPDATE_ORDER_QUOTATIONSTATUS = 
+			"update DesignerOrder set quotationStatus = ? where orderNo = ?;";
+
+	public void confirmrdOrderVO(Integer orderNo,String quotationStatus) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_ORDER_QUOTATIONSTATUS);
+			pstmt.setString(1, quotationStatus);
+			pstmt.setInt(2, orderNo);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	private static final String UPDATE_ORDER_CONTRACTSTATUS = 
+			"update DesignerOrder set contractStatus = ? where orderNo = ?;";
+
+	public void confirmrdContract(Integer orderNo,String contractStatus) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_ORDER_CONTRACTSTATUS);
+			pstmt.setString(1, contractStatus);
+			pstmt.setInt(2, orderNo);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	
 }

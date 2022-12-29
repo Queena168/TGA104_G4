@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%-- <%@ page import="java.util.Locale" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.NumberFormat"%>
+<%
+NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.TAIWAN);
+%> --%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,16 +154,16 @@
 				<div class="col-lg-3">
 					<div class="nav flex-column nav-pills account-pills account-tabs"
 						id="v-pills-tab" role="tablist" aria-orientation="vertical">
-						<a class="nav-link active" id="v-pills-profile-tab"
-							data-toggle="pill" href="#v-pills-profile" role="tab"
+						<a class="nav-link " id="v-pills-profile-tab" data-toggle="pill"
+							href="#v-pills-profile" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>會員資料
 						</a> <a class="nav-link" id="v-pills-order-tab" data-toggle="pill"
 							href="#v-pills-productorder" role="tab"
 							aria-controls="v-pills-order" aria-selected="false"> <span><i
 								class='bx bx-shopping-bag'></i></span>商品訂單
-						</a> <a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
-							href="#v-pills-designorder" role="tab"
+						</a> <a class="nav-link active" id="v-pills-wishlist-tab"
+							data-toggle="pill" href="#v-pills-designorder" role="tab"
 							aria-controls="v-pills-wishlist" aria-selected="false"> <span><i
 								class='bx bx-file'></i></span>合約案件
 						</a>
@@ -178,8 +186,8 @@
 				<div class="col-lg-9">
 					<div class="tab-content account-content" id="v-pills-tabContent">
 						<!-- profile tab -->
-						<div class="tab-pane fade show active" id="v-pills-profile"
-							role="tabpanel" aria-labelledby="v-pills-profile-tab">
+						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+							aria-labelledby="v-pills-profile-tab">
 							<!-- profile information -->
 							<div class="row">
 								<div class="col-12">
@@ -515,7 +523,7 @@
 
 						</div>
 						<!-- DesignerOrder tab -->
-						<div class="tab-pane fade" id="v-pills-designorder"
+						<div class="tab-pane fade  show active" id="v-pills-designorder"
 							role="tabpanel" aria-labelledby="v-pills-wishlist-tab">
 							<div class="order-table order-table__collapse">
 								<div class="panel">
@@ -538,7 +546,7 @@
 													<tr>
 														<td><strong>${desOrderList.orderNo}</strong></td>
 														<td>${desOrderList.designerVO.designerName}</td>
-														
+
 														<%-- <td>${desOrderList.quotationStatus}</td> --%>
 														<c:choose>
 															<c:when test="${desOrderList.quotationStatus =='報價確認' }">
@@ -568,9 +576,9 @@
 																<td>尚未進行</td>
 															</c:otherwise>
 														</c:choose>
-														
+
 														<td>工程進度</td>
-														
+
 														<c:choose>
 															<c:when test="${desOrderList.finishStatus =='true' }">
 																<td>已結案</td>
@@ -585,8 +593,9 @@
 																	class="d-none d-sm-block">明細</span> <i
 																	class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
 																	<input type="submit" class="account-file-input" hidden />
-																	<input type="hidden" name="orderNo" value="${desOrderList.orderNo}"> 
-																	<input type="hidden" name="action" value="desOrder_GetOne">
+																	<input type="hidden" name="orderNo"
+																	value="${desOrderList.orderNo}"> <input
+																	type="hidden" name="action" value="desOrder_GetOne">
 																</label>
 															</form>
 														</td>
@@ -596,13 +605,317 @@
 										</table>
 									</div>
 								</div>
-							</div>
-						</div>
 
+								<div class="card mb-4">
+									<div
+										class="card-header d-flex align-items-center justify-content-between">
+										<h5 class="mb-0">案件編號：${findDesignerOrder.orderNo}</h5>
+										<small class="text-muted float-end">設計師：${findDesignerOrder.designerVO.designerName}</small>
+										<input type="hidden" name="orderNo"
+											value="${findDesignerOrder.designerNo}"> <input
+											type="hidden" name="designerNo"
+											value="${findDesignerOrder.designerNo}">
+									</div>
+									<div class="card-body">
+										<form method="post" action="MemberOrderServlet">
+											<!-- 諮詢 -->
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label"
+													for="basic-default-name"><h5>諮詢明細</h5></label>
+											</div>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="inquiryBudget">諮詢預算</label>
+												<div class="col-sm-10">
+													<fmt:setLocale value="zh_TW" />
+													<input type="text" class="form-control"
+														name="inquiryBudget" id="inquiryBudget"
+														value="<fmt:formatNumber value="${findDesignerOrder.inquiryBudget}" 
+															type="currency" maxFractionDigits="0" />"
+														readonly />
+												</div>
+											</div>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="inquirySize">諮詢坪數</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" name="inquirySize"
+														id="inquirySize" value="${findDesignerOrder.inquirySize}"
+														readonly />
+												</div>
+											</div>
+											<div class="row mb-3">
+												<label class="col-sm-2 col-form-label" for="inquiryDetail">諮詢構想描述</label>
+												<div class="col-sm-10">
+													<textarea id="inquiryDetail" class="form-control"
+														name="inquiryDetail" readonly
+														aria-describedby="basic-icon-default-message2">${findDesignerOrder.inquiryDetail}</textarea>
+												</div>
+											</div>
+											<div class="modal-footer"></div>
+											<!-- /諮詢 -->
+
+											<!-- 報價 -->
+											<c:choose>
+												<c:when test="${findDesignerOrder.quotationStatus =='未提供' }">
+												</c:when>
+
+												<c:otherwise>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="basic-default-name"><h5>報價明細</h5></label>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="quotationAmount">報價金額</label>
+														<div class="col-sm-10">
+															<fmt:setLocale value="zh_TW" />
+															<input type="text" class="form-control"
+																name="quotationAmount" id="quotationAmount"
+																value="<fmt:formatNumber value="${findDesignerOrder.quotationAmount}" 
+															type="currency" maxFractionDigits="0" />"
+																readonly />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="quotationDetail">報價單內容</label>
+														<div class="col-sm-10">
+															<textarea id="quotationDetail" class="form-control"
+																name="quotationDetail" readonly
+																aria-describedby="basic-icon-default-message2">${findDesignerOrder.quotationDetail}</textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="basic-default-name">報價單附檔</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" readonly
+																name="quotationAtt" id="basic-default-name"
+																placeholder="報價單附檔" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label" for="quotationNote">報價單備註</label>
+														<div class="col-sm-10">
+															<textarea id="quotationNote" class="form-control"
+																name="quotationNote" readonly
+																aria-describedby="basic-icon-default-message2">${findDesignerOrder.quotationNote}</textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="quotationStatus">報價單狀態</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" readonly
+																name="quotationStatus" id="quotationStatus"
+																value="${findDesignerOrder.quotationStatus}" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="basic-default-name">報價成立時間</label>
+														<div class="col-sm-10 col-form-label">
+															${findDesignerOrder.quotationApprovalTime} <input
+																type="hidden" name="quotationApprovalTime"
+																value="${findDesignerOrder.quotationApprovalTime}">
+														</div>
+													</div>
+													<div class="row justify-content-end custom-form__btn"
+														style="padding-bottom: 20px;">
+														<div>
+															<button type="submit" class="btn btn-primary"
+																style="margin-right: 10px;" name="action"
+																value="confirmedQuotation">確認報價單</button>
+															<input type="hidden" name="orderNo"
+																value="${findDesignerOrder.designerNo}"> <input
+																type="hidden" name="memberNo"
+																value="${findDesignerOrder.memberNo}">
+															<button type="submit" class="btn btn-close"
+																style="margin-right: 10px;" name="action"
+																value="rejectQuotation">退回報價單</button>
+															<input type="hidden" name="memberNo"
+																value="${findDesignerOrder.memberNo}">
+														</div>
+													</div>
+													<div class="modal-footer"></div>
+												</c:otherwise>
+											</c:choose>
+											<!-- /報價 -->
+
+											<!-- 合約 -->
+											<c:choose>
+												<c:when test="${findDesignerOrder.contractStatus =='尚未進行' }">
+												</c:when>
+
+												<c:otherwise>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="basic-default-name"><h5>合約明細</h5></label>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="contractDetail">合約內容</label>
+														<div class="col-sm-10">
+															<textarea id="contractDetail" class="form-control"
+																readonly aria-describedby="basic-icon-default-message2">${findDesignerOrder.contractDetail}</textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label" for="contractAtt">合約附檔</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" readonly
+																id="contractAtt" placeholder="合約附檔" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label" for="contractNote">合約備註</label>
+														<div class="col-sm-10">
+															<textarea id="contractNote" class="form-control"
+																name="contractNote" readonly
+																aria-describedby="basic-icon-default-message2">${findDesignerOrder.contractNote}</textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="contractStatus">合約狀態</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control"
+																name="contractStatus" readonly id="contractStatus"
+																value="${findDesignerOrder.contractStatus}" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="contractApprovalTime">合約成立時間</label>
+														<div class="col-sm-10 col-form-label">
+															${findDesignerOrder.contractApprovalTime}</div>
+													</div>
+													<div class="row justify-content-end custom-form__btn"
+														style="padding-bottom: 20px;">
+														<div>
+															<button type="submit" class="btn btn-primary"
+																style="margin-right: 10px;" name="action"
+																value="confirmedContract">確認合約</button>
+															<input type="hidden" name="orderNo"
+																value="${findDesignerOrder.designerNo}"> <input
+																type="hidden" name="memberNo"
+																value="${findDesignerOrder.memberNo}">
+															<button type="submit" class="btn btn-close"
+																style="margin-right: 10px;" name="action"
+																value="rejectContract">退回合約</button>
+														</div>
+													</div>
+													<div class="modal-footer"></div>
+												</c:otherwise>
+											</c:choose>
+											<!-- /合約 -->
+
+											<!-- 工程進度 -->
+											<c:choose>
+												<c:when test="${findDesignerOrder.contractStatus =='尚未進行' }">
+												</c:when>
+
+												<c:otherwise>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="basic-default-name"><h5>工程進度</h5></label>
+													</div>
+													<div class="card">
+														<div class="table-responsive text-nowrap">
+															<table class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>工程期數</th>
+																		<th>工程金額</th>
+																		<th>施工狀態</th>
+																		<th>施工圖片</th>
+																		<th>付款狀態</th>
+																		<th>上傳付款證明</th>
+																	</tr>
+																</thead>
+																<tbody class="table-border-bottom-0">
+																	<c:forEach var="designerOrderList" items="${designerOrderList}">
+																		<tr>
+																			<td><strong>${designerOrderList.orderPhase}</strong></td>
+																			<td>${designerOrderList.amount}</td>
+																			<td>${designerOrderList.constructionStatus}</td>
+																			<td><%-- <img
+																				src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoList.adminNo}"
+																				alt class="avatar w-px-40 rounded-circle" /> --%>施工圖片</td>
+																			<td>${designerOrderList.paymentStatus}</td>
+																			<td>上傳付款證明</td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<%-- <div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="contractDetail">合約內容</label>
+														<div class="col-sm-10">
+															<textarea id="contractDetail" class="form-control"
+																readonly aria-describedby="basic-icon-default-message2">${findDesignerOrder.contractDetail}</textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label" for="contractAtt">合約附檔</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" readonly
+																id="contractAtt" placeholder="合約附檔" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label" for="contractNote">合約備註</label>
+														<div class="col-sm-10">
+															<textarea id="contractNote" class="form-control"
+																name="contractNote" readonly
+																aria-describedby="basic-icon-default-message2">${findDesignerOrder.contractNote}</textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="contractStatus">合約狀態</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control"
+																name="contractStatus" readonly id="contractStatus"
+																value="${findDesignerOrder.contractStatus}" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label class="col-sm-2 col-form-label"
+															for="contractApprovalTime">合約成立時間</label>
+														<div class="col-sm-10 col-form-label">
+															${findDesignerOrder.contractApprovalTime}</div>
+													</div> --%>
+													<%-- <div class="row justify-content-end custom-form__btn">
+														<div>
+															<button type="submit" class="btn btn-primary"
+																style="margin-right: 10px;" name="action"
+																value="confirmedContract">確認合約</button>
+															<input type="hidden" name="orderNo"
+																value="${findDesignerOrder.designerNo}"> <input
+																type="hidden" name="memberNo"
+																value="${findDesignerOrder.memberNo}">
+															<button type="submit" class="btn btn-close"
+																style="margin-right: 10px;" name="action"
+																value="rejectContract">退回合約</button>
+														</div>
+													</div> --%>
+												</c:otherwise>
+											</c:choose>
+											<!-- /工程進度 -->
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!-- end main content -->
 	<!-- footer -->

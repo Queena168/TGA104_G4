@@ -2,6 +2,9 @@ package com.tibame.member.model;
 
 import java.util.List;
 
+import com.tibame.designer.model.DesignerOrderJNDIDAO;
+import com.tibame.designer.model.DesignerOrderVO;
+
 public class MemberService {
 
 	private Member_interface dao;
@@ -71,4 +74,25 @@ public class MemberService {
 		MemberDAO dao = new MemberDAO();
 		dao.updateActivaction(memberNo, activaction);
 	}
+	
+	public List<DesignerOrderVO> selectbyMemberNo(Integer memberNo){
+		MemberDAO dao = new MemberDAO();
+		return dao.findByMemberNo(memberNo);
+	}
+	
+	public DesignerOrderVO findDesignerOrder(Integer orderNo) {
+		DesignerOrderJNDIDAO dao = new DesignerOrderJNDIDAO();
+		return dao.findDesignerOrder(orderNo);
+	}
+	
+	public void confirmrdOrderVO(Integer orderNo,String quotationStatus) {
+		MemberDAO dao = new MemberDAO();
+		dao.confirmrdOrderVO(orderNo,quotationStatus);
+	}
+	
+	public void confirmrdContract(Integer orderNo,String contractStatus) {
+		MemberDAO dao = new MemberDAO();
+		dao.confirmrdContract(orderNo,contractStatus);
+	}
+	
 }
