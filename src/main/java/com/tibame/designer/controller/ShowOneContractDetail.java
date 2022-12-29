@@ -1,7 +1,6 @@
-package designer.controller;
+package com.tibame.designer.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import designer.model.DesignerOrderPhaseVO;
-import designer.model.DesignerOrderVO;
-import designer.service.DesignerOrderPhaseService;
-import designer.service.DesignerOrderService;
+import com.tibame.designer.model.DesignerOrderVO;
+import com.tibame.designer.service.DesignerOrderService;
 
 @WebServlet("/ShowOneContractDetail")
 public class ShowOneContractDetail extends HttpServlet {

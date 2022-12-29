@@ -1,4 +1,4 @@
-package designer.model;
+package com.tibame.designer.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

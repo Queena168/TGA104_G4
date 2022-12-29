@@ -1,10 +1,10 @@
-package designer.service;
+package com.tibame.designer.service;
 
 import java.util.List;
 
-import designer.model.DesignerOrderPhaseDAO_interface;
-import designer.model.DesignerOrderPhaseJNDIDAO;
-import designer.model.DesignerOrderPhaseVO;
+import com.tibame.designer.model.DesignerOrderPhaseDAO_interface;
+import com.tibame.designer.model.DesignerOrderPhaseJNDIDAO;
+import com.tibame.designer.model.DesignerOrderPhaseVO;
 
 public class DesignerOrderPhaseService {
 

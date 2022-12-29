@@ -1,12 +1,8 @@
-package designer.controller;
+package com.tibame.designer.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import designer.model.DesignerOrderVO;
-import designer.service.DesignerOrderService;
+import com.tibame.designer.model.DesignerOrderVO;
+import com.tibame.designer.service.DesignerOrderService;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/SendQuotation")

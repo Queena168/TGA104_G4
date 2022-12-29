@@ -1,9 +1,8 @@
-package designer.model;
+package com.tibame.designer.model;
 
 import java.sql.Date;
-import java.util.Arrays;
 
-import designer.service.DesignerOrderService;
+import com.tibame.designer.service.DesignerOrderService;
 
 public class DesignerOrderPhaseVO implements java.io.Serializable {
 
