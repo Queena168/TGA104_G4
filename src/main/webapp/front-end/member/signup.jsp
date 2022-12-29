@@ -213,7 +213,7 @@
 											<input class="form-check-input" type="radio" name="gender"
 												id="inlineRadio3" value="其他" /> <label
 												class="form-check-label" for="inlineRadio3"
-												style="font-size: 15px;">其他</label>
+												style="font-size: 15px;">不願透露</label>
 										</div>
 									</div>
 								</div>

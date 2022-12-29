@@ -13,11 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tibame.designer.model.DesignerOrderPhaseVO;
+import com.tibame.designer.model.DesignerOrderVO;
+import com.tibame.designer.service.DesignerOrderPhaseService;
+import com.tibame.designer.service.DesignerService;
 import com.tibame.member.model.MailService;
 import com.tibame.member.model.MemberService;
 import com.tibame.member.model.MemberVO;
 
-@WebServlet(value = { "/front-end/member/MemberServlet", "/front-end/member/MemberSignup", "/back-end/member/MemberServlet" })
+@WebServlet(value = { "/front-end/member/MemberServlet", "/front-end/member/MemberSignup",
+		"/back-end/member/MemberServlet" })
 @MultipartConfig
 public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,8 +46,12 @@ public class MemberServlet extends HttpServlet {
 			Integer memberNo = Integer.valueOf(str);
 			/*************************** 2.查詢資料 *****************************************/
 			MemberService memberSvc = new MemberService();
-			MemberVO memberVO = memberSvc.getOneMember(memberNo);
+			List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
+			
+			
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
+			session.setAttribute("desOrderList", desOrderList);
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/memberPorfile.jsp");
 			successView.forward(req, res);
 		}
@@ -95,19 +104,19 @@ public class MemberServlet extends HttpServlet {
 			}
 			String strBirthDate = req.getParameter("birthDate");
 			java.sql.Date birthDate = java.sql.Date.valueOf(strBirthDate); // string to java.sql.Date
-			
+
 			String valistr = req.getParameter("valistr");
 			HttpSession session = req.getSession();
-	        session.getAttribute(valistr);
+			session.getAttribute(valistr);
 //			String valistrin = (String) session.getAttribute(valistr);
 			String valistrin = req.getParameter("valistr");
 //			System.out.println("Servlet valistr: " + valistr);
 //			System.out.println("Servlet valistrin: " + valistrin);
-			
+
 			if (!valistr.equals(valistrin)) {
 				errorMsgs.add("驗證碼錯誤 請重新輸入");
 			}
-			
+
 			Boolean activaction = false;
 
 			MemberVO memberVO = new MemberVO();
@@ -133,15 +142,15 @@ public class MemberServlet extends HttpServlet {
 					activaction);
 			MailService mail = new MailService();
 			String subject = "【會員註冊通知信】";
-			String messageText = "<h2>Hello! " + memberName + "</h2>" +"<br> <p> 請點擊以下連結啟用帳號</p>" + 
-					 "<a href='http://localhost:8081/TGA104_G4/front-end/index.html'>MatDesign首頁</a><br>";
+			String messageText = "<h2>Hello! " + memberName + "</h2>" + "<br> <p> 請點擊以下連結啟用帳號</p>"
+					+ "<a href='http://localhost:8081/TGA104_G4/front-end/index.html'>MatDesign首頁</a><br>";
 			mail.sendMail(memberAccount, subject, messageText);
-			
+
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/signupSuccess.jsp");
 			successView.forward(req, res);
 		}
-		
+
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -321,7 +330,7 @@ public class MemberServlet extends HttpServlet {
 
 			String nickName = null;
 			try {
-				 nickName = String.valueOf(req.getParameter("nickName").trim());
+				nickName = String.valueOf(req.getParameter("nickName").trim());
 			} catch (NumberFormatException e) {
 				nickName = "小明";
 				errorMsgs.add("暱稱請填中文字.");
@@ -329,7 +338,7 @@ public class MemberServlet extends HttpServlet {
 
 			String gender = null;
 			try {
-				 gender = String.valueOf(req.getParameter("gender").trim());
+				gender = String.valueOf(req.getParameter("gender").trim());
 			} catch (NumberFormatException e) {
 				gender = "女";
 				errorMsgs.add("性別請填中文字.");
@@ -337,7 +346,7 @@ public class MemberServlet extends HttpServlet {
 
 			java.sql.Date birthdate = null;
 			try {
-				 birthdate = java.sql.Date.valueOf(req.getParameter("birthDate"));
+				birthdate = java.sql.Date.valueOf(req.getParameter("birthDate"));
 			} catch (IllegalArgumentException e) {
 				birthdate = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
@@ -397,6 +406,95 @@ public class MemberServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
+		if ("updatemember".equals(action)) { // 來自memberPorfile.jsp的修改請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer memberno = Integer.valueOf(req.getParameter("memberNo").trim());
+			String memberAccount = req.getParameter("memberAccount");
+			if (memberAccount == null || memberAccount.trim().length() == 0) {
+				errorMsgs.add("會員帳號請勿空白");
+			}
+
+			String memberPassword = req.getParameter("memberPassword");
+			String memberReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			if (memberPassword == null || memberPassword.trim().length() == 0) {
+				errorMsgs.add("會員密碼: 請勿空白");
+			} else if (!memberPassword.trim().matches(memberReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.add("會員密碼: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+			}
+
+			String memberName = req.getParameter("memberName");
+			if (memberName == null || memberName.trim().length() == 0) {
+				errorMsgs.add("會員姓名請勿空白");
+			}
+
+			String nickName = req.getParameter("nickName");
+			if (nickName == null || nickName.trim().length() == 0) {
+				errorMsgs.add("會員暱稱 請勿空白");
+			}
+			String gender = req.getParameter("gender");
+			if (gender == null || gender.trim().length() == 0) {
+				errorMsgs.add("會員性別 請勿空白");
+			}
+
+			String strBirthDate = req.getParameter("birthDate");
+			java.sql.Date birthDate = java.sql.Date.valueOf(strBirthDate); // string to java.sql.Date
+
+			Boolean activaction = Boolean.valueOf(req.getParameter("activaction").trim());
+
+			MemberVO memberVO = new MemberVO();
+			memberVO.setMemberNo(memberno);
+			memberVO.setMemberPassword(memberPassword);
+			memberVO.setMemberName(memberName);
+			memberVO.setNickName(nickName);
+			memberVO.setGender(gender);
+			memberVO.setBirthDate(birthDate);
+			memberVO.setActivaction(activaction);
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("memberVO", memberVO); // 含有輸入格式錯誤的memberVO物件,也存入req
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/memberPorfile.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
+
+			/*************************** 2.開始修改資料 *****************************************/
+			MemberService memberSvc = new MemberService();
+			memberVO = memberSvc.updateMember(memberno, memberAccount, memberPassword, memberName, nickName, gender,
+					birthDate, activaction);
+
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("updateMemberVO", memberVO); // 資料庫update成功後,正確的的memberVO物件,存入req
+			String url = "/front-end/member/updateMemberPorfile.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOnemember.jsp
+			successView.forward(req, res);
+
+		}
+		
+		if ("desOrder_GetOne".equals(action)) { // 來自memberPorfile.jsp的案件明細請求
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer orderNo = Integer.valueOf(req.getParameter("orderNo"));
+			
+			/*************************** 2.開始修改資料 *****************************************/
+			MemberService memberSvc = new MemberService();
+			DesignerOrderVO findDesignerOrder = memberSvc.findDesignerOrder(orderNo);
+			DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
+			List<DesignerOrderPhaseVO> designerOrderList = designerOrderPhaseSvc.getOrderPhase(orderNo);
+			
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			HttpSession session = req.getSession();
+			session.setAttribute("findDesignerOrder", findDesignerOrder);
+			req.setAttribute("designerOrderList", designerOrderList);
+			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetail.jsp"); 
+			successView.forward(req, res);
+		}
+		
+		
+		
 	}
 
 }

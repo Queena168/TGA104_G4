@@ -202,12 +202,8 @@ pageContext.setAttribute("list", list);
 												</tr>
 											</thead>
 											<tbody>
-												<%-- <c:set var="flag" value="true" /> --%>
 												<c:forEach var="portfolioListByNo"
 													items="${portfolioListByNo}">
-													<%-- <c:if test="${(portfolioVO.designerNo == designerVO.designerNo) && flag==true} ">
-														<c:set var="flag" value="false" />
-														<c:forEach var="portfolioVO" items="${list}"> --%>
 													<tr>
 														<td><strong>${portfolioListByNo.portfolioNo}</strong></td>
 														<td>${portfolioListByNo.portfolioName}</td>
@@ -230,10 +226,7 @@ pageContext.setAttribute("list", list);
 																</label>
 															</form>
 														</td>
-														<%-- <td>${portfolioVO.designerNo}</td> --%>
 													</tr>
-													<%-- </c:forEach>
-													</c:if> --%>
 												</c:forEach>
 											</tbody>
 										</table>

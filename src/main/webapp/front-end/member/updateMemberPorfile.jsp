@@ -186,30 +186,30 @@
 									<div class="profile-info profile-info--main">
 										<div class="profile-info__row">
 											<div class="profile-info__col">
-												<span class="content"> <span>會員帳號</span> <span>${memberVO.memberAccount}</span>
+												<span class="content"> <span>會員帳號</span> <span>${updateMemberVO.memberAccount}</span>
 												</span>
 											</div>
 											<div class="profile-info__col">
 												<span class="content"> <span>會員名稱</span> <span
-													class="profile-info__col--value ltr">${memberVO.memberName}</span>
+													class="profile-info__col--value ltr">${updateMemberVO.memberName}</span>
 												</span>
 											</div>
 										</div>
 										<div class="profile-info__row">
 											<div class="profile-info__col">
 												<span class="content"> <span>暱稱</span> <span
-													class="profile-info__col--value">${memberVO.nickName}</span>
+													class="profile-info__col--value">${updateMemberVO.nickName}</span>
 												</span>
 											</div>
 											<div class="profile-info__col">
-												<span class="content"> <span>性別</span> <span>${memberVO.gender}</span>
+												<span class="content"> <span>性別</span> <span>${updateMemberVO.gender}</span>
 												</span>
 											</div>
 										</div>
 										<div class="profile-info__row">
 											<div class="profile-info__col">
 												<span class="content"> <span>生日</span> <span
-													class="profile-info__col--value">${memberVO.birthDate}</span>
+													class="profile-info__col--value">${updateMemberVO.birthDate}</span>
 												</span>
 											</div>
 											<div class="profile-info__col">
@@ -227,7 +227,7 @@
 								</div>
 							</div>
 							<!-- end profile information -->
-
+							
 							<!-- edit profile -->
 							<div class="modal fade profile-info__modal" id="editProfileModal"
 								tabindex="-1" role="dialog"
@@ -244,7 +244,7 @@
 										</div>
 										<div class="modal-body">
 											<div class="card-body">
-
+											
 												<%-- 錯誤表列 --%>
 												<c:if test="${not empty errorMsgs}">
 													<div class="mb-3">
@@ -265,30 +265,30 @@
 													class="change-pass">
 													<div class="mb-3">
 														<label class="form-label" for="basic-default-fullname">會員帳號</label>
-														<div>${memberVO.memberAccount}</div>
+														<div>${updateMemberVO.memberAccount}</div>
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="memberPassword">密碼</label>
 														<input name="memberPassword" type="text"
 															class="form-control" id="memberPassword"
-															value="${memberVO.memberPassword}" />
+															value="${updateMemberVO.memberPassword}" />
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="memberName">會員名稱</label> <input
 															type="text" class="form-control" id="memberName"
-															name="memberName" value="${memberVO.memberName}" />
+															name="memberName" value="${updateMemberVO.memberName}" />
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="nickName">暱稱</label> <input
 															type="text" class="form-control" id="nickName"
-															name="nickName" value="${memberVO.nickName}" />
+															name="nickName" value="${updateMemberVO.nickName}" />
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="gender">性別</label>
 														<div class="row">
 															<div class="col-md">
 																<c:choose>
-																	<c:when test="${memberVO.gender =='男性' }">
+																	<c:when test="${updateMemberVO.gender =='男性' }">
 																		<div class="form-check form-check-inline mt-3">
 																			<input class="form-check-input" type="radio"
 																				name="gender" id="inlineRadio1" value="男性" checked />
@@ -308,7 +308,7 @@
 																				style="font-size: 15px;">不願透露</label>
 																		</div>
 																	</c:when>
-																	<c:when test="${memberVO.gender =='女性' }">
+																	<c:when test="${updateMemberVO.gender =='女性' }">
 																		<div class="form-check form-check-inline mt-3">
 																			<input class="form-check-input" type="radio"
 																				name="gender" id="inlineRadio1" value="男性" /> <label
@@ -356,7 +356,7 @@
 														<label class="form-label" for="nickName">生日</label>
 														<div class="">
 															<input class="form-control" type="date"
-																value="${memberVO.birthDate}" id="html5-date-input"
+																value="${updateMemberVO.birthDate}" id="html5-date-input"
 																name="birthDate" />
 														</div>
 													</div>
@@ -372,11 +372,10 @@
 															<button type="submit" class="btn btn-green">修改</button>
 															<input type="hidden" name="action" value="updatemember">
 															<input type="hidden" name="memberNo"
-																value="${memberVO.memberNo}"> <input
-																type="hidden" name=memberAccount
-																value="${memberVO.memberNo}"> <input
-																type="hidden" name="activaction"
-																value="${memberVO.activaction}">
+																value="${updateMemberVO.memberNo}">
+															<input type="hidden" name=memberAccount
+																value="${memberVO.memberAccount}">
+															<input type="hidden" name="activaction" value="${updateMemberVO.activaction}">
 														</div>
 													</div>
 												</form>
@@ -388,13 +387,13 @@
 							</div>
 							<!-- end edit profile -->
 						</div>
-						<!-- ProductOrder tab -->
+						<!-- orders tab -->
 						<div class="tab-pane fade" id="v-pills-productorder"
 							role="tabpanel" aria-labelledby="v-pills-order-tab">
 							<div class="order-table order-table__collapse">
 								<div class="order-table__head">
 									<div class="order-table__row order-table__row--head">
-										<div class="order-table__cell order-table__cell--hash">#1111</div>
+										<div class="order-table__cell order-table__cell--hash">#</div>
 										<div class="order-table__cell order-table__cell--id">Order
 											Number</div>
 										<div class="order-table__cell order-table__cell--date">Order
@@ -512,91 +511,149 @@
 									</div>
 								</div>
 							</div>
-
+							<!-- empty account tab -->
+							<!--                        <div class="row">-->
+							<!--                            <div class="col-12">-->
+							<!--                                <div class="notice-wrapper">-->
+							<!--                                    <p>There is no item added here. <a href="shop-sidebar-right.html" class="notice-wrapper__link">GO Shop</a></p>-->
+							<!--                                </div>-->
+							<!--                            </div>-->
+							<!--                        </div>-->
+							<!-- empty account tab -->
 						</div>
-						<!-- DesignerOrder tab -->
+						<!-- orders tab -->
 						<div class="tab-pane fade" id="v-pills-designorder"
-							role="tabpanel" aria-labelledby="v-pills-wishlist-tab">
+							role="tabpanel" aria-labelledby="v-pills-order-tab">
 							<div class="order-table order-table__collapse">
-								<div class="panel">
-									<div class="panel-body">
-										<table
-											class="table table-bordered bordered table-striped table-condensed datatable">
-											<thead>
-												<tr>
-													<th>案件編號</th>
-													<th>設計師名稱</th>
-													<th>報價單狀態</th>
-													<th>合約狀態</th>
-													<th>工程進度</th>
-													<th>案件狀態</th>
-													<th>明細</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach var="desOrderList" items="${desOrderList}">
-													<tr>
-														<td><strong>${desOrderList.orderNo}</strong></td>
-														<td>${desOrderList.designerVO.designerName}</td>
-														
-														<%-- <td>${desOrderList.quotationStatus}</td> --%>
-														<c:choose>
-															<c:when test="${desOrderList.quotationStatus =='報價確認' }">
-																<td>報價確認</td>
-															</c:when>
-															<c:when test="${desOrderList.quotationStatus =='確認中' }">
-																<td>確認中</td>
-															</c:when>
-															<c:when test="${desOrderList.quotationStatus =='退回報價' }">
-																<td>退回報價</td>
-															</c:when>
-															<c:otherwise>
-																<td>未報價</td>
-															</c:otherwise>
-														</c:choose>
-														<c:choose>
-															<c:when test="${desOrderList.contractStatus =='合約確認' }">
-																<td>合約確認</td>
-															</c:when>
-															<c:when test="${desOrderList.contractStatus =='確認中' }">
-																<td>確認中</td>
-															</c:when>
-															<c:when test="${desOrderList.contractStatus =='退回合約' }">
-																<td>退回合約</td>
-															</c:when>
-															<c:otherwise>
-																<td>尚未進行</td>
-															</c:otherwise>
-														</c:choose>
-														
-														<td>工程進度</td>
-														
-														<c:choose>
-															<c:when test="${desOrderList.finishStatus =='true' }">
-																<td>已結案</td>
-															</c:when>
-															<c:otherwise>
-																<td>未結案</td>
-															</c:otherwise>
-														</c:choose>
-														<td>
-															<form method="post" action="MemberServlet">
-																<label class="btn btn-primary" tabindex="0"> <span
-																	class="d-none d-sm-block">明細</span> <i
-																	class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
-																	<input type="submit" class="account-file-input" hidden />
-																	<input type="hidden" name="orderNo" value="${desOrderList.orderNo}"> 
-																	<input type="hidden" name="action" value="desOrder_GetOne">
-																</label>
-															</form>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
+								<div class="order-table__head">
+									<div class="order-table__row order-table__row--head">
+										<div class="order-table__cell order-table__cell--hash">#</div>
+										<div class="order-table__cell order-table__cell--id">Order
+											Number</div>
+										<div class="order-table__cell order-table__cell--date">Order
+											Date</div>
+										<div class="order-table__cell order-table__cell--receive">Deliver
+											date</div>
+										<div class="order-table__cell order-table__cell--price">Total
+											price</div>
+										<div class="order-table__cell order-table__cell--payment">Payment</div>
+										<div class="order-table__cell order-table__cell--details">Details</div>
+									</div>
+								</div>
+								<div class="order-table__body">
+									<div class="order-table__row">
+										<div class="order-table__cell order-table__cell--hash">1</div>
+										<div class="order-table__cell order-table__cell--id">
+											<div class="order-table__cell--heading">Order number</div>
+											<div class="order-table__cell--content id-content">
+												123456789</div>
+										</div>
+										<div class="order-table__cell order-table__cell--date">
+											<div class="order-table__cell--heading">Order Date</div>
+											<div class="order-table__cell--content date-content">22/06/2019</div>
+										</div>
+										<div class="order-table__cell order-table__cell--receive">
+											<div class="order-table__cell--heading">Deliver State</div>
+											<div class="order-table__cell--content receive-content">
+												<span
+													class="badge order-table__status order-table__status--progress">In
+													progress</span>
+											</div>
+										</div>
+										<div class="order-table__cell order-table__cell--price">
+											<div class="order-table__cell--heading">Total price</div>
+											<div class="order-table__cell--content  price-content">$1,500</div>
+										</div>
+										<div class="order-table__cell order-table__cell--payment">
+											<div class="order-table__cell--heading">Payment</div>
+											<div class="order-table__cell--content  payment-content">Master
+												card</div>
+										</div>
+										<div class="order-table__cell order-table__cell--details">
+											<div class="order-table__cell--heading">Details</div>
+											<div class="order-table__cell--content  details-content">
+												<a href="order-details.html#v-pills-order-tab">View more</a>
+											</div>
+										</div>
+									</div>
+									<div class="order-table__row">
+										<div class="order-table__cell order-table__cell--hash">2</div>
+										<div class="order-table__cell order-table__cell--id">
+											<div class="order-table__cell--heading">Order number</div>
+											<div class="order-table__cell--content id-content">
+												123456789</div>
+										</div>
+										<div class="order-table__cell order-table__cell--date">
+											<div class="order-table__cell--heading">Order Date</div>
+											<div class="order-table__cell--content date-content">1/03/2019</div>
+										</div>
+										<div class="order-table__cell order-table__cell--receive">
+											<div class="order-table__cell--heading">Deliver State</div>
+											<div class="order-table__cell--content receive-content">
+												<span
+													class="badge order-table__status order-table__status--cancel">Canceled</span>
+											</div>
+										</div>
+										<div class="order-table__cell order-table__cell--price">
+											<div class="order-table__cell--heading">Total price</div>
+											<div class="order-table__cell--content  price-content">$500</div>
+										</div>
+										<div class="order-table__cell order-table__cell--payment">
+											<div class="order-table__cell--heading">Payment</div>
+											<div class="order-table__cell--content  payment-content">Paypal</div>
+										</div>
+										<div class="order-table__cell order-table__cell--details">
+											<div class="order-table__cell--heading">Details</div>
+											<div class="order-table__cell--content  details-content">
+												<a href="order-details.html#v-pills-order-tab">View more</a>
+											</div>
+										</div>
+									</div>
+									<div class="order-table__row">
+										<div class="order-table__cell order-table__cell--hash">3</div>
+										<div class="order-table__cell order-table__cell--id">
+											<div class="order-table__cell--heading">Order number</div>
+											<div class="order-table__cell--content id-content">
+												123456789</div>
+										</div>
+										<div class="order-table__cell order-table__cell--date">
+											<div class="order-table__cell--heading">Order Date</div>
+											<div class="order-table__cell--content date-content">12/02/2019</div>
+										</div>
+										<div class="order-table__cell order-table__cell--receive">
+											<div class="order-table__cell--heading">Deliver State</div>
+											<div class="order-table__cell--content receive-content">
+												<span
+													class="badge order-table__status order-table__status--success">Delivered</span>
+											</div>
+										</div>
+										<div class="order-table__cell order-table__cell--price">
+											<div class="order-table__cell--heading">Total price</div>
+											<div class="order-table__cell--content  price-content">$1,850</div>
+										</div>
+										<div class="order-table__cell order-table__cell--payment">
+											<div class="order-table__cell--heading">Payment</div>
+											<div class="order-table__cell--content  payment-content">Master
+												card</div>
+										</div>
+										<div class="order-table__cell order-table__cell--details">
+											<div class="order-table__cell--heading">Details</div>
+											<div class="order-table__cell--content  details-content">
+												<a href="order-details.html#v-pills-order-tab">View more</a>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
+							<!-- empty account tab -->
+							<!--                        <div class="row">-->
+							<!--                            <div class="col-12">-->
+							<!--                                <div class="notice-wrapper">-->
+							<!--                                    <p>There is no item added here. <a href="shop-sidebar-right.html" class="notice-wrapper__link">GO Shop</a></p>-->
+							<!--                                </div>-->
+							<!--                            </div>-->
+							<!--                        </div>-->
+							<!-- empty account tab -->
 						</div>
 
 					</div>

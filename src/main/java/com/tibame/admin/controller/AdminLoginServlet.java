@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,8 @@ import javax.servlet.http.HttpSession;
 import com.tibame.admin.model.AdminDAO;
 import com.tibame.admin.model.AdminVO;
 
-@WebServlet("/AdminLoginServlet1")
+@WebServlet("/back-end/adminLogin/AdminLoginServlet")
+@MultipartConfig
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -74,7 +76,7 @@ public class AdminLoginServlet extends HttpServlet {
 		} else {  // 帳號密碼正確，做以下工作
 			HttpSession session = req.getSession();
 			session.setAttribute("adminVO", adminVO); // 在session內做已經登入過的標識
-			res.sendRedirect(req.getContextPath()+"/back-end/admin/index.jsp"); // 成功登入index.jsp
+			res.sendRedirect(req.getContextPath() + "/back-end/admin/index.jsp"); // 成功登入index.jsp
 			
 		}
 		
