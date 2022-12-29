@@ -341,7 +341,7 @@
                           <div class="contentPopup pop">
                             <div class="contentContainer">
                               <button class="closeContent close_btn">關閉</button><br><br>
-                              ${forumReportVOList.postNo==0?'forumReportVOList.replyContent':forumReportVOList.postContent}
+                              ${forumReportVOList.postNo==0?forumReportVOList.replyContent:forumReportVOList.postContent}
                             </div>
                           </div>
                         </td>
