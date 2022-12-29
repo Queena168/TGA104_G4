@@ -341,7 +341,7 @@
 		
 														<td>
 															<form method="post"
-																action="http://localhost:8080/TGA104_G4/UpdateProductServlet">
+																action="UpdateProductServlet">
 																<label class="btn btn-primary" tabindex="0"> <span
 																	class="d-none d-sm-block">修改</span> <i
 																	class="fa-regular fa-pen-to-square d-block d-sm-none"></i>

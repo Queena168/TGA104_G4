@@ -17,7 +17,7 @@ import com.tibame.product.model.ProductVO;
 /**
  * Servlet implementation class UpdateProductServlet
  */
-@WebServlet("/back-end/product/UpdateProductServlet")
+@WebServlet("/UpdateProductServlet")
 public class UpdateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

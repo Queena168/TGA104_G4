@@ -321,7 +321,7 @@
 	</ul>
 </c:if>
 
-									<form id="#" class="mb-3"  METHOD="post" action="UpdateProductTypeServlet" name="form1">
+	<form id="#" class="mb-3"  METHOD="post" action="UpdateProductTypeServlet" name="form1">
 		<div class="mb-3">
 			<label for="#" class="form-label">商品類別編號:<font color=red><b>*</b></font></label> 			
 			<input type="hidden" class="form-control" 
