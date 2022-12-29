@@ -2,12 +2,14 @@ package com.tibame.forum_topic.model;
 
 import java.util.List;
 
-public class ForumTopicService {
-	private ForumTopicDAO_interface dao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-	public ForumTopicService() {
-		dao = new ForumTopicDAO();
-	}
+@Service
+public class ForumTopicService {
+
+	@Autowired
+	private ForumTopicDAO_interface dao;
 
 	public ForumTopicVO addTopic(String topicName, Integer adminNo) {
 		ForumTopicVO forumtopicVO = new ForumTopicVO();

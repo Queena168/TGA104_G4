@@ -2,13 +2,14 @@ package com.tibame.forum_report.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class ForumReportService {
 
+	@Autowired
 	private ForumReportDAO_interface dao;
-
-	public ForumReportService() {
-		dao = new ForumReportDAO();
-	}
 
 	public ForumReportVO addReport(Integer postNo, Integer replyNo, Integer informant, String reportReason) {
 		ForumReportVO forumReportVO = new ForumReportVO();
@@ -16,7 +17,6 @@ public class ForumReportService {
 		forumReportVO.setReplyNo(replyNo);
 		forumReportVO.setInformant(informant);
 		forumReportVO.setReportReason(reportReason);
-
 		dao.insert(forumReportVO);
 		return forumReportVO;
 	}
@@ -26,7 +26,6 @@ public class ForumReportService {
 		forumReportVO.setReviewer(reviewer);
 		forumReportVO.setReviewResult(reviewResult);
 		forumReportVO.setPostNo(postNo);
-
 		dao.updateByPostNo(forumReportVO);
 		return forumReportVO;
 	}
@@ -36,7 +35,6 @@ public class ForumReportService {
 		forumReportVO.setReviewer(reviewer);
 		forumReportVO.setReviewResult(reviewResult);
 		forumReportVO.setReplyNo(replyNo);
-
 		dao.updateByReplyNo(forumReportVO);
 		return forumReportVO;
 	}

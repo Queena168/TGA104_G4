@@ -19,7 +19,8 @@ document.querySelectorAll(".show_update").forEach(function(btn) {
 document.querySelector("#add_submit").addEventListener("click", function() {
 	$.ajax({
 		type: "POST",
-		url: "forumtopic.do",
+		url: "addTopic",
+//		url: "forumtopic.do",
 		data: $("#add_topic_form").serialize(),
 		dataType: "JSON",
 		success: function(data) {
@@ -36,7 +37,8 @@ document.querySelector("#add_submit").addEventListener("click", function() {
 document.querySelector("#update_submit").addEventListener("click", function() {
 	$.ajax({
 		type: "POST",
-		url: "forumtopic.do",
+		url: "updateTopic",
+//		url: "forumtopic.do",
 		data: $("#update_topic_form").serialize(),
 		dataType: "JSON",
 		success: function(data) {

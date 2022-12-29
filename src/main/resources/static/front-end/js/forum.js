@@ -11,7 +11,8 @@ function search() {
 function add() {
 	$.ajax({
 		type: "POST",
-		url: "forumpost.do",
+		url: "addPost",
+//		url: "forumpost.do",
 		data: $("#add_form").serialize(),
 		dataType: "JSON",
 		success: function(data) {

@@ -341,7 +341,7 @@
                           <div class="contentPopup pop">
                             <div class="contentContainer">
                               <button class="closeContent close_btn">關閉</button><br><br>
-                              ${forumReportVOList.postNo==0?'forumReportVOList.replyContent':forumReportVOList.postContent}
+                              ${forumReportVOList.postNo==0?forumReportVOList.replyContent:forumReportVOList.postContent}
                             </div>
                           </div>
                         </td>
@@ -379,7 +379,7 @@
                                   <option value="未違規">未違規
                                   <option value="下架">下架
                                 </select>
-                                <input type="hidden" name="action" value="update">
+                                <input type="hidden" name="action"> <!-- value="update">  -->
                                 <input type="hidden" name="reviewer" value="1">
                                 <%-- 記得換成${adminVO.adminNo} --%>
                                   <input type="hidden" name="postNo" value="${forumReportVOList.postNo}">

@@ -2,29 +2,27 @@ package com.tibame.forum_post.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class ForumPostService {
 
+	@Autowired
 	private ForumPostDAO_interface dao;
-	
-	public ForumPostService() {
-		dao = new ForumPostDAO();
-	}
 
 	public ForumPostVO addPost(Integer memberNo, Integer topicNo, String title, String content) {
 		ForumPostVO forumPostVO = new ForumPostVO();
-
 		forumPostVO.setMemberNo(memberNo);
 		forumPostVO.setTopicNo(topicNo);
 		forumPostVO.setTitle(title);
 		forumPostVO.setContent(content);
 		dao.insert(forumPostVO);
-
 		return forumPostVO;
 	}
 
 	public ForumPostVO updatePost(String title, String content, Integer postNo) {
 		ForumPostVO forumPostVO = new ForumPostVO();
-
 		forumPostVO.setTitle(title);
 		forumPostVO.setContent(content);
 		forumPostVO.setPostNo(postNo);
