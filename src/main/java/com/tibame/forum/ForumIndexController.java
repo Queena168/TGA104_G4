@@ -24,8 +24,8 @@ public class ForumIndexController {
 	@Autowired
 	ForumPostService forumPostService;
 
-	@Autowired
-	ForumJedisService forumJedisService;
+//	@Autowired
+//	ForumJedisService forumJedisService;
 
 	@GetMapping("")
 	public String handlerMethod(Model model) {
@@ -44,11 +44,12 @@ public class ForumIndexController {
 		List<ForumPostVO> hotList = new ArrayList<ForumPostVO>();
 		List<Integer> viewList = new ArrayList<Integer>();
 
-		for (String a : forumJedisService.getTop5()) {
+		ForumJedis jedis = new ForumJedis();
+		for (String a : jedis.getTop5()) {
 			hotList.add(forumPostService.getPostByPostNo(Integer.valueOf(a)));
-			viewList.add(forumJedisService.getZset(a));
+			viewList.add(jedis.getZset(a));
 		}
-		forumJedisService.close();
+		jedis.close();
 		model.addAttribute("hotList", hotList);
 		model.addAttribute("viewList", viewList);
 		// 取得Redis紀錄瀏覽次數的zset中瀏覽次數最高的1-5篇文章，將文章VO和瀏覽次數分別存到attribute
