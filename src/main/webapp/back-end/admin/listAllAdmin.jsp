@@ -372,7 +372,7 @@ pageContext.setAttribute("listPrivilege", listPrivilege);
 												<td>${adminVoList.uploader}</td>
 												<td>
 													<form method="post"
-														action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+														action="<%=request.getContextPath()%>/back-end/admin/AdminServlet">
 														<label class="btn btn-primary" tabindex="0"> <span
 															class="d-none d-sm-block">修改</span> <i
 															class="fa-regular fa-pen-to-square d-block d-sm-none"></i>

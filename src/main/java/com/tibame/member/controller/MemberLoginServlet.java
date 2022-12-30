@@ -76,8 +76,14 @@ public class MemberLoginServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}else {
 				HttpSession session = req.getSession();
-				session.setAttribute("memberVO", memberVO); // 在session內做已經登入過的標識
-				res.sendRedirect(req.getContextPath()+"/front-end/member/index.jsp"); // 成功登入index.jsp
+				String location = (String)session.getAttribute("location");
+				if(location==null) {
+					session.setAttribute("memberVO", memberVO); // 在session內做已經登入過的標識
+					res.sendRedirect(req.getContextPath()+"/front-end/member/index.jsp"); // 成功登入index.jsp
+				}else {
+					res.sendRedirect(location);
+				}
+				
 			}
 		}
 		
