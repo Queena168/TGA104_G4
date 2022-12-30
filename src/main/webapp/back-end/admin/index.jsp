@@ -90,7 +90,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../member/Admin-Member-MemberInfo.html" class="menu-link">
+								href="../member/listAllMember.jsp" class="menu-link">
 									<div data-i18n="">會員資料管理</div>
 							</a></li>
 						</ul></li>
