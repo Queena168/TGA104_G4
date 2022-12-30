@@ -140,10 +140,12 @@ public class MemberServlet extends HttpServlet {
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.addMember(memberAccount, memberPassword, memberName, nickName, gender, birthDate,
 					activaction);
+			memberVO = memberSvc.findMemberNo(memberAccount);
+			Integer memberNo = memberVO.getMemberNo();
 			MailService mail = new MailService();
 			String subject = "【會員註冊通知信】";
-			String messageText = "<h2>Hello! " + memberName + "</h2>" + "<br> <p> 請點擊以下連結啟用帳號</p>"
-					+ "<a href='http://localhost:8081/TGA104_G4/front-end/index.html'>MatDesign首頁</a><br>";
+			String messageText = "<h2>Hello! " + memberName + "</h2>" +"<br> <p> 請點擊以下連結確認信箱帳號無誤</p>" + 
+					 "<a href='http://localhost:8081/TGA104_G4/front-end/Activation?memberNo=" + memberNo +"'>確認</a><br>";
 			mail.sendMail(memberAccount, subject, messageText);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/

@@ -632,5 +632,51 @@ public class MemberDAO implements Member_interface {
 
 	}
 	
+	private static final String SELECT_MEMBERNO = 
+			"select * from Member where memberAccount = ?;";
+	
+	public MemberVO findMemberNo(String memberAccount) {
+		boolean status = false; // 利用布林值確認帳號密碼是否匹配 
+		MemberVO memberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_MEMBERNO);
+			
+			pstmt.setString(1, memberAccount);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				status = true;
+				
+				memberVO = new MemberVO();
+				memberVO.setMemberNo(rs.getInt("memberNo"));
+				memberVO.setMemberAccount(rs.getString("memberAccount"));
+				memberVO.setMemberPassword(rs.getString("memberPassword"));
+				memberVO.setMemberName(rs.getString("memberName"));
+				memberVO.setNickName(rs.getString("nickName"));
+				memberVO.setGender(rs.getString("gender"));
+				memberVO.setBirthDate(rs.getDate("birthDate"));
+				memberVO.setActivaction(rs.getBoolean("activaction"));
+			}
+			
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			// process sql exception
+			se.printStackTrace(System.err);
+		}
+		
+		
+		
+		return memberVO;
+	}
+	
 	
 }

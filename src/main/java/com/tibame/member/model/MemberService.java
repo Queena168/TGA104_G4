@@ -95,4 +95,9 @@ public class MemberService {
 		dao.confirmrdContract(orderNo,contractStatus);
 	}
 	
+	public MemberVO findMemberNo(String memberAccount) {
+		MemberDAO dao = new MemberDAO();
+		return dao.findMemberNo(memberAccount);
+	}
+	
 }

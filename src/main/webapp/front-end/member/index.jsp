@@ -100,14 +100,14 @@
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<ul class="navbar-nav main-navbar">
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
+						class="nav-link " href="../designer_protfolio/memFindPortfolio.jsp">找作品</a>
 					</li>
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="#">找設計師</a></li>
+						class="nav-link " href="${pageContext.request.contextPath}/ShowDesignerPage">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="./product/productListAll.html">商城</a></li>
+						class="nav-link " href="${pageContext.request.contextPath}/ShowShop">商城</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="#">論壇</a></li>
+						class="nav-link " href="../forum/forumIndex.do">論壇</a></li>
 					<!-- <li class="nav-item main-navbar__item dropdown">
                     <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
                 </li> -->

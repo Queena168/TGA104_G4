@@ -149,26 +149,17 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumMaintain.html" class="menu-link">
+								href="../forum/adminForumTopic.do" class="menu-link">
 									<div data-i18n="">論壇維護</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumList.html" class="menu-link">
-									<div data-i18n="">發文列表</div>
+								href="../forum/adminForumAll.do" class="menu-link">
+									<div data-i18n="">文章列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumReportCheck.html"
+								href="../forum/adminForumReport.do"
 								class="menu-link">
-									<div data-i18n="">發文檢舉查核</div>
-							</a></li>
-							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ReplyList.html" class="menu-link">
-									<div data-i18n="">留言列表</div>
-							</a></li>
-							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ReplyReportCheck.html"
-								class="menu-link">
-									<div data-i18n="">留言檢舉查核</div>
+									<div data-i18n="">檢舉查核</div>
 							</a></li>
 						</ul></li>
 
