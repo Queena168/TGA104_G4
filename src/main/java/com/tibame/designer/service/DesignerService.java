@@ -122,6 +122,7 @@ public class DesignerService {
 	
 	public DesignerVO logindesigner(String designerAccount,String designerPassword) {
 		return dao.login(designerAccount, designerPassword);
+		
 	}
 
 	

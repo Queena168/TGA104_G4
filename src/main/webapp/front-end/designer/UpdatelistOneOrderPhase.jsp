@@ -308,56 +308,24 @@ margin-left: 200px;
 </nav>
 <!-- end main header navbar -->
 
-	<!-- Navbar Start -->
-	<div class="container-fluid">
-		<div class="row border-top px-xl-5">
-
-			<div class="col-lg-9">
-				<nav
-					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="<%=request.getContextPath()%>/front-end/designer/index.jsp" class="text-decoration-none d-block d-lg-none">
-						<h1 class="m-0">
-							<span class="text-primary">M</span>atDesign
-						</h1>
-					</a>
-					<button type="button" class="navbar-toggler" data-toggle="collapse"
-						data-target="#navbarCollapse">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse justify-content-between"
-						id="navbarCollapse">
-						<div class="navbar-nav py-0">
-							<div id="selfedit" style="width: 200px"><a href="<%=request.getContextPath()%>/DesignerEdit?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>編輯簡介</b></a></div>
-							<div id="ordermanage" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerOrder?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>案件管理</b></a></div>
-							<div id="quotation" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerQuotationController?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>報價管理</b></a></div>
-							<div id="contract" style="width: 200px"><a  href="<%=request.getContextPath()%>/DesignerContractController?designerNo=${designerVO.designerNo}" class="nav-item nav-link"><b>合約管理</b></a></div>
-							<div id="portfolio" style="width: 200px"><a  href="teacher.html" class="nav-item nav-link"><b>作品管理</b></a></div>
-						</div>
-					</div>
-					
-				</nav>
-			</div>
-		</div>
-	</div>
-	
-	<!-- Navbar End -->
 <hr size="8px" align="center" width="100%" >
 <div style="text-align:center"><h3>案件進度查看</h3></div>
 <div align="center">
 <form id="form" method="post">
 <table> 
-        <c:forEach var="designerOrderPhaseVO" items="${list}">
+        <c:forEach var="designerOrderPhaseVO" items="${list}" begin="0" end="0">
 		<tr><th>案件編號:</th><td>${designerOrderPhaseVO.orderNo}</td></tr>
 		
 		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr> 
-		<tr><th>合約總期數</th><td>${designerOrderPhaseVO.orderPhase}期</td></tr>  
+		<tr><th>合約總期數</th><td>${designerOrderPhaseVO.totalOrderPhase}期</td></tr>  
         </c:forEach>
 		<tr>
 		<th>裝潢進度</th>
 		<td>
-		<c:forEach var="designerOrderPhaseVO" items="${list}">
+		
 		   <select id="selection" name="constructionStatus" disabled="disabled">
+		   <c:forEach var="designerOrderPhaseVO" items="${list}">
                <option  value="未開始">請選擇進度</option>
                <option value="第一期施工開始" ${designerOrderPhaseVO.constructionStatus=="第一期施工開始"?'selected':''}>第一期施工開始</option>
                <option value="第一期施工結束" ${designerOrderPhaseVO.constructionStatus=="第一期施工結束"?'selected':''}>第一期施工結束</option>
@@ -365,27 +333,27 @@ margin-left: 200px;
                <option value="第二期施工結束" ${designerOrderPhaseVO.constructionStatus=="第二期施工結束"?'selected':''}>第二期施工結束</option>
                <option value="第三期施工開始" ${designerOrderPhaseVO.constructionStatus=="第三期施工開始"?'selected':''}>第三期施工開始</option>
                <option value="第三期施工結束" ${designerOrderPhaseVO.constructionStatus=="第三期施工結束"?'selected':''}>第三期施工結束</option>
+            </c:forEach>
            </select>
-        </c:forEach>
+       
         </td>
 		</tr>	
-		 <c:forEach var="designerOrderPhaseVO" items="${list}">
-	    <tr><th>進度說明</th><td><textarea id="t1"  placeholder="請輸入進度內容!" name="orderPhaseDetail" disabled="disabled">${designerOrderPhaseVO.orderPhaseDetail}</textarea></td></tr>
-	    </c:forEach>
-
+		 
 	    
 	    
 	    <tr>
 		<th>付款進度</th>
 		<td>
-		<c:forEach var="designerOrderPhaseVO" items="${list}" >
+		
 		   <select id="selectionpayment" name="paymentStatus" disabled="disabled">
+		   <c:forEach var="designerOrderPhaseVO" items="${list}" >
                <option value="未付款">未付款</option>
                <option value="第一期付款完成" ${designerOrderPhaseVO.paymentStatus=="第一期付款完成"?'selected':''}>第一期付款完成</option>
                <option value="第二期付款完成" ${designerOrderPhaseVO.paymentStatus=="第二期付款完成"?'selected':''}>第二期付款完成</option>
                <option value="第三期付款完成" ${designerOrderPhaseVO.paymentStatus=="第三期付款完成"?'selected':''}>第三期付款完成</option>
+           </c:forEach>
            </select>
-         </c:forEach>
+         
         </td>
 		</tr>	
 	
