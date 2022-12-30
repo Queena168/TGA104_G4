@@ -25,6 +25,9 @@ public class PostController {
 
 	@Autowired
 	ForumReplyService forumReplyService;
+	
+	@Autowired
+	ForumJedisService forumJedisService;
 
 	@RequestMapping("/front-end/forum/posts.do")
 	public String handlerMethod(Model model, Integer postNo, Integer topicNo, Integer page) {
@@ -41,10 +44,9 @@ public class PostController {
 		model.addAttribute("forumReplyVOList", forumReplyVOList);
 		// 以postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的所有回應ReplyVO，存入attribute
 
-		ForumJedis jedis = new ForumJedis();
-		jedis.setZset(postNo.toString());
-		model.addAttribute("view", jedis.getZset(postNo.toString()));
-		jedis.close();
+		forumJedisService.setZset(postNo.toString());
+		model.addAttribute("view", forumJedisService.getZset(postNo.toString()));
+		forumJedisService.close();
 
 		// =====資料分頁=====
 		if (page == null) {

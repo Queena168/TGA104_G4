@@ -2,15 +2,17 @@ package com.tibame.forum;
 
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import redis.clients.jedis.Jedis;
 
-public class ForumJedis {
+@Service
+public class ForumJedisService {
+	
+	@Autowired
 	private Jedis jedis;
-
-	public ForumJedis() {
-		jedis = new Jedis("localhost", 6379);
-	}
-
+	
 	public void setZset(String postNo) {
 		jedis.zincrby("viewZset", 1, postNo);
 	}
