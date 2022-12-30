@@ -253,7 +253,7 @@
 								href="javascript:void(0);" data-bs-toggle="dropdown">
 									<div class="avatar avatar-online">
 										<img
-											src="<%=request.getContextPath()%>/MemberPicReader?memberNo=${memberVO.memberNo}"
+											src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
 											alt class="w-px-40 rounded-circle" />
 									</div>
 							</a>
@@ -263,37 +263,36 @@
 												<div class="flex-shrink-0 me-3">
 													<div class="avatar avatar-online">
 														<img
-															src="<%=request.getContextPath()%>/MemberPicReader?memberNo=${memberVO.memberNo}"
+															src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
 															alt class="w-px-40  rounded-circle" />
 													</div>
 												</div>
 												<div class="flex-grow-1">
-													<span class="fw-semibold d-block">${memberVO.memberName}</span>
-													<small class="text-muted">${memberVO.memberEmail}</small>
+													<span class="fw-semibold d-block">${adminVO.adminName}</span>
+													<small class="text-muted">${adminVO.adminEmail}</small>
 												</div>
 											</div>
 									</a></li>
 
 									<li><form method="post"
-											action="<%=request.getContextPath()%>/back-end/member/member.do">
-											<div class="dropdown-item">
-
-												<label class="btn rounded-pill bg-label-secondary"
-													tabindex="0"> <i class="bx bx-user me-2"></i> <span
-													class="align-middle">My Profile</span> <input type="hidden"
-													name="memberNo" value="${memberVO.memberNo}"> <input
-													type="hidden" name="action" value="getOne_For_Profile">
+											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+											<div class="dropdown-item" > 
+												
+												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
+													<i class="bx bx-user me-2"></i> 
+													<span class="align-middle">My Profile</span> 
+													<input type="hidden" name="adminNo" value="${adminVO.adminNo}"> 
+													<input type="hidden" name="action" value="getOne_For_Profile">
 													<input type="submit" class="account-file-input" hidden />
 												</label>
 											</div>
 										</form></li>
-									<li><a class="dropdown-item"
-										href="../memberLogin/admin-login.jsp"> <label
-											class="btn rounded-pill bg-label-secondary" tabindex="0">
-												<i class="bx bx-power-off me-2"></i> <span
-												class="align-middle">Log Out</span>
-										</label>
-									</a></li>
+									<li><a class="dropdown-item" href="../adminLogin/admin-login.jsp">
+												<label class="btn rounded-pill bg-label-secondary" tabindex="0">
+													<i class="bx bx-power-off me-2"></i> 
+													<span class="align-middle">Log Out</span> 
+												</label>
+									</a></li>	
 								</ul>
 							</li>
 							<!--/ User -->

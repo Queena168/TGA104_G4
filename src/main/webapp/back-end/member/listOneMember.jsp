@@ -322,45 +322,42 @@
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
-<%-- 										<c:forEach var="memberlist" items="${list}"> --%>
-											<tr>
-												<td><strong>${memberselect.memberNo}</strong></td>
-												<td>${memberselect.memberAccount}</td>
-												<td>${memberselect.memberPassword}</td>
-												<td>${memberselect.memberName}</td>
-												<td>${memberselect.nickName}</td>
-												<td>${memberselect.gender}</td>
-												<td>${memberselect.birthDate}</td>
-												<td>${memberselect.activaction}</td>
-											</tr>
-<%-- 										</c:forEach> --%>
+										<tr>
+											<td><strong>${memberselect.memberNo}</strong></td>
+											<td>${memberselect.memberAccount}</td>
+											<td>${memberselect.memberPassword}</td>
+											<td>${memberselect.memberName}</td>
+											<td>${memberselect.nickName}</td>
+											<td>${memberselect.gender}</td>
+											<td>${memberselect.birthDate}</td>
+											<td>${memberselect.activaction}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 							<!-- / Content -->
-
-							<!-- Footer -->
-							<footer class="content-footer footer bg-footer-theme">
-								<div
-									class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-									<div class="mb-2 mb-md-0">
-										©
-										<script>
-											document.write(new Date().getFullYear());
-										</script>
-										, made by <a href="#" target="_blank"
-											class="footer-link fw-bolder">MatDesign</a>
-									</div>
-
-								</div>
-							</footer>
-							<!-- / Footer -->
-							
 							<div class="content-backdrop fade"></div>
 						</div>
 						<!-- Content wrapper -->
 					</div>
 					<!-- / Layout page -->
 				</div>
+				<!-- Footer -->
+				<footer class="content-footer footer bg-footer-theme">
+					<div
+						class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+						<div class="mb-2 mb-md-0">
+							©
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							, made by <a href="#" target="_blank"
+								class="footer-link fw-bolder">MatDesign</a>
+						</div>
 
+					</div>
+				</footer>
+				<!-- / Footer -->
 				<!-- Overlay -->
 				<div class="layout-overlay layout-menu-toggle"></div>
 			</div>
