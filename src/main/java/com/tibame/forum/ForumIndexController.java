@@ -3,11 +3,10 @@ package com.tibame.forum;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tibame.forum_post.model.ForumPostService;
@@ -16,6 +15,7 @@ import com.tibame.forum_topic.model.ForumTopicService;
 import com.tibame.forum_topic.model.ForumTopicVO;
 
 @Controller
+@RequestMapping("/front-end/forum/forumIndex.do")
 public class ForumIndexController {
 
 	@Autowired
@@ -23,15 +23,12 @@ public class ForumIndexController {
 
 	@Autowired
 	ForumPostService forumPostService;
-	
+
 	@Autowired
 	ForumJedisService forumJedisService;
 
-	@RequestMapping("/front-end/forum/forumIndex.do")
-	public String handlerMethod(Model model, HttpSession session) {
-
-		session.setAttribute("account", "Max");
-		session.setAttribute("memberNo", 3);
+	@GetMapping("")
+	public String handlerMethod(Model model) {
 
 		List<ForumTopicVO> forumTopicVOList = forumTopicService.getAll();
 		model.addAttribute("forumTopicVOList", forumTopicVOList);

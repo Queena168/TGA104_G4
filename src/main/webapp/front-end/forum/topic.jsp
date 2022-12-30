@@ -127,7 +127,7 @@
             <span><a href="forumIndex.do">論壇首頁</a> >> <a
                     href="topic.do?topicNo=${param.topicNo}&page=1">${forumTopicVO.topicName}</a></span>
             <c:choose>
-                <c:when test="${sessionScope.account!=null}">
+                <c:when test="${memberVO.memberAccount!=null}">
                    	<button type="button" class="add_post_btn" onclick="location.href='posting.do?topicNo=${param.topicNo}'">我要發文</button>
                 </c:when>
                 <c:otherwise>

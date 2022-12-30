@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -28,7 +29,7 @@ public class ForumPostController {
 	ForumTopicService forumTopicService;
 
 	@PostMapping("/search")
-	public String search(Model model, String keyword) {
+	public String search(Model model, @RequestParam("keyword") String keyword) {
 
 		if (keyword.trim().length() == 0) {
 			return "redirect:forumIndex.do";
@@ -51,7 +52,9 @@ public class ForumPostController {
 
 	@ResponseBody
 	@PostMapping("addPost")
-	public String addPost(Model model, Integer memberNo, Integer topicNo, String title, String content) {
+	public String addPost(Model model, @RequestParam("memberNo") Integer memberNo,
+			@RequestParam("topicNo") Integer topicNo, @RequestParam("title") String title,
+			@RequestParam("content") String content) {
 
 		Map<String, String> message = new HashMap<String, String>();
 		Gson gson = new Gson();
@@ -84,7 +87,8 @@ public class ForumPostController {
 
 	@ResponseBody
 	@PostMapping("updatePost")
-	public String updatePost(Model model, String title, String content, Integer postNo, Integer topicNo) {
+	public String updatePost(Model model, @RequestParam("title") String title, @RequestParam("content") String content,
+			@RequestParam("postNo") Integer postNo, @RequestParam("topicNo") Integer topicNo) {
 
 		Map<String, String> message = new HashMap<String, String>();
 		Gson gson = new Gson();

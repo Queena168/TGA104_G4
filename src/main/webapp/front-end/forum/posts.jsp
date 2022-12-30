@@ -131,7 +131,7 @@
 					href="topic.do?topicNo=${param.topicNo}&page=1">${forumTopicVO.topicName} </a> >> <a
 					href="posts.do?topicNo=${param.topicNo}&postNo=${param.postNo}&page=1">${forumPostVO.title}</a></span>
 			<c:choose>
-				<c:when test="${sessionScope.account!=null}">
+				<c:when test="${memberVO.memberAccount!=null}">
 					<button type="button" class="add_post_btn"
 						onclick="location.href='posting.do?topicNo=${param.topicNo}'">我要發文</button>
 				</c:when>
@@ -154,10 +154,10 @@
 				</div>
 				原PO<br><br><br>
 				<c:choose>
-					<c:when test="${(sessionScope.account!=null) and (sessionScope.memberNo!= forumPostVO.memberNo)}">
+					<c:when test="${(memberVO.memberAccount!=null) and (memberVO.memberNo!= forumPostVO.memberNo)}">
 						<button class="post_report_btn">檢舉此文</button>
 					</c:when>
-					<c:when test="${(sessionScope.account!=null) and (sessionScope.memberNo== forumPostVO.memberNo)}">
+					<c:when test="${(memberVO.memberAccount!=null) and (memberVO.memberNo== forumPostVO.memberNo)}">
 						<button class="post_report_btn" style="display: none"></button>
 					</c:when>
 					<c:otherwise>
@@ -185,7 +185,7 @@
 				</div>
 				<c:choose>
 					<c:when
-						test="${(sessionScope.memberNo == forumPostVO.memberNo)&&(forumPostVO.reviewResult !='下架')}">
+						test="${(memberVO.memberNo == forumPostVO.memberNo)&&(forumPostVO.reviewResult !='下架')}">
 						<button class="post_modify_btn">我要修改</button>
 					</c:when>
 					<c:otherwise>
@@ -210,11 +210,11 @@
 							#${pageStart+status.count}樓<br><br><br>
 							<c:choose>
 								<c:when
-									test="${(sessionScope.account!=null) and (sessionScope.memberNo!= forumReplyVO.memberNo)}">
+									test="${(memberVO.memberAccount!=null) and (memberVO.memberNo!= forumReplyVO.memberNo)}">
 									<button class="reply_report_btn">檢舉此文</button>
 								</c:when>
 								<c:when
-									test="${(sessionScope.account!=null) and (sessionScope.memberNo== forumReplyVO.memberNo)}">
+									test="${(memberVO.memberAccount!=null) and (memberVO.memberNo== forumReplyVO.memberNo)}">
 									<button class="reply_report_btn" style="display: none"></button>
 								</c:when>
 								<c:otherwise>
@@ -243,7 +243,7 @@
 							</div>
 							<c:choose>
 								<c:when
-									test="${sessionScope.memberNo == forumReplyVO.memberNo&&(forumReplyVO.reviewResult !='下架')}">
+									test="${memberVO.memberNo == forumReplyVO.memberNo&&(forumReplyVO.reviewResult !='下架')}">
 									<button class="reply_modify_btn">我要修改</button>
 								</c:when>
 								<c:otherwise>
@@ -276,7 +276,7 @@
 
 		<!--Comment & Modify Area-->
 		<c:choose>
-			<c:when test="${sessionScope.account ==null}">
+			<c:when test="${memberVO.memberAccount ==null}">
 				<h4> 登入後可留言... </h4>
 				<button id="submit_btn" type="button" style="display: none">送出</button>
 			</c:when>
@@ -290,7 +290,7 @@
 						<textarea name="content" id="summernote"></textarea>
 						<button id="submit_btn" type="button">送出</button>
 						<input id="act" type="hidden" name="action"><!-- value="insert"> --> 
-						<input type="hidden" name="memberNo" value="${sessionScope.memberNo}">
+						<input type="hidden" name="memberNo" value="${memberVO.memberNo}">
 						<input type="hidden" id="modify_replyNo" name="replyNo" value="">
 						<input type="hidden" name="topicNo" value="${param.topicNo}">
 						<input type="hidden" name="postNo" value="${param.postNo}">
@@ -311,7 +311,7 @@
 						<input type="hidden" name="topicNo" value="${param.topicNo}">
 						<input type="hidden" name="postNo" value="${param.postNo}">
 						<input type="hidden" id="report_replyNo" name="replyNo" value="">
-						<input type="hidden" name="informant" value="${sessionScope.memberNo}">
+						<input type="hidden" name="informant" value="${memberVO.memberNo}">
 						<input type="hidden" name="action"><!-- value="insertReport"> --> 
 						<input type="hidden" name="page" value="${param.page}">
 					</div>

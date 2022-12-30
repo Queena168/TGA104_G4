@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tibame.forum_post.model.ForumPostService;
@@ -32,8 +33,11 @@ public class AdminForumAllController {
 			}
 		} catch (NullPointerException e) {
 			forumVOList = forumPostService.getAll();
-			listname = "post"; // 第一次進來無query string，設定listname = "post";
+			listname = "post";
 		}
+		// 從query string取得listname，決定要呼叫的方法
+		// 第一次進來無query string，設定listname = "post";
+
 		model.addAttribute("forumVOList", forumVOList);
 		model.addAttribute("listname", listname);
 		// 將取得的VOList & listname 存入attribute

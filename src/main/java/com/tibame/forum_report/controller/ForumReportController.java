@@ -3,29 +3,28 @@ package com.tibame.forum_report.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.tibame.forum_report.model.ForumReportService;
 
-@Controller
+@RestController
 @RequestMapping({ "/front-end/forum", "/back-end/forum" })
 public class ForumReportController {
 
 	@Autowired
 	ForumReportService forumReportService;
 
-	@ResponseBody
 	@PostMapping("addReport")
-	public String addReport(Model model, Integer postNo, Integer replyNo, Integer informant, String reportReason,
-			Integer topicNo, Integer page) {
+	public String addReport(Model model, @RequestParam("postNo") Integer postNo,
+			@RequestParam(required = false, value = "replyNo") Integer replyNo,
+			@RequestParam("informant") Integer informant, @RequestParam("reportReason") String reportReason,
+			@RequestParam("topicNo") Integer topicNo, @RequestParam("page") Integer page) {
 
 		Map<String, String> message = new HashMap<String, String>();
 		Gson gson = new Gson();
@@ -47,10 +46,10 @@ public class ForumReportController {
 		return gson.toJson(message);
 	}
 
-	@ResponseBody
 	@PostMapping("updateReport")
-	public String updateReport(Model model, Integer reviewer, String reviewResult, Integer postNo, Integer replyNo,
-			String listname) {
+	public String updateReport(Model model, @RequestParam("reviewer") Integer reviewer,
+			@RequestParam("reviewResult") String reviewResult, @RequestParam("postNo") Integer postNo,
+			@RequestParam("replyNo") Integer replyNo, @RequestParam("listname") String listname) {
 
 		Map<String, String> message = new HashMap<String, String>();
 		Gson gson = new Gson();

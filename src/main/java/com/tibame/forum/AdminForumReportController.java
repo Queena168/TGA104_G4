@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tibame.forum_report.model.ForumReportService;
@@ -31,8 +32,10 @@ public class AdminForumReportController {
 			}
 		} catch (NullPointerException e) {
 			forumReportVOList = forumReportService.getAll();
-			listname = "all"; // 第一次進來無query string，設定listname = "all";
+			listname = "all";
 		}
+		// 從query string取得listname，決定要呼叫的方法
+		// 第一次進來無query string，catch NullPointerException，設定listname = "all";
 
 		model.addAttribute("forumReportVOList", forumReportVOList);
 		model.addAttribute("listname", listname);

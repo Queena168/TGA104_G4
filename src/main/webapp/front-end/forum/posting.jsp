@@ -141,7 +141,7 @@
 				<button type="button" class="new_post_btn" onclick="add()">送出</button>
 <!-- 				<input type="hidden" name="action" value="insert"> -->
 				<input type="hidden" name="topicNo" value="${param.topicNo}">
-				<input type="hidden" name="memberNo" value="${sessionScope.memberNo}">
+				<input type="hidden" name="memberNo" value="${memberVO.memberNo}">
 			</form>
 		</div>
 	</div>

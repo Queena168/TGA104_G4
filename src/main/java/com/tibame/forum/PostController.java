@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tibame.forum_post.model.ForumPostService;
@@ -15,6 +16,7 @@ import com.tibame.forum_topic.model.ForumTopicService;
 import com.tibame.forum_topic.model.ForumTopicVO;
 
 @Controller
+@RequestMapping("/front-end/forum/posts.do")
 public class PostController {
 
 	@Autowired
@@ -25,11 +27,11 @@ public class PostController {
 
 	@Autowired
 	ForumReplyService forumReplyService;
-	
+
 	@Autowired
 	ForumJedisService forumJedisService;
 
-	@RequestMapping("/front-end/forum/posts.do")
+	@GetMapping("")
 	public String handlerMethod(Model model, Integer postNo, Integer topicNo, Integer page) {
 
 		ForumPostVO forumPostVO = forumPostService.getPostByPostNo(postNo);
@@ -47,6 +49,7 @@ public class PostController {
 		forumJedisService.setZset(postNo.toString());
 		model.addAttribute("view", forumJedisService.getZset(postNo.toString()));
 		forumJedisService.close();
+		// 取得該篇文章存於Redis的瀏覽次數
 
 		// =====資料分頁=====
 		if (page == null) {

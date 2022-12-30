@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tibame.admin.model.AdminService;
@@ -13,12 +14,13 @@ import com.tibame.forum_topic.model.ForumTopicService;
 import com.tibame.forum_topic.model.ForumTopicVO;
 
 @Controller
+@RequestMapping("/back-end/forum/adminForumTopic.do")
 public class AdminForumTopicController {
 
 	@Autowired
 	ForumTopicService forumTopicService;
 
-	@RequestMapping("/back-end/forum/adminForumTopic.do")
+	@GetMapping("")
 	public String handlerMethod(Model model) {
 
 		List<ForumTopicVO> forumTopicVOList = forumTopicService.getAll();

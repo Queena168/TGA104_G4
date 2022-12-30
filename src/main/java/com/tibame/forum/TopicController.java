@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tibame.forum_post.model.ForumPostService;
 import com.tibame.forum_post.model.ForumPostVO;
@@ -17,6 +19,7 @@ import com.tibame.forum_topic.model.ForumTopicService;
 import com.tibame.forum_topic.model.ForumTopicVO;
 
 @Controller
+@RequestMapping("/front-end/forum/topic.do")
 public class TopicController {
 
 	@Autowired
@@ -27,12 +30,13 @@ public class TopicController {
 
 	@Autowired
 	ForumReplyService forumReplyService;
-	
+
 	@Autowired
 	ForumJedisService forumJedisService;
 
-	@RequestMapping("/front-end/forum/topic.do")
-	public String handlerMethod(Model model, Integer topicNo, Integer page) {
+	@GetMapping("")
+	public String handlerMethod(Model model, @RequestParam("topicNo") Integer topicNo,
+			@RequestParam("page") Integer page) {
 
 		ForumTopicVO forumTopicVO = forumTopicService.getTopicByTopicNo(topicNo);
 		model.addAttribute("forumTopicVO", forumTopicVO);
@@ -64,6 +68,7 @@ public class TopicController {
 		}
 		model.addAttribute("viewList", viewList);
 		forumJedisService.close();
+		// 取得存於Redis的各文章瀏覽次數
 
 		// =====資料分頁=====
 		if (page == null) {

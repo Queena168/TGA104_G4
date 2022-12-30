@@ -4,25 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.tibame.forum_topic.model.ForumTopicService;
 
-@Controller
+@RestController
 @RequestMapping("/back-end/forum")
 public class ForumTopicController {
 
 	@Autowired
 	ForumTopicService forumTopicService;
 
-	@ResponseBody
 	@PostMapping("/addTopic")
-	public String addTopic(Model model, String topicName, Integer adminNo) {
+	public String addTopic(Model model, @RequestParam("topicName") String topicName,
+			@RequestParam("adminNo") Integer adminNo) {
 
 		Map<String, String> message = new HashMap<String, String>();
 		Gson gson = new Gson();
@@ -41,9 +41,9 @@ public class ForumTopicController {
 		return gson.toJson(message);
 	}
 
-	@ResponseBody
 	@PostMapping("/updateTopic")
-	public String updateTopic(Model model, String topicName, Integer adminNo, Integer topicNo) {
+	public String updateTopic(Model model, @RequestParam("topicName") String topicName,
+			@RequestParam("adminNo") Integer adminNo, @RequestParam("topicNo") Integer topicNo) {
 
 		Map<String, String> message = new HashMap<String, String>();
 		Gson gson = new Gson();
