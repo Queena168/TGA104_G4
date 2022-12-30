@@ -26,9 +26,9 @@ public class UserJDBCDAO {
 	}
 	
 	private static final String GET_ONE_STMT =
-			"SELECT memberNo, memberName, memberEmail, memberPassword from User where memberEmail=? and memberPassword=?";
+			"SELECT memberNo, memberName, memberAccount, memberPassword from Member where memberAccount=? and memberPassword=?";
 	private static final String GET_MEMBER_STMT = 
-			"SELECT memberNo, memberName, email, password from User where memberNo = ?";
+			"SELECT memberNo, memberName, memberAccount, memberPassword from Member where memberNo = ?";
 	
 	public User findByPrimaryKey(Integer memberNo) {
 		User user = null;
@@ -41,8 +41,8 @@ public class UserJDBCDAO {
 					user = new User();
 					user.setUserNo(rs.getInt("memberNo"));
 					user.setName(rs.getString("memberName"));
-					user.setEmail(rs.getString("email"));
-					user.setPassword(rs.getString("password"));
+					user.setEmail(rs.getString("memberAccount"));
+					user.setPassword(rs.getString("memberPassword"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -63,7 +63,7 @@ public class UserJDBCDAO {
 					user = new User();
 					user.setUserNo(rs.getInt("memberNo"));
 					user.setName(rs.getString("memberName"));
-					user.setEmail(rs.getString("memberEmail"));
+					user.setEmail(rs.getString("memberAccount"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

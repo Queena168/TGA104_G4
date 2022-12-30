@@ -26,6 +26,14 @@ public class AddContract extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.getAttribute("designerOrderVO");
 		String action =  req.getParameter("action");
+		
+		
+		
+		/*
+		 * addContract.jsp點擊新增合約時，執行以下程式
+		 * 此不是新增資料進資料庫，而是導向要輸入資料的頁面
+		
+		 * */
 			
 		if("insertcontract".equals(action)) {
 			
@@ -36,13 +44,15 @@ public class AddContract extends HttpServlet {
 			} catch (Exception e) {
 				System.out.print("AddContract的designerOrderNo為空值");
 			}
-			
-			
-			//PrintWriter out = res.getWriter()n
+
 			DesignerOrderService designerOrderScv = new DesignerOrderService();
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
+			//DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
+			//List <DesignerOrderPhaseVO> designerOrderPhaselist  = designerOrderPhaseSvc.getOrderPhase(designerOrderNo);
+			//System.out.println("addcontract.java之designerOrderPhaselist內容"+designerOrderPhaselist.size());
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());
-			req.setAttribute("designerOrderVO", designerOrderVO);			
+			session.setAttribute("designerOrderVO", designerOrderVO);	
+			//session.setAttribute("designerOrderPhaselist", designerOrderPhaselist);
 		    String url = "/front-end/designer/addContract.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);
@@ -50,7 +60,11 @@ public class AddContract extends HttpServlet {
 		
 		
 		//================================================================
+		/*
+		 * addContract.jsp點擊修改合約時，執行以下程式
+		 * 此不是新增資料進資料庫，而是導向要輸入資料的頁面
 		
+		 * */
 		
 		
 		if("updatecontract".equals(action)) {
@@ -67,7 +81,7 @@ public class AddContract extends HttpServlet {
 
 			DesignerOrderService designerOrderScv = new DesignerOrderService();
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
-			req.setAttribute("designerOrderVO", designerOrderVO);			
+			session.setAttribute("designerOrderVO", designerOrderVO);			
 		    String url = "/front-end/designer/addContract.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);

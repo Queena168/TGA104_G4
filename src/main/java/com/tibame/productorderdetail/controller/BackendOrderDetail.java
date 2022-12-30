@@ -20,8 +20,8 @@ import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 @WebServlet("/BackendOrderDetail")
 public class BackendOrderDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ProductOrderJDBCDAO productOrderJDBCDAO;   
+//	@Autowired
+//	private ProductOrderJDBCDAO productOrderJDBCDAO;   
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("text/html; charset=utf-8");
@@ -29,7 +29,7 @@ public class BackendOrderDetail extends HttpServlet {
 		try(PrintWriter out = res.getWriter()){
 			Integer orderNo = Integer.valueOf(req.getParameter("productOrderNo"));
 			if(orderNo!=null) {
-//				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
+				ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
 				List<ProductOrderDetailVO> ordersDetail = productOrderJDBCDAO.findOrdersById(orderNo);
 				req.setAttribute("ordersDetail", ordersDetail);
 				req.getRequestDispatcher("back-end/productOrder/listProductOrderDetail.jsp").forward(req, res);

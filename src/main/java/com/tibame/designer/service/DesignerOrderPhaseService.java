@@ -15,13 +15,13 @@ public class DesignerOrderPhaseService {
 	}
 	
 	
-	public  DesignerOrderPhaseVO insertDesignerOrderPhase(Integer orderNo, Integer orderPhase, Integer amount, byte[] contractAtt) {
+	public  DesignerOrderPhaseVO insertDesignerOrderPhase(Integer orderNo, Integer totalOrderPhase, Integer totalamount) {
 
 		DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
 		designerOrderPhaseVO.setOrderNo(orderNo);
-		designerOrderPhaseVO.setOrderPhase(orderPhase);
-		designerOrderPhaseVO.setAmount(amount);
-		
+		designerOrderPhaseVO.setTotalOrderPhase(totalOrderPhase);
+		designerOrderPhaseVO.setTotalamount(totalamount);	
+		System.out.println("正要開始執行insert");
 		dao.insert(designerOrderPhaseVO);
 		return designerOrderPhaseVO;
 	}

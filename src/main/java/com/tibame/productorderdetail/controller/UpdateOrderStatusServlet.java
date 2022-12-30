@@ -20,8 +20,8 @@ import com.tibame.productorder.model.ProductOrderVO;
 @WebServlet("/UpdateOrderStatusServlet")
 public class UpdateOrderStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ProductOrderService productOrderService;	
+//	@Autowired
+//	private ProductOrderService productOrderService;	
        
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -35,7 +35,7 @@ public class UpdateOrderStatusServlet extends HttpServlet {
 			productOrderVO.setOrderNo(OrderNo);
 			productOrderVO.setOrderStatus(OrderStatus);
 			
-//			ProductOrderService productOrderService = new ProductOrderService();
+			ProductOrderService productOrderService = new ProductOrderService();
 			productOrderVO = productOrderService.updateOrderStatus(OrderNo, OrderStatus);
 		 	List<ProductOrderVO> list = productOrderService.getAll();
 		 	req.setAttribute("list", list);	

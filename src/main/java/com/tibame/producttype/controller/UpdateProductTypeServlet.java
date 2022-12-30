@@ -22,8 +22,8 @@ import com.tibame.producttype.model.ProductTypeVO;
 public class UpdateProductTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	@Autowired
-	private ProductTypeService productTypeSvc; 
+//	@Autowired
+//	private ProductTypeService productTypeSvc; 
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -38,7 +38,7 @@ public class UpdateProductTypeServlet extends HttpServlet {
 			Integer productTypeNo = Integer.valueOf(req.getParameter("productTypeNo"));
 
 			/*************************** 2.開始查詢資料 ****************************************/
-//			ProductTypeService productTypeSvc = new ProductTypeService();
+			ProductTypeService productTypeSvc = new ProductTypeService();
 			ProductTypeVO productTypeVO = productTypeSvc.getOneProductType(productTypeNo);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/

@@ -24,7 +24,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 		}
 	}
 
-	private static final String INSERT_DESIGNER_ORDER_PHASE = "insert into DesignerOrderPhase (orderNo,orderPhase,amount) values(?,?,?)";
+	private static final String INSERT_DESIGNER_ORDER_PHASE = "insert into DesignerOrderPhase (orderNo,totalOrderPhase,totalamount) values(?,?,?)";
 	private static final String GET_ORDER_PHASE = "select * from DesignerOrderPhase where orderNo=?";
 
 
@@ -37,11 +37,11 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_DESIGNER_ORDER_PHASE);
 			pstmt.setInt(1, designerOrderPhaseVO.getOrderNo());
-			pstmt.setInt(2, designerOrderPhaseVO.getOrderPhase());
-			pstmt.setInt(3, designerOrderPhaseVO.getAmount());
+			pstmt.setInt(2, designerOrderPhaseVO.getTotalOrderPhase());	
+			pstmt.setInt(3, designerOrderPhaseVO.getTotalamount());
 			pstmt.executeUpdate();
 
-			System.out.println("新增成功");
+			System.out.println("designerOrderPhase新增成功");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -190,11 +190,13 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 				designerOrderPhaseVO.setOrderPhase(rs.getInt("orderPhase"));
 				designerOrderPhaseVO.setAmount(rs.getInt("amount"));
 				designerOrderPhaseVO.setConstructionStatus(rs.getString("constructionStatus"));
-				designerOrderPhaseVO.setOrderPhaseDetail(rs.getString("orderPhaseDetail"));
 				designerOrderPhaseVO.setPaymentPhase(rs.getInt("paymentPhase"));
 				designerOrderPhaseVO.setPaymentStatus(rs.getString("paymentStatus"));
 				designerOrderPhaseVO.setPaymentAtt(rs.getBytes("paymentAtt"));
 				designerOrderPhaseVO.setModificationTime(rs.getDate("modificationTime"));
+				designerOrderPhaseVO.setTotalamount(rs.getInt("totalOrderPhase"));
+				designerOrderPhaseVO.setTotalamount(rs.getInt("totalamount"));
+				
 				list.add(designerOrderPhaseVO);
 			}
 

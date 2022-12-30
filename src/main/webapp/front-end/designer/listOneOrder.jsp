@@ -3,11 +3,6 @@
 <%@ page import="com.tibame.designer.model.*" %>
 
 
-<%
-  DesignerVO designerVO=(DesignerVO) session.getAttribute("designerVO");
-  DesignerOrderVO designerOrderVO = (DesignerOrderVO) request.getAttribute("designerOrderVO"); //DesignerServlet.java(Concroller), 存入req的empVO物件
-%>
-
 
 <html>
 <head>
@@ -140,6 +135,17 @@ margin-left: 200px;
 
 }
 
+#btn1{
+float:left;
+width: 100px;
+margin-left: 450px;
+}
+
+#btn2{
+float:left;
+width: 100px;
+margin-left: 20px;
+}
 </style>
 
 
@@ -177,11 +183,16 @@ margin-left: 200px;
   }
   
   
-    .logintitle{
+.logintitle{
   position: absolute;
   width:100px;
   right: 180px;
-  }
+}
+  
+#block2{
+  margin-left: 50px;
+}
+  
 </style>
 
 </head>
@@ -250,36 +261,105 @@ margin-left: 200px;
 <table>
 
 	
-		<tr><th>案件編號:</th><td>${designerOrderVO.orderNo}</td></tr>
-		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
+		<tr><th>案件編號</th><td>${designerOrderVO.orderNo}</td></tr>
+		<tr><th>客戶</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr>
 		<tr><th>諮詢預算</th><td>${designerOrderVO.inquiryBudget}元</td></tr>
 		<tr><th>諮詢坪數</th><td>${designerOrderVO.inquirySize}坪</td></tr>
 		<tr><th>諮詢內容</th><td>${designerOrderVO.inquiryDetail}</td></tr>
 	    <tr><th>報價金額</th><td>${designerOrderVO.quotationAmount}元</td></tr>
 		<tr><th>報價內容</th><td>${designerOrderVO.quotationDetail}</td></tr>
-		<tr><th>報價時間</th><td>${designerOrderVO.quotationSendTime}</td> </tr>
-		<tr><th>報價是否同意</th><td>${designerOrderVO.quotationStatus}</td> </tr>	
-		<tr><th>報價同意時間</th><td>${designerOrderVO.quotationApprovalTime}</td></tr>
-		<tr><th>合約是否同意</th><td>${designerOrderVO.contractStatus}</td></tr>	
-		<tr><th>合約同意時間</th><td>${designerOrderVO.contractApprovalTime}</td></tr>
-		<tr><th>合約內容</th><td>${designerOrderVO.contractDetail}</td></tr>
+		<tr>
+		<th>報價附件</th>
+		<c:choose>
+		   <c:when test="${designerOrderVO.quotationAtt!=null}">
+		     <td><a href="#" onclick="window.open(
+	    '<%=request.getContextPath()%>/Quotationinfo?orderNo=${designerOrderVO.orderNo}'
+	    , '_blank').focus();">下載報價單</a></td>
+		   </c:when>
+		   <c:when test="${designerOrderVO.quotationAtt==null}">
+		   <td>無附件</td>
+		   </c:when>
+		</c:choose>
+		</tr>
+	<!--  	<tr><th>報價時間</th><td>${designerOrderVO.quotationSendTime}</td> </tr>-->
+	<!--	<tr><th>報價是否同意</th><td>${designerOrderVO.quotationStatus}</td> </tr>	-->
+	<!--	<tr><th>報價同意時間</th><td>${designerOrderVO.quotationApprovalTime}</td></tr>-->
+	<!--	<tr><th>合約是否同意</th><td>${designerOrderVO.contractStatus}</td></tr>	-->
+	<!--	<tr><th>合約同意時間</th><td>${designerOrderVO.contractApprovalTime}</td></tr-->
+	<c:forEach var="designerOrderPhaseVO" items="${list}">
+		<tr><th>合約期數</th><td>${designerOrderPhaseVO.orderPhase}</td></tr>
+    </c:forEach>
+		<tr>
+		   <th>合約內容</th>
+		   <td>${designerOrderVO.contractDetail}</td></tr>
+	    <tr>
+		<th>合約附件</th>
+		<c:choose>
+		   <c:when test="${designerOrderVO.contractAtt!=null}">
+		      <td><a href="#" onclick="window.open(
+	    '<%=request.getContextPath()%>/Contractinfo?orderNo=${designerOrderVO.orderNo}'
+	    , '_blank').focus();">下載合約</a></td>
+		   </c:when>
+		   <c:when test="${designerOrderVO.contractAtt==null}">
+		   <td>無附件</td>
+		   </c:when>
+		</c:choose>
+		</tr>
+	<!--  	<c:forEach var="designerOrderPhaseVO" items="${list}">
+		<tr><th>裝潢進度</th><td>${designerOrderPhaseVO.constructionStatus}</td></tr>
+		</c:forEach>
+		<c:forEach var="designerOrderPhaseVO" items="${list}">
+		<tr><th>付款進度</th><td>${designerOrderPhaseVO.paymentStatus}</td></tr>
+		</c:forEach>-->
+		
+		
+		
 		
 		<tr>
 		   <th>是否結案</th>
 		      <td> 
 		          <c:choose>
 				       <c:when test="${designerOrderVO.finishStatus==true}">
-				           是
+				           已結案
 				       </c:when>
 				  <c:when test="${designerOrderVO.finishStatus==false}">
-				           否
+				           未結案
 				  </c:when>
 		          </c:choose>	
 		      </td>
 		</tr>
 
 </table>
+     <div id="block2"> 
+           <div id="btn1">
+          <form method="get" action="seeOrderPayment">
+              <input type="hidden" value="${designerOrderVO.contractStatus}"> 
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
+              <input id="btn2" type="submit" value="查看進度"  style="display: inline-block;">
+          </form>           
+          </div>
+          <div id="btn2">
+          <form action="FinishedDesignerOrder">
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
+              <input id="btn" type="submit" value="結案"  style="display: inline-block;">   
+           </form>
+           </div>
+             <div>
+              <input type ="button" onclick="history.back()" value="回上一頁" > 
+              </div> 
+        
+     </div> 
+
 </div>
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/designer/js/btnscontrolorder.js"></script>
+<script type="text/javascript">
+var type2 = '${designerOrderVO.contractStatus}';
+var type = '${designerOrderVO.finishStatus}';
+DisplayAndHiddenBtn2("btn2",type2);
+DisplayAndHiddenBtn("btn",type);
+</script>
+
 </body>
 </html>

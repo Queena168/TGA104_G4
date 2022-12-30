@@ -17,8 +17,7 @@ import com.tibame.productorder.model.ProductOrderService;
 import com.tibame.productorder.model.ProductOrderVO;
 
 
-
-@WebServlet("/back-end/productOrder/BackendSelectAllOrder")
+@WebServlet("/BackendSelectAllOrder")
 public class BackendSelectAllOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 //	@Autowired

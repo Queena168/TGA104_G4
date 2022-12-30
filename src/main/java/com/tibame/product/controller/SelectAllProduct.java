@@ -19,13 +19,13 @@ import com.tibame.product.model.ProductVO;
 @WebServlet("/SelectAllProduct")
 public class SelectAllProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	ProductService productService;
+//	@Autowired
+//	ProductService productService;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-//		ProductService productService = new ProductService();
+		ProductService productService = new ProductService();
 		List<ProductVO> list = productService.getAll();
 		
 		req.setAttribute("list", list);

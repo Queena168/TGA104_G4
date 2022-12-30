@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.annotation.Order;
+
 import com.tibame.admin.model.AdminVO;
 
-
-@WebFilter("/AdminPrivilegeUpdateFilter")
+@Order(value = 2)
+@WebFilter(filterName = "AdminPrivilegeUpdateFilter", urlPatterns = {"/back-end/admin/AdminServlet"})
 public class AdminPrivilegeUpdateFilter implements Filter {
        
 	private FilterConfig config;

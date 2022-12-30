@@ -41,6 +41,11 @@ NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.TAIWAN);
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 	rel='stylesheet'>
+<style>
+td {
+	vertical-align: middle;
+}
+</style>
 </head>
 
 <body>
@@ -687,10 +692,21 @@ NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.TAIWAN);
 													<div class="row mb-3">
 														<label class="col-sm-2 col-form-label"
 															for="basic-default-name">報價單附檔</label>
-														<div class="col-sm-10">
-															<input type="text" class="form-control" readonly
+														<div class="col-sm-10" style="line-height: 38px">
+															<c:choose>
+																<c:when test="${findDesignerOrder.quotationAtt!=null}">
+																	<span> <a href="#" class="btn add-to-cart-btn"
+																		onclick="window.open(
+	    																'<%=request.getContextPath()%>/Quotationinfo?orderNo=${findDesignerOrder.orderNo}'
+	    																, '_blank').focus();">預覽報價單</a></span>
+																</c:when>
+																<c:when test="${findDesignerOrder.quotationAtt==null}">
+																	無報價附件
+																</c:when>
+															</c:choose>
+															<input type="hidden" class="form-control"
 																name="quotationAtt" id="basic-default-name"
-																placeholder="報價單附檔" />
+																value="${findDesignerOrder.quotationAtt}" />
 														</div>
 													</div>
 													<div class="row mb-3">
@@ -761,9 +777,21 @@ NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.TAIWAN);
 													</div>
 													<div class="row mb-3">
 														<label class="col-sm-2 col-form-label" for="contractAtt">合約附檔</label>
-														<div class="col-sm-10">
-															<input type="text" class="form-control" readonly
-																id="contractAtt" placeholder="合約附檔" />
+														<div class="col-sm-10" style="line-height: 38px">
+															<c:choose>
+																<c:when test="${findDesignerOrder.contractAtt!=null}">
+																	<span> <a href="#" class="btn add-to-cart-btn"
+																		onclick="window.open(
+	    																'<%=request.getContextPath()%>/Quotationinfo?orderNo=${findDesignerOrder.orderNo}'
+	    																, '_blank').focus();">預覽合約</a></span>
+																</c:when>
+																<c:when test="${findDesignerOrder.contractAtt==null}">
+																	無合約附件
+																</c:when>
+															</c:choose>
+															<input type="hidden" class="form-control"
+																name="contractAtt" id="basic-default-name"
+																value="${findDesignerOrder.contractAtt}" />
 														</div>
 													</div>
 													<div class="row mb-3">
@@ -830,77 +858,42 @@ NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.TAIWAN);
 																		<th>施工圖片</th>
 																		<th>付款狀態</th>
 																		<th>上傳付款證明</th>
+																		<th></th>
 																	</tr>
 																</thead>
 																<tbody class="table-border-bottom-0">
-																	<c:forEach var="designerOrderList" items="${designerOrderList}">
+																	<c:forEach var="designerOrderList"
+																		items="${designerOrderList}">
 																		<tr>
-																			<td><strong>${designerOrderList.orderPhase}</strong></td>
-																			<td>${designerOrderList.amount}</td>
-																			<td>${designerOrderList.constructionStatus}</td>
-																			<td><%-- <img
+																			<td style="vertical-align: middle;"><strong>${designerOrderList.orderPhase}</strong></td>
+																			<fmt:setLocale value="zh_TW" />
+																			<td style="vertical-align: middle;"><fmt:formatNumber
+																				value="${designerOrderList.amount}"
+																				type="currency" maxFractionDigits="0" /></td>
+																			<td style="vertical-align: middle;">${designerOrderList.constructionStatus}</td>
+																			<td style="vertical-align: middle;">
+																				<%-- <img
 																				src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoList.adminNo}"
-																				alt class="avatar w-px-40 rounded-circle" /> --%>施工圖片</td>
-																			<td>${designerOrderList.paymentStatus}</td>
-																			<td>上傳付款證明</td>
+																				alt class="avatar w-px-40 rounded-circle" /> --%>施工圖片
+																			</td>
+																			<td style="vertical-align: middle;">${designerOrderList.paymentStatus}</td>
+																			<td style="vertical-align: middle;"><input
+																				type="file" name="upfilequotation" id="fileinp"></td>
+																			<td style="vertical-align: middle;"><label
+																				class="btn btn-primary" tabindex="0"> <span
+																					class="d-none d-sm-block">上傳</span> <i
+																					class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+																					<%-- <input type="submit" class="account-file-input"
+																					hidden /> <input type="hidden" name="phaseNo"
+																					value="${desOrderList.phaseNo}"> <input
+																					type="hidden" name="action" value="desOrder_GetOne"> --%>
+																			</label></td>
 																		</tr>
 																	</c:forEach>
 																</tbody>
 															</table>
 														</div>
 													</div>
-													<%-- <div class="row mb-3">
-														<label class="col-sm-2 col-form-label"
-															for="contractDetail">合約內容</label>
-														<div class="col-sm-10">
-															<textarea id="contractDetail" class="form-control"
-																readonly aria-describedby="basic-icon-default-message2">${findDesignerOrder.contractDetail}</textarea>
-														</div>
-													</div>
-													<div class="row mb-3">
-														<label class="col-sm-2 col-form-label" for="contractAtt">合約附檔</label>
-														<div class="col-sm-10">
-															<input type="text" class="form-control" readonly
-																id="contractAtt" placeholder="合約附檔" />
-														</div>
-													</div>
-													<div class="row mb-3">
-														<label class="col-sm-2 col-form-label" for="contractNote">合約備註</label>
-														<div class="col-sm-10">
-															<textarea id="contractNote" class="form-control"
-																name="contractNote" readonly
-																aria-describedby="basic-icon-default-message2">${findDesignerOrder.contractNote}</textarea>
-														</div>
-													</div>
-													<div class="row mb-3">
-														<label class="col-sm-2 col-form-label"
-															for="contractStatus">合約狀態</label>
-														<div class="col-sm-10">
-															<input type="text" class="form-control"
-																name="contractStatus" readonly id="contractStatus"
-																value="${findDesignerOrder.contractStatus}" />
-														</div>
-													</div>
-													<div class="row mb-3">
-														<label class="col-sm-2 col-form-label"
-															for="contractApprovalTime">合約成立時間</label>
-														<div class="col-sm-10 col-form-label">
-															${findDesignerOrder.contractApprovalTime}</div>
-													</div> --%>
-													<%-- <div class="row justify-content-end custom-form__btn">
-														<div>
-															<button type="submit" class="btn btn-primary"
-																style="margin-right: 10px;" name="action"
-																value="confirmedContract">確認合約</button>
-															<input type="hidden" name="orderNo"
-																value="${findDesignerOrder.designerNo}"> <input
-																type="hidden" name="memberNo"
-																value="${findDesignerOrder.memberNo}">
-															<button type="submit" class="btn btn-close"
-																style="margin-right: 10px;" name="action"
-																value="rejectContract">退回合約</button>
-														</div>
-													</div> --%>
 												</c:otherwise>
 											</c:choose>
 											<!-- /工程進度 -->

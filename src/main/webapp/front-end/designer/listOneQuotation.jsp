@@ -3,10 +3,6 @@
 <%@ page import="com.tibame.designer.model.*" %>
 
 
-<%
-  DesignerVO designerVO=(DesignerVO) session.getAttribute("designerVO");
-  DesignerOrderVO designerOrderVO = (DesignerOrderVO) request.getAttribute("designerOrderVO"); //DesignerServlet.java(Concroller), 存入req的empVO物件
-%>
 
 
 <html>
@@ -256,8 +252,8 @@ margin-left: 200px;
 <form method="post" action="AddQuotation" >
 <table>
 
-		<tr><th>案件編號:</th><td>${designerOrderVO.orderNo}</td></tr>
-		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
+		<tr><th>案件編號</th><td>${designerOrderVO.orderNo}</td></tr>
+		<tr><th>客戶</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr>
 		<tr><th>諮詢預算</th><td>${designerOrderVO.inquiryBudget}元</td></tr>
 		<tr><th>諮詢坪數</th><td>${designerOrderVO.inquirySize}坪</td></tr>
@@ -276,6 +272,18 @@ margin-left: 200px;
 	      </c:choose>
 	   
 	    
+	    </tr>
+	    <tr><th>報價附件</th>
+	     <c:choose>
+	     <c:when test="${designerOrderVO.quotationAtt!=null}">
+	    <td><a href="#" onclick="window.open(
+	    '<%=request.getContextPath()%>/Quotationinfo?orderNo=${designerOrderVO.orderNo}'
+	    , '_blank').focus();">預覽報價單</a></td>
+	    </c:when>
+	    <c:when test="${designerOrderVO.quotationAtt==null}">
+	    <td>無報價附件</td>
+	    </c:when>
+	    </c:choose>
 	    </tr>
 		<tr><th>報價內容</th><td>${designerOrderVO.quotationDetail}</td></tr>
 	    <tr><th>報價同意時間</th><td>${designerOrderVO.quotationApprovalTime}</td></tr>
@@ -302,32 +310,12 @@ margin-left: 200px;
 </form>
 </div>
 
-   
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/designer/js/btnscontrolquotation.js"></script>   
 <script type="text/javascript">
-
-function DisplayAndHiddenBtn(btnName, type) {
-   var currentinputbutton = document.getElementById(btnName);
-   if (type == '未報價') {
-	   //currentinputbutton.style.display = "inline-block"; //style中的display且橫向排列属性
-	   document.getElementById("showorhidden2").style.display = "none";
-   }else if(type == '退回報價'){
-	   document.getElementById("showorhidden1").style.display = "none";
-	   
-   }else{
-	   currentinputbutton.style.display = "none"; 
-   }
-	 
-}
-
-
+var type = '${designerOrderVO.quotationStatus}';
+DisplayAndHiddenBtn("showorhidden1", type);
+DisplayAndHiddenBtn("showorhidden2", type);
 </script>
 
-
-      <script> 
-              var type='${designerOrderVO.quotationStatus}';
-	          DisplayAndHiddenBtn("showorhidden1",type);
-	          DisplayAndHiddenBtn("showorhidden2",type);
-	  </script>
 </body>
 </html>
