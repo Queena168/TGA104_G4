@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tibame.cart.model.User;
+import com.tibame.member.model.MemberVO;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
 
 
@@ -22,7 +23,7 @@ public class ShowFinalDetail extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		//先確認是否已登入
-		User auth = (User)req.getSession().getAttribute("auth");
+		MemberVO auth = (MemberVO)req.getSession().getAttribute("memberVO");
 		List<ProductOrderDetailVO> orders = (List<ProductOrderDetailVO>)req.getAttribute("ordersDetail");
 		if(auth!=null){
 			req.setAttribute("auth", auth);

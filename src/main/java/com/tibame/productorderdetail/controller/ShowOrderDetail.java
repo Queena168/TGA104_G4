@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
-
 import com.tibame.cart.model.Cart;
 import com.tibame.cart.model.ShopProductService;
 import com.tibame.cart.model.User;
+import com.tibame.member.model.MemberVO;
 import com.tibame.productorder.model.ProductOrderJDBCDAO;
 import com.tibame.productorder.model.ProductOrderVO;
 
@@ -35,12 +31,15 @@ public class ShowOrderDetail extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		// 先確認是否已登入
-		User auth = (User) req.getSession().getAttribute("auth");
+//		User auth = (User) req.getSession().getAttribute("auth");
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 		List<ProductOrderVO> orders = null;
-		if (auth != null) {
-			req.setAttribute("auth", auth);
+		if (memberVO != null) {
+			Integer memberNo = memberVO.getMemberNo();
+			
 			ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
-			orders = productOrderJDBCDAO.userOrders(auth.getUserNo());
+			orders = productOrderJDBCDAO.userOrders(memberNo);
 		} else {
 //			res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/login.jsp");
 			String url = "/front-end/cart/login.jsp";
@@ -50,7 +49,7 @@ public class ShowOrderDetail extends HttpServlet {
 		}
 
 		Cart cart = (Cart) req.getAttribute("cart");
-		HttpSession session = req.getSession();
+		session = req.getSession();
 		ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart_list");
 		List<Cart> cartProduct = null;
 		ShopProductService shopProductService = new ShopProductService();

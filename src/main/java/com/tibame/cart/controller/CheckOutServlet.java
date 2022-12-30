@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tibame.cart.model.Cart;
 import com.tibame.cart.model.ShopProductService;
 import com.tibame.cart.model.User;
+import com.tibame.member.model.MemberVO;
 import com.tibame.productorder.model.ProductOrderJDBCDAO;
 import com.tibame.productorder.model.ProductOrderVO;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
@@ -159,7 +160,7 @@ public class CheckOutServlet extends HttpServlet {
 //		String number = Integer.toString((int)(Math.random()*10000 + 100));
 //		String orderNo = so.concat(number);
 		HttpSession session = req.getSession();
-		User auth = (User) req.getSession().getAttribute("auth");
+		MemberVO auth = (MemberVO) session.getAttribute("memberVO");
 		if (auth == null) {
 			res.sendRedirect("/front-end/cart/login.jsp"); // login.jsp
 			return;
@@ -181,7 +182,7 @@ public class CheckOutServlet extends HttpServlet {
 		String orderStatus = "未發貨";
 		productOrderVO.setTotalQTY(QTY);
 		productOrderVO.setTotalAmount(price);
-		productOrderVO.setMemberNo(auth.getUserNo());
+		productOrderVO.setMemberNo(auth.getMemberNo());
 //		productOrderVO.setPaidDate(formatter.format(date));
 		productOrderVO.setPaidDate(Date);
 		productOrderVO.setReceiverName(receiverName);

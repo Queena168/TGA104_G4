@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.tibame.member.model.MemberVO;
+
 
 public class UserJDBCDAO {
 	private static DataSource dataSource = null;
@@ -50,8 +52,8 @@ public class UserJDBCDAO {
 		    return user;
 	}
 	
-	public User userLogin(String email, String password) {
-		User user = null;
+	public MemberVO userLogin(String email, String password) {
+		MemberVO user = null;
 		
 		
 		try (Connection connection = dataSource.getConnection();
@@ -60,10 +62,10 @@ public class UserJDBCDAO {
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 				while (rs.next()) {
-					user = new User();
-					user.setUserNo(rs.getInt("memberNo"));
-					user.setName(rs.getString("memberName"));
-					user.setEmail(rs.getString("memberAccount"));
+					user = new MemberVO();
+					user.setMemberNo(rs.getInt("memberNo")); 
+					user.setMemberName(rs.getString("memberName"));
+					user.setMemberAccount(rs.getString("memberAccount"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

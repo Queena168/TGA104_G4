@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.tibame.cart.model.ShopProductService;
 import com.tibame.cart.model.User;
+import com.tibame.member.model.MemberVO;
 import com.tibame.productorder.model.ProductOrderJDBCDAO;
 import com.tibame.productorder.model.ProductOrderVO;
 import com.tibame.productorderdetail.model.ProductOrderDetailVO;
@@ -32,12 +33,12 @@ public class SelectOrder extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		User auth = (User)req.getSession().getAttribute("auth");
+		MemberVO auth = (MemberVO)req.getSession().getAttribute("memberVO");
 		List<ProductOrderVO> orders = null;
 		if(auth!=null){
 			req.setAttribute("auth", auth);
 			ProductOrderJDBCDAO productOrderJDBCDAO = new ProductOrderJDBCDAO();
-			   orders = productOrderJDBCDAO.userOrders(auth.getUserNo());
+			   orders = productOrderJDBCDAO.userOrders(auth.getMemberNo());
 			   req.setAttribute("orders", orders);
 			   String url = "/front-end/order/order.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁

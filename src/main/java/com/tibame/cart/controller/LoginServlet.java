@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 			String password = req.getParameter("login-password"); // from login.jsp name=login-password
 
 			UserJDBCDAO userJDBCDAO = new UserJDBCDAO();
-			User user = userJDBCDAO.userLogin(email, password);
+			MemberVO user = userJDBCDAO.userLogin(email, password);
 		    
 //			MemberDAO memberDAO = new MemberDAO();
 //			MemberVO memberVO  = memberDAO.memberLogin(memberVO);
@@ -74,9 +74,11 @@ public class LoginServlet extends HttpServlet {
 				ShopProductService shopProductService = new ShopProductService();
 				cartProduct = shopProductService.getCartProducts(cart_list);
 				req.setAttribute("cart_list", cart_list);
-
+				
 				Integer total = shopProductService.getTotalCartPrice(cart_list);
 				req.setAttribute("total", total);
+				session.setAttribute("memberVO", user);
+				
 				String url = "/ShowOrderDetail";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
 				successView.forward(req, res);
@@ -85,15 +87,15 @@ public class LoginServlet extends HttpServlet {
 			}
 
 			// 消費者登入
-			if (user != null) {
-				req.getSession().setAttribute("auth", user);
-//				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp 登入後導到購物區
-				String url = "/ShowOrderDetail";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-			} else {
-				out.println("user login failed");
-			}
+//			if (user != null) {
+//				req.getSession().setAttribute("auth", user);
+////				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp 登入後導到購物區
+//				String url = "/ShowOrderDetail";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				successView.forward(req, res);
+//			} else {
+//				out.println("user login failed");
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
