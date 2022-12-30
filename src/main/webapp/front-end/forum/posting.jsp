@@ -40,87 +40,88 @@
 </head>
 
 <body>
-	<!-- main header navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">
-				<img src="../images/MatDesignLogo.png" alt="">
-			</a>
-			<!--  navbar actions -->
-			<div class="main-navbar-action">
-				<div id="mainNavbarDropdown">
-					<!-- navbar user account dropdown -->
-					<div class="dropdown-wrapper" id="usermenu" data-collapse="false">
-						<div class="account-wrapper">
-							<!-- login form wrapper -->
+<!-- main header navbar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">    
+            <img src="../images/MatDesignLogo.png" alt="">
+        </a>
+        <!--  navbar actions -->
+        <div class="main-navbar-action">
+            <div id="mainNavbarDropdown">
+                <!-- navbar user account dropdown -->
+                <div class="dropdown-wrapper" id="usermenu" data-collapse="false">
+                    <div class="account-wrapper">
+                        <!-- login form wrapper -->
+                        
+                        <div class="account-wrapper__content">
+                            <form class="custom-form">
+                                <div class="custom-form__btn">
+                                    <a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
+                                    <a class="dropdown-item nav-link" href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <!-- account links when user is logged in-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
+                        <!--                            class="icon-user-profile"></i></span>Profile</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
+                        <!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
+                        <!--                            class="icon-sign"></i></span>Addresses</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
+                        <!--                            class="icon-wish-list"></i></span>wishlist</a>-->
+                        <!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
 
-							<div class="account-wrapper__content">
-								<form class="custom-form">
-									<div class="custom-form__btn">
-										<a href="login.html">
-											<button type="button" class="btn submit-btn">登入/註冊</button>
-									</div>
-
-								</form>
-							</div>
-							<!-- account links when user is logged in-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
-							<!--                            class="icon-user-profile"></i></span>Profile</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
-							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
-							<!--                            class="icon-sign"></i></span>Addresses</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
-							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
-							<!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
-
-						</div>
-					</div>
-					<!-- navbar cart dropdown -->
-					<div class="" id="cartmenu" data-collapse="false"></div>
-				</div>
-				<!-- navbar user account icon -->
-				<div class="main-navbar-action__btn nav-dropdown">
-					<a class="dropdown-link" data-target="usermenu">
-						<i class="icon-user"></i>
-					</a>
-				</div>
-				<!-- navbar cart icon -->
-				<div class="main-navbar-action__btn nav-dropdown">
-					<a class="dropdown-link" data-target="cartmenu">
-						<span class="cart-badge">2</span>
-						<i class="icon-shopping-bag"></i>
-					</a>
-				</div>
-				<!-- navbar actions content -->
-			</div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
-				aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-			<div class="collapse navbar-collapse" id="mainNavbar">
-				<ul class="navbar-nav main-navbar">
-					<li class="nav-item main-navbar__item dropdown">
-						<a class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
-					</li>
-					<li class="nav-item main-navbar__item dropdown">
-						<a class="nav-link " href="#">找設計師</a>
-					</li>
-					<li class="nav-item main-navbar__item dropdown">
-						<a class="nav-link " href="./product/productListAll.html">商城</a>
-					</li>
-					<li class="nav-item main-navbar__item dropdown">
-						<a class="nav-link " href="forumIndex.do">論壇</a>
-					</li>
-					<!-- <li class="nav-item main-navbar__item dropdown">
-                        <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
-                    </li> -->
-					<li class="nav-item main-navbar__item">
-						<a class="nav-link" href="contact.html">關於我們</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- end main header navbar -->
+                    </div>
+                </div>
+                <!-- navbar cart dropdown -->
+                <div class="" id="cartmenu" data-collapse="false"></div>
+            </div>
+            <!-- navbar user account icon -->
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="usermenu">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+            <!-- navbar cart icon -->
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="cartmenu">
+                    <span class="cart-badge">2</span>
+                    <i class="icon-shopping-bag"></i>
+                </a>
+            </div>
+            <!-- navbar actions content -->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+                aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+       <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav main-navbar">
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="${pageContext.request.contextPath}/front-end/designer_protfolio/memFindPortfolio.jsp" >找作品</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="${pageContext.request.contextPath}/ShowDesignerPage" >找設計師</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="${pageContext.request.contextPath}/ShowShop" >商城</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="${pageContext.request.contextPath}/front-end/forum/forumIndex.do" >論壇</a>
+                </li>
+                <!-- <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
+                </li> -->
+                <li class="nav-item main-navbar__item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/front-end/contact.html">關於我們</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end main header navbar -->
 
 	<!-- Posting Start -->
 	<div class="forum_container">

@@ -1,6 +1,6 @@
 //foorumIndex.jsp search button
 function search() {
-	if (document.querySelector("#keyword").value == "") {
+	if (document.querySelector("#keyword").value.trim() == "") {
 		alert("請輸入文字");
 	} else {
 		document.querySelector("#search_form").submit();

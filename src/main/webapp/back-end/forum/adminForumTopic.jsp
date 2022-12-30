@@ -51,183 +51,170 @@
 </head>
 
 <body>
-  <!-- Layout wrapper -->
-  <div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-      <!-- Menu -->
+ <!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
 
-      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-        <div class="app-brand demo">
-          <a href="../index.html" class="app-brand-link">
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
-          </a>
+			<aside id="layout-menu"
+				class="layout-menu menu-vertical menu bg-menu-theme">
+				<div class="app-brand demo">
+					<a href="index.jsp" class="app-brand-link"> <span
+						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
+					</a> <a href="javascript:void(0);"
+						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+						<i class="bx bx-chevron-left bx-sm align-middle"></i>
+					</a>
+				</div>
 
-          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-            <i class="bx bx-chevron-left bx-sm align-middle"></i>
-          </a>
-        </div>
+				<div class="menu-inner-shadow"></div>
 
-        <div class="menu-inner-shadow"></div>
+				<ul class="menu-inner py-1">
 
-        <ul class="menu-inner py-1">
+					<!-- Member會員管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-regular fa-user "></i>
+							<div data-i18n="Member">會員管理</div>
+					</a>
 
-          <!-- Member會員管理 -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons fa-regular fa-user "></i>
-              <div data-i18n="Member">會員管理</div>
-            </a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../member/listAllMember.jsp" class="menu-link">
+									<div data-i18n="">會員資料管理</div>
+							</a></li>
+						</ul></li>
 
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../member/Admin-Member-MemberInfo.html" class="menu-link">
-                  <div data-i18n="">會員資料管理</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+					<!-- Designer設計師管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-solid fa-user"></i>
+							<div data-i18n="Designer">設計師管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../designer/Admin-Design-DesignerInfo.html"
+								class="menu-link">
+									<div data-i18n="">設計師資料管理</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
+									<div data-i18n="">作品管理</div>
+							</a></li>
+						</ul></li>
 
-          <!-- Designer設計師管理 -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons fa-solid fa-user"></i>
-              <div data-i18n="Designer">設計師管理</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../designer/Admin-Design-DesignerInfo.html" class="menu-link">
-                  <div data-i18n="">設計師資料管理</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../designer/Admin-Design-Portfolio.html" class="menu-link">
-                  <div data-i18n="">作品管理</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+					<!-- Designer_Order設計師訂單管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-regular fa-file"></i>
+							<div data-i18n="Designer_Order">合約案件管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../order/Admin-Order-OrderList.html" class="menu-link">
+									<div data-i18n="">合約案件列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../order/Admin-Order-OrderListDetail.html"
+								class="menu-link" target="_blank">
+									<div data-i18n="">合約案件明細</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../order/Admin-Order-ReviewList.html" class="menu-link"
+								target="_blank">
+									<div data-i18n="">評價列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../order/Admin-Order-OrderReportCheck.html"
+								class="menu-link" target="_blank">
+									<div data-i18n="">評價檢舉查核</div>
+							</a></li>
+						</ul></li>
 
-          <!-- Designer_Order設計師訂單管理 -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons fa-regular fa-file"></i>
-              <div data-i18n="Designer_Order">合約案件管理</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../order/Admin-Order-OrderList.html" class="menu-link">
-                  <div data-i18n="">合約案件列表</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../order/Admin-Order-OrderListDetail.html" class="menu-link">
-                  <div data-i18n="">合約案件明細</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../order/Admin-Order-ReviewList.html" class="menu-link">
-                  <div data-i18n="">評價列表</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../order/Admin-Order-OrderReportCheck.html" class="menu-link">
-                  <div data-i18n="">評價檢舉查核</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+					<!-- Forum論壇管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-regular fa-pen-to-square"></i>
+							<div data-i18n="Forum">論壇管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../forum/adminForumTopic.do" class="menu-link">
+									<div data-i18n="">論壇維護</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../forum/adminForumAll.do" class="menu-link">
+									<div data-i18n="">文章列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../forum/adminForumReport.do"
+								class="menu-link">
+									<div data-i18n="">檢舉查核</div>
+							</a></li>
+						</ul></li>
 
-          <!-- Forum論壇管理 -->
-          <li class="menu-item active open">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons fa-regular fa-pen-to-square"></i>
-              <div data-i18n="Forum">論壇管理</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item active">
-                <a href="adminForumTopic.do" class="menu-link">
-                  <div data-i18n="">論壇維護</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="adminForumAll.do" class="menu-link">
-                  <div data-i18n="">文章列表</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="adminForumReport.do" class="menu-link">
-                  <div data-i18n="">檢舉查核</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+					<!-- Product商品管理 -->
+					<li class="menu-item"><a href="javascript:void(0)"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons bx bx-shopping-bag"></i>
+							<div data-i18n="Product">商品管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="${pageContext.request.contextPath}/SelectAll"
+								class="menu-link">
+									<div data-i18n="">商品列表</div>
+							</a></li>
+							<!-- <li class="menu-item"><a
+								href="../product/Admin-Product-ProductType.html"
+								class="menu-link">
+									<div data-i18n="">商品類別</div>
+							</a></li> -->
+							<li class="menu-item"><a
+								href="${pageContext.request.contextPath}/BackendSelectAllOrder"
+								class="menu-link">
+									<div data-i18n="">商品訂單管理</div>
+							</a></li>
+						</ul></li>
 
-          <!-- Product商品管理 -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
-              <div data-i18n="Product">商品管理</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../product/Admin-Product-ProductList.html" class="menu-link">
-                  <div data-i18n="">商品列表</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../product/Admin-Product-ProductType.html" class="menu-link">
-                  <div data-i18n="">商品類別</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../product/Admin-Product-ProductOrderList.html" class="menu-link">
-                  <div data-i18n="">商品訂單管理</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+					<!-- Article報導文章管理 -->
+					<li class="menu-item"><a href="javascript:void(0)"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons bx bx-copy"></i>
+							<div data-i18n="Article">報導文章管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a
+								href="../article/Admin-Article-ArticleList.html"
+								class="menu-link">
+									<div data-i18n="">報導文章列表</div>
+							</a></li>
+							<li class="menu-item"><a
+								href="../article/Admin-Article-ArticleType.html"
+								class="menu-link">
+									<div data-i18n="">報導文章類別</div>
+							</a></li>
+						</ul></li>
 
-          <!-- Article報導文章管理 -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-copy"></i>
-              <div data-i18n="Article">報導文章管理</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../article/Admin-Article-ArticleList.html" class="menu-link">
-                  <div data-i18n="">報導文章列表</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="../article/Admin-Article-ArticleType.html" class="menu-link">
-                  <div data-i18n="">報導文章類別</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+					<!-- Admin管理員管理 -->
+					<li class="menu-item"><a href="javascript:void(0);"
+						class="menu-link menu-toggle"> <i
+							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
+							<div data-i18n="Admin">管理員管理</div>
+					</a>
+						<ul class="menu-sub">
+							<li class="menu-item"><a href="listAllAdmin.jsp"
+								class="menu-link">
+									<div data-i18n="">管理員資料管理</div>
+							</a></li>
+						</ul></li>
+				</ul>
+			</aside>
+			<!-- / Menu -->
 
-          <!-- Admin管理員管理 -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons fa-solid fa-users-gear"></i>
-              <div data-i18n="Admin">管理員管理</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="../admin/Admin-Admin-AdminInfo.html" class="menu-link">
-                  <div data-i18n="">管理員資料管理</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </aside>
-      <!-- / Menu -->
-
-      <!-- Layout container -->
-      <div class="layout-page">
-       		<!-- Navbar -->
+			<!-- Layout container -->
+			<div class="layout-page">
+				<!-- Navbar -->
 
 				<nav
 					class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
