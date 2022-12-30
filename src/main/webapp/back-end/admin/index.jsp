@@ -171,17 +171,17 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductList.html"
+								href="${pageContext.request.contextPath}/SelectAll"
 								class="menu-link">
 									<div data-i18n="">商品列表</div>
 							</a></li>
-							<li class="menu-item"><a
+							<!-- <li class="menu-item"><a
 								href="../product/Admin-Product-ProductType.html"
 								class="menu-link">
 									<div data-i18n="">商品類別</div>
-							</a></li>
+							</a></li> -->
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductOrderList.html"
+								href="${pageContext.request.contextPath}/BackendSelectAllOrder"
 								class="menu-link">
 									<div data-i18n="">商品訂單管理</div>
 							</a></li>

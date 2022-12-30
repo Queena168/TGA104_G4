@@ -150,9 +150,9 @@
 							data-toggle="pill" href="#v-pills-profile" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>會員資料
-						</a> <a class="nav-link" id="v-pills-order-tab" data-toggle="pill"
-							href="#v-pills-productorder" role="tab"
-							aria-controls="v-pills-order" aria-selected="false"> <span><i
+						</a> <a class="nav-link" 
+							href="${pageContext.request.contextPath}/SelectOrder" 
+							> <span><i
 								class='bx bx-shopping-bag'></i></span>商品訂單
 						</a> <a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
 							href="#v-pills-designorder" role="tab"
