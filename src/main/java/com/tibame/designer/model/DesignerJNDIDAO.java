@@ -26,7 +26,7 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 	}
 	//private static final String INSERT_DESIGNER = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,'審核未成功',null,null,null)";
 	private static final String INSERT_DESIGNERINFO = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String GET_ALL_DESIGNER = "SELECT designerNo,designerAccount, designerPassword, designerName,designerCompany,designerPic,approvalStatus,approvalTime,approver,designerStatus FROM Designer";
+	private static final String GET_ALL_DESIGNER = "SELECT designerNo,designerAccount, designerPassword, designerName,designerCompany,designerPic,Phone,DesignerDetail,approvalStatus,approvalTime,approver,designerStatus FROM Designer";
 	private static final String GET_ONE_DESIGNER = "SELECT designerNo,designerAccount,designerPassword,designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,approver,designerStatus FROM Designer where designerNo = ?";
 	//private static final String DELETE = "DELETE FROM Designer where designerNo = ?";
 	private static final String UPDATE = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=? ,designerPic=? where designerNo = ?";
@@ -210,6 +210,8 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 				designerVO.setDesignerPassword(rs.getString("designerPassword"));
 				designerVO.setDesignerName(rs.getString("designerName"));
 				designerVO.setDesignerCompany(rs.getString("designerCompany"));
+				designerVO.setPhone(rs.getString("Phone"));
+				designerVO.setDesignerDetail(rs.getString("DesignerDetail"));
 				designerVO.setDesignerPic(rs.getBytes("designerPic"));
 				designerVO.setApprovalStatus(rs.getString("approvalStatus"));
 				designerVO.setApprovalTime(rs.getDate("approvalTime"));
