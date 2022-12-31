@@ -140,7 +140,7 @@
             <div class="table-head">
                 <div class="status"></div>
                 <div class="subjects">標題</div>
-                <div class="replies">瀏覽次數/回應數</div>
+                <div class="replies">瀏覽/回應</div>
                 <div class="last-reply">最新回應</div>
             </div>
             <c:choose>

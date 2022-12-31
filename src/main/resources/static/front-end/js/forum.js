@@ -1,10 +1,18 @@
 //foorumIndex.jsp search button
 function search() {
-	if (document.querySelector("#keyword").value.trim() == "") {
-		alert("請輸入文字");
-	} else {
-		document.querySelector("#search_form").submit();
-	}
+	$.ajax({
+		type: "POST",
+		url: "search",
+		data: $("#search_form").serialize(),
+		dataType: "JSON",
+		success: function(data) {
+			if ("error" in data) {
+				alert(data.error);
+			} else {
+				window.location.href = data.success;
+			}
+		},
+	});
 }
 
 //posting.jsp submit button
@@ -12,7 +20,7 @@ function add() {
 	$.ajax({
 		type: "POST",
 		url: "addPost",
-//		url: "forumpost.do",
+		//		url: "forumpost.do",
 		data: $("#add_form").serialize(),
 		dataType: "JSON",
 		success: function(data) {
