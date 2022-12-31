@@ -104,30 +104,6 @@ th, td {
 
 
 <style>
-/* #preview { */
-/* 	border: 1px solid lightgray; */
-/* 	display: inline-block; */
-/* 	width: 150px; */
-/* 	min-height: 200px; */
-/* 	position: relative; */
-	
-
-	
-/* } */
-
-/* #preview span.text { */
-/* 	position: absolute; */
-/* 	display: inline-block; */
-/* 	left: 50%; */
-/* 	top: 50%; */
-/* 	transform: translate(-50%, -50%); */
-/* 	z-index: -1; */
-/* 	color: lightgray; */
-/* } */
-
-/* #preview img.preview_img { */
-/* 	width: 100%; */
-/* } */
 
 
 .wrap{
@@ -147,15 +123,6 @@ margin-left: 200px;
 margin-left: 500px;
 }
 
-/* img{ */
-/*     max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/ 
-/*     height:auto; */
-/* } */
-
-/* .intro{ */
-/* margin-left: 200px; */
-
-/* } */
 
 #btn1{
 float:left;
@@ -203,14 +170,7 @@ margin-left: 20px;
     padding: 5px;
     text-align: center;
   }
-  
-  
-/* .logintitle{ */
-/*   position: absolute; */
-/*   width:100px; */
-/*   right: 180px; */
-/* } */
-  
+ 
 #block2{
   margin-left: 50px;
 }
