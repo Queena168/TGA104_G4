@@ -388,7 +388,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 											<div class="mb-3">
 												<label for="email" class="form-label">上傳管理員</label> <input
 													type="text" class="form-control" id="email" name="uploader"
-													value="${adminVO.uploader}" readonly/>
+													value="${adminVO.adminNo}" readonly/>
 											</div>
 
 											<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
