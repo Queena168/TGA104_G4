@@ -528,11 +528,20 @@ margin-left: 20px;
       <div class="progress" id="progress"></div>
       <!-- 進度條的圈圈（Steps） -->
       <div class="circle active">尚未進行</div>
-      <div class="circle">報價</div>
+      <c:choose>
+      <c:when test="${designerOrderVO.quotationStatus!='未報價'}">
+      <div class="circle">報價</div>      
       <div class="circle">同意報價</div>
+      </c:when>
+      </c:choose>
+      <c:choose>
+      <c:when test="${designerOrderVO.contractStatus!='尚未進行'}">
       <div class="circle">簽約</div>
       <div class="circle">同意合約</div>
       <div class="circle">施工</div>
+      </c:when>
+       </c:choose>
+      
       <div class="circle">結案</div>
     </div>
   </div>
@@ -575,7 +584,7 @@ margin-left: 20px;
 		<th>合約附件</th>
 		<c:choose>
 		   <c:when test="${designerOrderVO.contractAtt!=null}">
-		      <td><a href="#" onclick="window.open(
+		      <td><a href="#" style="color:red;" onclick="window.open(
 	    '<%=request.getContextPath()%>/Contractinfo?orderNo=${designerOrderVO.orderNo}'
 	    , '_blank').focus();">預覽合約</a></td>
 		   </c:when>
