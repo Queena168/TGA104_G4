@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.Arrays;
 
 import com.tibame.designer.service.DesignerService;
+import com.tibame.member.model.MemberService;
+import com.tibame.member.model.MemberVO;
 
 public class DesignerOrderVO implements java.io.Serializable {
 
@@ -229,11 +231,11 @@ public class DesignerOrderVO implements java.io.Serializable {
 
 	// ================================================================
 	// member
-//	public MemberVO getMemberVO() {
-//		MemberService memberSvc = new MemberService();
-//		MemberVO memberVO = memberSvc.getOneMember(memberNo);
-//		return memberVO;
-//	}
+	public MemberVO getMemberVO() {
+		MemberService memberSvc = new MemberService();
+		MemberVO memberVO = memberSvc.getOneMember(memberNo);
+		return memberVO;
+	}
 
 	@Override
 	public String toString() {

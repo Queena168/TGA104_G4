@@ -29,46 +29,13 @@ public class DesignerOrderServlet extends HttpServlet {
 		res.setContentType("image/gif");
 		HttpSession session = req.getSession();
 		session.getAttribute("designerVO");
-		String action = req.getParameter("action");
 		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
-		//PrintWriter out = res.getWriter();
-		DesignerOrderService designerOrderScv=new DesignerOrderService();
-		List<DesignerOrderVO> list= designerOrderScv.getAllMyOrder(designerNo);
-		//System.out.println(list);
+		DesignerOrderService designerOrderScv = new DesignerOrderService();
+		List<DesignerOrderVO> list = designerOrderScv.getAllMyOrder(designerNo);
 		session.setAttribute("list", list);
 		String url = "/front-end/designer/orderManage.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 		successView.forward(req, res);
-
-		//================================================================================
-		//查看設計師所有訂單
-		if("showMyOrder".equals(action)) {
-			designerNo = Integer.valueOf(req.getParameter("designerNo"));
-			//PrintWriter out = res.getWriter();
-			designerOrderScv=new DesignerOrderService();
-			list= designerOrderScv.getAllMyOrder(designerNo);
-			//System.out.println(list);
-			session.setAttribute("list", list);
-			url = "/front-end/designer/orderManage.jsp";
-			successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
-			successView.forward(req, res);
-		}
-		
-		
-	
-		//===============================================================================
-		//如結案狀態為未結案則取得設計師進行中訂單，如結案狀態為結案則取得設計師結案訂單
-		if("showFinishOrder".equals(action)) {
-			designerNo = Integer.valueOf(req.getParameter("designerNo"));
-			//PrintWriter out = res.getWriter();
-			designerOrderScv=new DesignerOrderService();
-			list= designerOrderScv.getAllMyisFinishOrder(designerNo);
-			//System.out.println(list);
-			session.setAttribute("list", list);
-			url = "/front-end/designer/orderManage.jsp";
-			successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
-			successView.forward(req, res);
-		}
 
 	}
 
