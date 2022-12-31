@@ -47,9 +47,11 @@ public class ShowOneOrderDetail extends HttpServlet {
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());
 			DesignerOrderPhaseService designerOrderPhaseService = new DesignerOrderPhaseService();
 			List<DesignerOrderPhaseVO> list = designerOrderPhaseService.getOrderPhase(designerOrderNo);
+			DesignerOrderPhaseVO designerOneOrderPhaseVO = designerOrderPhaseService.getOneOrderPhase(designerOrderNo);
 			System.out.println("list內容:"+list.toString());
 			session.setAttribute("list", list);
-			session.setAttribute("designerOrderVO", designerOrderVO);			
+			session.setAttribute("designerOrderVO", designerOrderVO);	
+		    session.setAttribute("designerOneOrderPhaseVO", designerOneOrderPhaseVO);
 		    String url = "/front-end/designer/listOneOrder.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);

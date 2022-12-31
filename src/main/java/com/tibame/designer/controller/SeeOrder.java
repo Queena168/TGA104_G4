@@ -14,31 +14,34 @@ import javax.servlet.http.HttpSession;
 import com.tibame.designer.model.DesignerOrderPhaseVO;
 import com.tibame.designer.service.DesignerOrderPhaseService;
 
-@WebServlet("/SendOrderPayment")
-public class SendOrderPayment extends HttpServlet {
+@WebServlet("/seeOrder")
+public class SeeOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doPost(req, res);
-	}
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		session.getAttribute("list");
-		String paymentStatus = req.getParameter("paymentStatus");
 		String strorderNo = req.getParameter("orderNo");
-		//System.out.println("strorderNo"+strorderNo);
-		Integer orderNo=null;
-		orderNo = Integer.valueOf(strorderNo);
-		DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
-		designerOrderPhaseSvc.updateDesignerOrderPhasePayment(orderNo, paymentStatus);
-		List <DesignerOrderPhaseVO> list = designerOrderPhaseSvc.getOrderPhase(orderNo);
+		Integer orderNo = null;
+		try {
+			orderNo = Integer.valueOf(strorderNo);
+		} catch (Exception e) {
+			System.out.println("updateOrderPhase之orderNo為空值");
+		}
+		DesignerOrderPhaseService designerOrderPhaseService = new DesignerOrderPhaseService();
+		List<DesignerOrderPhaseVO> list = designerOrderPhaseService.getOrderPhase(orderNo);
+		System.out.println(list.toString());
 		session.setAttribute("list", list);
-		String url = "/front-end/designer/listOneOrder.jsp";
+		String url = "/front-end/designer/UpdatelistOneOrderPhase.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url);
-		successView.forward(req, res); 
-		
+		successView.forward(req, res);
+	
+	}
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		doGet(req, res);
 	}
 
 }

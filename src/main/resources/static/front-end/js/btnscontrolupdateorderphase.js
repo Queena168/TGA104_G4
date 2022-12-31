@@ -28,7 +28,7 @@
 
 //===============================================================
 	//點擊施工狀態下拉選單及更新施工狀態下拉選單
-var btn1 = document.getElementById("btn1");
+var btn1 = document.getElementById("btncontrust");
 var select1 = document.getElementById("selection");
 var textarea = document.getElementById("t1");
 var form = document.getElementById("form");
@@ -47,7 +47,7 @@ btn1.addEventListener("click",function(){
 	
 //===============================================================	
 	//點擊付款狀態下拉選單及更新付款狀態下拉選單
-var btn2 = document.getElementById("btn2");
+var btn2 = document.getElementById("btnpayment");
 var select2 = document.getElementById("selectionpayment");
 //var form1 = document.getElementById("form1");
 btn2.addEventListener("click",function(){
@@ -67,13 +67,14 @@ function DisplayAndHiddenBtn(btnName, type) {
 	 var currentinputbutton = document.getElementById(btnName);
    if (type == 'true') {
 	   //currentinputbutton.style.display = "inline-block"; //style中的display且橫向排列属性
-	   document.getElementById("btn1").style.display = "none";	
-	   document.getElementById("btn2").style.display = "none";
+	   document.getElementById("btncontrust").style.display = "none";	
+	   document.getElementById("btnpayment").style.display = "none";
    }else{
 	   currentinputbutton.style.display = "inline-block"; 
    }
 	 
 }
+
 
 
 

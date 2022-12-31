@@ -21,25 +21,27 @@ public class DesignerOrderPhaseService {
 		designerOrderPhaseVO.setOrderNo(orderNo);
 		designerOrderPhaseVO.setTotalOrderPhase(totalOrderPhase);
 		designerOrderPhaseVO.setTotalamount(totalamount);	
-		System.out.println("正要開始執行insert");
 		dao.insert(designerOrderPhaseVO);
 		return designerOrderPhaseVO;
 	}
 	
-	public  DesignerOrderPhaseVO InsertDesignerOrderPhaseConstruction(Integer orderNo,String constructionStatus,String contractDetail) {
+	public  DesignerOrderPhaseVO insertDesignerOrderPhaseConstruction(Integer orderNo,Integer totalOrderPhase,String constructionStatus,String contractDetail,byte[] orderPhaseAtt) {
 		DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
 		designerOrderPhaseVO.setOrderNo(orderNo);
+		designerOrderPhaseVO.setTotalOrderPhase(totalOrderPhase);
 		designerOrderPhaseVO.setConstructionStatus(constructionStatus);
 		designerOrderPhaseVO.setOrderPhaseDetail(contractDetail);
-		dao.InsertDesignerOrderPhaseConstruction(designerOrderPhaseVO);
+		designerOrderPhaseVO.setOrderPhaseAtt(orderPhaseAtt);
+		//System.out.println("你好友執行到1");
+		dao.insertDesignerOrderPhaseConstruction(designerOrderPhaseVO);
 		return designerOrderPhaseVO;
 	}
 	
-	public  DesignerOrderPhaseVO InsertDesignerOrderPhasePayment(Integer orderNo,String paymentStatus) {
+	public  DesignerOrderPhaseVO updateDesignerOrderPhasePayment(Integer orderNo,String paymentStatus) {
 		DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
 		designerOrderPhaseVO.setOrderNo(orderNo);
 		designerOrderPhaseVO.setPaymentStatus(paymentStatus);
-		dao.InsertDesignerOrderPhasePayment(designerOrderPhaseVO);
+		dao.updateDesignerOrderPhasePayment(designerOrderPhaseVO);
 		return designerOrderPhaseVO;
 	}
 	

@@ -534,8 +534,8 @@ margin-left: 20px;
 		</c:choose>
 		</tr>
 
-	<c:forEach var="designerOrderPhaseVO" items="${list}">
-		<tr><th>合約期數</th><td>${designerOrderPhaseVO.orderPhase}</td></tr>
+	<c:forEach var="designerOrderPhaseVO" items="${list}" begin="0" end="0">
+		<tr><th>合約期數</th><td>${designerOrderPhaseVO.totalOrderPhase}期</td></tr>
     </c:forEach>
 		<tr>
 		   <th>合約備註</th>
@@ -580,10 +580,10 @@ margin-left: 20px;
 </table>
      <div id="block2"> 
            <div id="btn1">
-          <form method="get" action="seeOrderPayment">
+          <form method="get" action="seeOrder">
               <input type="hidden" value="${designerOrderVO.contractStatus}"> 
-              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
-              <input id="btn2" type="submit" value="查看進度"  style="display: inline-block;">
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}"> 
+            <input id="btn2" type="submit" value="查看進度"  style="display: inline-block;">
           </form>           
           </div>
           <div id="btn2">
@@ -606,6 +606,9 @@ margin-left: 20px;
 
 
 <script type="text/javascript">
+
+
+
 //報價進度
 function progressquotation(type) {
 	
@@ -621,10 +624,6 @@ let currentActive = 1;
 if(type=='確認中'){
      // currentActive 就加一（往前進一步）
 	  currentActive++;
-	  //判斷還能不能前進，如果不能前進了，就設為最大步數，也就是圈圈的個數
-// 	  if (currentActive > circles.length) {
-// 	    currentActive = circles.length;
-// 	  }
 	  update();
 
 }
@@ -633,32 +632,11 @@ if(type=='確認中'){
 if(type=='同意報價'){
 	// currentActive 就加一（往前進一步）
 	  currentActive+=2;
-
-	  //判斷還能不能前進，如果不能前進了，就設為最大步數，也就是圈圈的個數
-// 	  if (currentActive > circles.length) {
-// 	    currentActive = circles.length;
-// 	  }
+	 
 	  // 更新狀態（函式內容還沒定義）
 	  update();
 }
 
-// if(type=='退回報價'){
-// 	//每當後退紐被點擊的時候， currentActive 就減一（往後退一步）
-// 	//prev.addEventListener("click", () => {
-// 	  //currentActive++;
-// 		currentActive--;
-
-// 	  //判斷還能不能前進，如果不能後退了，就設為初始值，也就是1
-// // 	  if (currentActive < 1) {
-// // 	    currentActive = 2;
-// // 	  }
-// 	  // console.log(currentActive)
-
-// 	  // 更新狀態（函式內容還沒定義）
-// 	  update();
-// 	//});
-	
-// }
 
 function update() {
   // 第一件事：更新 .circle 元素的 .active class
@@ -700,10 +678,8 @@ function progresscontract(type) {
 	if(type=='確認中'){
    // currentActive 就加一（往前進一步）
 	currentActive+=3;
-		  //判斷還能不能前進，如果不能前進了，就設為最大步數，也就是圈圈的個數
-//	 	  if (currentActive > circles.length) {
-//	 	    currentActive = circles.length;
-//	 	  }
+	currentActive++;
+
 		  // 更新狀態（函式內容還沒定義）
 		  update();
 	}
@@ -712,12 +688,8 @@ function progresscontract(type) {
 	
 	if(type=='同意合約'){
     // currentActive 就加一（往前進一步）
-     currentActive+=4;
-
-		  //判斷還能不能前進，如果不能前進了，就設為最大步數，也就是圈圈的個數
-//	 	  if (currentActive > circles.length) {
-//	 	    currentActive = circles.length;
-//	 	  }
+     //currentActive+=4;
+     currentActive++;
 		  // 更新狀態（函式內容還沒定義）
 		  update();
 	}
@@ -745,18 +717,126 @@ function progresscontract(type) {
 		 }
 }
 
+
+//簽約進度
+function progressdo(type) {	
+	//進度條
+	const process = document.getElementById("progress");
+
+	// 進度圈圈
+	const circles = document.querySelectorAll(".circle");
+
+	// 首先設定變數現在的階段 currentActive 為 1
+	//let currentActive = 1;
+	
+	
+	
+	if(type=='第一期施工開始'){
+   // currentActive 就加一（往前進一步）
+	//currentActive+=5;
+	currentActive++;
+		  // 更新狀態（函式內容還沒定義）
+		  update();
+	}
+	
+
+	function update() {
+		  // 第一件事：更新 .circle 元素的 .active class
+
+		  //遍歷一遍 circles
+		  circles.forEach((circle, idx) => {
+		    //如果現在的 circle 的 index 比 進度（currentActive） 小的話，就是一個已完成進度，加上 active
+		    if (idx < currentActive) {
+		      circle.classList.add("active");
+		    } else {
+		      //否則這個 circle 就是一個未完成進度，拿掉 active
+		      circle.classList.remove("active");
+		    }
+		  });
+
+		  // 第二件事：更新進度條元素的長度
+		  // 因為是進度條的長度，所以我們用（已完成距離（進度-1）)/間隔數(圈圈總數-1) *100 取得長度百分比
+		  length = ((currentActive - 1) / (circles.length - 1)) * 100;
+		  // 把單位加回去
+		  progress.style.width = length + "%";
+
+		 }
+}
+
+
+//結案
+
+function progressfinish(type) {	
+	//進度條
+	const process = document.getElementById("progress");
+
+	// 進度圈圈
+	const circles = document.querySelectorAll(".circle");
+
+	// 首先設定變數現在的階段 currentActive 為 1
+	//let currentActive = 1;
+	
+	
+	
+	if(type=='true'){
+		
+   // currentActive 就加一（往前進一步）
+	//currentActive+=6;
+	currentActive++;
+		  // 更新狀態（函式內容還沒定義）
+		  update();
+	}
+	
+	function update() {
+		  // 第一件事：更新 .circle 元素的 .active class
+
+		  //遍歷一遍 circles
+		  circles.forEach((circle, idx) => {
+		    //如果現在的 circle 的 index 比 進度（currentActive） 小的話，就是一個已完成進度，加上 active
+		    if (idx < currentActive) {
+		      circle.classList.add("active");
+		    } else {
+		      //否則這個 circle 就是一個未完成進度，拿掉 active
+		      circle.classList.remove("active");
+		    }
+		  });
+
+		  // 第二件事：更新進度條元素的長度
+		  // 因為是進度條的長度，所以我們用（已完成距離（進度-1）)/間隔數(圈圈總數-1) *100 取得長度百分比
+		  length = ((currentActive - 1) / (circles.length - 1)) * 100;
+		  // 把單位加回去
+		  progress.style.width = length + "%";
+
+		 }
+}
+
+
+
+
+
 </script>
+<script type="text/javascript">
+
+
+
+
+
+
+</script>
+
 
 
 <script type="text/javascript">
 var type2 = '${designerOrderVO.contractStatus}';
 var type = '${designerOrderVO.finishStatus}';
-var typequotationStatus = '${designerOrderVO.quotationStatus}'
-var typecontractStatus = '${designerOrderVO.contractStatus}'
+var typequotationStatus = '${designerOrderVO.quotationStatus}';
+var typeprogress = '${designerOneOrderPhaseVO.constructionStatus}';
 DisplayAndHiddenBtn2("btn2",type2);
 DisplayAndHiddenBtn("btn",type);
 progressquotation(typequotationStatus);
-progresscontract(typecontractStatus);
+progresscontract(type2);
+progressdo(typeprogress);
+progressfinish(type);
 </script>
 
 

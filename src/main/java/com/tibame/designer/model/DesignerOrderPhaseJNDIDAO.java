@@ -102,16 +102,28 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 	}
 
 	@Override
-	public void InsertDesignerOrderPhaseConstruction(DesignerOrderPhaseVO designerOrderPhaseVO) {
-
+	public void insertDesignerOrderPhaseConstruction(DesignerOrderPhaseVO designerOrderPhaseVO) {
+		//System.out.println("你好友執行到2");
+         int a=0;
 		// =======================================
-		String updateDesignerOrderPhaseConstruction = "update DesignerOrderPhase set constructionStatus=?,orderPhaseDetail=? where orderNo=?";
+		String updateDesignerOrderPhaseConstruction = "Insert into DesignerOrderPhase (orderNo,totalOrderPhase,constructionStatus,orderPhase,orderPhaseDetail,orderPhaseAtt,modificationTime) values(?,?,?,?,?,?,now());";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement ps = connection.prepareStatement(updateDesignerOrderPhaseConstruction)) {
-			ps.setString(1, designerOrderPhaseVO.getConstructionStatus());
-			ps.setString(2, designerOrderPhaseVO.getOrderPhaseDetail());
-			ps.setInt(3, designerOrderPhaseVO.getOrderNo());
+			ps.setInt(1, designerOrderPhaseVO.getOrderNo());
+			ps.setInt(2, designerOrderPhaseVO.getTotalOrderPhase());
+			ps.setString(3, designerOrderPhaseVO.getConstructionStatus());
+			  if(designerOrderPhaseVO.getConstructionStatus().equals("第一期施工開始")||designerOrderPhaseVO.getConstructionStatus().equals("第一期施工結束")) {
+		    	 a=1;
+		      }else if(designerOrderPhaseVO.getConstructionStatus().equals("第二期施工開始")||designerOrderPhaseVO.getConstructionStatus().equals("第二期施工結束")){	
+		    	  a=2;
+		      }else {
+		    	 a=3;
+		      }
+			ps.setInt(4, a);			
+			ps.setString(5, designerOrderPhaseVO.getOrderPhaseDetail());
+			ps.setBytes(6, designerOrderPhaseVO.getOrderPhaseAtt());
+			//System.out.println("你好友執行到3");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,7 +135,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 	
 
 	@Override
-	public void InsertDesignerOrderPhasePayment(DesignerOrderPhaseVO designerOrderPhaseVO) {
+	public void updateDesignerOrderPhasePayment(DesignerOrderPhaseVO designerOrderPhaseVO) {
 
 		// =======================================
 		String updateDesignerOrderPhaseConstruction = "insert into  DesignerOrderPhase (orderNo,)set paymentStatus=? where orderNo=?";
@@ -142,7 +154,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 
 	@Override
 	public DesignerOrderPhaseVO findOneDesignerOrderPhase(Integer orderNo) {
-		String findOneDesignerOrderPhase = "select * from DesignerOrderPhase where orderNo=?";
+		String findOneDesignerOrderPhase = "select * from DesignerOrderPhase where orderNo=? and constructionStatus='第一期施工開始'";
 		DesignerOrderPhaseVO designerOrderPhaseVO=null;
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(findOneDesignerOrderPhase);) {
@@ -150,6 +162,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
 	            designerOrderPhaseVO = new DesignerOrderPhaseVO();
+	            designerOrderPhaseVO.setPhaseNo(rs.getInt("phaseNo"));
 				designerOrderPhaseVO.setOrderNo(rs.getInt("orderNo"));
 				designerOrderPhaseVO.setOrderPhase(rs.getInt("orderPhase"));
 				designerOrderPhaseVO.setAmount(rs.getInt("amount"));
@@ -186,18 +199,21 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 
 			while (rs.next()) {
 				designerOrderPhaseVO = new DesignerOrderPhaseVO();
+				designerOrderPhaseVO.setPhaseNo(rs.getInt("phaseNo"));
 				designerOrderPhaseVO.setOrderNo(rs.getInt("orderNo"));
+				designerOrderPhaseVO.setTotalOrderPhase(rs.getInt("totalOrderPhase"));
 				designerOrderPhaseVO.setOrderPhase(rs.getInt("orderPhase"));
+				designerOrderPhaseVO.setTotalamount(rs.getInt("totalAmount"));
 				designerOrderPhaseVO.setAmount(rs.getInt("amount"));
 				designerOrderPhaseVO.setConstructionStatus(rs.getString("constructionStatus"));
 				designerOrderPhaseVO.setPaymentPhase(rs.getInt("paymentPhase"));
 				designerOrderPhaseVO.setPaymentStatus(rs.getString("paymentStatus"));
 				designerOrderPhaseVO.setPaymentAtt(rs.getBytes("paymentAtt"));
 				designerOrderPhaseVO.setModificationTime(rs.getDate("modificationTime"));
-				designerOrderPhaseVO.setTotalamount(rs.getInt("totalOrderPhase"));
-				designerOrderPhaseVO.setTotalamount(rs.getInt("totalamount"));
-				
+				designerOrderPhaseVO.setOrderPhaseDetail(rs.getString("orderPhaseDetail"));
+				designerOrderPhaseVO.setOrderPhaseAtt(rs.getBytes("orderPhaseAtt"));			
 				list.add(designerOrderPhaseVO);
+
 			}
 
 			// Handle any driver errors

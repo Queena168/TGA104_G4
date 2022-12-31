@@ -38,26 +38,26 @@
 
 
  <!-- Favicon -->
-    <link rel="icon" href="../images/favicon.ico" sizes="32x32">
+    <link rel="icon" href="<%=request.getContextPath()%>/front-end/images/favicon.ico" sizes="32x32">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel='stylesheet' href='../css/fontawesome.min.css'>
+    <link rel='stylesheet' href='<%=request.getContextPath()%>/front-end/css/fontawesome.min.css'>
     <!-- Animate -->
-    <link href="../css/animate.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/front-end/css/animate.css" rel="stylesheet">
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/owl.theme.default.min.css">
     <!-- light box -->
-    <link rel="stylesheet" href="../css/lightbox.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/lightbox.min.css">
     <!-- jquery ui -->
-    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/jquery-ui.min.css">
     <!--    <link rel="stylesheet" href="//basehold.it/24">-->
 
     <!-- nice select -->
-    <link rel="stylesheet" href="../css/nice-select.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/nice-select.min.css">
     <!-- Main Styles -->
-    <link rel="stylesheet" href="../scss/main.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/scss/main.css">
 
 
 
@@ -117,32 +117,6 @@ th, td {
 
 
 <style>
-#preview {
-	border: 1px solid lightgray;
-	display: inline-block;
-	width: 150px;
-	min-height: 200px;
-	position: relative;
-	
-
-	
-}
-
-#preview span.text {
-	position: absolute;
-	display: inline-block;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	z-index: -1;
-	color: lightgray;
-}
-
-#preview img.preview_img {
-	width: 100%;
-}
-
-
 .wrap{
     margin: auto;
     margin-left: 500px;
@@ -160,19 +134,12 @@ margin-left: 200px;
 margin-left: 50px;
 }
 
-img{
-    max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
-    height:auto;
-}
-
 .intro{
 margin-left: 200px;
 
 }
 
 </style>
-
-
 
 <style>
   table#table-1 {
@@ -207,12 +174,6 @@ margin-left: 200px;
   }
   
   
-    .logintitle{
-  position: absolute;
-  width:100px;
-  right: 180px;
-  }
-  
   #t1 {
    height: 100%; /*高度填充*/
    width: 100%;
@@ -220,6 +181,13 @@ margin-left: 200px;
    vertical-align: bottom; /*chrome的td有margin-top情況 用此CSS調整*/
    border: none; /*border用td的*/
 }
+
+
+
+  .block{
+  width: 1263px;
+  height: 70px;
+  }
 </style>
 
 </head>
@@ -229,7 +197,7 @@ margin-left: 200px;
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
     <div class="container">
         <a class="navbar-brand" href="index.html">    
-            <img src="../images/MatDesignLogo.png" alt="">
+            <img src="<%=request.getContextPath()%>/front-end/images/MatDesignLogo.png" alt="">
         </a>
         <!--  navbar actions -->
         <div class="main-navbar-action">
@@ -307,17 +275,19 @@ margin-left: 200px;
     </div>
 </nav>
 <!-- end main header navbar -->
-
+<div class="block"></div>	
 <hr size="8px" align="center" width="100%" >
 <div style="text-align:center"><h3>案件進度查看</h3></div>
 <div align="center">
-<form id="form" method="post">
+<form id="form" method="post" enctype="multipart/form-data">
 <table> 
         <c:forEach var="designerOrderPhaseVO" items="${list}" begin="0" end="0">
+       
 		<tr><th>案件編號:</th><td>${designerOrderPhaseVO.orderNo}</td></tr>
 		
 		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
 		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr> 
+		<input type="hidden" name="totalOrderPhase" value="${designerOrderPhaseVO.totalOrderPhase}">
 		<tr><th>合約總期數</th><td>${designerOrderPhaseVO.totalOrderPhase}期</td></tr>  
         </c:forEach>
 		<tr>
@@ -338,6 +308,43 @@ margin-left: 200px;
        
         </td>
 		</tr>	
+		
+		<tr>
+		<th>進度說明</th>
+		<td>
+		<c:forEach var="designerOrderPhaseVO" items="${list}">
+		<textarea id="t1" placeholder="請輸入內容!" name="orderPhaseDetail" disabled="disabled">${designerOrderPhaseVO.orderPhaseDetail}</textarea>		
+		</c:forEach>
+		</td>
+		</tr>
+		
+		
+		<tr>	    	    
+	    <th>附件上傳</th>
+	    <td>
+		<input type="file" name="orderPhaseAtt" id="fileinp">
+        </td>         
+	    </tr>
+		
+		<tr><th>施工進度附件</th>
+	
+        <c:choose>
+        <c:when test="${designerOrderPhaseVO.orderPhaseAtt!=null}">
+        <td>
+        <c:forEach var="designerOrderPhaseVO" items="${list}">
+        <a href="#" onclick="window.open(
+	    '<%=request.getContextPath()%>/OrderPhaseInfo?orderNo=${designerOrderPhaseVO.orderNo}'
+	    , '_blank').focus();">預覽進度附件</a>	
+	    </c:forEach>
+	    </td>
+	    </c:when>	    
+	    <c:when test="${designerOrderPhaseVO.orderPhaseAtt==null}">
+	    <td>無進度附件</td>
+	    </c:when>
+
+	    </c:choose>
+	    
+	    </tr> 
 		 
 	    
 	    
@@ -348,8 +355,11 @@ margin-left: 200px;
 		   <select id="selectionpayment" name="paymentStatus" disabled="disabled">
 		   <c:forEach var="designerOrderPhaseVO" items="${list}" >
                <option value="未付款">未付款</option>
+               <option value="第一期待付款" ${designerOrderPhaseVO.paymentStatus=="第一期待付款"?'selected':''}>第一期付款完成</option>
                <option value="第一期付款完成" ${designerOrderPhaseVO.paymentStatus=="第一期付款完成"?'selected':''}>第一期付款完成</option>
+               <option value="第二期待付款" ${designerOrderPhaseVO.paymentStatus=="第二期待付款"?'selected':''}>第二期付款完成</option>
                <option value="第二期付款完成" ${designerOrderPhaseVO.paymentStatus=="第二期付款完成"?'selected':''}>第二期付款完成</option>
+               <option value="第三期待付款" ${designerOrderPhaseVO.paymentStatus=="第三期待付款"?'selected':''}>第三期付款完成</option>
                <option value="第三期付款完成" ${designerOrderPhaseVO.paymentStatus=="第三期付款完成"?'selected':''}>第三期付款完成</option>
            </c:forEach>
            </select>
@@ -361,11 +371,13 @@ margin-left: 200px;
 </table>
      <div id="block2">
               <input type="hidden" name="finishstatus" value="${designerOrderVO.finishStatus}">
-              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
-              <input id="btn1" type="button" value="更新裝潢進度" style="display: inline-block;"> 
+               <c:forEach var="designerOrderPhaseVO" items="${list}">
+               <input type="hidden" name="orderNo" value="${designerOrderPhaseVO.orderNo}">
+               </c:forEach>
+              <input id="btncontrust" type="button" value="更新裝潢進度" style="display: inline-block;"> 
               
-              <input type="hidden" name="orderNo" value="${designerOrderPhaseVO.orderNo}">
-              <input id="btn2" type="button" value="更新付款進度" style="display: inline-block;">       
+             <!--  <input type="hidden" name="orderNo" value="${designerOrderPhaseVO.orderNo}"> -->
+              <input id="btnpayment" type="button" value="更新付款進度" style="display: inline-block;">       
               
               <input type ="button" onclick="history.back()" value="回上一頁" >
      </div> 
@@ -379,7 +391,7 @@ margin-left: 200px;
             <div class="row">
                 <div class="col-lg-4 col-md-6 footer__content">
                     <div class="footer-logo">
-                        <img src="../images/MatDesignLogo.png" alt="">
+                        <img src="<%=request.getContextPath()%>/front-end/images/MatDesignLogo.png" alt="">
                     </div>
                     <p></p>
                     
@@ -420,32 +432,85 @@ margin-left: 200px;
 
 <!-- All Jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/popper.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/bootstrap.min.js"></script>
 <!-- owl carousel js -->
-<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/owl.carousel.min.js"></script>
 <!-- Jquery ui -->
-<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery-ui.min.js"></script>
 <!-- light box js -->
-<script type="text/javascript" src="js/lightbox.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/lightbox.min.js"></script>
 <!-- typeahead js -->
-<script type="text/javascript" src="js/typeahead.jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/typeahead.jquery.min.js"></script>
 <!-- master zoom image js -->
-<script type="text/javascript" src="js/jquery.zoom.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.zoom.min.js"></script>
 <!-- countdown js -->
-<script type="text/javascript" src="js/countdown.jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/countdown.jquery.min.js"></script>
 <!-- nice select js -->
-<script type="text/javascript" src="js/nice-select.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/nice-select.min.js"></script>
 <!-- wow js -->
-<script type="text/javascript" src="js/wow.min.js"></script>
-<!-- custom js -->
-<script type="text/javascript" src="js/custom.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/designer/js/btnscontrolupdateorderphase.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/wow.min.js"></script>
+
+
+<script type="text/javascript">
+
+var btn1 = document.getElementById("btncontrust");
+var select1 = document.getElementById("selection");
+var textarea = document.getElementById("t1");
+var form = document.getElementById("form");
+//var form2 = document.getElementById("form2");
+btn1.addEventListener("click",function(){
+	if(select1.hasAttribute("disabled")){
+		select1.removeAttribute("disabled");
+		textarea.removeAttribute("disabled");
+	}else{
+		form.setAttribute("action","SendOrderPhase");
+		form.submit();
+	}
+		
+});	
+	
+	
+//===============================================================	
+	//點擊付款狀態下拉選單及更新付款狀態下拉選單
+var btn2 = document.getElementById("btnpayment");
+var select2 = document.getElementById("selectionpayment");
+//var form1 = document.getElementById("form1");
+btn2.addEventListener("click",function(){
+	if(select2.hasAttribute("disabled")){
+		select2.removeAttribute("disabled");
+	}else{
+		form.setAttribute("action","SendOrderPayment");
+		form.submit();
+	}
+		
+});
+//================================================================
+	//實作更新裝潢進度及付款進度按鈕隱藏及出現
+	
+	
+function DisplayAndHiddenBtn(btnName, type) {
+	 var currentinputbutton = document.getElementById(btnName);
+   if (type == 'true') {
+	   //currentinputbutton.style.display = "inline-block"; //style中的display且橫向排列属性
+	   document.getElementById("btncontrust").style.display = "none";	
+	   document.getElementById("btnpayment").style.display = "none";
+   }else{
+	   currentinputbutton.style.display = "inline-block"; 
+   }
+	 
+}
+
+
+</script>
+
+
+
 <script type="text/javascript">
 var type='${designerOrderVO.finishStatus}';
-DisplayAndHiddenBtn("btn1",type);
-DisplayAndHiddenBtn("btn2",type);
+DisplayAndHiddenBtn("btncontrust",type);
+DisplayAndHiddenBtn("btnpayment",type);
 </script>
 
 </body>
