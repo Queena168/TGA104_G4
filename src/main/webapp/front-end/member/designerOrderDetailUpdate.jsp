@@ -113,8 +113,7 @@ td {
 				<!-- navbar cart icon -->
 				<div class="main-navbar-action__btn nav-dropdown">
 					<a class="dropdown-link" data-target="cartmenu"> <!-- <span
-						class="cart-badge">2</span>  -->
-						<i class="icon-shopping-bag"></i>
+						class="cart-badge">2</span>  --><i class="icon-shopping-bag"></i>
 					</a>
 				</div>
 				<!-- navbar actions content -->
@@ -170,7 +169,7 @@ td {
 							href="#v-pills-profile" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>會員資料
-						</a> <a class="nav-link"
+						</a>  <a class="nav-link"
 							href="${pageContext.request.contextPath}/SelectOrder"> <span><i
 								class='bx bx-shopping-bag'></i></span>商品訂單
 						</a> <a class="nav-link active" id="v-pills-wishlist-tab"
@@ -286,9 +285,8 @@ td {
 														<div class="form-group custom-form__input">
 															<label class="form-label" for="memberPassword">密碼</label>
 															<div class="input-box password-box row">
-																<input type="password" class="form-control"
-																	name="memberPassword" id="memberPassword"
-																	value="${memberVO.memberPassword}">
+																<input type="password" class="form-control" name="memberPassword"
+																	id="memberPassword" value="${memberVO.memberPassword}">
 																<div class="input-box__icon ">
 																	<span class="showhidepassword"><i
 																		class="far fa-eye-slash"></i></span>
@@ -383,7 +381,7 @@ td {
 																name="birthDate" />
 														</div>
 													</div>
-
+													
 													<div class="modal-footer custom-form__btn">
 														<button type="button" class="btn btn-close"
 															data-dismiss="modal">取消</button>
@@ -407,7 +405,7 @@ td {
 							</div>
 							<!-- end edit profile -->
 						</div>
-
+						
 						<!-- DesignerOrder tab -->
 						<div class="tab-pane fade  show active" id="v-pills-designorder"
 							role="tabpanel" aria-labelledby="v-pills-wishlist-tab">
@@ -449,7 +447,7 @@ td {
 															</c:otherwise>
 														</c:choose>
 														<c:choose>
-															<c:when test="${desOrderList.contractStatus =='合約' }">
+															<c:when test="${desOrderList.contractStatus =='同意合約' }">
 																<td>同意合約</td>
 															</c:when>
 															<c:when test="${desOrderList.contractStatus =='確認中' }">
@@ -543,13 +541,11 @@ td {
 											<c:choose>
 												<c:when test="${findDesignerOrder.quotationStatus =='未提供' }">
 												</c:when>
-
-												<c:when
-													test="${findDesignerOrder.quotationStatus =='null' }">
+												
+												<c:when test="${findDesignerOrder.quotationStatus =='null' }">
 												</c:when>
-
-												<c:when
-													test="${findDesignerOrder.quotationStatus =='同意報價' }">
+												
+												<c:when test="${findDesignerOrder.quotationStatus =='同意報價' }">
 													<div class="row mb-3">
 														<label class="col-sm-2 col-form-label"
 															for="basic-default-name"><h5>報價明細</h5></label>
@@ -696,19 +692,17 @@ td {
 																value="${findDesignerOrder.quotationApprovalTime}">
 														</div>
 													</div>
-
+													
 													<div class="row justify-content-end custom-form__btn"
 														style="padding-bottom: 20px;">
 														<div>
 															<button type="submit" class="btn btn-primary"
 																style="margin-right: 10px;" name="action"
 																value="confirmedQuotation">確認報價單</button>
-															<input type="hidden" name="designerNo"
+															<input type="hidden" name="orderNo"
 																value="${findDesignerOrder.designerNo}"> <input
 																type="hidden" name="memberNo"
-																value="${findDesignerOrder.memberNo}"> <input
-																type="hidden" name="orderNo"
-																value="${findDesignerOrder.orderNo}">
+																value="${findDesignerOrder.memberNo}">
 															<button type="submit" class="btn btn-close"
 																style="margin-right: 10px;" name="action"
 																value="rejectQuotation">退回報價單</button>
@@ -716,7 +710,7 @@ td {
 																value="${findDesignerOrder.memberNo}">
 														</div>
 													</div>
-
+													
 													<div class="modal-footer"></div>
 												</c:otherwise>
 											</c:choose>
@@ -726,10 +720,10 @@ td {
 											<c:choose>
 												<c:when test="${findDesignerOrder.contractStatus =='尚未進行' }">
 												</c:when>
-
+												
 												<c:when test="${findDesignerOrder.contractStatus =='null' }">
 												</c:when>
-
+												
 												<c:when test="${findDesignerOrder.contractStatus =='同意合約' }">
 													<div class="row mb-3">
 														<label class="col-sm-2 col-form-label"
