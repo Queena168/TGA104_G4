@@ -490,19 +490,19 @@ margin-left: 20px;
       <div class="circle active">尚未進行</div>
       <c:choose>
       <c:when test="${designerOrderVO.quotationStatus!='未報價'}">
-      <div class="circle">報價</div>      
+      <div class="circle">報價中</div>      
       <div class="circle">同意報價</div>
       </c:when>
       </c:choose>
       <c:choose>
       <c:when test="${designerOrderVO.contractStatus!='尚未進行'}">
-      <div class="circle">簽約</div>
+      <div class="circle">簽約中</div>
       <div class="circle">同意合約</div>
       <div class="circle">施工</div>
       </c:when>
        </c:choose>
-      
       <div class="circle">結案</div>
+
     </div>
   </div>
 
@@ -587,9 +587,9 @@ margin-left: 20px;
           </form>           
           </div>
           <div id="btn2">
-          <form action="FinishedDesignerOrder">
+          <form id="finishform" action="FinishedDesignerOrder">
               <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
-              <input id="btn" type="submit" value="結案"  style="display: inline-block;">   
+              <input id="btn" type="button" value="結案"  style="display: inline-block;">   
            </form>
            </div>
              <div>
@@ -678,7 +678,7 @@ function progresscontract(type) {
 	if(type=='確認中'){
    // currentActive 就加一（往前進一步）
 	currentActive+=3;
-	currentActive++;
+	//currentActive++;
 
 		  // 更新狀態（函式內容還沒定義）
 		  update();
@@ -688,8 +688,8 @@ function progresscontract(type) {
 	
 	if(type=='同意合約'){
     // currentActive 就加一（往前進一步）
-     //currentActive+=4;
-     currentActive++;
+     currentActive+=4;
+     //currentActive++;
 		  // 更新狀態（函式內容還沒定義）
 		  update();
 	}
@@ -727,14 +727,14 @@ function progressdo(type) {
 	const circles = document.querySelectorAll(".circle");
 
 	// 首先設定變數現在的階段 currentActive 為 1
-	//let currentActive = 1;
+	let currentActive = 1;
 	
 	
 	
 	if(type=='第一期施工開始'){
    // currentActive 就加一（往前進一步）
-	//currentActive+=5;
-	currentActive++;
+	currentActive+=5;
+	//currentActive++;
 		  // 更新狀態（函式內容還沒定義）
 		  update();
 	}
@@ -764,9 +764,9 @@ function progressdo(type) {
 }
 
 
-//結案
+//結案情況
 
-function progressfinish(type) {	
+function progressfinish(type1,type2) {	
 	//進度條
 	const process = document.getElementById("progress");
 
@@ -774,18 +774,26 @@ function progressfinish(type) {
 	const circles = document.querySelectorAll(".circle");
 
 	// 首先設定變數現在的階段 currentActive 為 1
-	//let currentActive = 1;
+	let currentActive = 1;
 	
 	
 	
-	if(type=='true'){
-		
+	if((type1=='第三期付款完成' && type2=='true')||type2=='true'){		
    // currentActive 就加一（往前進一步）
-	//currentActive+=6;
-	currentActive++;
+	currentActive+=6;
+	//currentActive++;
 		  // 更新狀態（函式內容還沒定義）
 		  update();
 	}
+	
+	if(type1=='未報價' && type2=='true'){
+		
+		   // currentActive 就加一（往前進一步）
+			currentActive++;
+			//currentActive++;
+				  // 更新狀態（函式內容還沒定義）
+				  update();
+			}
 	
 	function update() {
 		  // 第一件事：更新 .circle 元素的 .active class
@@ -809,7 +817,6 @@ function progressfinish(type) {
 
 		 }
 }
-
 
 
 
@@ -836,7 +843,18 @@ DisplayAndHiddenBtn("btn",type);
 progressquotation(typequotationStatus);
 progresscontract(type2);
 progressdo(typeprogress);
-progressfinish(type);
+progressfinish(typequotationStatus,type);
+progressfinish(typeprogress,type);
+</script>
+
+<script type="text/javascript">
+document.getElementById("btn").addEventListener("click",function(){
+	window.confirm("確定將此案件作結案");
+	if (yes) {
+		document.getElementById("finishform").submit();
+	} 
+});
+
 </script>
 
 
