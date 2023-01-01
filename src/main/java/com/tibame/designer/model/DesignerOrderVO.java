@@ -236,6 +236,13 @@ public class DesignerOrderVO implements java.io.Serializable {
 		MemberVO memberVO = memberSvc.getOneMember(memberNo);
 		return memberVO;
 	}
+	
+	
+//	public DesignerOrderPhaseVO getDesignerOrderPhaseVO() {
+//		MemberService designerOrderPhaseSvc = new MemberService	();
+//		DesignerOrderPhaseVO designerOrderPhaseVO = designerOrderPhaseSvc.designerOrderPhaseVO(orderNo);
+//		return designerOrderPhaseVO;
+//	}
 
 	@Override
 	public String toString() {
