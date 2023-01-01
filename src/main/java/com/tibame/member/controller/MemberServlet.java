@@ -45,8 +45,10 @@ public class MemberServlet extends HttpServlet {
 			String str = req.getParameter("memberNo");
 			Integer memberNo = Integer.valueOf(str);
 			/*************************** 2.查詢資料 *****************************************/
+			// 查詢訂單資料
 			MemberService memberSvc = new MemberService();
 			List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
+			
 			
 			
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/

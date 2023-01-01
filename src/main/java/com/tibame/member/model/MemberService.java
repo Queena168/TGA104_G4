@@ -3,6 +3,7 @@ package com.tibame.member.model;
 import java.util.List;
 
 import com.tibame.designer.model.DesignerOrderJNDIDAO;
+import com.tibame.designer.model.DesignerOrderPhaseVO;
 import com.tibame.designer.model.DesignerOrderVO;
 
 public class MemberService {
@@ -98,6 +99,14 @@ public class MemberService {
 	public MemberVO findMemberNo(String memberAccount) {
 		MemberDAO dao = new MemberDAO();
 		return dao.findMemberNo(memberAccount);
+	}
+	
+	public DesignerOrderPhaseVO designerOrderPhaseVO(Integer orderNo) {
+		MemberDAO dao = new MemberDAO();
+		System.out.println("orderNo:" + orderNo);
+		System.out.println("dao.designerOrderPhaseVO(orderNo):" + dao.designerOrderPhaseVO(orderNo));
+		return dao.designerOrderPhaseVO(orderNo);
+		
 	}
 	
 }
