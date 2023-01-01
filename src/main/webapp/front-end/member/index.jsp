@@ -46,8 +46,8 @@
 					<div class="dropdown-wrapper" id="usermenu" data-collapse="false">
 						<div class="account-wrapper">
 							<!-- login form wrapper -->
-							<div class="account-wrapper__content">
-								<div class="custom-form__btn custom-form__input">
+							<div class="account-wrapper__content" style="text-align:center;">
+								<div class="">
 									<div class="account-wrapper__heading">
 										<span>${memberVO.memberAccount}</span> 
 										<span
@@ -86,8 +86,8 @@
 				</div>
 				<!-- navbar cart icon -->
 				<div class="main-navbar-action__btn nav-dropdown">
-					<a class="dropdown-link" data-target="cartmenu"> <span
-						class="cart-badge">2</span> <i class="icon-shopping-bag"></i>
+					<a class="dropdown-link" data-target="cartmenu"><!--  <span
+						class="cart-badge">2</span> --> <i class="icon-shopping-bag"></i>
 					</a>
 				</div>
 				<!-- navbar actions content -->

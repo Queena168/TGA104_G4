@@ -51,8 +51,9 @@
 						<div class="account-wrapper">
 							<!-- login form wrapper -->
 
-							<div class="account-wrapper__content">
-								<div class="custom-form__btn custom-form__input">
+							<!-- login form wrapper -->
+							<div class="account-wrapper__content" style="text-align: center;">
+								<div class="">
 									<div class="account-wrapper__heading">
 										<span>${memberVO.memberAccount}</span> <span
 											class="account-wrapper__heading--link">${memberVO.memberName}
@@ -61,24 +62,31 @@
 								</div>
 								<div class="account-wrapper__content">
 									<div class="form-group custom-form__input">
-										<a class="dropdown-item " href="memberPorfile.jsp"> <span><i
-												class="icon-user-profile"></i></span>會員資料
-										</a>
+										<!-- <a class="dropdown-item "
+											href="designerPorfile.jsp"> -->
+										<form method="post" action="MemberServlet">
+											<button class="btn">
+												<div>
+													<i class="icon-user-profile"></i>會員資料
+												</div>
+											</button>
+											<input type="hidden" name="memberNo"
+												value="${memberVO.memberNo}"> <input type="hidden"
+												name="action" value="portfolio_GetByNo">
+										</form>
 									</div>
 									<div class="form-group custom-form__input">
-										<a class="dropdown-item  " href="../index.html"><span><i
-												class="icon-log-out"></i></span>登出</a>
+										<form method="post" action="../index.html">
+											<button class="btn">
+												<div>
+													<i class="icon-user-profile"></i>登出
+												</div>
+											</button>
+										</form>
 									</div>
 								</div>
 
 							</div>
-							<!-- account links when user is logged in-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
-							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
-							<!--                            class="icon-sign"></i></span>Addresses</a>-->
-							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
-							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
 
 						</div>
 					</div>
@@ -93,8 +101,8 @@
 				</div>
 				<!-- navbar cart icon -->
 				<div class="main-navbar-action__btn nav-dropdown">
-					<a class="dropdown-link" data-target="cartmenu"> <span
-						class="cart-badge">2</span> <i class="icon-shopping-bag"></i>
+					<a class="dropdown-link" data-target="cartmenu"> <!-- <span
+						class="cart-badge"></span>  --> <i class="icon-shopping-bag"></i>
 					</a>
 				</div>
 				<!-- navbar actions content -->
@@ -150,9 +158,8 @@
 							data-toggle="pill" href="#v-pills-profile" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>會員資料
-						</a> <a class="nav-link" 
-							href="${pageContext.request.contextPath}/SelectOrder" 
-							> <span><i
+						</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/SelectOrder"> <span><i
 								class='bx bx-shopping-bag'></i></span>商品訂單
 						</a> <a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill"
 							href="#v-pills-designorder" role="tab"
@@ -189,20 +196,17 @@
 												<span class="content"> <span>會員帳號</span> <span>${memberVO.memberAccount}</span>
 												</span>
 											</div>
+
+										</div>
+										<div class="profile-info__row">
 											<div class="profile-info__col">
 												<span class="content"> <span>會員名稱</span> <span
 													class="profile-info__col--value ltr">${memberVO.memberName}</span>
 												</span>
 											</div>
-										</div>
-										<div class="profile-info__row">
 											<div class="profile-info__col">
 												<span class="content"> <span>暱稱</span> <span
 													class="profile-info__col--value">${memberVO.nickName}</span>
-												</span>
-											</div>
-											<div class="profile-info__col">
-												<span class="content"> <span>性別</span> <span>${memberVO.gender}</span>
 												</span>
 											</div>
 										</div>
@@ -213,7 +217,7 @@
 												</span>
 											</div>
 											<div class="profile-info__col">
-												<span class="content"> <span>會員頭貼</span> <span></span>
+												<span class="content"> <span>性別</span> <span>${memberVO.gender}</span>
 												</span>
 											</div>
 										</div>
@@ -262,28 +266,36 @@
 												<%-- /錯誤表列 --%>
 
 												<form method="post" action="MemberServlet"
-													class="change-pass">
+													class="change-pass custom-form">
 													<div class="mb-3">
 														<label class="form-label" for="basic-default-fullname">會員帳號</label>
 														<div>${memberVO.memberAccount}</div>
 													</div>
 													<div class="mb-3">
-														<label class="form-label" for="memberPassword">密碼</label>
-														<input name="memberPassword" type="text"
-															class="form-control" id="memberPassword"
-															value="${memberVO.memberPassword}" />
+														<div class="form-group custom-form__input">
+															<label class="form-label" for="memberPassword">密碼</label>
+															<div class="input-box password-box row">
+																<input type="password" class="form-control"
+																	name="memberPassword" id="memberPassword"
+																	value="${memberVO.memberPassword}">
+																<div class="input-box__icon ">
+																	<span class="showhidepassword"><i
+																		class="far fa-eye-slash"></i></span>
+																</div>
+															</div>
+														</div>
 													</div>
-													<div class="mb-3">
+													<div class="mb-3 custom-form__input">
 														<label class="form-label" for="memberName">會員名稱</label> <input
 															type="text" class="form-control" id="memberName"
 															name="memberName" value="${memberVO.memberName}" />
 													</div>
-													<div class="mb-3">
+													<div class="mb-3 custom-form__input">
 														<label class="form-label" for="nickName">暱稱</label> <input
 															type="text" class="form-control" id="nickName"
 															name="nickName" value="${memberVO.nickName}" />
 													</div>
-													<div class="mb-3">
+													<div class="mb-3 custom-form__input">
 														<label class="form-label" for="gender">性別</label>
 														<div class="row">
 															<div class="col-md">
@@ -352,7 +364,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="mb-3">
+													<div class="mb-3 custom-form__input">
 														<label class="form-label" for="nickName">生日</label>
 														<div class="">
 															<input class="form-control" type="date"
@@ -360,11 +372,7 @@
 																name="birthDate" />
 														</div>
 													</div>
-													<div class="mb-3">
-														<label class="form-label" for="basic-default-phone">大頭貼</label>
-														<input type="file" id="basic-default-phone"
-															class="form-control phone-mask" />
-													</div>
+
 													<div class="modal-footer custom-form__btn">
 														<button type="button" class="btn btn-close"
 															data-dismiss="modal">取消</button>
@@ -374,7 +382,7 @@
 															<input type="hidden" name="memberNo"
 																value="${memberVO.memberNo}"> <input
 																type="hidden" name=memberAccount
-																value="${memberVO.memberNo}"> <input
+																value="${memberVO.memberAccount}"> <input
 																type="hidden" name="activaction"
 																value="${memberVO.activaction}">
 														</div>
@@ -388,132 +396,7 @@
 							</div>
 							<!-- end edit profile -->
 						</div>
-						<!-- ProductOrder tab -->
-						<div class="tab-pane fade" id="v-pills-productorder"
-							role="tabpanel" aria-labelledby="v-pills-order-tab">
-							<div class="order-table order-table__collapse">
-								<div class="order-table__head">
-									<div class="order-table__row order-table__row--head">
-										<div class="order-table__cell order-table__cell--hash">#1111</div>
-										<div class="order-table__cell order-table__cell--id">Order
-											Number</div>
-										<div class="order-table__cell order-table__cell--date">Order
-											Date</div>
-										<div class="order-table__cell order-table__cell--receive">Deliver
-											date</div>
-										<div class="order-table__cell order-table__cell--price">Total
-											price</div>
-										<div class="order-table__cell order-table__cell--payment">Payment</div>
-										<div class="order-table__cell order-table__cell--details">Details</div>
-									</div>
-								</div>
-								<div class="order-table__body">
-									<div class="order-table__row">
-										<div class="order-table__cell order-table__cell--hash">1</div>
-										<div class="order-table__cell order-table__cell--id">
-											<div class="order-table__cell--heading">Order number</div>
-											<div class="order-table__cell--content id-content">
-												123456789</div>
-										</div>
-										<div class="order-table__cell order-table__cell--date">
-											<div class="order-table__cell--heading">Order Date</div>
-											<div class="order-table__cell--content date-content">22/06/2019</div>
-										</div>
-										<div class="order-table__cell order-table__cell--receive">
-											<div class="order-table__cell--heading">Deliver State</div>
-											<div class="order-table__cell--content receive-content">
-												<span
-													class="badge order-table__status order-table__status--progress">In
-													progress</span>
-											</div>
-										</div>
-										<div class="order-table__cell order-table__cell--price">
-											<div class="order-table__cell--heading">Total price</div>
-											<div class="order-table__cell--content  price-content">$1,500</div>
-										</div>
-										<div class="order-table__cell order-table__cell--payment">
-											<div class="order-table__cell--heading">Payment</div>
-											<div class="order-table__cell--content  payment-content">Master
-												card</div>
-										</div>
-										<div class="order-table__cell order-table__cell--details">
-											<div class="order-table__cell--heading">Details</div>
-											<div class="order-table__cell--content  details-content">
-												<a href="order-details.html#v-pills-order-tab">View more</a>
-											</div>
-										</div>
-									</div>
-									<div class="order-table__row">
-										<div class="order-table__cell order-table__cell--hash">2</div>
-										<div class="order-table__cell order-table__cell--id">
-											<div class="order-table__cell--heading">Order number</div>
-											<div class="order-table__cell--content id-content">
-												123456789</div>
-										</div>
-										<div class="order-table__cell order-table__cell--date">
-											<div class="order-table__cell--heading">Order Date</div>
-											<div class="order-table__cell--content date-content">1/03/2019</div>
-										</div>
-										<div class="order-table__cell order-table__cell--receive">
-											<div class="order-table__cell--heading">Deliver State</div>
-											<div class="order-table__cell--content receive-content">
-												<span
-													class="badge order-table__status order-table__status--cancel">Canceled</span>
-											</div>
-										</div>
-										<div class="order-table__cell order-table__cell--price">
-											<div class="order-table__cell--heading">Total price</div>
-											<div class="order-table__cell--content  price-content">$500</div>
-										</div>
-										<div class="order-table__cell order-table__cell--payment">
-											<div class="order-table__cell--heading">Payment</div>
-											<div class="order-table__cell--content  payment-content">Paypal</div>
-										</div>
-										<div class="order-table__cell order-table__cell--details">
-											<div class="order-table__cell--heading">Details</div>
-											<div class="order-table__cell--content  details-content">
-												<a href="order-details.html#v-pills-order-tab">View more</a>
-											</div>
-										</div>
-									</div>
-									<div class="order-table__row">
-										<div class="order-table__cell order-table__cell--hash">3</div>
-										<div class="order-table__cell order-table__cell--id">
-											<div class="order-table__cell--heading">Order number</div>
-											<div class="order-table__cell--content id-content">
-												123456789</div>
-										</div>
-										<div class="order-table__cell order-table__cell--date">
-											<div class="order-table__cell--heading">Order Date</div>
-											<div class="order-table__cell--content date-content">12/02/2019</div>
-										</div>
-										<div class="order-table__cell order-table__cell--receive">
-											<div class="order-table__cell--heading">Deliver State</div>
-											<div class="order-table__cell--content receive-content">
-												<span
-													class="badge order-table__status order-table__status--success">Delivered</span>
-											</div>
-										</div>
-										<div class="order-table__cell order-table__cell--price">
-											<div class="order-table__cell--heading">Total price</div>
-											<div class="order-table__cell--content  price-content">$1,850</div>
-										</div>
-										<div class="order-table__cell order-table__cell--payment">
-											<div class="order-table__cell--heading">Payment</div>
-											<div class="order-table__cell--content  payment-content">Master
-												card</div>
-										</div>
-										<div class="order-table__cell order-table__cell--details">
-											<div class="order-table__cell--heading">Details</div>
-											<div class="order-table__cell--content  details-content">
-												<a href="order-details.html#v-pills-order-tab">View more</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 
-						</div>
 						<!-- DesignerOrder tab -->
 						<div class="tab-pane fade" id="v-pills-designorder"
 							role="tabpanel" aria-labelledby="v-pills-wishlist-tab">
@@ -536,57 +419,135 @@
 											<tbody>
 												<c:forEach var="desOrderList" items="${desOrderList}">
 													<tr>
-														<td><strong>${desOrderList.orderNo}</strong></td>
-														<td>${desOrderList.designerVO.designerName}</td>
-														
+														<td>
+															<div class="card-body">
+																<div class="demo-vertical-spacing">
+																	<strong>${desOrderList.orderNo} </strong>
+																</div>
+															</div>
+														</td>
+														<td>
+															<div class="card-body">
+																<div class="demo-vertical-spacing">
+																	${desOrderList.designerVO.designerName}</div>
+															</div>
+														</td>
+
 														<%-- <td>${desOrderList.quotationStatus}</td> --%>
 														<c:choose>
-															<c:when test="${desOrderList.quotationStatus =='報價確認' }">
-																<td>報價確認</td>
+															<c:when test="${desOrderList.quotationStatus =='同意報價' }">
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">報價確認</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.quotationStatus =='確認中' }">
-																<td>確認中</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">確認中</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.quotationStatus =='退回報價' }">
-																<td>退回報價</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">退回報價</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:otherwise>
-																<td>未報價</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">未報價</div>
+																	</div>
+																</td>
 															</c:otherwise>
 														</c:choose>
 														<c:choose>
-															<c:when test="${desOrderList.contractStatus =='合約確認' }">
-																<td>合約確認</td>
+															<c:when test="${desOrderList.contractStatus =='同意合約' }">
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">合約確認</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.contractStatus =='確認中' }">
-																<td>確認中</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">確認中</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.contractStatus =='退回合約' }">
-																<td>退回合約</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">退回合約</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:otherwise>
-																<td>尚未進行</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">尚未進行</div>
+																	</div>
+																</td>
 															</c:otherwise>
 														</c:choose>
-														
-														<td>工程進度</td>
-														
+
+														<%-- <c:choose>
+															<c:when test="${desOrderList.contractStatus =='同意合約' }"> --%>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing"
+																			style="width: 50px;">
+																			<div class="progress">
+																				<div class="progress-bar" role="progressbar"
+																					style="width: 50%" aria-valuenow="75"
+																					aria-valuemin="0" aria-valuemax="100">${desOrderList.designerOrderPhaseVO.totalOrderPhase}</div>
+																			</div>${desOrderList.designerOrderPhaseVO.totalOrderPhase}
+																		</div>
+																	</div>
+																</td>
+															<%-- </c:when> --%>
+															<%-- <c:otherwise>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">尚未進行</div>
+																	</div>
+																</td>
+															</c:otherwise>
+
+														</c:choose> --%>
+
 														<c:choose>
 															<c:when test="${desOrderList.finishStatus =='true' }">
-																<td>已結案</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">已結案</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:otherwise>
-																<td>未結案</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">未結案</div>
+																	</div>
+																</td>
 															</c:otherwise>
 														</c:choose>
 														<td>
 															<form method="post" action="MemberServlet">
-																<label class="btn btn-primary" tabindex="0"> <span
+																<label class="btn btn-primary" tabindex="0"
+																	style="margin-top: 10px;"> <span
 																	class="d-none d-sm-block">明細</span> <i
 																	class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
 																	<input type="submit" class="account-file-input" hidden />
-																	<input type="hidden" name="orderNo" value="${desOrderList.orderNo}"> 
-																	<input type="hidden" name="action" value="desOrder_GetOne">
+																	<input type="hidden" name="orderNo"
+																	value="${desOrderList.orderNo}"> <input
+																	type="hidden" name="memberNo"
+																	value="${desOrderList.memberNo}"> <input
+																	type="hidden" name="action" value="desOrder_GetOne">
 																</label>
 															</form>
 														</td>

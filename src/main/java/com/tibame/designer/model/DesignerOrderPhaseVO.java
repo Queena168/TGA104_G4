@@ -1,6 +1,7 @@
 package com.tibame.designer.model;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 import com.tibame.designer.service.DesignerOrderService;
 
@@ -19,11 +20,18 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 	private Integer orderNo;// (報價單合約訂單表單流水號): int, not null
 	private Integer totalOrderPhase;
 	private Integer totalamount;
+	private byte[] orderPhaseAtt;
 	
 
-
-	
-
+	@Override
+	public String toString() {
+		return "DesignerOrderPhaseVO [phaseNo=" + phaseNo + ", orderPhase=" + orderPhase + ", amount=" + amount
+				+ ", constructionStatus=" + constructionStatus + ", orderPhaseDetail=" + orderPhaseDetail
+				+ ", paymentPhase=" + paymentPhase + ", paymentStatus=" + paymentStatus + ", paymentAtt="
+				+ Arrays.toString(paymentAtt) + ", modificationTime=" + modificationTime + ", orderNo=" + orderNo
+				+ ", totalOrderPhase=" + totalOrderPhase + ", totalamount=" + totalamount + ", orderPhaseAtt="
+				+ Arrays.toString(orderPhaseAtt) + "]";
+	}
 
 	public Integer getPhaseNo() {
 		return phaseNo;
@@ -127,6 +135,18 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 
 	public void setTotalamount(Integer totalamount) {
 		this.totalamount = totalamount;
+	}
+	
+	
+	
+	
+
+	public byte[] getOrderPhaseAtt() {
+		return orderPhaseAtt;
+	}
+
+	public void setOrderPhaseAtt(byte[] orderPhaseAtt) {
+		this.orderPhaseAtt = orderPhaseAtt;
 	}
 
 	public DesignerOrderVO getDesignerOrderVO() {

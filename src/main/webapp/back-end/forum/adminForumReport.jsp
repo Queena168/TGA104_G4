@@ -135,7 +135,7 @@
 						</ul></li>
 
 					<!-- Forum論壇管理 -->
-					<li class="menu-item"><a href="javascript:void(0);"
+					<li class="menu-item active open"><a href="javascript:void(0);"
 						class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-regular fa-pen-to-square"></i>
 							<div data-i18n="Forum">論壇管理</div>
@@ -149,7 +149,7 @@
 								href="../forum/adminForumAll.do" class="menu-link">
 									<div data-i18n="">文章列表</div>
 							</a></li>
-							<li class="menu-item"><a
+							<li class="menu-item active open"><a
 								href="../forum/adminForumReport.do"
 								class="menu-link">
 									<div data-i18n="">檢舉查核</div>

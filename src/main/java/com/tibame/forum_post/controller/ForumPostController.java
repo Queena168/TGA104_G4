@@ -5,20 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.tibame.forum_post.model.ForumPostService;
 import com.tibame.forum_post.model.ForumPostVO;
 import com.tibame.forum_topic.model.ForumTopicService;
 
-@Controller
+@RestController
 @RequestMapping("/front-end/forum")
 public class ForumPostController {
 
@@ -28,29 +29,31 @@ public class ForumPostController {
 	@Autowired
 	ForumTopicService forumTopicService;
 
-	@PostMapping("/search")
-	public String search(Model model, @RequestParam("keyword") String keyword) {
+	@PostMapping("search")
+	public String search(Model model, HttpSession session, @RequestParam("keyword") String keyword) {
+		Map<String, String> message = new HashMap<String, String>();
+		Gson gson = new Gson();
 
 		if (keyword.trim().length() == 0) {
-			return "redirect:forumIndex.do";
+			message.put("error", "請輸入文字");
+			return gson.toJson(message);
 		}
 
 		List<ForumPostVO> resultList = forumPostService.getPostByKeyword(keyword);
-		if (resultList.isEmpty()) {
-			return "/front-end/forum/searchResult.jsp";
-		}
-
+		System.out.println(resultList);
 		List<String> topicNameList = new ArrayList<String>();
-		for (ForumPostVO a : resultList) {
-			topicNameList.add(forumTopicService.getTopicByTopicNo(a.getTopicNo()).getTopicName());
+		if (!resultList.isEmpty()) {
+			for (ForumPostVO a : resultList) {
+				topicNameList.add(forumTopicService.getTopicByTopicNo(a.getTopicNo()).getTopicName());
+			}
 		}
 
-		model.addAttribute("resultList", resultList);
-		model.addAttribute("topicNameList", topicNameList);
-		return "/front-end/forum/searchResult.jsp";
+		session.setAttribute("resultList", resultList);
+		session.setAttribute("topicNameList", topicNameList);
+		message.put("success", "searchResult.jsp");
+		return gson.toJson(message);
 	}
 
-	@ResponseBody
 	@PostMapping("addPost")
 	public String addPost(Model model, @RequestParam("memberNo") Integer memberNo,
 			@RequestParam("topicNo") Integer topicNo, @RequestParam("title") String title,
@@ -85,7 +88,6 @@ public class ForumPostController {
 		return gson.toJson(message);
 	}
 
-	@ResponseBody
 	@PostMapping("updatePost")
 	public String updatePost(Model model, @RequestParam("title") String title, @RequestParam("content") String content,
 			@RequestParam("postNo") Integer postNo, @RequestParam("topicNo") Integer topicNo) {

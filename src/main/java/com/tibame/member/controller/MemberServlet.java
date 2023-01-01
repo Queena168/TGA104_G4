@@ -45,13 +45,15 @@ public class MemberServlet extends HttpServlet {
 			String str = req.getParameter("memberNo");
 			Integer memberNo = Integer.valueOf(str);
 			/*************************** 2.查詢資料 *****************************************/
+			// 查詢訂單資料
 			MemberService memberSvc = new MemberService();
 			List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
 			
 			
+			
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			HttpSession session = req.getSession();
-			session.setAttribute("desOrderList", desOrderList);
+			
+			req.setAttribute("desOrderList", desOrderList);
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/memberPorfile.jsp");
 			successView.forward(req, res);
 		}
@@ -480,17 +482,20 @@ public class MemberServlet extends HttpServlet {
 		if ("desOrder_GetOne".equals(action)) { // 來自memberPorfile.jsp的案件明細請求
 			/*************************** 1.接收請求參數 ****************************************/
 			Integer orderNo = Integer.valueOf(req.getParameter("orderNo"));
+			Integer memberNo = Integer.valueOf(req.getParameter("memberNo"));
 			
 			/*************************** 2.開始修改資料 *****************************************/
 			MemberService memberSvc = new MemberService();
 			DesignerOrderVO findDesignerOrder = memberSvc.findDesignerOrder(orderNo);
 			DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
-			List<DesignerOrderPhaseVO> designerOrderList = designerOrderPhaseSvc.getOrderPhase(orderNo);
+			List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
+			List<DesignerOrderPhaseVO> designerOrderPhase = designerOrderPhaseSvc.getOrderPhase(orderNo);
 			
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			HttpSession session = req.getSession();
-			session.setAttribute("findDesignerOrder", findDesignerOrder);
-			req.setAttribute("designerOrderList", designerOrderList);
+			
+			req.setAttribute("findDesignerOrder", findDesignerOrder);
+			req.setAttribute("desOrderList", desOrderList);
+			req.setAttribute("designerOrderPhase", designerOrderPhase);
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetail.jsp"); 
 			successView.forward(req, res);
 		}

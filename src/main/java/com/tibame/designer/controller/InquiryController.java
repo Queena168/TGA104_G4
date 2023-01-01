@@ -33,11 +33,11 @@ public class InquiryController extends HttpServlet {
 		res.setContentType("text/html;charset=UTF-8");
 		String action = req.getParameter("action");
 		if("insertinquiry".equals(action)) {
-			System.out.println("有進來inquiry===================");
+			//System.out.println("有進來inquiry===================");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			System.out.println("有進來inquiry1===================");
+			//System.out.println("有進來inquiry1===================");
 			String strmember = req.getParameter("memberNo");
 			Integer memberNo = null;
 			try {

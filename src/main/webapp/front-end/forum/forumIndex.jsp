@@ -55,8 +55,8 @@
                         <div class="account-wrapper__content">
                             <form class="custom-form">
                                 <div class="custom-form__btn">
-                                    <a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
-                                    <a class="dropdown-item nav-link" href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
+                                    <a class="dropdown-item nav-link" href="../member/login.jsp">會員登入/註冊</a>
+                                    <a class="dropdown-item nav-link" href="../designer_protfolio/login.jsp">設計師登入/註冊</a>
                                 </div>
                                 
                             </form>
@@ -125,7 +125,7 @@
     <div class="forum_container">
         <div class="subforum">
             <div class="subforum-title">
-                <form method="post" id="search_form" action="search"><!--forumpost.do-->
+                <form method="post" id="search_form"><!-- action="search" forumpost.do-->
                     <input type="text" id="keyword" name="keyword" placeholder="搜尋論壇發文">
                     <input type="hidden" name="action" value="search">
                     <button type="button" class="search_btn" onclick="search()">確認</button>

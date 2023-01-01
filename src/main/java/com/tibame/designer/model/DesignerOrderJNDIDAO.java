@@ -46,12 +46,13 @@ public class DesignerOrderJNDIDAO implements DesignerOrderDAO_interface {
 			pstmt = con.prepareStatement(UPDATE_QUOTATION);
 			pstmt.setInt(1, designerOrderVO.getQuotationAmount());
 			pstmt.setString(2, designerOrderVO.getQuotationDetail());
-			pstmt.setString(3, "送出報價");
+			pstmt.setString(3, "確認中");
+			
 			pstmt.setBytes(4, designerOrderVO.getQuotationAtt());
 			pstmt.setInt(5, designerOrderVO.getOrderNo());
 			pstmt.executeUpdate();
 
-			System.out.println("新增成功");
+			System.out.println("報價新增成功");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -88,7 +89,7 @@ public class DesignerOrderJNDIDAO implements DesignerOrderDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_CONTRACT);
 			pstmt.setString(1, designerOrderVO.getContractDetail());
-			pstmt.setString(2, "送出合約");
+			pstmt.setString(2, "確認中");
 			pstmt.setBytes(3, designerOrderVO.getContractAtt());
 			pstmt.setInt(4, designerOrderVO.getOrderNo());
 			pstmt.executeUpdate();
@@ -305,7 +306,7 @@ public class DesignerOrderJNDIDAO implements DesignerOrderDAO_interface {
 			pstmt.setInt(4, designerOrderVO.getInquirySize());
 			pstmt.setString(5, designerOrderVO.getInquiryDetail());
 			pstmt.setString(6, "未報價");
-			pstmt.setString(7, "未進行合約");
+			pstmt.setString(7, "尚未進行");
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
 
@@ -603,7 +604,6 @@ public class DesignerOrderJNDIDAO implements DesignerOrderDAO_interface {
 				designerOrderVO.setReviewTime(rs.getDate("reviewTime"));
 				designerOrderVO.setFinishStatus(rs.getBoolean("finishStatus"));
 				list.add(designerOrderVO);
-				System.out.println("執行========================");
 
 			}
 

@@ -111,7 +111,8 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
+								href="../designer_portfolio/listAllPortfolio.jsp"
+								class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -333,7 +334,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 								</div>
 							</c:if>
 							<%-- /錯誤表列 --%>
-							
+
 							<!-- Account -->
 							<div class="card-body">
 								<div
@@ -383,19 +384,19 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 										<!-- /排版用區塊  -->
 										<div class="mb-3 col-md-6 ">
 											<label for="firstName" class="form-label">大頭貼</label>
-												<img
+											<ul class="picture_list" id="ul_id">
+												<li style="list-style-type: none;"><img
 													src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoUpdate.adminNo}"
 													alt="user-avatar" class="d-block rounded" height="100"
-													width="100" id="uploadedAvatar" />
-											<br>
+													width="100" id="uploadedAvatar" /></li>
+											</ul>
 											<div class="button-wrapper">
 												<label for="upload" class="btn btn-secondary" tabindex="0">
 													<input type="file" id="upload" class="account-file-input"
 													accept="image/png, image/jpeg" name="adminPic"
-													value="<%=adminVoUpdate.getAdminPic()%>" />
+													 />
 												</label>
-												<p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max
-													size of 800K</p>
+												<p class="text-muted mb-0">Allowed JPG, GIF or PNG.</p>
 											</div>
 										</div>
 										<!-- 排版用區塊  -->
@@ -462,11 +463,21 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 	<script src="../assets/js/main.js"></script>
 
 	<!-- Page JS -->
-	<script src="../assets/js/pages-account-settings-account.js"></script>
-	<script src="../assets/js/adminUpdate-changepic.js"></script>
+	<!-- <script src="../assets/js/pages-account-settings-account.js"></script>
+	<script src="../assets/js/adminUpdate-changepic.js"></script> -->
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	
+	<!-- Pic preview JS  -->
+	<script>
+		/* var adminNo = '${adminVoUpdate.adminNo}'; */
+		var adminpicsrc = '<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoUpdate.adminNo}';
+		var contextpath = '<%=request.getContextPath()%>';
+		console.log("adminpicsrc:" + adminpicsrc);
+	</script>
+	<script src="../assets/js/admin-updatepreviewpic.js"></script>
+	
 </body>
 </html>
 

@@ -31,8 +31,8 @@ public class TopicController {
 	@Autowired
 	ForumReplyService forumReplyService;
 
-	@Autowired
-	ForumJedisService forumJedisService;
+//	@Autowired
+//	ForumJedisService forumJedisService;
 
 	@GetMapping("")
 	public String handlerMethod(Model model, @RequestParam("topicNo") Integer topicNo,
@@ -63,11 +63,12 @@ public class TopicController {
 		model.addAttribute("countList", countList);
 		// 從PostVO中得到postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的總回應數，存入attribute
 
+		ForumJedis jedis = new ForumJedis();
 		for (ForumPostVO a : forumPostVOList) {
-			viewList.add(forumJedisService.getZset(a.getPostNo().toString()).intValue());
+			viewList.add(jedis.getZset(a.getPostNo().toString()).intValue());
 		}
 		model.addAttribute("viewList", viewList);
-		forumJedisService.close();
+		jedis.close();
 		// 取得存於Redis的各文章瀏覽次數
 
 		// =====資料分頁=====

@@ -55,8 +55,8 @@
                         <div class="account-wrapper__content">
                             <form class="custom-form">
                                 <div class="custom-form__btn">
-                                    <a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
-                                    <a class="dropdown-item nav-link" href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
+                                    <a class="dropdown-item nav-link" href="../member/login.jsp">會員登入/註冊</a>
+                                    <a class="dropdown-item nav-link" href="../designer_protfolio/login.jsp">設計師登入/註冊</a>
                                 </div>
                                 
                             </form>
@@ -140,7 +140,7 @@
             <div class="table-head">
                 <div class="status"></div>
                 <div class="subjects">標題</div>
-                <div class="replies">瀏覽次數/回應數</div>
+                <div class="replies">瀏覽/回應</div>
                 <div class="last-reply">最新回應</div>
             </div>
             <c:choose>
