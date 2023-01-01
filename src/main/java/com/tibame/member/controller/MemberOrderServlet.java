@@ -167,11 +167,47 @@ public class MemberOrderServlet extends HttpServlet {
 			req.setAttribute("findDesignerOrder", findDesignerOrder);
 			req.setAttribute("desOrderList", desOrderList);
 			req.setAttribute("designerOrderPhase", designerOrderPhase);
-
+			
 
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetailUpdate.jsp");
 			successView.forward(req, res);
 
+		}
+		
+		if("upload_paymentPic".equals(action)) { // 來自/front-end/member/designerOrederDetail.jsp 點擊 上傳 付款附件按鈕的請求 
+			/*************************** 1.接收請求參數 **********************/
+			Integer phaseNo = Integer.valueOf(req.getParameter("phaseNo"));
+			Integer orderNo = Integer.valueOf(req.getParameter("orderNo"));
+			
+			MemberService memberSvc = new MemberService();
+			DesignerOrderVO designerOrderVO = memberSvc.findDesignerOrder(orderNo);
+			Integer memberNo = designerOrderVO.getMemberNo();
+//			Integer memberNo = Integer.valueOf(req.getParameter("memberNo"));
+			
+			String paymentStatus = "完成付款";
+			
+			DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
+			designerOrderPhaseVO.setPhaseNo(phaseNo);
+			designerOrderPhaseVO.setPaymentStatus(paymentStatus);
+			/*************************** 2.開始修改資料 *****************************************/
+			
+			memberSvc.updatePharePayment(phaseNo);
+			
+			DesignerOrderVO findDesignerOrder = memberSvc.findDesignerOrder(orderNo);
+
+			DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
+			List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
+			List<DesignerOrderPhaseVO> designerOrderPhase = designerOrderPhaseSvc.getOrderPhase(orderNo);
+
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("findDesignerOrder", findDesignerOrder);
+			req.setAttribute("desOrderList", desOrderList);
+			req.setAttribute("designerOrderPhase", designerOrderPhase);
+			
+
+			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetailUpdate.jsp");
+			successView.forward(req, res);
+			
 		}
 
 	}

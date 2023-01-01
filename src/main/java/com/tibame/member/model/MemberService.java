@@ -103,10 +103,13 @@ public class MemberService {
 	
 	public DesignerOrderPhaseVO designerOrderPhaseVO(Integer orderNo) {
 		MemberDAO dao = new MemberDAO();
-		System.out.println("orderNo:" + orderNo);
-		System.out.println("dao.designerOrderPhaseVO(orderNo):" + dao.designerOrderPhaseVO(orderNo));
 		return dao.designerOrderPhaseVO(orderNo);
 		
+	}
+	
+	public void updatePharePayment(Integer phaseNo) {
+		MemberDAO dao = new MemberDAO();
+		dao.updatePharePayment(phaseNo);
 	}
 	
 }

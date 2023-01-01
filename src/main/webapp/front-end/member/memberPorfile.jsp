@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -495,22 +496,26 @@
 															</c:otherwise>
 														</c:choose>
 
-														<%-- <c:choose>
-															<c:when test="${desOrderList.contractStatus =='同意合約' }"> --%>
+														<c:choose>
+															<c:when test="${desOrderList.contractStatus =='同意合約' }"> 
 																<td>
 																	<div class="card-body">
 																		<div class="demo-vertical-spacing"
 																			style="width: 50px;">
 																			<div class="progress">
+																			<c:set var="orderPhase" value="${desOrderList.designerOrderPhaseVO.orderPhase}"></c:set>
+																			<c:set var="totalOrderPhase" value="${desOrderList.designerOrderPhaseVO.totalOrderPhase}"></c:set>
+																			<c:set var="orderPhasePercentage" value="${orderPhase/totalOrderPhase}"></c:set>
 																				<div class="progress-bar" role="progressbar"
-																					style="width: 50%" aria-valuenow="75"
-																					aria-valuemin="0" aria-valuemax="100">${desOrderList.designerOrderPhaseVO.totalOrderPhase}</div>
-																			</div>${desOrderList.designerOrderPhaseVO.totalOrderPhase}
+																					style="width: <fmt:formatNumber type="percent" value="${orderPhasePercentage}" maxFractionDigits="1" />" aria-valuenow="50"
+																					aria-valuemin="0" aria-valuemax="100">
+																				<fmt:formatNumber type="percent" value="${orderPhasePercentage}" maxFractionDigits="1" /></div>
+																			</div><fmt:formatNumber type="percent" value="${orderPhasePercentage}" maxFractionDigits="1" />
 																		</div>
 																	</div>
 																</td>
-															<%-- </c:when> --%>
-															<%-- <c:otherwise>
+															</c:when> 
+															<c:otherwise>
 																<td>
 																	<div class="card-body">
 																		<div class="demo-vertical-spacing">尚未進行</div>
@@ -518,7 +523,7 @@
 																</td>
 															</c:otherwise>
 
-														</c:choose> --%>
+														</c:choose>
 
 														<c:choose>
 															<c:when test="${desOrderList.finishStatus =='true' }">

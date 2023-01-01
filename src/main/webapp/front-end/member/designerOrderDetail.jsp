@@ -113,8 +113,7 @@ td {
 				<!-- navbar cart icon -->
 				<div class="main-navbar-action__btn nav-dropdown">
 					<a class="dropdown-link" data-target="cartmenu"> <!-- <span
-						class="cart-badge">2</span>  -->
-						<i class="icon-shopping-bag"></i>
+						class="cart-badge">2</span>  --> <i class="icon-shopping-bag"></i>
 					</a>
 				</div>
 				<!-- navbar actions content -->
@@ -430,57 +429,148 @@ td {
 											<tbody>
 												<c:forEach var="desOrderList" items="${desOrderList}">
 													<tr>
-														<td><strong>${desOrderList.orderNo}</strong></td>
-														<td>${desOrderList.designerVO.designerName}</td>
+														<td>
+															<div class="card-body">
+																<div class="demo-vertical-spacing">
+																	<strong>${desOrderList.orderNo} </strong>
+																</div>
+															</div>
+														</td>
+														<td>
+															<div class="card-body">
+																<div class="demo-vertical-spacing">
+																	${desOrderList.designerVO.designerName}</div>
+															</div>
+														</td>
 
 														<%-- <td>${desOrderList.quotationStatus}</td> --%>
 														<c:choose>
 															<c:when test="${desOrderList.quotationStatus =='同意報價' }">
-																<td>同意報價</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">報價確認</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.quotationStatus =='確認中' }">
-																<td>確認中</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">確認中</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.quotationStatus =='退回報價' }">
-																<td>退回報價</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">退回報價</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:otherwise>
-																<td>未報價</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">未報價</div>
+																	</div>
+																</td>
 															</c:otherwise>
 														</c:choose>
 														<c:choose>
-															<c:when test="${desOrderList.contractStatus =='合約' }">
-																<td>同意合約</td>
+															<c:when test="${desOrderList.contractStatus =='同意合約' }">
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">合約確認</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.contractStatus =='確認中' }">
-																<td>確認中</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">確認中</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:when test="${desOrderList.contractStatus =='退回合約' }">
-																<td>退回合約</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">退回合約</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:otherwise>
-																<td>尚未進行</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">尚未進行</div>
+																	</div>
+																</td>
 															</c:otherwise>
 														</c:choose>
 
-														<td>工程進度</td>
+														<c:choose>
+															<c:when test="${desOrderList.contractStatus =='同意合約' }">
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing"
+																			style="width: 50px;">
+																			<div class="progress">
+																				<c:set var="orderPhase"
+																					value="${desOrderList.designerOrderPhaseVO.orderPhase}"></c:set>
+																				<c:set var="totalOrderPhase"
+																					value="${desOrderList.designerOrderPhaseVO.totalOrderPhase}"></c:set>
+																				<c:set var="orderPhasePercentage"
+																					value="${orderPhase/totalOrderPhase}"></c:set>
+																				<div class="progress-bar" role="progressbar"
+																					style="width: <fmt:formatNumber type="percent" value="${orderPhasePercentage}" maxFractionDigits="1" />"
+																					aria-valuenow="50" aria-valuemin="0"
+																					aria-valuemax="100">
+																					<fmt:formatNumber type="percent"
+																						value="${orderPhasePercentage}"
+																						maxFractionDigits="1" />
+																				</div>
+																			</div>
+																			<fmt:formatNumber type="percent"
+																				value="${orderPhasePercentage}"
+																				maxFractionDigits="1" />
+																		</div>
+																	</div>
+																</td>
+															</c:when>
+															<c:otherwise>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">尚未進行</div>
+																	</div>
+																</td>
+															</c:otherwise>
+
+														</c:choose>
 
 														<c:choose>
 															<c:when test="${desOrderList.finishStatus =='true' }">
-																<td>已結案</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">已結案</div>
+																	</div>
+																</td>
 															</c:when>
 															<c:otherwise>
-																<td>未結案</td>
+																<td>
+																	<div class="card-body">
+																		<div class="demo-vertical-spacing">未結案</div>
+																	</div>
+																</td>
 															</c:otherwise>
 														</c:choose>
 														<td>
 															<form method="post" action="MemberServlet">
-																<label class="btn btn-primary" tabindex="0"> <span
+																<label class="btn btn-primary" tabindex="0"
+																	style="margin-top: 10px;"> <span
 																	class="d-none d-sm-block">明細</span> <i
 																	class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
 																	<input type="submit" class="account-file-input" hidden />
 																	<input type="hidden" name="orderNo"
 																	value="${desOrderList.orderNo}"> <input
+																	type="hidden" name="memberNo"
+																	value="${desOrderList.memberNo}"> <input
 																	type="hidden" name="action" value="desOrder_GetOne">
 																</label>
 															</form>
@@ -891,26 +981,49 @@ td {
 																			<td style="vertical-align: middle;"><strong>${designerOrderPhase.orderPhase}</strong></td>
 																			<fmt:setLocale value="zh_TW" />
 																			<td style="vertical-align: middle;"><fmt:formatNumber
-																					value="${designerOrderPhase.amount}" type="currency"
-																					maxFractionDigits="0" /></td>
+																					value="${designerOrderPhase.amount}"
+																					type="currency" maxFractionDigits="0" /></td>
 																			<td style="vertical-align: middle;">${designerOrderPhase.constructionStatus}</td>
-																			<td style="vertical-align: middle;">
-																				<%-- <img
-																				src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoList.adminNo}"
-																				alt class="avatar w-px-40 rounded-circle" /> --%>施工圖片
-																			</td>
+																			<td style="vertical-align: middle;"><c:choose>
+																					<c:when
+																						test="${designerOrderPhase.constructionStatus =='完成施工' }">
+																						<img
+																							src="<%=request.getContextPath()%>/OrderPhasePicReader?phaseNo=${designerOrderPhase.phaseNo}"
+																							alt="user-avatar" class="d-block rounded"
+																							height="100" width="100" id="uploadedAvatar" />
+																					</c:when>
+																					<c:otherwise>
+																						尚未提供圖片
+																					</c:otherwise>
+
+																				</c:choose></td>
+
 																			<td style="vertical-align: middle;">${designerOrderPhase.paymentStatus}</td>
-																			<td style="vertical-align: middle;"><input
-																				type="file" name="upfilequotation" id="fileinp"></td>
-																			<td style="vertical-align: middle;"><label
-																				class="btn btn-primary" tabindex="0"> <span
-																					class="d-none d-sm-block">上傳</span> <i
-																					class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
-																					<%-- <input type="submit" class="account-file-input"
-																					hidden /> <input type="hidden" name="phaseNo"
-																					value="${desOrderList.phaseNo}"> <input
-																					type="hidden" name="action" value="desOrder_GetOne"> --%>
-																			</label></td>
+
+																			<c:choose>
+																				<c:when
+																					test="${designerOrderPhase.paymentStatus =='完成付款' }">
+																					<td style="vertical-align: middle;"></td>
+																					<td style="vertical-align: middle;"></td>
+																				</c:when>
+
+																				<c:otherwise>
+																					<td style="vertical-align: middle;"><input
+																						type="file" name="paymentAtt" id="fileinp"></td>
+																					<td style="vertical-align: middle;"><label
+																						class="btn btn-primary" tabindex="0"> <span
+																							class="d-none d-sm-block">上傳</span> <i
+																							class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+																							<input type="submit" class="account-file-input"
+																							hidden /> <input type="hidden" name="phaseNo"
+																							value="${designerOrderPhase.phaseNo}"> <input
+																							type="hidden" name="orderNo"
+																							value="${designerOrderPhase.orderNo}"> <input
+																							type="hidden" name="action"
+																							value="upload_paymentPic">
+																					</label></td>
+																				</c:otherwise>
+																			</c:choose>
 																		</tr>
 																	</c:forEach>
 																</tbody>
@@ -933,7 +1046,6 @@ td {
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<!-- end main content -->
 	<!-- footer -->

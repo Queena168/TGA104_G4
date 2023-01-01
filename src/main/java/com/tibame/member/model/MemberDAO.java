@@ -671,8 +671,6 @@ public class MemberDAO implements Member_interface {
 				designerOrderPhaseVO.setPaymentAtt(rs.getBytes("paymentAtt"));
 				designerOrderPhaseVO.setModificationTime(rs.getDate("modificationTime"));
 				
-				System.out.println("rs.getInt(\"phaseNo\")" + rs.getInt("phaseNo"));
-				System.out.println("rs.getInt(\"orderNo\")" + rs.getInt("orderNo"));
 				
 			}
 
@@ -683,8 +681,49 @@ public class MemberDAO implements Member_interface {
 			// process sql exception
 			se.printStackTrace(System.err);
 		}
-		System.out.println("MemberVO designerOrderPhaseVO:" + designerOrderPhaseVO);
+		
 		return designerOrderPhaseVO;
+	}
+	
+	private static final String UPDATEPHAREPAYMENT = "UPDATE DesignerOrderPhase set paymentStatus='完成付款' where phaseNo = ?;";
+
+	public void updatePharePayment(Integer phaseNo) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATEPHAREPAYMENT);
+			pstmt.setInt(1, phaseNo);
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
 	}
 
 }
