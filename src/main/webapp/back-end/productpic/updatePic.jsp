@@ -332,9 +332,9 @@
 		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
 		<div class="mb-3">
 			<label for="#" class="form-label">商品編號:<font color=red><b>*</b></font></label> 			
-			<input type="TEXT" class="form-control" 
-				name="productNo" value="${productPicVO.productNo}" 
-				size="45" readonly="readonly"/>
+			<input type="hidden" class="form-control" 
+				name="productNo" value ="${productPicVO.productNo}" 
+				size="45" readonly="readonly"/>${productPicVO.productNo}
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品名稱:</label> 			

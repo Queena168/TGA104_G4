@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
-	data-theme="theme-default" data-assets-path="../assets/"
+	data-theme="theme-default" data-assets-path="${pageContext.request.contextPath}/back-end/assets/"
 	data-template="vertical-menu-template-free">
 <head>
 <meta charset="utf-8" />
@@ -19,7 +19,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="${pageContext.request.contextPath}/back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -31,30 +31,30 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/core.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="../assets/vendor/css/theme-default.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="../assets/css/demo.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+	href="${pageContext.request.contextPath}/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet"
-	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+	href="${pageContext.request.contextPath}/back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/css/pages/page-auth.css" />
 <!-- Helpers -->
-<script src="../assets/vendor/js/helpers.js"></script>
+<script src="${pageContext.request.contextPath}/back-end/assets/vendor/js/helpers.js"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="../assets/js/config.js"></script>
+<script src="${pageContext.request.contextPath}/back-end/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -87,7 +87,7 @@
 
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../member/Admin-Member-MemberInfo.html" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/member/Admin-Member-MemberInfo.html" class="menu-link">
 									<div data-i18n="">會員資料管理</div>
 							</a></li>
 						</ul></li>
@@ -100,12 +100,12 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-DesignerInfo.html"
+								href="${pageContext.request.contextPath}/back-end/designer/Admin-Design-DesignerInfo.html"
 								class="menu-link">
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/designer_portfolio/listAllPortfolio.jsp" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -118,20 +118,20 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../order/Admin-Order-OrderList.html" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/order/Admin-Order-OrderList.html" class="menu-link">
 									<div data-i18n="">合約案件列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../order/Admin-Order-OrderListDetail.html"
+								href="${pageContext.request.contextPath}/back-end/order/Admin-Order-OrderListDetail.html"
 								class="menu-link">
 									<div data-i18n="">合約案件明細</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../order/Admin-Order-ReviewList.html" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/order/Admin-Order-ReviewList.html" class="menu-link">
 									<div data-i18n="">評價列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../order/Admin-Order-OrderReportCheck.html"
+								href="${pageContext.request.contextPath}/back-end/order/Admin-Order-OrderReportCheck.html"
 								class="menu-link">
 									<div data-i18n="">評價檢舉查核</div>
 							</a></li>
@@ -145,24 +145,24 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumMaintain.html" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/forum/Admin-Forum-ForumMaintain.html" class="menu-link">
 									<div data-i18n="">論壇維護</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumList.html" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/forum/Admin-Forum-ForumList.html" class="menu-link">
 									<div data-i18n="">發文列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumReportCheck.html"
+								href="${pageContext.request.contextPath}/back-end/forum/Admin-Forum-ForumReportCheck.html"
 								class="menu-link">
 									<div data-i18n="">發文檢舉查核</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ReplyList.html" class="menu-link">
+								href="${pageContext.request.contextPath}/back-end/forum/Admin-Forum-ReplyList.html" class="menu-link">
 									<div data-i18n="">留言列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ReplyReportCheck.html"
+								href="${pageContext.request.contextPath}/back-end/forum/Admin-Forum-ReplyReportCheck.html"
 								class="menu-link">
 									<div data-i18n="">留言檢舉查核</div>
 							</a></li>
@@ -176,17 +176,17 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductList.html"
+								href="${pageContext.request.contextPath}/back-end/product/Admin-Product-ProductList.html"
 								class="menu-link">
 									<div data-i18n="">商品列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductType.html"
+								href="${pageContext.request.contextPath}/back-end/product/Admin-Product-ProductType.html"
 								class="menu-link">
 									<div data-i18n="">商品類別</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductOrderList.html"
+								href="${pageContext.request.contextPath}/back-end/product/Admin-Product-ProductOrderList.html"
 								class="menu-link">
 									<div data-i18n="">商品訂單管理</div>
 							</a></li>
@@ -200,12 +200,12 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../article/Admin-Article-ArticleList.html"
+								href="${pageContext.request.contextPath}/back-end/article/Admin-Article-ArticleList.html"
 								class="menu-link">
 									<div data-i18n="">報導文章列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../article/Admin-Article-ArticleType.html"
+								href="${pageContext.request.contextPath}/back-end/article/Admin-Article-ArticleType.html"
 								class="menu-link">
 									<div data-i18n="">報導文章類別</div>
 							</a></li>
@@ -251,7 +251,7 @@
 								href="javascript:void(0);" data-bs-toggle="dropdown">
 									<div class="avatar avatar-online">
 										<img
-											src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+											src="${pageContext.request.contextPath}/AdminPicReader?adminNo=${adminVO.adminNo}"
 											alt class="w-px-40 rounded-circle" />
 									</div>
 							</a>
@@ -261,7 +261,7 @@
 												<div class="flex-shrink-0 me-3">
 													<div class="avatar avatar-online">
 														<img
-															src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+															src="${pageContext.request.contextPath}/AdminPicReader?adminNo=${adminVO.adminNo}"
 															alt class="w-px-40  rounded-circle" />
 													</div>
 												</div>
@@ -273,7 +273,7 @@
 									</a></li>
 
 									<li><form method="post"
-											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+											action="${pageContext.request.contextPath}/back-end/admin/admin.do">
 											<div class="dropdown-item">
 
 												<label class="btn rounded-pill bg-label-secondary"
@@ -286,7 +286,7 @@
 											</div>
 										</form></li>
 									<li><a class="dropdown-item"
-										href="../adminLogin/admin-login.jsp"> <label
+										href="${pageContext.request.contextPath}/back-end/adminLogin/admin-login.jsp"> <label
 											class="btn rounded-pill bg-label-secondary" tabindex="0">
 												<i class="bx bx-power-off me-2"></i> <span
 												class="align-middle">Log Out</span>
@@ -312,16 +312,15 @@
 									<div class="card-body">
 
 										<h5 class="mb-2 card-title text-center">新增商品類別</h5>
-	<%-- 錯誤表列 --%>
+										
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
-	<form id="#" class="mb-3"  METHOD="post" action="../../AddProductTypeServlet" name="form1">
+	<form id="#" class="mb-3"  METHOD="post" action="${pageContext.request.contextPath}/AddProductTypeServlet" name="form1">
 		<div class="mb-3">
 			<label for="#" class="form-label">商品類別名稱:</label> 
 			<input
@@ -333,7 +332,7 @@
 			class="btn btn-primary d-grid w-100" type="submit"
 			value="送出新增">
 	</form>
-	<a href="../../SelectAllProductType">回商品類別頁</a>
+	<a href="${pageContext.request.contextPath}/SelectAllProductType">回商品類別頁</a>
 </div>
 								</div>
 								<!-- Register Card -->
@@ -372,26 +371,26 @@
 
 	<!-- Core JS -->
 	<!-- build:js assets/vendor/js/core.js -->
-	<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="../assets/vendor/libs/popper/popper.js"></script>
-	<script src="../assets/vendor/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/popper/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/js/bootstrap.js"></script>
 	<script
-		src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-	<script src="../assets/vendor/js/menu.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/js/menu.js"></script>
 	<!-- endbuild -->
 
 	<!-- Vendors JS -->
-	<script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 	<!-- Main JS -->
-	<script src="../assets/js/main.js"></script>
-	<script src="../assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/main.js"></script>
 
 
 	<!-- Page JS -->
-	<script src="../assets/js/dashboards-analytics.js"></script>
-	<script src="../assets/js/admin-picpreview.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/dashboards-analytics.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/admin-picpreview.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

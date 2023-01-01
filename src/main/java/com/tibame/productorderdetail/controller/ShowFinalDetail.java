@@ -28,6 +28,7 @@ public class ShowFinalDetail extends HttpServlet {
 		if(auth!=null){
 			req.setAttribute("auth", auth);
 			req.setAttribute("orders", orders);
+			req.getAttribute("productOrderVO");
 			String url = "/front-end/order/showOrderDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);

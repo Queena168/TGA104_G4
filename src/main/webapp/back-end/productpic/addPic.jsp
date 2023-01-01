@@ -325,14 +325,20 @@
 	
 	<form id="#" class="mb-3"  METHOD="post" action="../../PicServlet" enctype="multipart/form-data" name="form1">
 		<div class="mb-3">
-			<label for="#" class="form-label">商品編號:</label> 
-			<input
-				type="text" class="form-control" id="#"
-				name="productNo" placeholder="輸入商品編號"/>
-		</div>
+		<jsp:useBean id="productService" scope="page" class="com.tibame.product.model.ProductService" />
+			<tr>
+				<td>商品:<font color=red><b>*</b></font></td>
+				<td><select size="1" name="productNo">
+					<c:forEach var="productVO" items="${productService.all}">
+						<option class="form-control" value="${productVO.productNo}" ${(productVO.productNo==productVO.productNo)? 'selected':'' } >
+						${productVO.productName}
+					</c:forEach>
+				</select></td>
+			</tr>	
+		</div>		
 		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
 		<div class="mb-3">
-			<label for="firstName" class="form-label">大頭貼</label>
+			<label for="firstName" class="form-label">上傳圖片:</label>
 			<ul class="picture_list list-unstyled mt-2"></ul>
 			<div class="button-wrapper">
 				<label for="upload" class="btn btn-secondary" tabindex="0">

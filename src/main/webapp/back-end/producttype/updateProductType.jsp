@@ -18,7 +18,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -86,7 +86,7 @@
 
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../member/Admin-Member-MemberInfo.html" class="menu-link">
+								href="back-end/member/Admin-Member-MemberInfo.html" class="menu-link">
 									<div data-i18n="">會員資料管理</div>
 							</a></li>
 						</ul></li>
@@ -99,12 +99,12 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-DesignerInfo.html"
+								href="back-end/designer/Admin-Design-DesignerInfo.html"
 								class="menu-link">
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../designer_portfolio/listAllPortfolio.jsp" class="menu-link">
+								href="back-end/designer_portfolio/listAllPortfolio.jsp" class="menu-link">
 									<div data-i18n="">作品管理</div>
 							</a></li>
 						</ul></li>
@@ -121,16 +121,16 @@
 									<div data-i18n="">合約案件列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../order/Admin-Order-OrderListDetail.html"
+								href="back-end/order/Admin-Order-OrderListDetail.html"
 								class="menu-link">
 									<div data-i18n="">合約案件明細</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../order/Admin-Order-ReviewList.html" class="menu-link">
+								href="back-end/order/Admin-Order-ReviewList.html" class="menu-link">
 									<div data-i18n="">評價列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../order/Admin-Order-OrderReportCheck.html"
+								href="back-end/order/Admin-Order-OrderReportCheck.html"
 								class="menu-link">
 									<div data-i18n="">評價檢舉查核</div>
 							</a></li>
@@ -144,24 +144,24 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumMaintain.html" class="menu-link">
+								href="back-end/forum/Admin-Forum-ForumMaintain.html" class="menu-link">
 									<div data-i18n="">論壇維護</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumList.html" class="menu-link">
+								href="back-end/forum/Admin-Forum-ForumList.html" class="menu-link">
 									<div data-i18n="">發文列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ForumReportCheck.html"
+								href="back-end/forum/Admin-Forum-ForumReportCheck.html"
 								class="menu-link">
 									<div data-i18n="">發文檢舉查核</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ReplyList.html" class="menu-link">
+								href="back-end/forum/Admin-Forum-ReplyList.html" class="menu-link">
 									<div data-i18n="">留言列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../forum/Admin-Forum-ReplyReportCheck.html"
+								href="back-end/forum/Admin-Forum-ReplyReportCheck.html"
 								class="menu-link">
 									<div data-i18n="">留言檢舉查核</div>
 							</a></li>
@@ -185,7 +185,7 @@
 									<div data-i18n="">商品類別</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductOrderList.html"
+								href="back-end/product/Admin-Product-ProductOrderList.html"
 								class="menu-link">
 									<div data-i18n="">商品訂單管理</div>
 							</a></li>
@@ -199,12 +199,12 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../article/Admin-Article-ArticleList.html"
+								href="back-end/article/Admin-Article-ArticleList.html"
 								class="menu-link">
 									<div data-i18n="">報導文章列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../article/Admin-Article-ArticleType.html"
+								href="back-end/article/Admin-Article-ArticleType.html"
 								class="menu-link">
 									<div data-i18n="">報導文章類別</div>
 							</a></li>
@@ -311,9 +311,8 @@
 
 						<!-- Update Admin Info -->
 						<div class="card mb-4">
-<%-- 錯誤表列 --%>
+						
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>

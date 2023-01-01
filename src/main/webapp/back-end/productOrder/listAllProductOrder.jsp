@@ -327,7 +327,7 @@
 						<tbody class="table-border-bottom-0">
 							<c:forEach var="productOrderVO" items="${list}">
 								<tr>
-									<td><strong>${productOrderVO.orderNo}</strong></td>
+									<td><strong>${productOrderVO.ooNo}</strong></td>
 									<td>${productOrderVO.memberNo}</td>
 									<td>${productOrderVO.totalQTY}</td>
 									<td>${productOrderVO.totalAmount}</td>

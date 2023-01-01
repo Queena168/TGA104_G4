@@ -29,7 +29,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 		}
 	}
 
-	private static final String GET_ALL_STMT = "SELECT orderNo, memberNo, receiverName, receiverPhone, receiverAddress, totalQTY, totalAmount, invoiceNo, "
+	private static final String GET_ALL_STMT = "SELECT ooNo, orderNo, memberNo, receiverName, receiverPhone, receiverAddress, totalQTY, totalAmount, invoiceNo, "
 			+ "businessNumber, paidDate, shipDate, orderStatus FROM ProductOrder order by orderNo";
 	private static final String INSERT_STMT = "insert into ProductOrder(memberNo, receiverName, receiverPhone, receiverAddress, totalQTY, totalAmount, invoiceNo, "
 			+ "businessNumber, paidDate, shipDate, orderStatus)" + " " + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -152,6 +152,7 @@ public class ProductOrderJDBCDAO implements ProductOrderDAO_interface {
 				while (rs.next()) {
 					// ProductTypeVO 也稱為 Domain objects
 					productOrderVO = new ProductOrderVO();
+					productOrderVO.setOoNo(rs.getInt("ooNo"));
 					productOrderVO.setOrderNo(rs.getInt("orderNo"));
 					productOrderVO.setMemberNo(rs.getInt("memberNo"));
 					productOrderVO.setReceiverName(rs.getString("receiverName"));

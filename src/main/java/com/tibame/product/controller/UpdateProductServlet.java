@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.tibame.product.model.ProductService;
 import com.tibame.product.model.ProductVO;
 
-/**
- * Servlet implementation class UpdateProductServlet
- */
+
 @WebServlet("/UpdateProductServlet")
 public class UpdateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -96,7 +94,7 @@ public class UpdateProductServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("productVO", productVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/product/update_product_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/product/updateProduct.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}

@@ -18,7 +18,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="${pageContext.request.contextPath}/back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -30,30 +30,30 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/core.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="../assets/vendor/css/theme-default.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="../assets/css/demo.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+	href="${pageContext.request.contextPath}/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet"
-	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+	href="${pageContext.request.contextPath}/back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back-end/assets/vendor/css/pages/page-auth.css" />
 <!-- Helpers -->
-<script src="../assets/vendor/js/helpers.js"></script>
+<script src="${pageContext.request.contextPath}/back-end/assets/vendor/js/helpers.js"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="../assets/js/config.js"></script>
+<script src="${pageContext.request.contextPath}/back-end/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -312,7 +312,7 @@
 
 										<h5 class="mb-2 card-title text-center">商品資料新增</h5>
 
-	<%-- 錯誤表列 --%>
+
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
@@ -322,14 +322,20 @@
 		</ul>
 	</c:if>
 	
-	<form id="#" class="mb-3"  METHOD="post" action="../../AddProductServlet" name="form1">
+	<form id="#" class="mb-3"  METHOD="post" action="${pageContext.request.contextPath}/AddProductServlet" name="form1">
 		<div class="mb-3">
-			<label for="#" class="form-label">商品類別編號:</label> 
-			<input
-				type="text" class="form-control" id="#"
-				name="productTypeNo" placeholder="輸入商品編號"
-			/>
+		<jsp:useBean id="productTypeService" scope="page" class="com.tibame.producttype.model.ProductTypeService" />
+			<tr>
+				<td>商品類別:<font color=red><b>*</b></font></td>
+				<td><select size="1" name="productTypeNo">
+					<c:forEach var="productTypeVO" items="${productTypeService.all}">
+						<option class="form-control" value="${productTypeVO.productTypeNo}" ${(productTypeVO.productTypeNo==productTypeVO.productTypeNo)? 'selected':'' } >
+						${productTypeVO.productTypeName}
+					</c:forEach>
+				</select></td>
+			</tr>	
 		</div>
+		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品名稱:</label> 
 			<input
@@ -337,6 +343,7 @@
 				name="productName" placeholder="輸入商品名稱"
 			/>
 		</div>
+		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品庫存量:</label> 
 			<input
@@ -344,6 +351,7 @@
 				name="stock" placeholder="輸入商品庫存量"
 			/>
 		</div>
+		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品價格:</label> 
 			<input
@@ -351,6 +359,7 @@
 				name="price" placeholder="輸入商品價格"
 			/>
 		</div>
+		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品描述:</label> 
 			<input
@@ -358,6 +367,7 @@
 				name="productDescription" placeholder="輸入商品描述"
 			/>
 		</div>
+		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品狀態:</label> 
 			<input
@@ -365,12 +375,18 @@
 				name="productStatus" placeholder="輸入商品狀態"
 			/>
 		</div>
+		
 		<div class="mb-3">
-			<label for="#" class="form-label">管理員:</label> 
-			<input
-				type="text" class="form-control" id="#"
-				name="adminNo"
-			/>
+		<jsp:useBean id="adminService" scope="page" class="com.tibame.admin.model.AdminService" />
+			<tr>
+				<td>管理員:<font color=red><b>*</b></font></td>
+				<td><select size="1" name="adminNo">
+					<c:forEach var="adminVO" items="${adminService.all}">
+						<option class="form-control" value="${adminVO.adminNo}" ${(adminVO.adminNo==adminVO.adminNo)? 'selected':'' } >
+						${adminVO.adminNo}
+					</c:forEach>
+				</select></td>
+			</tr>	
 		</div>
 		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
 		<input type="hidden" name="action" value="insertProduct"> <input
@@ -416,26 +432,26 @@
 
 	<!-- Core JS -->
 	<!-- build:js assets/vendor/js/core.js -->
-	<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="../assets/vendor/libs/popper/popper.js"></script>
-	<script src="../assets/vendor/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/popper/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/js/bootstrap.js"></script>
 	<script
-		src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-	<script src="../assets/vendor/js/menu.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/js/menu.js"></script>
 	<!-- endbuild -->
 
 	<!-- Vendors JS -->
-	<script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 	<!-- Main JS -->
-	<script src="../assets/js/main.js"></script>
-	<script src="../assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/main.js"></script>
 
 
 	<!-- Page JS -->
-	<script src="../assets/js/dashboards-analytics.js"></script>
-	<script src="../assets/js/admin-picpreview.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/dashboards-analytics.js"></script>
+	<script src="${pageContext.request.contextPath}/back-end/assets/js/admin-picpreview.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>

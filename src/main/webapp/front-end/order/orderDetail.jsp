@@ -155,6 +155,13 @@
 <h3>本次消費金額：$ ${(total>0)?total:0}</h3>
 <br>
 <h3>收貨資訊</h3>
+<c:if test="${not empty errorMsgs}">
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
 <form METHOD="get" ACTION="${pageContext.request.contextPath}/CheckOutServlet">
   <div class="form-row">
     <div class="form-group col-md-6">

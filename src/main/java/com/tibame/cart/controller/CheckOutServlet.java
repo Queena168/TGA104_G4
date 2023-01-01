@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -131,20 +132,38 @@ public class CheckOutServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			receiverName = req.getParameter("rname").trim();
+			String receiverNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 			if (receiverName == null || receiverName.trim().length() == 0) {
-				errorMsgs.add("姓名請勿空白");
-			}
+				errorMsgs.add("收件人姓名請勿空白");
+			} else if(!receiverName.trim().matches(receiverName)) { 
+				errorMsgs.add("收件人姓名只能是中、英文字母");
+            }
 			
 			receiverPhone = req.getParameter("rphone").trim();
+			String receiverPhoneReg = "^[(0-9)]{2,10}$";
 			if (receiverPhone == null || receiverPhone.trim().length() == 0) {
 				errorMsgs.add("電話請勿空白");
-			}
+			} else if(!receiverPhone.trim().matches(receiverPhoneReg)) { 
+				errorMsgs.add("收件電話只能是數字");
+            }
 			
 			receiverAddress = req.getParameter("raddress").trim();
 			if (receiverAddress == null || receiverAddress.trim().length() == 0) {
 				errorMsgs.add("地址請勿空白");
+			}
+			String receiverAddressReg = "^[(\u4e00-\u9fa5)(0-9)]$";
+			if (receiverAddress == null || receiverName.trim().length() == 0) {
+				errorMsgs.add("收件地址請勿空白");
+			} else if(!receiverAddress.trim().matches(receiverName)) { 
+				errorMsgs.add("收件地址只能包含中文字與數字");
+            }
+			
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("ShowOrderDetail");
+				failureView.forward(req, res);
+				return;
 			}
 		}
 		
@@ -203,6 +222,7 @@ public class CheckOutServlet extends HttpServlet {
 //		System.out.println("cart_list" + cart_list.get(0).getProductName());
 //		System.out.println("cart_list" + cart_list.get(1).getProductName());
 	    }
+
 //		System.out.println("ordersItems" + ordersItems.get(0).getProductName());
 //		System.out.println("ordersItems" + ordersItems.get(1).getProductName());
 		productOrderVO.setItems(ordersItems);

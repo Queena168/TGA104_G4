@@ -18,7 +18,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -330,41 +330,55 @@
 				size="45" readonly="readonly"/>${productVO.productNo}
 		</div>
 		<!-- <button class="btn btn-primary d-grid w-100">註冊</button> -->
-		<div class="mb-3">
-			<label for="#" class="form-label">商品類別編號:</label> 			
-			<input type="text" class="form-control" 
-				name="productTypeNo" size="45" value="${productVO.productTypeNo}"/>
-		</div>
+	    <div class="mb-3">
+	    <jsp:useBean id="productTypeService" scope="page" class="com.tibame.producttype.model.ProductTypeService" />
+	        <tr>
+	            <td>商品類別:<font color=red><b>*</b></font></td>
+	            <td><select size="1" name="productTypeNo">
+	                <c:forEach var="productTypeVO" items="${productTypeService.all}">
+	                    <option class="form-control" value="${productTypeVO.productTypeNo}" ${(productTypeVO.productTypeNo==productTypeVO.productTypeNo)? 'selected':'' } >
+	                    ${productTypeVO.productTypeName}
+	                </c:forEach>
+	            </select></td>
+	        </tr>	
+	    </div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品名稱:</label> 			
 			<input type="text" class="form-control" 
-				name="productName" size="45" value="${productVO.productName}"/>
+				name="productName" size="45"/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品庫存量:</label> 			
 			<input type="text" class="form-control" 
-				name="stock" size="45" value="${productVO.stock}"/>
+				name="stock" size="45"/>
 		</div>		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品單價:</label> 			
 			<input type="text" class="form-control" 
-				name="price" size="45" value="${productVO.price}"/>
+				name="price" size="45"/>
 		</div>		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品描述:</label> 			
 			<input type="text" class="form-control" 
-				name="productDescription" size="45" value="${productVO.productDescription}"/>
+				name="productDescription" size="45"/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品狀態:</label> 			
 			<input type="text" class="form-control" 
-				name="productStatus" size="45" value="${productVO.productStatus}"/>
+				name="productStatus" size="45"/>
 		</div>	
-		<div class="mb-3">
-			<label for="#" class="form-label">管理員編號:</label> 			
-			<input type="hidden" class="form-control" 
-				name="adminNo" size="45" value="${productVO.adminNo}" readonly="readonly"/>${productVO.adminNo}
-		</div>									
+	    <div class="mb-3">
+	    <jsp:useBean id="adminService" scope="page" class="com.tibame.admin.model.AdminService" />
+	        <tr>
+	            <td>管理員:<font color=red><b>*</b></font></td>
+	            <td><select size="1" name="adminNo">
+	                <c:forEach var="adminVO" items="${adminService.all}">
+	                    <option class="form-control" value="${adminVO.adminNo}" ${(adminVO.adminNo==adminVO.adminNo)? 'selected':'' } >
+	                    ${adminVO.adminNo}
+	                </c:forEach>
+	            </select></td>
+	        </tr>	
+	    </div>						
 		<input type="hidden" name="action" value="updateProduct"> 
 		<input type="hidden" name="productNo" value="${productVO.productNo}">
 		<input

@@ -161,7 +161,7 @@
 	<table class="table table-light">
 		<thead> 
 			<tr>
-				<th scope="col">訂單編號</th>
+<!-- 				<th scope="col">訂單編號</th> -->
 <!-- 				<th scope="col">商品編號</th> -->
 				<th scope="col">商品名稱</th>
 				<th scope="col">單價</th>
@@ -172,13 +172,13 @@
 		<tbody>
 		<c:forEach var="o" items="${orders}">
 			<tr>
-				<td>${o.orderNo}</td>
+<%-- 				<td>${o.orderNo}</td> --%>
 <%-- 				<td>${o.productNo}</td> --%>
 				<td>${o.productName}</td>
 				<td>${o.price}</td>
 				<td>${o.qty}</td>
 			</tr>				
-		</c:forEach>		
+		</c:forEach>
 		</tbody>
 	</table> 
 </div>

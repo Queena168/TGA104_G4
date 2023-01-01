@@ -51,13 +51,18 @@ public class UpdateProductTypeServlet extends HttpServlet {
 		if ("updateProductType".equals(action)) { // 來自update_emp_input.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			Integer productTypeNo = Integer.valueOf(req.getParameter("productTypeNo").trim());
 			String productTypeName = req.getParameter("productTypeName");
+			
+			String productTypeNameReg = "^[(\\u4e00-\\u9fa5)(0-9)]$";
+			if (productTypeName == null || productTypeName.trim().length() == 0) {
+				errorMsgs.add("商品類別名稱請勿空白");
+			} else if(!productTypeName.trim().matches(productTypeName)) { 
+				errorMsgs.add("商品類別名稱只能包含中文字與數字");
+            }
 
 			ProductTypeVO productTypeVO = new ProductTypeVO();
 			productTypeVO.setProductTypeNo(productTypeNo);

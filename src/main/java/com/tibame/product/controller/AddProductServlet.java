@@ -61,7 +61,8 @@ private static final long serialVersionUID = 1L;
 				errorMsgs.add("商品狀態請勿空白");
 			}
 			
-			Integer adminNo = Integer.valueOf(req.getParameter("adminNo"));
+			Integer adminNo = Integer.valueOf(req.getParameter("adminNo").trim());
+
 
 			ProductVO productVO = new ProductVO();
 			productVO.setProductTypeNo(productTypeNo);
