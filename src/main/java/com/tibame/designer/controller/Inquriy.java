@@ -32,7 +32,7 @@ public class Inquriy extends HttpServlet {
 			String strdesignerNo = req.getParameter("designerNo").trim();
 			Integer designerNo=null;
 			designerNo = Integer.valueOf(strdesignerNo);
-			System.out.println("designerNo:"+designerNo);
+			System.out.println("inquiry.java之designerNo:"+designerNo);
 			
 			//Integer designerNo  = Integer.valueOf(req.getParameter("designerNo").trim());			
 			DesignerService designerSvc = new DesignerService();
