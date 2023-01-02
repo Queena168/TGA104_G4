@@ -40,14 +40,14 @@ public class DesignerOrderPhaseService {
 	
 	
 	//==========================================================
-	public  DesignerOrderPhaseVO insertDesignerOrderPhaseConstruction(Integer orderNo,Integer totalOrderPhase,Integer orderPhase, Integer totalAmount,String constructionStatus,String contractDetail) {
+	public  DesignerOrderPhaseVO insertDesignerOrderPhaseConstruction(Integer orderNo,Integer totalOrderPhase,Integer orderPhase, Integer totalAmount,String constructionStatus) {
 		DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
 		designerOrderPhaseVO.setOrderNo(orderNo);
 		designerOrderPhaseVO.setTotalOrderPhase(totalOrderPhase);
 		designerOrderPhaseVO.setOrderPhase(orderPhase);
 		designerOrderPhaseVO.setTotalAmount(totalAmount);
 		designerOrderPhaseVO.setConstructionStatus(constructionStatus);
-		designerOrderPhaseVO.setOrderPhaseDetail(contractDetail);
+		//designerOrderPhaseVO.setOrderPhaseDetail(contractDetail);
 		//designerOrderPhaseVO.setOrderPhaseAtt(orderPhaseAtt);
 		dao.insertDesignerOrderPhaseConstruction(designerOrderPhaseVO);
 		return designerOrderPhaseVO;

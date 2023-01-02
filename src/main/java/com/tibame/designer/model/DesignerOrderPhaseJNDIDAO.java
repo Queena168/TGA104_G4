@@ -125,7 +125,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 	public void insertDesignerOrderPhaseConstruction(DesignerOrderPhaseVO designerOrderPhaseVO) {
 
 		// =======================================
-		String updateDesignerOrderPhaseConstruction = "Insert into DesignerOrderPhase (orderNo,totalOrderPhase, orderPhase,totalAmount,constructionStatus,paymentPhase,paymentStatus,orderPhaseDetail,modificationTime) values(?,?,?,?,?,?,?,?,now());";
+		String updateDesignerOrderPhaseConstruction = "Insert into DesignerOrderPhase (orderNo,totalOrderPhase, orderPhase,totalAmount,constructionStatus,paymentPhase,paymentStatus,modificationTime) values(?,?,?,?,?,?,?,now());";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement ps = connection.prepareStatement(updateDesignerOrderPhaseConstruction,Statement.RETURN_GENERATED_KEYS)) {
@@ -136,7 +136,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 			ps.setString(5, designerOrderPhaseVO.getConstructionStatus());
 			ps.setInt(6, designerOrderPhaseVO.getOrderPhase());
 			ps.setString(7, "尚未付款");
-			ps.setString(8, designerOrderPhaseVO.getOrderPhaseDetail());
+			//ps.setString(8, designerOrderPhaseVO.getOrderPhaseDetail());
 			//ps.setBytes(6, designerOrderPhaseVO.getOrderPhaseAtt());
 			ps.executeUpdate();
 			// 取得DesignerOrderPhase資料表流水編號
@@ -201,8 +201,8 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 				designerOrderPhaseVO.setPaymentStatus(rs.getString("paymentStatus"));
 				designerOrderPhaseVO.setPaymentAtt(rs.getBytes("paymentAtt"));
 				designerOrderPhaseVO.setModificationTime(rs.getDate("modificationTime"));
-				designerOrderPhaseVO.setOrderPhaseDetail(rs.getString("orderPhaseDetail"));
-				designerOrderPhaseVO.setOrderPhaseAtt(rs.getBytes("orderPhaseAtt"));;
+				//designerOrderPhaseVO.setOrderPhaseDetail(rs.getString("orderPhaseDetail"));
+				//designerOrderPhaseVO.setOrderPhaseAtt(rs.getBytes("orderPhaseAtt"));;
 			}
 
 		} catch (SQLException e) {
@@ -241,8 +241,8 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 				designerOrderPhaseVO.setPaymentStatus(rs.getString("paymentStatus"));
 				designerOrderPhaseVO.setPaymentAtt(rs.getBytes("paymentAtt"));
 				designerOrderPhaseVO.setModificationTime(rs.getDate("modificationTime"));
-				designerOrderPhaseVO.setOrderPhaseDetail(rs.getString("orderPhaseDetail"));
-				designerOrderPhaseVO.setOrderPhaseAtt(rs.getBytes("orderPhaseAtt"));
+				//designerOrderPhaseVO.setOrderPhaseDetail(rs.getString("orderPhaseDetail"));
+				//designerOrderPhaseVO.setOrderPhaseAtt(rs.getBytes("orderPhaseAtt"));
 				list.add(designerOrderPhaseVO);
 
 			}

@@ -28,7 +28,7 @@ public class SendOrderPhase extends HttpServlet {
 		DesignerOrderPhaseVO total = (DesignerOrderPhaseVO) session.getAttribute("designerOneOrderPhaseVO");		
 		System.out.println("SendOrderPhase之designerOneOrderPhaseVO:"+session.getAttribute("designerOneOrderPhaseVO"));
 		String constructionStatus = req.getParameter("constructionStatus");
-		String orderPhaseDetail = req.getParameter("orderPhaseDetail");
+		//String orderPhaseDetail = req.getParameter("orderPhaseDetail");
 		String strorderNo = req.getParameter("orderNo");
 		Integer orderNo = Integer.valueOf(strorderNo);
 		String strtotalOrderPhase = req.getParameter("totalOrderPhase");
@@ -43,7 +43,7 @@ public class SendOrderPhase extends HttpServlet {
 //		in.close();
 		DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();		
 	   // designerOrderPhaseSvc.insertDesignerOrderPhaseConstruction(orderNo,totalOrderPhase,orderPhase,constructionStatus, orderPhaseDetail,orderPhaseAtt);
-	    designerOrderPhaseSvc.insertDesignerOrderPhaseConstruction(orderNo,totalOrderPhase,orderPhase,totalAmount,constructionStatus, orderPhaseDetail);
+	    designerOrderPhaseSvc.insertDesignerOrderPhaseConstruction(orderNo,totalOrderPhase,orderPhase,totalAmount,constructionStatus);
 	    List<DesignerOrderPhaseVO> list = designerOrderPhaseSvc.getOrderPhase(orderNo);
 		DesignerOrderPhaseVO  designerOneOrderPhaseVO = designerOrderPhaseSvc.getOneOrderPhase(orderNo);
 		System.out.println("sendorderphase之designerOrderPhaseVO內容:"+list);
