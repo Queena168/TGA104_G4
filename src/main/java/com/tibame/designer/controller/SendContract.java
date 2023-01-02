@@ -33,8 +33,8 @@ public class SendContract extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=Big5");
 		HttpSession session = req.getSession();
-		session.getAttribute("designerOrderVO");
-		session.getAttribute("designerOrderPhaselist"); 
+		//session.getAttribute("designerOrderVO");
+		//session.getAttribute("designerOrderPhaselist"); 
 		String action =  req.getParameter("action");
 		
 		if("sendcontract".equals(action)) {
@@ -107,7 +107,7 @@ public class SendContract extends HttpServlet {
 			
 			DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
 			//2.新增DesignerOrderPhase資料表的totalOrderPhase,totalamount欄位
-			System.out.println("56vu/6=====================================");
+			//System.out.println("56vu/6=====================================");
 			DesignerOrderPhaseVO designerOrderPhaseVO = designerOrderPhaseSvc.insertDesignerOrderPhase(OrderNo, totalOrderPhase, totalamount);
 		
 			//3.重新抓取合約DesignerOrder資訊

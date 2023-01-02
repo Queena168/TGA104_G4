@@ -19,8 +19,9 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 	private Date modificationTime;// (修改時間): timestamp
 	private Integer orderNo;// (報價單合約訂單表單流水號): int, not null
 	private Integer totalOrderPhase;
-	private Integer totalamount;
+	private Integer totalAmount;
 	private byte[] orderPhaseAtt;
+
 	
 
 	@Override
@@ -29,7 +30,7 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 				+ ", constructionStatus=" + constructionStatus + ", orderPhaseDetail=" + orderPhaseDetail
 				+ ", paymentPhase=" + paymentPhase + ", paymentStatus=" + paymentStatus + ", paymentAtt="
 				+ Arrays.toString(paymentAtt) + ", modificationTime=" + modificationTime + ", orderNo=" + orderNo
-				+ ", totalOrderPhase=" + totalOrderPhase + ", totalamount=" + totalamount + ", orderPhaseAtt="
+				+ ", totalOrderPhase=" + totalOrderPhase + ", totalAmount=" + totalAmount + ", orderPhaseAtt="
 				+ Arrays.toString(orderPhaseAtt) + "]";
 	}
 
@@ -89,8 +90,6 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 		this.paymentAtt = paymentAtt;
 	}
 
-
-
 	public Date getModificationTime() {
 		return modificationTime;
 	}
@@ -119,8 +118,6 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 		this.orderPhaseDetail = orderPhaseDetail;
 	}
 
-	
-	
 	public Integer getTotalOrderPhase() {
 		return totalOrderPhase;
 	}
@@ -129,17 +126,15 @@ public class DesignerOrderPhaseVO implements java.io.Serializable {
 		this.totalOrderPhase = totalOrderPhase;
 	}
 
-	public Integer getTotalamount() {
-		return totalamount;
+    
+
+	public Integer getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setTotalamount(Integer totalamount) {
-		this.totalamount = totalamount;
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
 	}
-	
-	
-	
-	
 
 	public byte[] getOrderPhaseAtt() {
 		return orderPhaseAtt;

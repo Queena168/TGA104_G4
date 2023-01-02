@@ -30,9 +30,11 @@ public class SeeOrder extends HttpServlet {
 			System.out.println("updateOrderPhase之orderNo為空值");
 		}
 		DesignerOrderPhaseService designerOrderPhaseService = new DesignerOrderPhaseService();
-		List<DesignerOrderPhaseVO> list = designerOrderPhaseService.getOrderPhase(orderNo);
-		System.out.println(list.toString());
-		session.setAttribute("list", list);
+		//List<DesignerOrderPhaseVO> list = designerOrderPhaseService.getOrderPhase(orderNo);
+		DesignerOrderPhaseVO  designerOneOrderPhaseVO = designerOrderPhaseService.getOneOrderPhase(orderNo);
+		System.out.println("SeeOrder.java之designerOneOrderPhaseVO===="+designerOneOrderPhaseVO.toString());
+		//session.setAttribute("list", list);
+		session.setAttribute("SeeOrder之designerOneOrderPhaseVO", designerOneOrderPhaseVO);
 		String url = "/front-end/designer/UpdatelistOneOrderPhase.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url);
 		successView.forward(req, res);

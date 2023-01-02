@@ -94,7 +94,7 @@ public class DesignerOrderJNDIDAO implements DesignerOrderDAO_interface {
 			pstmt.setInt(4, designerOrderVO.getOrderNo());
 			pstmt.executeUpdate();
 
-			System.out.println("合約新增/更新成功");
+			System.out.println("designerOrderjndi合約新增/更新成功");
 
 		} catch (SQLException se) {
 			System.out.println(se);

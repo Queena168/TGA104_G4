@@ -1,6 +1,7 @@
 package com.tibame.designer.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tibame.designer.model.DesignerOrderPhaseVO;
 import com.tibame.designer.model.DesignerOrderVO;
+import com.tibame.designer.service.DesignerOrderPhaseService;
 import com.tibame.designer.service.DesignerOrderService;
 
 @WebServlet("/AddContract")
@@ -47,12 +50,12 @@ public class AddContract extends HttpServlet {
 
 			DesignerOrderService designerOrderScv = new DesignerOrderService();
 			DesignerOrderVO designerOrderVO=designerOrderScv.getMyOrder(designerOrderNo);
-			//DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
-			//List <DesignerOrderPhaseVO> designerOrderPhaselist  = designerOrderPhaseSvc.getOrderPhase(designerOrderNo);
+			DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
+			List <DesignerOrderPhaseVO> designerOrderPhaselist  = designerOrderPhaseSvc.getOrderPhase(designerOrderNo);
 			//System.out.println("addcontract.java之designerOrderPhaselist內容"+designerOrderPhaselist.size());
 			//System.out.println("showOneOrderDetail之designerOrderVO物件內容:"+designerOrderVO.toString());
 			session.setAttribute("designerOrderVO", designerOrderVO);	
-			//session.setAttribute("designerOrderPhaselist", designerOrderPhaselist);
+			session.setAttribute("designerOrderPhaselist", designerOrderPhaselist);
 		    String url = "/front-end/designer/addContract.jsp";
 		    RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 			successView.forward(req, res);

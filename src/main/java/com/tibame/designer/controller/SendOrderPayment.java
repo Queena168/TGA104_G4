@@ -25,14 +25,20 @@ public class SendOrderPayment extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		session.getAttribute("list");
+		DesignerOrderPhaseVO  designerOrderPhaseVO =(DesignerOrderPhaseVO) session.getAttribute("designerOneOrderPhaseVO");
+		System.out.println("SendOrderPayment.java之測試結果:"+session.getAttribute("designerOneOrderPhaseVO").toString());	
 		String paymentStatus = req.getParameter("paymentStatus");
-		String strorderNo = req.getParameter("orderNo");
-		//System.out.println("strorderNo"+strorderNo);
-		Integer orderNo=null;
-		orderNo = Integer.valueOf(strorderNo);
+		String strpaymentnumber = req.getParameter("paymentnumber");
+		Integer paymentnumber = Integer.valueOf(strpaymentnumber);
+//		System.out.println("sendorderpayment之paymentnumber:"+paymentnumber);
+//		String strorderNo = req.getParameter("orderNo");
+//		System.out.println("sendorderpayment之strorderNo"+strorderNo);
+		//Integer orderNo = Integer.valueOf(strorderNo);
+		Integer orderNo = designerOrderPhaseVO.getOrderNo();
+		Integer orderPhase = designerOrderPhaseVO.getOrderPhase();
+		String constructionStatus = designerOrderPhaseVO.getConstructionStatus();
 		DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
-		designerOrderPhaseSvc.updateDesignerOrderPhasePayment(orderNo, paymentStatus);
+		designerOrderPhaseSvc.updateDesignerOrderPhasePayment(orderNo, paymentStatus,orderPhase,constructionStatus,paymentnumber);
 		List <DesignerOrderPhaseVO> list = designerOrderPhaseSvc.getOrderPhase(orderNo);
 		session.setAttribute("list", list);
 		String url = "/front-end/designer/listOneOrder.jsp";

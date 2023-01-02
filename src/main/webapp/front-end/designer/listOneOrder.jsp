@@ -718,8 +718,8 @@ function progresscontract(type) {
 }
 
 
-//簽約進度
-function progressdo(type) {	
+//施工進度
+function progressdo(type1,type2) {	
 	//進度條
 	const process = document.getElementById("progress");
 
@@ -731,7 +731,10 @@ function progressdo(type) {
 	
 	
 	
-	if(type=='第一期施工開始'){
+	if((type1=='1' && type2 =='進行中')||(type1=='1' && type2 =='完成施工')||
+	   (type1=='2' && type2 =='進行中')||(type1=='2' && type2 =='完成施工')||
+	   (type1=='3' && type2 =='進行中')||(type1=='3' && type2 =='完成施工')			
+	){
    // currentActive 就加一（往前進一步）
 	currentActive+=5;
 	//currentActive++;
@@ -837,12 +840,14 @@ function progressfinish(type1,type2) {
 var type2 = '${designerOrderVO.contractStatus}';
 var type = '${designerOrderVO.finishStatus}';
 var typequotationStatus = '${designerOrderVO.quotationStatus}';
+var progressnumber = '${designerOneOrderPhaseVO.orderPhase}';
 var typeprogress = '${designerOneOrderPhaseVO.constructionStatus}';
+
 DisplayAndHiddenBtn2("btn2",type2);
 DisplayAndHiddenBtn("btn",type);
 progressquotation(typequotationStatus);
 progresscontract(type2);
-progressdo(typeprogress);
+progressdo(progressnumber,typeprogress);
 progressfinish(typequotationStatus,type);
 progressfinish(typeprogress,type);
 </script>
