@@ -266,7 +266,7 @@ margin-left: 200px;
 		<th>合約期數</th>
 		<c:choose>
 		  <c:when test="${designerOrderPhaselist.size()==0}">
-		  <td><input type="number" name="totalOrderPhase" style="width: 50px" value="${param.totalOrderPhase}">期</td>
+		  <td><input type="number" name="totalOrderPhase" min="1" max="10" style="width: 50px" value="${param.totalOrderPhase}">期</td>
 		  </c:when>
 		  
 		  <c:when test="${designerOrderPhaselist.size()!=0}">
@@ -283,7 +283,7 @@ margin-left: 200px;
 		
 		<tr><th>合約內容</th>
 		<td id="t1td"> 
-		 <textarea id="t1"  placeholder="請輸入內容!" name="contractDetail">${param.contractDetail}</textarea>
+		 <textarea id="t1"  placeholder="請輸入內容!" name="contractDetail">${designerOrderVO.contractDetail}</textarea>
 		</td>
 		</tr>
 				

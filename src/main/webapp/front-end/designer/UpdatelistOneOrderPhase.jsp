@@ -279,111 +279,73 @@ margin-left: 200px;
 <hr size="8px" align="center" width="100%" >
 <div style="text-align:center"><h3>案件進度查看</h3></div>
 <div align="center">
-<form id="form" method="post" enctype="multipart/form-data">
-<table> 
-        <c:forEach var="designerOrderPhaseVO" items="${list}" begin="0" end="0">
-       
-		<tr><th>案件編號:</th><td>${designerOrderPhaseVO.orderNo}</td></tr>
-		
-		<tr><th>客戶:</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
-		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr> 
-		<input type="hidden" name="totalOrderPhase" value="${designerOrderPhaseVO.totalOrderPhase}">
-		<tr><th>合約總期數</th><td>${designerOrderPhaseVO.totalOrderPhase}期</td></tr>  
-        </c:forEach>
+<form id="form" method="post" action="SendOrderPhase">
+<table>        
+		<tr><th>案件編號</th><td>${designerOneOrderPhaseVO.orderNo}</td></tr>		
+		<tr><th>客戶</th><td>${designerOrderVO.memberVO.memberName}</td></tr>
+		<tr><th>案件設計師</th><td>${designerOrderVO.designerVO.designerName}</td></tr> 		
+		<tr><th>合約總期數</th><td>${designerOneOrderPhaseVO.totalOrderPhase}期</td></tr>  
 		<tr>
-		<th>裝潢進度</th>
+		<th>當前裝潢進度</th>
 		<td>
-		
-		   <select id="selection" name="constructionStatus" disabled="disabled">
-		   <c:forEach var="designerOrderPhaseVO" items="${list}">
-               <option  value="未開始">請選擇進度</option>
-               <option value="第一期施工開始" ${designerOrderPhaseVO.constructionStatus=="第一期施工開始"?'selected':''}>第一期施工開始</option>
-               <option value="第一期施工結束" ${designerOrderPhaseVO.constructionStatus=="第一期施工結束"?'selected':''}>第一期施工結束</option>
-               <option value="第二期施工開始" ${designerOrderPhaseVO.constructionStatus=="第二期施工開始"?'selected':''}>第二期施工開始</option>
-               <option value="第二期施工結束" ${designerOrderPhaseVO.constructionStatus=="第二期施工結束"?'selected':''}>第二期施工結束</option>
-               <option value="第三期施工開始" ${designerOrderPhaseVO.constructionStatus=="第三期施工開始"?'selected':''}>第三期施工開始</option>
-               <option value="第三期施工結束" ${designerOrderPhaseVO.constructionStatus=="第三期施工結束"?'selected':''}>第三期施工結束</option>
-            </c:forEach>
-           </select>
-       
+		<input id="phasenumber" name="phasenumber" type="number" style="width: 50px" min="1" max="10" value="${designerOneOrderPhaseVO.orderPhase}" disabled="disabled">期
+     	   <select id="selection" name="constructionStatus" disabled="disabled">		   
+               <option  value="尚未施工" ${designerOneOrderPhaseVO.constructionStatus=="尚未施工"?'selected':''}>尚未施工</option>
+               <option value="進行中" ${designerOneOrderPhaseVO.constructionStatus=="進行中"?'selected':''}>進行中</option>
+               <option value="完成施工" ${designerOneOrderPhaseVO.constructionStatus=="完成施工"?'selected':''}>完成施工</option>
+           </select>       
         </td>
 		</tr>	
 		
-		<tr>
+        <tr>
 		<th>進度說明</th>
 		<td>
-		<c:forEach var="designerOrderPhaseVO" items="${list}">
-		<textarea id="t1" placeholder="請輸入內容!" name="orderPhaseDetail" disabled="disabled">${designerOrderPhaseVO.orderPhaseDetail}</textarea>		
-		</c:forEach>
+		    <textarea id="t1" placeholder="請輸入內容!" name="orderPhaseDetail" disabled="disabled">${designerOneOrderPhaseVO.orderPhaseDetail}</textarea>		
 		</td>
 		</tr>
-		
-		
-		<tr>	    	    
-	    <th>附件上傳</th>
-	    <td>
-		<input type="file" name="orderPhaseAtt" id="fileinp">
-        </td>         
-	    </tr>
-		
-		<tr><th>施工進度附件</th>
-	
-        <c:choose>
-        <c:when test="${designerOrderPhaseVO.orderPhaseAtt!=null}">
-        <td>
-        <c:forEach var="designerOrderPhaseVO" items="${list}">
-        <a href="#" onclick="window.open(
-	    '<%=request.getContextPath()%>/OrderPhaseInfo?orderNo=${designerOrderPhaseVO.orderNo}'
-	    , '_blank').focus();">預覽進度附件</a>	
-	    </c:forEach>
-	    </td>
-	    </c:when>	    
-	    <c:when test="${designerOrderPhaseVO.orderPhaseAtt==null}">
-	    <td>無進度附件</td>
-	    </c:when>
 
-	    </c:choose>
-	    
-	    </tr> 
-		 
-	    
-	    
-	    <tr>
-		<th>付款進度</th>
-		<td>
-		
-		   <select id="selectionpayment" name="paymentStatus" disabled="disabled">
-		   <c:forEach var="designerOrderPhaseVO" items="${list}" >
-               <option value="未付款">未付款</option>
-               <option value="第一期待付款" ${designerOrderPhaseVO.paymentStatus=="第一期待付款"?'selected':''}>第一期付款完成</option>
-               <option value="第一期付款完成" ${designerOrderPhaseVO.paymentStatus=="第一期付款完成"?'selected':''}>第一期付款完成</option>
-               <option value="第二期待付款" ${designerOrderPhaseVO.paymentStatus=="第二期待付款"?'selected':''}>第二期付款完成</option>
-               <option value="第二期付款完成" ${designerOrderPhaseVO.paymentStatus=="第二期付款完成"?'selected':''}>第二期付款完成</option>
-               <option value="第三期待付款" ${designerOrderPhaseVO.paymentStatus=="第三期待付款"?'selected':''}>第三期付款完成</option>
-               <option value="第三期付款完成" ${designerOrderPhaseVO.paymentStatus=="第三期付款完成"?'selected':''}>第三期付款完成</option>
-           </c:forEach>
-           </select>
-         
-        </td>
-		</tr>	
 	
 	    
 </table>
      <div id="block2">
               <input type="hidden" name="finishstatus" value="${designerOrderVO.finishStatus}">
-               <c:forEach var="designerOrderPhaseVO" items="${list}">
-               <input type="hidden" name="orderNo" value="${designerOrderPhaseVO.orderNo}">
-               </c:forEach>
+              <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}">
+              <input type="hidden" name="totalOrderPhase" value="${designerOneOrderPhaseVO.totalOrderPhase}">
               <input id="btncontrust" type="button" value="更新裝潢進度" style="display: inline-block;"> 
-              
-             <!--  <input type="hidden" name="orderNo" value="${designerOrderPhaseVO.orderNo}"> -->
-              <input id="btnpayment" type="button" value="更新付款進度" style="display: inline-block;">       
-              
-              <input type ="button" onclick="history.back()" value="回上一頁" >
+              <input id="cancel1" type="button" value="取消" style="display: inline-block;">            
      </div> 
 </form>
 </div>
 
+
+<div align="center">
+<form  id="form2" action="SendOrderPayment">
+<table>
+ <tr>
+		 <th>付款金額</th>
+		 <td>
+		     <input id="paymentnumber" name="paymentnumber" type="number" style="width: 150px"  value="${designerOneOrderPhaseVO.amount}" disabled="disabled">元
+		 </td>
+		 </tr>
+		     
+	    <tr>
+		<th>付款進度</th>
+		<td>
+		   <select id="selectionpayment" name="paymentStatus" disabled="disabled">
+               <option value="尚未付款" ${designerOneOrderPhaseVO.paymentStatus=="尚未付款"?'selected':''}>尚未付款</option>
+               <option value="完成付款" ${designerOneOrderPhaseVO.paymentStatus=="完成付款"?'selected':''}>完成付款</option>
+           </select>        
+        </td>
+		</tr>	
+ </table>
+        <div id="block2">	
+            <input id="btnpayment" type="button" value="更新付款進度" style="display: inline-block;"> 
+            <input id="cancel2" type="button" value="取消" style="display: inline-block;">      
+           	<input type ="button" onclick="history.back()" value="回上一頁" >	
+		</div>
+</form>
+</div>
+  
 <!-- footer -->
 <footer class="footer">
     <div class="container">
@@ -457,18 +419,38 @@ margin-left: 200px;
 
 var btn1 = document.getElementById("btncontrust");
 var select1 = document.getElementById("selection");
+var phasenumber = document.getElementById("phasenumber");
 var textarea = document.getElementById("t1");
 var form = document.getElementById("form");
-//var form2 = document.getElementById("form2");
+var form2 = document.getElementById("form2");
+var cancel1 = document.getElementById("cancel1");
+var cancel2 = document.getElementById("cancel2");
 btn1.addEventListener("click",function(){
 	if(select1.hasAttribute("disabled")){
 		select1.removeAttribute("disabled");
+		phasenumber.removeAttribute("disabled");
 		textarea.removeAttribute("disabled");
+		select1.setAttribute("test","test");
+		phasenumber.setAttribute("test","test");
+		textarea.setAttribute("test","test");
+		
 	}else{
-		form.setAttribute("action","SendOrderPhase");
+		//form.setAttribute("action","SendOrderPhase");
 		form.submit();
 	}
 		
+});	
+
+
+cancel1.addEventListener("click",function(){
+	if(select1.hasAttribute("test")){
+		select1.removeAttribute("test");
+		phasenumber.removeAttribute("test");
+		textarea.removeAttribute("test");
+		select1.setAttribute("disabled","disabled");
+		phasenumber.setAttribute("disabled","disabled");
+		textarea.setAttribute("disabled","disabled");		
+	}
 });	
 	
 	
@@ -476,18 +458,33 @@ btn1.addEventListener("click",function(){
 	//點擊付款狀態下拉選單及更新付款狀態下拉選單
 var btn2 = document.getElementById("btnpayment");
 var select2 = document.getElementById("selectionpayment");
+var paymentnumber =  document.getElementById("paymentnumber");
 //var form1 = document.getElementById("form1");
 btn2.addEventListener("click",function(){
 	if(select2.hasAttribute("disabled")){
+		paymentnumber.removeAttribute("disabled");
 		select2.removeAttribute("disabled");
+		paymentnumber.setAttribute("test","test");
+		select2.setAttribute("test","test");
 	}else{
-		form.setAttribute("action","SendOrderPayment");
-		form.submit();
+		//form2.setAttribute("action","SendOrderPayment");
+		form2.submit();
 	}
 		
 });
+
+
+
+cancel2.addEventListener("click",function(){
+	if(select2.hasAttribute("test")){
+		paymentnumber.removeAttribute("test");
+		select2.removeAttribute("test");
+		paymentnumber.setAttribute("disabled","disabled");
+		select2.setAttribute("disabled","disabled");	
+	}
+});	
 //================================================================
-	//實作更新裝潢進度及付款進度按鈕隱藏及出現
+	//狀態為結案時實作更新裝潢進度及付款進度按鈕隱藏及出現
 	
 	
 function DisplayAndHiddenBtn(btnName, type) {
@@ -496,6 +493,8 @@ function DisplayAndHiddenBtn(btnName, type) {
 	   //currentinputbutton.style.display = "inline-block"; //style中的display且橫向排列属性
 	   document.getElementById("btncontrust").style.display = "none";	
 	   document.getElementById("btnpayment").style.display = "none";
+	   document.getElementById("cancel1");
+	   document.getElementById("cancel2");
    }else{
 	   currentinputbutton.style.display = "inline-block"; 
    }

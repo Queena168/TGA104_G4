@@ -7,6 +7,7 @@ public interface DesignerOrderPhaseDAO_interface {
 	public void updateDesignerOrderPhasePayment(DesignerOrderPhaseVO designerOrderPhaseVO);
 	public List<DesignerOrderPhaseVO> findDesignerOrderPhase(Integer orderNo);
 	public  DesignerOrderPhaseVO findOneDesignerOrderPhase(Integer orderNo);
+	public List<DesignerOrderPhaseVO> testfindDesignerOrderPhase();	
 	public List<DesignerOrderPhaseVO> getAll();
 
 }
