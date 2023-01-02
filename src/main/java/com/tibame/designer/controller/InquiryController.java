@@ -50,8 +50,8 @@ public class InquiryController extends HttpServlet {
 			}
 					
 		
-			String strdesignerNo = req.getParameter("designerNo");
-			System.out.println("inquirycontroller之strdesignerNo:"+strdesignerNo);
+//			String strdesignerNo = req.getParameter("designerNo");
+//			System.out.println("inquirycontroller之strdesignerNo:"+strdesignerNo);
 			//Integer designerNo = Integer.valueOf(strdesignerNo);
 			Integer designerNo = designerVO.getDesignerNo();
 
@@ -72,7 +72,7 @@ public class InquiryController extends HttpServlet {
 //			} else if (!MemberPhone.trim().matches(phoneReg)) {
 //				errorMsgs.add("請填寫正確手機號碼格式");
 //			}				
-			System.out.println("有進來inquiry5===================");
+			//System.out.println("有進來inquiry5===================");
 			String strsize=req.getParameter("inquirysize");
 			System.out.println("inquirycontroller之strsize:"+strsize);
 			Integer inquirySize = null;
@@ -81,7 +81,7 @@ public class InquiryController extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("諮詢坪數請勿空白");
 			}
-			System.out.println("有進來inquiry6===================");
+			//System.out.println("有進來inquiry6===================");
 			String strbudget = req.getParameter("inquirybudget");
 			System.out.println("inquirycontroller之strbudget:"+strbudget);
 			Integer inquiryBudget=null;
@@ -90,14 +90,14 @@ public class InquiryController extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("諮詢預算請勿空白");
 			}
-			System.out.println("有進來inquiry7===================");
+			//System.out.println("有進來inquiry7===================");
 			String inquiryDetail = req.getParameter("inquiryDetail").trim();
 			if(inquiryDetail==null||inquiryDetail.trim().length()==0) {
 				errorMsgs.add("諮詢內容請勿空白");
 			}
 			
 			if (!errorMsgs.isEmpty()) {
-				System.out.println("inquiry-done1=============================");
+				//System.out.println("inquiry-done1=============================");
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/designer/inquiryPage.jsp");
 				failureView.forward(req, res);
 				return;

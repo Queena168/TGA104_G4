@@ -301,14 +301,14 @@ public class DesignerOrderJNDIDAO implements DesignerOrderDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_INQUIRY);
 			pstmt.setInt(1, designerOrderVO.getDesignerNo());
-			pstmt.setInt(2, 3);
+			pstmt.setInt(2, designerOrderVO.getMemberNo());
 			pstmt.setInt(3, designerOrderVO.getInquiryBudget());
 			pstmt.setInt(4, designerOrderVO.getInquirySize());
 			pstmt.setString(5, designerOrderVO.getInquiryDetail());
 			pstmt.setString(6, "未報價");
 			pstmt.setString(7, "尚未進行");
 			pstmt.executeUpdate();
-			System.out.println("新增成功");
+			System.out.println("諮詢新增成功");
 
 		} catch (SQLException se) {
 			System.out.println(se);

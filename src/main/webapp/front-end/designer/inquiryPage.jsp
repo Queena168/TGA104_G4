@@ -358,7 +358,7 @@ margin-left: 280px;
 <div id="block2">
 <input type="hidden" name="action" value="insertinquiry">
 <input type="hidden" name="memberNo"  value="${memberVO.memberNo}">
-<input type="button" name="designerNo"  value="${designerVO.designerNo}">
+<input type="hidden" name="designerNo"  value="${designerVO.designerNo}">
 <input type="submit" value="送出諮詢資料">
 </div>
 </div>
