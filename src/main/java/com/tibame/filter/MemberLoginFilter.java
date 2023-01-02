@@ -19,7 +19,7 @@ import org.springframework.core.annotation.Order;
 import com.tibame.member.model.MemberVO;
 
 @Order(value = 2)
-@WebFilter(filterName = "MemberLoginFilter", urlPatterns = {"/"})
+@WebFilter(filterName = "MemberLoginFilter", urlPatterns = {"/front-end/designer/inquiryPage.jsp"})
 public class MemberLoginFilter extends HttpFilter implements Filter {
        
     

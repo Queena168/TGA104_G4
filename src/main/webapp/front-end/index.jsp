@@ -1,604 +1,346 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>MatDesign</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="Free HTML Templates" name="keywords" />
-<meta content="Free HTML Templates" name="description" />
-<link href="css/MatDesign.css" rel="stylesheet" />
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon" />
-
-<!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-	rel="stylesheet" />
-
+<link rel="icon" href="images/favicon.ico" sizes="32x32">
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet" />
+<link rel='stylesheet' href='css/fontawesome.min.css'>
+<!-- Animate -->
+<link href="css/animate.css" rel="stylesheet">
+<!-- Owl Carousel -->
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<!-- light box -->
+<link rel="stylesheet" href="css/lightbox.min.css">
+<!-- jquery ui -->
+<link rel="stylesheet" href="css/jquery-ui.min.css">
+<!--    <link rel="stylesheet" href="//basehold.it/24">-->
 
-<!-- Libraries Stylesheet -->
-<link href="lib/owlcarousel/assets/owl.carousel.min.css"
-	rel="stylesheet" />
+<!-- nice select -->
+<link rel="stylesheet" href="css/nice-select.min.css">
+<!-- Main Styles -->
+<link rel="stylesheet" href="scss/main.css">
 
-<!-- Customized Bootstrap Stylesheet -->
-<link href="css/style.css" rel="stylesheet" />
-
-  <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"
-    ></script>
 </head>
 
 <body>
-	<!-- Topbar Start -->
-	<div class="container-fluid d-none d-lg-block">
-		<div class="row align-items-center py-4 px-xl-5">
-			<div class="align-item-center-right">
-				<a href="#" type="button"
-					class="btn btn-primary py-2 px-4 d-none d-lg-block"
-					data-bs-toggle="modal" data-bs-target="#loginModal">登入/註冊</a>
-			</div>
+	<!-- main header navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light custom-navbar"
+		id="mainMenu">
+		<div class="container">
+			<a class="navbar-brand" href="index.html"> <img
+				src="images/MatDesignLogo.png" alt="">
+			</a>
+			<!--  navbar actions -->
+			<div class="main-navbar-action">
+				<div id="mainNavbarDropdown">
+					<!-- navbar user account dropdown -->
+					<div class="dropdown-wrapper" id="usermenu" data-collapse="false">
+						<div class="account-wrapper">
+							<!-- login form wrapper -->
 
-			<div class="modal fade" id="loginModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<!-- Registration Start -->
-						<div class="container-fluid bg-registration py-5"
-							style="margin: 30px 0">
-							<div class="col-lg-5">
-								<div id="cardborder" class="card border-0">
-									<!-- tab標籤開始 -->
-									<div class="h-swicher-wrapper container">
-										<div class="row justify-content-center">
-											<div class="col-md-10 d-flex justify-content-center py-4">
-												<div class="h-swicher">
-													<input type="radio" name="login" id="memberlogin"
-														checked="checked"
-														class="swicher-input swicher-input-memberlogin" /> <label
-														for="memberlogin" class="swicher-label">會員登入</label> <input
-														type="radio" name="login" id="designerlogin"
-														class="swicher-input swicher-input-designerlogin" /> <label
-														for="designerlogin" class="swicher-label">設計師登入</label> <span
-														class="switcher-toggle"></span>
-												</div>
-											</div>
-										</div>
+							<div class="account-wrapper__content">
+								<form class="custom-form">
+									<div class="custom-form__btn">
+										<a class="dropdown-item nav-link" href="./member/login.jsp">會員登入/註冊</a>
+										<a class="dropdown-item nav-link"
+											href="./designer_protfolio/login.jsp">設計師登入/註冊</a>
 									</div>
 
-									<!-- tab標籤結束 -->
-									<div class="card-body rounded-bottom bg-primary p-5">
-										<form>
-											<div class="form-group">
-												<input type="text" class="form-control border-0 p-4"
-													placeholder="帳號" required="required" />
-											</div>
-											<div class="form-group">
-												<input type="email" class="form-control border-0 p-4"
-													placeholder="密碼" required="required" />
-											</div>
-										<!-- <div class="form-group"></div> -->	
-										<!--	<input type="checkbox" class="remember" />記住我的密碼 -->	
-											<div>
-												<button class="btn btn-dark btn-block border-0 py-3"
-													type="submit">送出</button>
-											</div>
-										</form>
-										<!-- Footer -->
-										<div class="modal-footer">
-											<div class="signup">
-												<span style="color: black; font-weight: bold">尚未成為會員</span>
-												<a href="#" type="button" class="member"
-													style="color: black; font-weight: bold"> 立即加入 </a>
-											</div>
-											
-											<div class="signup">
-												<span style="color: black; font-weight: bold">加入設計團隊</span>
-												<a href="addDesigner.jsp" type="button" class="designer"
-													style="color: black; font-weight: bold"> 立即加入 </a>
-											</div>
-										</div>
-									</div>
-								</div>
+								</form>
 							</div>
+							<!-- account links when user is logged in-->
+							<!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
+							<!--                            class="icon-user-profile"></i></span>Profile</a>-->
+							<!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
+							<!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
+							<!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
+							<!--                            class="icon-sign"></i></span>Addresses</a>-->
+							<!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
+							<!--                            class="icon-wish-list"></i></span>wishlist</a>-->
+							<!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
+
 						</div>
-						<!-- Registration End -->
 					</div>
+					<!-- navbar cart dropdown -->
+					<div class="" id="cartmenu" data-collapse="false"></div>
 				</div>
-			</div>
-
-			<div class="col-lg-0">
-				<a href="" class="text-decoration-none">
-					<h1 class="m-0">
-						<span class="text-primary">M</span>atDesign
-					</h1>
-				</a>
-			</div>
-
-		</div>
-	</div>
-	<!-- Topbar End -->
-
-	<!-- Navbar Start -->
-	<div class="container-fluid">
-		<div class="row border-top px-xl-5">
-
-			<div class="col-lg-9">
-				<nav
-					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="" class="text-decoration-none d-block d-lg-none">
-						<h1 class="m-0">
-							<span class="text-primary">M</span>atDesign
-						</h1>
+				<!-- navbar user account icon -->
+				<div class="main-navbar-action__btn nav-dropdown">
+					<a class="dropdown-link" data-target="usermenu"> <i
+						class="icon-user"></i>
 					</a>
-					<button type="button" class="navbar-toggler" data-toggle="collapse"
-						data-target="#navbarCollapse">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse justify-content-between"
-						id="navbarCollapse">
-						<div class="navbar-nav py-0">
-							<a id="product" href="index.html" class="nav-item nav-link">找作品</a>
-							<a id="design" href="findDesigner.jsp" class="nav-item nav-link">找設計師</a>
-							<a id="store" href="course.html" class="nav-item nav-link">商城</a>
-							<a id="fourm" href="teacher.html" class="nav-item nav-link">論壇</a>
-							<a id="topic" href="teacher.html" class="nav-item nav-link">報導文章</a>
-
-						</div>
-
-					</div>
-				</nav>
+				</div>
+				<!-- navbar cart icon -->
+				<div class="main-navbar-action__btn nav-dropdown">
+					<a class="dropdown-link" data-target="cartmenu"> <i
+						class="icon-shopping-bag"></i>
+					</a>
+				</div>
+				<!-- navbar actions content -->
+			</div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#mainNavbar" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNavbar">
+				<ul class="navbar-nav main-navbar">
+					<li class="nav-item main-navbar__item dropdown"><a
+						class="nav-link " href="./designer_protfolio/memFindPortfolio.jsp">找作品</a>
+					</li>
+					<li class="nav-item main-navbar__item dropdown"><a
+						class="nav-link " href="../ShowDesignerPage">找設計師</a></li>
+					<li class="nav-item main-navbar__item dropdown"><a
+						class="nav-link " href="../ShowShop">商城</a></li>
+					<li class="nav-item main-navbar__item dropdown"><a
+						class="nav-link " href="./forum/forumIndex.do">論壇</a></li>
+					<!-- <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
+                </li> -->
+					<li class="nav-item main-navbar__item"><a class="nav-link"
+						href="contact.html">關於我們</a></li>
+				</ul>
 			</div>
 		</div>
-	</div>
-	<!-- Navbar End -->
-
-	<!-- Carousel Start -->
-	<div class="container-fluid p-0 pb-5 mb-5">
-		<div id="header-carousel" class="carousel slide carousel-fade"
-			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-				<li data-target="#header-carousel" data-slide-to="1"></li>
-				<li data-target="#header-carousel" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active" style="min-height: 300px">
-					<img class="position-relative w-100" src="./img/matdesign001.jpg"
-						style="min-height: 300px; object-fit: cover" />
-					<div
-						class="carousel-caption d-flex align-items-center justify-content-center">
-						<div class="p-5" style="width: 100%; max-width: 900px">
-							<h5 class="text-white text-uppercase mb-md-3">Best Online
-								Courses</h5>
-							<h1 class="display-3 text-white mb-md-4">Best Education From
-								Your Home</h1>
-							<a href=""
-								class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn
-								More</a>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item" style="min-height: 300px">
-					<img class="position-relative w-100" src="./img/matdesign002.jpg"
-						style="min-height: 300px; object-fit: cover" />
-					<div
-						class="carousel-caption d-flex align-items-center justify-content-center">
-						<div class="p-5" style="width: 100%; max-width: 900px">
-							<h5 class="text-white text-uppercase mb-md-3">Best Online
-								Courses</h5>
-							<h1 class="display-3 text-white mb-md-4">Best Online
-								Learning Platform</h1>
-							<a href=""
-								class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn
-								More</a>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item" style="min-height: 300px">
-					<img class="position-relative w-100" src="./img/matdesign003.jpg"
-						style="min-height: 300px; object-fit: cover" />
-					<div
-						class="carousel-caption d-flex align-items-center justify-content-center">
-						<div class="p-5" style="width: 100%; max-width: 900px">
-							<h5 class="text-white text-uppercase mb-md-3">Best Online
-								Courses</h5>
-							<h1 class="display-3 text-white mb-md-4">New Way To Learn
-								From Home</h1>
-							<a href=""
-								class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn
-								More</a>
+	</nav>
+	<!-- end main header navbar -->
+	<!-- main header slider -->
+	<div class="hero-header-slider">
+		<div class="owl-carousel ltr" id="heroHeaderSlider">
+			<div class="item">
+				<div class="hero-header-slider__img slider-img"
+					style="background-image: url('../front-end/images/index-banner.png')">
+					<div class="hero-header-slider__wrapper">
+						<div class="slider-inner">
+							<div class="container overflow-hidden">
+								<div class="inner-content inner-content--dark slider-animated">
+									<!--  <h5 class="slider-subtitle">New Trend</h5> -->
+									<h1 class="slider-title animated" style="color: white;">Take
+										The Best Quality Design Matching Platform</h1>
+									<p class="slider-text animated" style="color: white;">You
+										can complete your dream home here</p>
+									<!-- <div class="slider-btn">
+                                    <a class="btn animated" href="#">Shop now</a>
+                                </div> -->
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- <div class="item">
+            <div class="hero-header-slider__img slider-img"
+                 style="background-image: url('https://via.placeholder.com/1920x800')">
+                <div class="hero-header-slider__wrapper">
+                    <div class="slider-inner">
+                        <div class="container overflow-hidden">
+                            <div class="inner-content inner-content--dark slider-animated">
+                                <h5 class="slider-subtitle">New Trend</h5>
+                                <h1 class="slider-title animated">Stay on trend in new year</h1>
+                                <p class="slider-text animated">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                    elit. Quam, vel.</p>
+                                <div class="slider-btn">
+                                    <a class="btn animated" href="#">View more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 		</div>
 	</div>
-	<!-- Carousel End -->
+	<!-- end of main header -->
 
+	<!-- main content -->
+	<div class="main-content py-100">
+		<div class="container">
+			<!-- 最新作品 -->
 
-	<!-- Category Start -->
-	<div class="container-fluid py-5">
-		<div class="container pt-5 pb-3">
-			<div class="text-center mb-5">
-				<h2 class="text-primary text-uppercase mb-3"
-					style="letter-spacing: 5px">商品</h2>
-
-				<h1>熱銷商品</h1>
-			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-1.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-2.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-3.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-4.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-5.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-6.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-7.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div
-						class="cat-item position-relative overflow-hidden rounded mb-2">
-						<img class="img-fluid" src="img/cat-8.jpg" alt="" /> <a
-							class="cat-overlay text-white text-decoration-none" href="">
-							<h4 class="text-white font-weight-medium">種類</h4> <span>100
-								Courses</span>
-						</a>
-					</div>
+			<div class="row overflow-hidden">
+				<div class="col-12">
+					<h2 class="main-title wow fadeIn">最新作品</h2>
 				</div>
 			</div>
+			<div class="row wow fadeIn mb-100">
+				<c:forEach var="portfolioList" items="${portfolioList}" begin="0" end="2">
+					<div class="col-lg-4 col-md-6">
+						<div class="blog-post blog-post--grid">
+							<div class="blog-post__img">
+								<div class="blog-post__img--overlay"></div>
+								<img src="<%=request.getContextPath()%>/PortfolioPic1?portfolioNo=${portfolioList.portfolioNo}" alt=""> <a
+									href="#" class="btn blog-post__btn"> Read more </a>
+							</div>
+							<div class="blog-post__inner">
+								<div class="blog-post__inner--title">
+									<a href="#"><h4>${portfolioList.portfolioName}</h4></a>
+								</div>
+								<div class="blog-post__inner--details">
+									<span class="date"><fmt:formatDate pattern="yyyy-MM-dd" value="${portfolioList.createTime}" /></span>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<!-- end 最新作品 -->
 		</div>
-	</div>
-	<!-- Category Start -->
-
-	<!-- Team Start -->
-	<div class="container-fluid py-5">
-		<div class="container pt-5 pb-3">
-			<div class="text-center mb-5">
-				<h2 class="text-primary text-uppercase mb-3"
-					style="letter-spacing: 5px">設計師</h2>
-				<h1>熱門設計師</h1>
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="img/team-1.jpg" alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-twitter"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-facebook-f"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-linkedin-in"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-							<h5>Jhon Doe</h5>
-							<p class="m-0">Web Designer</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="img/team-2.jpg" alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-twitter"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-facebook-f"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-linkedin-in"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-							<h5>Jhon Doe</h5>
-							<p class="m-0">Web Designer</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="img/team-3.jpg" alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-twitter"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-facebook-f"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-linkedin-in"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-							<h5>Jhon Doe</h5>
-							<p class="m-0">Web Designer</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 text-center team mb-4">
-					<div class="team-item rounded overflow-hidden mb-2">
-						<div class="team-img position-relative">
-							<img class="img-fluid" src="img/team-4.jpg" alt="" />
-							<div class="team-social">
-								<a class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-twitter"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-facebook-f"></i></a> <a
-									class="btn btn-outline-light btn-square mx-1" href="#"><i
-									class="fab fa-linkedin-in"></i></a>
-							</div>
-						</div>
-						<div class="bg-secondary p-4">
-							<h5>Jhon Doe</h5>
-							<p class="m-0">Web Designer</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Team End -->
-
-	<!-- Courses Start -->
-	<div class="container-fluid py-5">
-		<div class="container py-5">
-			<div class="text-center mb-5">
-				<h2 class="text-primary text-uppercase mb-3"
-					style="letter-spacing: 5px">作品</h2>
-				<h1>作品精選</h1>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="rounded overflow-hidden mb-2">
-						<img class="img-fluid" src="./img/product600400/product001.jpg"
-							alt="" />
-						<div class="bg-secondary p-4">
-							<div class="d-flex justify-content-between mb-3">
-								<small class="m-0"><i
-									class="fa fa-users text-primary mr-2"></i>25 Students</small> <small
-									class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h
-									30m</small>
-							</div>
-							<a class="h5" href="">作品名稱</a>
-							<div class="border-top mt-4 pt-4">
-								<div class="d-flex justify-content-between">
-									<h6 class="m-0">
-										<i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-									</h6>
-									<h5 class="m-0">$99</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="rounded overflow-hidden mb-2">
-						<img class="img-fluid" src="./img/product600400/product002.jpg"
-							alt="" />
-						<div class="bg-secondary p-4">
-							<div class="d-flex justify-content-between mb-3">
-								<small class="m-0"><i
-									class="fa fa-users text-primary mr-2"></i>25 Students</small> <small
-									class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h
-									30m</small>
-							</div>
-							<a class="h5" href="">作品名稱</a>
-							<div class="border-top mt-4 pt-4">
-								<div class="d-flex justify-content-between">
-									<h6 class="m-0">
-										<i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-									</h6>
-									<h5 class="m-0">$99</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="rounded overflow-hidden mb-2">
-						<img class="img-fluid" src="./img/product600400/product003.jpg"
-							alt="" />
-						<div class="bg-secondary p-4">
-							<div class="d-flex justify-content-between mb-3">
-								<small class="m-0"><i
-									class="fa fa-users text-primary mr-2"></i>25 Students</small> <small
-									class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h
-									30m</small>
-							</div>
-							<a class="h5" href="">作品名稱</a>
-							<div class="border-top mt-4 pt-4">
-								<div class="d-flex justify-content-between">
-									<h6 class="m-0">
-										<i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-									</h6>
-									<h5 class="m-0">$99</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="rounded overflow-hidden mb-2">
-						<img class="img-fluid" src="./img/product600400/product004.jpg"
-							alt="" />
-						<div class="bg-secondary p-4">
-							<div class="d-flex justify-content-between mb-3">
-								<small class="m-0"><i
-									class="fa fa-users text-primary mr-2"></i>25 Students</small> <small
-									class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h
-									30m</small>
-							</div>
-							<a class="h5" href="">作品名稱</a>
-							<div class="border-top mt-4 pt-4">
-								<div class="d-flex justify-content-between">
-									<h6 class="m-0">
-										<i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-									</h6>
-									<h5 class="m-0">$99</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="rounded overflow-hidden mb-2">
-						<img class="img-fluid" src="./img/product600400/product005.jpg"
-							alt="" />
-						<div class="bg-secondary p-4">
-							<div class="d-flex justify-content-between mb-3">
-								<small class="m-0"><i
-									class="fa fa-users text-primary mr-2"></i>25 Students</small> <small
-									class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h
-									30m</small>
-							</div>
-							<a class="h5" href="">作品名稱</a>
-							<div class="border-top mt-4 pt-4">
-								<div class="d-flex justify-content-between">
-									<h6 class="m-0">
-										<i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-									</h6>
-									<h5 class="m-0">$99</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="rounded overflow-hidden mb-2">
-						<img class="img-fluid" src="./img/product600400/product006.jpg"
-							alt="" />
-						<div class="bg-secondary p-4">
-							<div class="d-flex justify-content-between mb-3">
-								<small class="m-0"><i
-									class="fa fa-users text-primary mr-2"></i>25 Students</small> <small
-									class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h
-									30m</small>
-							</div>
-							<a class="h5" href="">作品名稱</a>
-							<div class="border-top mt-4 pt-4">
-								<div class="d-flex justify-content-between">
-									<h6 class="m-0">
-										<i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-									</h6>
-									<h5 class="m-0">$99</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Courses End -->
-
-	<!-- Footer Start -->
-	<div id="footer"
-		class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5"
-		style="margin-top: 10px">
-		<div class="row pt-5">
-			<div class="col-lg-7 col-md-12">
+		<!-- gallery -->
+		<div class="res-gallery res-gallery--bg mb-100">
+			<div class="container">
 				<div class="row">
-					<div class="col-md-6 mb-5">
-						<h5 class="text-primary text-uppercase mb-4"
-							style="letter-spacing: 5px">關於我們</h5>
-
-						<a href="#" style="font-weight: bold">關於我們</a>
-
+					<!-- gallery tabs -->
+					<div class="col-lg-3 res-gallery__tabs">
+						<h3 class="gallery-title">熱門設計師</h3>
+						<div class="nav nav-pills" id="v-pills-tab" role="tablist"
+							aria-orientation="vertical">
+							<a class="nav-link active" id="v-pills-cat01-tab"
+								data-toggle="pill" href="#v-pills-cat01" role="tab"
+								aria-controls="v-pills-cat01" aria-selected="true">All</a>
+						</div>
 					</div>
-					<div class="col-md-6 mb-5"></div>
+					<!-- gallery content -->
+					<div class="col-lg-9">
+						<div class="tab-content res-gallery__content"
+							id="v-pills-tabContent">
+							<div class="tab-pane fade show active" id="v-pills-cat01"
+								role="tabpanel" aria-labelledby="v-pills-cat01-tab">
+								<div class="row">
+								<c:forEach var="designerList" items="${designerList}" begin="0" end="5">
+									<div class="col-md-4 col-6 gallery-column">
+										<div class="image-effect">
+											<img src="<%=request.getContextPath()%>/DesignerShowPic?designerNo=${designerList.designerNo}" alt="">
+											<div class="image-effect__content">
+												<a href="#"><h3 class="link">${designerList.designerName}</h3></a>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-
 		</div>
+		<!-- end gallery -->
+		<div class="container">
+			<!-- items slider light -->
+			<div class="row mb-100">
+				<h2 class="main-title">商城</h2>
+				<div class="owl-carousel card-item-slider ltr" id="itemSliderLight">
+				<c:forEach var="productList" items="${productList}" begin="0" end="5">
+					<div class="item">
+						<div class="card-item card-item--light">
+							<div class="card-item__bg">
+								<a href="#"><img src="<%=request.getContextPath()%>/PicReadServlet?productNo=${productList.productNo}"
+									alt=""></a>
+							</div>
+							<div class="card-item__body">
+								<div class="card-item__body--price">
+									<strong>$${productList.price}</strong>
+								</div>
+								<div class="card-item__body--title">
+									<a href="#"><h4>${productList.productName}</h4></a>
+								</div>
+							</div>
+							<div class="card-item__overlay">
+								<a href="#" class="btn">Add to cart</a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+				</div>
+			</div>
+			<!-- end items slider light -->
+		</div>
+		<!-- end items slider light blue -->
+
+
+
 	</div>
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-		class="fa fa-angle-double-up"></i></a>
+	<!-- end main content -->
+	<!-- footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="footer__top-row">
+				<div class="row">
+					<div class="col-lg-4 col-md-6 footer__content">
+						<div class="footer-logo">
+							<img src="./images/MatDesignLogo.png" alt="">
+						</div>
+						<p></p>
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+					</div>
+					<div class="col-lg-2 col-md-6 footer__content">
+						<h5 class="footer-heading">關於我們</h5>
+						<ul class="footer-list">
+							<li class="footer-list__item"><a href="index.html">關於我們</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-6 footer__content">
+						<h5 class="footer-heading">網站地圖</h5>
+						<ul class="footer-list">
+							<li class="footer-list__item"><a href="">找作品</a></li>
+							<li class="footer-list__item"><a href="#">找設計師</a></li>
+							<li class="footer-list__item"><a href="#">商城</a></li>
+							<li class="footer-list__item"><a href="#">論壇</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-6 footer__content">
+						<h5 class="footer-heading">Keep in touch</h5>
+						<ul class="footer-list footer-list-info">
+							<li class="footer-list__item"><span><i
+									class="fas fa-envelope"></i></span> <span>MatDesign@gmail.com</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">
+				<p>&#169; copyright 2022. Designed by MatDesign</p>
+			</div>
+		</div>
+	</footer>
+	<!-- end footer -->
+	<!-- scroll up btn -->
+	<a class="back-to-top-btn" id="back-to-top"></a>
+	<!-- end scroll up btn -->
 
-	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
 
-	<!-- Template Javascript -->
-	<script src="/js/main.js"></script>
-
+	<!-- All Jquery -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<!-- owl carousel js -->
+	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+	<!-- Jquery ui -->
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<!-- light box js -->
+	<script type="text/javascript" src="js/lightbox.min.js"></script>
+	<!-- typeahead js -->
+	<script type="text/javascript" src="js/typeahead.jquery.min.js"></script>
+	<!-- master zoom image js -->
+	<script type="text/javascript" src="js/jquery.zoom.min.js"></script>
+	<!-- countdown js -->
+	<script type="text/javascript" src="js/countdown.jquery.min.js"></script>
+	<!-- nice select js -->
+	<script type="text/javascript" src="js/nice-select.min.js"></script>
+	<!-- wow js -->
+	<script type="text/javascript" src="js/wow.min.js"></script>
+	<!-- custom js -->
+	<script type="text/javascript" src="js/custom.js"></script>
 
 </body>
 </html>
