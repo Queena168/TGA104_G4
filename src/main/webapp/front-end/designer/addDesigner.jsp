@@ -39,6 +39,28 @@
 <link href="css/style.css" rel="stylesheet" />
 <link href="css/MatDesign.css" rel="stylesheet" />
 
+<!-- Favicon -->
+    <link rel="icon" href="<%=request.getContextPath()%>/front-end/images/favicon.ico" sizes="32x32">
+
+
+    <!-- Font Awesome -->
+    <link rel='stylesheet' href='<%=request.getContextPath()%>/front-end/css/fontawesome.min.css'>
+    <!-- Animate -->
+    <link href="<%=request.getContextPath()%>/front-end/css/animate.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/owl.theme.default.min.css">
+    <!-- light box -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/lightbox.min.css">
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/jquery-ui.min.css">
+    <!--    <link rel="stylesheet" href="//basehold.it/24">-->
+
+    <!-- nice select -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/nice-select.min.css">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/scss/main.css">
+
   <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -148,71 +170,134 @@ margin-left: 200px;
 </head>
 <body bgcolor='white'>
 	
-	<!-- Topbar Start -->
-	<div class="container-fluid d-none d-lg-block">
-		<div class="row align-items-center py-4 px-xl-5">
-			<div class="modal fade" id="loginModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<!-- Registration Start -->
-						<div class="container-fluid bg-registration py-5"
-							style="margin: 30px 0">
-							<div class="col-lg-5">
-								<div id="cardborder" class="card border-0">
-									<!-- tab標籤開始 -->
-									
+<!-- main header navbar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
+    <div class="container">
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/front-end/index.html">    
+            <img src="<%=request.getContextPath()%>/front-end/images/MatDesignLogo.png" alt="">
+        </a>
+        <!--  navbar actions -->
+        <div class="main-navbar-action">
+            <div id="mainNavbarDropdown">
+                <!-- navbar user account dropdown -->
+                <div class="dropdown-wrapper" id="usermenu" data-collapse="false">
+                    <div class="account-wrapper">
+                        <!-- login form wrapper -->
+                        
+                        <div class="account-wrapper__content">
+                            <form class="custom-form">
+                                <div class="custom-form__btn">
+                                    <a class="dropdown-item nav-link" href="<%=request.getContextPath()%>/front-end/member/login.jsp">會員登入/註冊</a>
+                                    <a class="dropdown-item nav-link" href="<%=request.getContextPath()%>/front-end/designer_protfolio/login.jsp">設計師登入/註冊</a>
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <!-- account links when user is logged in-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
+                        <!--                            class="icon-user-profile"></i></span>Profile</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-order-tab"><span><i-->
+                        <!--                            class="icon-shopping-basket"></i></span>Orders</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-address-tab"><span><i-->
+                        <!--                            class="icon-sign"></i></span>Addresses</a>-->
+                        <!--                    <a class="dropdown-item" href="account.html#v-pills-wishlist-tab"><span><i-->
+                        <!--                            class="icon-wish-list"></i></span>wishlist</a>-->
+                        <!--                    <a class="dropdown-item" href="#"><span><i class="icon-log-out"></i></span>Log out</a>-->
 
-									<!-- tab標籤結束 -->
-									<div class="card-body rounded-bottom bg-primary p-5"><!-- 動這行會影響到左上角LOGO -->
-							
-										<!-- Footer -->
-										<div class="modal-footer"><!-- 動這行會影響到左上角LOGO -->
-											<div class="signup"><!-- 動這行會影響到左上角LOGO -->
-												
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Registration End -->
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-0">
-				<a href="index.jsp" class="text-decoration-none">
-					<h1 class="m-0">
-						<span class="text-primary">M</span>atDesign
-					</h1>
-				</a>
-			</div>
-
-		</div>
-	</div>
-	<!-- Topbar End -->
-
-	<!-- Navbar Start -->
-	<div class="container-fluid">
-		<div class="row border-top px-xl-5">
-
-			<div class="col-lg-9">
-				<nav
-					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="" class="text-decoration-none d-block d-lg-none">
-						<h1 class="m-0">
-							<span class="text-primary">M</span>atDesign
-						</h1>
-					</a>
-					<button type="button" class="navbar-toggler" data-toggle="collapse"
-						data-target="#navbarCollapse">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</nav>
-			</div>
-		</div>
-	</div>
-	<!-- Navbar End -->
+                    </div>
+                </div>
+                <!-- navbar cart dropdown -->
+                <div class="" id="cartmenu" data-collapse="false"></div>
+            </div>
+            <!-- navbar user account icon -->
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="usermenu">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+            <!-- navbar cart icon -->
+            <div class="main-navbar-action__btn nav-dropdown">
+                <a class="dropdown-link" data-target="cartmenu">
+                    <span class="cart-badge">2</span>
+                    <i class="icon-shopping-bag"></i>
+                </a>
+            </div>
+            <!-- navbar actions content -->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+                aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav main-navbar">
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="<%=request.getContextPath()%>/front-end/designer_protfolio/memFindPortfolio.jsp" >找作品</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="<%=request.getContextPath()%>/ShowDesignerPage" >找設計師</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="<%=request.getContextPath()%>/ShowShop" >商城</a>
+                </li>
+                <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="./forum/forumIndex.do" >論壇</a>
+                </li>
+                <!-- <li class="nav-item main-navbar__item dropdown">
+                    <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
+                </li> -->
+                <li class="nav-item main-navbar__item">
+                    <a class="nav-link" href="contact.html">關於我們</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end main header navbar -->
+<!-- main header slider -->
+<div class="hero-header-slider">
+    <div class="owl-carousel ltr" id="heroHeaderSlider">
+        <div class="item">
+            <div class="hero-header-slider__img slider-img"
+                 style="background-image: url('https://via.placeholder.com/1920x800')">
+                <div class="hero-header-slider__wrapper">
+                    <div class="slider-inner">
+                        <div class="container overflow-hidden">
+                            <div class="inner-content inner-content--dark slider-animated">
+                                <h5 class="slider-subtitle">New Trend</h5>
+                                <h1 class="slider-title animated">A new way to design</h1>
+                                <p class="slider-text animated">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                    elit. Quam, vel.</p>
+                                <div class="slider-btn">
+                                    <a class="btn animated" href="#">Shop now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="hero-header-slider__img slider-img"
+                 style="background-image: url('https://via.placeholder.com/1920x800')">
+                <div class="hero-header-slider__wrapper">
+                    <div class="slider-inner">
+                        <div class="container overflow-hidden">
+                            <div class="inner-content inner-content--dark slider-animated">
+                                <h5 class="slider-subtitle">New Trend</h5>
+                                <h1 class="slider-title animated">Stay on trend in new year</h1>
+                                <p class="slider-text animated">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                    elit. Quam, vel.</p>
+                                <div class="slider-btn">
+                                    <a class="btn animated" href="#">View more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of main header -->
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -297,6 +382,50 @@ margin-left: 200px;
 </div>
 
 </FORM>
+
+
+<!-- footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="footer__top-row">
+				<div class="row">
+					<div class="col-lg-4 col-md-6 footer__content">
+						<div class="footer-logo">
+							<img src="<%=request.getContextPath()%>/front-end/images/MatDesignLogo.png" alt="">
+						</div>
+						<p></p>
+
+					</div>
+					<div class="col-lg-2 col-md-6 footer__content">
+						<h5 class="footer-heading">關於我們</h5>
+						<ul class="footer-list">
+							<li class="footer-list__item"><a href="index.html">關於我們</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-6 footer__content">
+						<h5 class="footer-heading">網站地圖</h5>
+						<ul class="footer-list">
+							<li class="footer-list__item"><a href="#">找作品</a></li>
+							<li class="footer-list__item"><a href="#">找設計師</a></li>
+							<li class="footer-list__item"><a href="#">商城</a></li>
+							<li class="footer-list__item"><a href="#">論壇</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-6 footer__content">
+						<h5 class="footer-heading">Keep in touch</h5>
+						<ul class="footer-list footer-list-info">
+							<li class="footer-list__item"><span><i
+									class="fas fa-envelope"></i></span> <span>MatDesign@gmail.com</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">
+				<p>&#169; copyright 2022. Designed by MatDesign</p>
+			</div>
+		</div>
+	</footer>
+	<!-- end footer -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="js/MatDesign.js"></script>

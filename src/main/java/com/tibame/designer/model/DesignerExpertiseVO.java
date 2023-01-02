@@ -39,7 +39,7 @@ public class DesignerExpertiseVO implements java.io.Serializable{
 		public DesignerVO getDesignerVO() {
 			DesignerService designerSvc = new DesignerService();
 			DesignerVO designerVO = designerSvc.getOneDesigner(designerNo);
-			System.out.println("designerExpertiseVO之designerService被執行");
+			//System.out.println("designerExpertiseVO之designerService被執行");
 			return designerVO;
 
 		}
@@ -49,7 +49,7 @@ public class DesignerExpertiseVO implements java.io.Serializable{
 		public ExpertiseVO getExpertiseVO() {
 			ExpertiseService expertiseSvc = new ExpertiseService();
 			ExpertiseVO expertiseVO = expertiseSvc.getOneExpertise(expertiseNo);
-			System.out.println("designerExpertiseVO之expertiseSvc被執行");
+			//System.out.println("designerExpertiseVO之expertiseSvc被執行");
 			return expertiseVO;
 		}
 
