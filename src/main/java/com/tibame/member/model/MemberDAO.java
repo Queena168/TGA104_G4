@@ -664,7 +664,7 @@ public class MemberDAO implements Member_interface {
 				designerOrderPhaseVO.setOrderPhase(rs.getInt("orderPhase"));
 				designerOrderPhaseVO.setTotalOrderPhase(rs.getInt("totalOrderPhase"));
 				designerOrderPhaseVO.setAmount(rs.getInt("amount"));
-				designerOrderPhaseVO.setTotalamount(rs.getInt("totalamount"));
+				designerOrderPhaseVO.setTotalAmount(rs.getInt("totalAmount"));
 				designerOrderPhaseVO.setConstructionStatus(rs.getString("constructionStatus"));
 				designerOrderPhaseVO.setPaymentPhase(rs.getInt("paymentPhase"));
 				designerOrderPhaseVO.setPaymentStatus(rs.getString("paymentStatus"));
