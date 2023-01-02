@@ -55,7 +55,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 			if (rs.next()) {
 				phaseNo = rs.getInt(1);
 				System.out.println("designerOrderPhase新增成功");
-				System.out.println("inserted; phaseNo: " + phaseNo);
+				//System.out.println("inserted; phaseNo: " + phaseNo);
 			}
 			
 //			if (phaseNo == -1) {
@@ -144,7 +144,7 @@ public class DesignerOrderPhaseJNDIDAO implements DesignerOrderPhaseDAO_interfac
 						if (rs.next()) {
 							phaseNo = rs.getInt(1);
 							System.out.println("designerOrderPhase新增成功");
-							System.out.println("inserted; phaseNo: " + phaseNo);
+							//System.out.println("inserted; phaseNo: " + phaseNo);
 						}
 						
 						if (phaseNo == -1) {

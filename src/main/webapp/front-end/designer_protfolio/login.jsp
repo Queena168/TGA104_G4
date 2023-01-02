@@ -98,7 +98,7 @@
 						class="nav-link " href="./designer_protfolio/listAll.html">找作品</a>
 					</li>
 					<li class="nav-item main-navbar__item dropdown"><a
-						class="nav-link " href="#">找設計師</a></li>
+						class="nav-link " href="<%=request.getContextPath()%>/ShowDesignerPage">找設計師</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a
 						class="nav-link " href="#">商城</a></li>
 					<li class="nav-item main-navbar__item dropdown"><a

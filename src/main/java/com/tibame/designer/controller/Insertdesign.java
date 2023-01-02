@@ -29,7 +29,7 @@ public class Insertdesign extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		//設計師註冊controller
 		
-		System.out.println("done0.0========================================");
+		//System.out.println("done0.0========================================");
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html;charset=UTF-8");
 		// res.setContentType("image/gif");
@@ -39,7 +39,7 @@ public class Insertdesign extends HttpServlet {
 		// =======================================================
 
 		if ("insertdesigner".equals(action)) { // 來自addDesigner.jsp的請求
-			System.out.println("done0.1========================================");
+			//System.out.println("done0.1========================================");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -111,7 +111,7 @@ public class Insertdesign extends HttpServlet {
 
 			PrintWriter out = res.getWriter();
 			out.print("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
-					+ "/front-end/designer/index.jsp'>");// redirects after 1 seconds
+					+ "/front-end/index.html'>");// redirects after 1 seconds
 //					out.print("<script> alert('註冊資料已送出，請等待管理員審核與通知!');</script>");	
 			res.getWriter().print("<script>alert('註冊資料已送出，請等待管理員審核與通知!');</script>");
 			// res.setHeader("refresh", "1;URL=" + req.getContextPath() +

@@ -48,8 +48,8 @@ public class ShowOneOrderDetail extends HttpServlet {
 			DesignerOrderPhaseService designerOrderPhaseService = new DesignerOrderPhaseService();
 			List<DesignerOrderPhaseVO> list = designerOrderPhaseService.getOrderPhase(designerOrderNo);		
 			DesignerOrderPhaseVO designerOneOrderPhaseVO = designerOrderPhaseService.getOneOrderPhase(designerOrderNo);
-			System.out.println("ShowOneOrderDetail.java之list內容:"+list.toString());
-			System.out.println("ShowOneOrderDetail.java之designerOneOrderPhaseVO內容=="+designerOneOrderPhaseVO);
+			//System.out.println("ShowOneOrderDetail.java之list內容:"+list.toString());
+			//System.out.println("ShowOneOrderDetail.java之designerOneOrderPhaseVO內容=="+designerOneOrderPhaseVO);
 			session.setAttribute("list", list);
 			session.setAttribute("designerOrderVO", designerOrderVO);	
 		    session.setAttribute("designerOneOrderPhaseVO", designerOneOrderPhaseVO);

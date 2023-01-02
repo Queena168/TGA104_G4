@@ -312,7 +312,7 @@ margin-left: 200px;
 		
 
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/designer/designer.do"  enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/insertdesign"  enctype="multipart/form-data">
 <div id="container">
      <!-- <div class="h2regisiter"><h2 >設計師註冊</h2></div> -->
      <div style="text-align: center;"><h2 >設計師註冊</h2></div>  

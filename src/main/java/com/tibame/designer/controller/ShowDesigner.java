@@ -24,7 +24,7 @@ public class ShowDesigner extends HttpServlet {
 		// 設計師與專長多對多的表格查詢
 		DesignerExpertiseService designerExpertiseScv = new DesignerExpertiseService();
 		Set<DesignerExpertiseVO> set = designerExpertiseScv.getAll();
-		System.out.println("showdesignerexpertise之designerExpertiseScv被執行");
+		//System.out.println("showdesignerexpertise之designerExpertiseScv被執行");
 		HttpSession session = req.getSession();
 		session.setAttribute("set", set);
 		String url = "/front-end/designer/findDesigner.jsp";
