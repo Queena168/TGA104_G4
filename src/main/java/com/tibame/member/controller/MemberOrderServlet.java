@@ -1,6 +1,7 @@
 package com.tibame.member.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.tibame.designer.model.DesignerOrderPhaseVO;
 import com.tibame.designer.model.DesignerOrderVO;
@@ -178,36 +180,94 @@ public class MemberOrderServlet extends HttpServlet {
 			/*************************** 1.接收請求參數 **********************/
 			Integer phaseNo = Integer.valueOf(req.getParameter("phaseNo"));
 			Integer orderNo = Integer.valueOf(req.getParameter("orderNo"));
+			Integer orderPhase = Integer.valueOf(req.getParameter("orderPhase"));
+			Integer totalOrderPhase = Integer.valueOf(req.getParameter("totalOrderPhase"));
 			
-			MemberService memberSvc = new MemberService();
-			DesignerOrderVO designerOrderVO = memberSvc.findDesignerOrder(orderNo);
-			Integer memberNo = designerOrderVO.getMemberNo();
-//			Integer memberNo = Integer.valueOf(req.getParameter("memberNo"));
-			
-			String paymentStatus = "完成付款";
-			
-			DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
-			designerOrderPhaseVO.setPhaseNo(phaseNo);
-			designerOrderPhaseVO.setPaymentStatus(paymentStatus);
-			/*************************** 2.開始修改資料 *****************************************/
-			
-			memberSvc.updatePharePayment(phaseNo);
-			
-			DesignerOrderVO findDesignerOrder = memberSvc.findDesignerOrder(orderNo);
+			if(orderPhase==totalOrderPhase) {
+				MemberService memberSvc = new MemberService();
+				DesignerOrderVO designerOrderVO = memberSvc.findDesignerOrder(orderNo);
+				Integer memberNo = designerOrderVO.getMemberNo();
+//				Integer memberNo = Integer.valueOf(req.getParameter("memberNo"));
+				
+				String paymentStatus = "完成付款";
+				Boolean finishStatus = true;
+				DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
+				designerOrderPhaseVO.setPhaseNo(phaseNo);
+				designerOrderPhaseVO.setPaymentStatus(paymentStatus);
+				
+				byte[] quotationAtt = req.getPart("quotationAtt").getInputStream().readAllBytes();
+				if (quotationAtt.length == 0) {
+					quotationAtt = null;
+				}
+//				Part part = req.getPart("quotationAtt");
+//				InputStream in = part.getInputStream();
+//				byte[] quotationAtt = new byte[in.available()];
+//				in.read(quotationAtt);
+//				in.close();
+//				if (quotationAtt.length == 0) {
+//					quotationAtt = null;
+//				}
+				/*************************** 2.開始修改資料 *****************************************/
+				
+				memberSvc.updatePharePayment(phaseNo, quotationAtt);
+				memberSvc.updateOrderFinishStatus(orderNo, finishStatus);
+				DesignerOrderVO findDesignerOrder = memberSvc.findDesignerOrder(orderNo);
 
-			DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
-			List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
-			List<DesignerOrderPhaseVO> designerOrderPhase = designerOrderPhaseSvc.getOrderPhase(orderNo);
+				DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
+				List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
+				List<DesignerOrderPhaseVO> designerOrderPhase = designerOrderPhaseSvc.getOrderPhase(orderNo);
 
-			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("findDesignerOrder", findDesignerOrder);
-			req.setAttribute("desOrderList", desOrderList);
-			req.setAttribute("designerOrderPhase", designerOrderPhase);
-			
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("findDesignerOrder", findDesignerOrder);
+				req.setAttribute("desOrderList", desOrderList);
+				req.setAttribute("designerOrderPhase", designerOrderPhase);
+				
 
-			RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetailUpdate.jsp");
-			successView.forward(req, res);
-			
+				RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetailUpdate.jsp");
+				successView.forward(req, res);
+			}else {
+				MemberService memberSvc = new MemberService();
+				DesignerOrderVO designerOrderVO = memberSvc.findDesignerOrder(orderNo);
+				Integer memberNo = designerOrderVO.getMemberNo();
+//				Integer memberNo = Integer.valueOf(req.getParameter("memberNo"));
+				
+				String paymentStatus = "完成付款";
+				
+				DesignerOrderPhaseVO designerOrderPhaseVO = new DesignerOrderPhaseVO();
+				designerOrderPhaseVO.setPhaseNo(phaseNo);
+				designerOrderPhaseVO.setPaymentStatus(paymentStatus);
+				
+				byte[] quotationAtt = req.getPart("quotationAtt").getInputStream().readAllBytes();
+				if (quotationAtt.length == 0) {
+					quotationAtt = null;
+				}
+//				Part part = req.getPart("quotationAtt");
+//				InputStream in = part.getInputStream();
+//				byte[] quotationAtt = new byte[in.available()];
+//				in.read(quotationAtt);
+//				in.close();
+//				if (quotationAtt.length == 0) {
+//					quotationAtt = null;
+//				}
+				/*************************** 2.開始修改資料 *****************************************/
+				
+				memberSvc.updatePharePayment(phaseNo, quotationAtt);
+				
+				DesignerOrderVO findDesignerOrder = memberSvc.findDesignerOrder(orderNo);
+
+				DesignerOrderPhaseService designerOrderPhaseSvc = new DesignerOrderPhaseService();
+				List<DesignerOrderVO> desOrderList = memberSvc.selectbyMemberNo(memberNo);
+				List<DesignerOrderPhaseVO> designerOrderPhase = designerOrderPhaseSvc.getOrderPhase(orderNo);
+
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("findDesignerOrder", findDesignerOrder);
+				req.setAttribute("desOrderList", desOrderList);
+				req.setAttribute("designerOrderPhase", designerOrderPhase);
+				
+
+				RequestDispatcher successView = req.getRequestDispatcher("/front-end/member/designerOrderDetailUpdate.jsp");
+				successView.forward(req, res);
+			}
 		}
 
 	}

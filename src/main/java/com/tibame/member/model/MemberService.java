@@ -107,9 +107,14 @@ public class MemberService {
 		
 	}
 	
-	public void updatePharePayment(Integer phaseNo) {
+	public void updatePharePayment(Integer phaseNo, byte[] quotationAtt) {
 		MemberDAO dao = new MemberDAO();
-		dao.updatePharePayment(phaseNo);
+		dao.updatePharePayment(phaseNo,quotationAtt);
+	}
+	
+	public void updateOrderFinishStatus(Integer orderNo,Boolean finishStatus) {
+		MemberDAO dao = new MemberDAO();
+		dao.updateOrderFinishStatus(orderNo, finishStatus);
 	}
 	
 }

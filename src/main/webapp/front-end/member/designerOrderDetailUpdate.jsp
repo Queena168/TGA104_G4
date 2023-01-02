@@ -113,7 +113,8 @@ td {
 				<!-- navbar cart icon -->
 				<div class="main-navbar-action__btn nav-dropdown">
 					<a class="dropdown-link" data-target="cartmenu"> <!-- <span
-						class="cart-badge">2</span>  --><i class="icon-shopping-bag"></i>
+						class="cart-badge">2</span>  -->
+						<i class="icon-shopping-bag"></i>
 					</a>
 				</div>
 				<!-- navbar actions content -->
@@ -169,7 +170,7 @@ td {
 							href="#v-pills-profile" role="tab"
 							aria-controls="v-pills-profile" aria-selected="true"> <span><i
 								class="icon-user-profile"></i></span>會員資料
-						</a>  <a class="nav-link"
+						</a> <a class="nav-link"
 							href="${pageContext.request.contextPath}/SelectOrder"> <span><i
 								class='bx bx-shopping-bag'></i></span>商品訂單
 						</a> <a class="nav-link active" id="v-pills-wishlist-tab"
@@ -285,8 +286,9 @@ td {
 														<div class="form-group custom-form__input">
 															<label class="form-label" for="memberPassword">密碼</label>
 															<div class="input-box password-box row">
-																<input type="password" class="form-control" name="memberPassword"
-																	id="memberPassword" value="${memberVO.memberPassword}">
+																<input type="password" class="form-control"
+																	name="memberPassword" id="memberPassword"
+																	value="${memberVO.memberPassword}">
 																<div class="input-box__icon ">
 																	<span class="showhidepassword"><i
 																		class="far fa-eye-slash"></i></span>
@@ -381,7 +383,7 @@ td {
 																name="birthDate" />
 														</div>
 													</div>
-													
+
 													<div class="modal-footer custom-form__btn">
 														<button type="button" class="btn btn-close"
 															data-dismiss="modal">取消</button>
@@ -405,7 +407,7 @@ td {
 							</div>
 							<!-- end edit profile -->
 						</div>
-						
+
 						<!-- DesignerOrder tab -->
 						<div class="tab-pane fade  show active" id="v-pills-designorder"
 							role="tabpanel" aria-labelledby="v-pills-wishlist-tab">
@@ -592,7 +594,7 @@ td {
 											value="${findDesignerOrder.designerNo}">
 									</div>
 									<div class="card-body">
-										<form method="post" action="MemberOrderServlet">
+										<form method="post" action="MemberOrderServlet" enctype="multipart/form-data">
 											<!-- 諮詢 -->
 											<div class="row mb-3">
 												<label class="col-sm-2 col-form-label"
@@ -632,11 +634,13 @@ td {
 											<c:choose>
 												<c:when test="${findDesignerOrder.quotationStatus =='未提供' }">
 												</c:when>
-												
-												<c:when test="${findDesignerOrder.quotationStatus =='null' }">
+
+												<c:when
+													test="${findDesignerOrder.quotationStatus =='null' }">
 												</c:when>
-												
-												<c:when test="${findDesignerOrder.quotationStatus =='同意報價' }">
+
+												<c:when
+													test="${findDesignerOrder.quotationStatus =='同意報價' }">
 													<div class="row mb-3">
 														<label class="col-sm-2 col-form-label"
 															for="basic-default-name"><h5>報價明細</h5></label>
@@ -783,7 +787,7 @@ td {
 																value="${findDesignerOrder.quotationApprovalTime}">
 														</div>
 													</div>
-													
+
 													<div class="row justify-content-end custom-form__btn"
 														style="padding-bottom: 20px;">
 														<div>
@@ -801,7 +805,7 @@ td {
 																value="${findDesignerOrder.memberNo}">
 														</div>
 													</div>
-													
+
 													<div class="modal-footer"></div>
 												</c:otherwise>
 											</c:choose>
@@ -811,10 +815,10 @@ td {
 											<c:choose>
 												<c:when test="${findDesignerOrder.contractStatus =='尚未進行' }">
 												</c:when>
-												
+
 												<c:when test="${findDesignerOrder.contractStatus =='null' }">
 												</c:when>
-												
+
 												<c:when test="${findDesignerOrder.contractStatus =='同意合約' }">
 													<div class="row mb-3">
 														<label class="col-sm-2 col-form-label"
@@ -976,26 +980,53 @@ td {
 																			<td style="vertical-align: middle;"><strong>${designerOrderPhase.orderPhase}</strong></td>
 																			<fmt:setLocale value="zh_TW" />
 																			<td style="vertical-align: middle;"><fmt:formatNumber
-																					value="${designerOrderPhase.amount}" type="currency"
-																					maxFractionDigits="0" /></td>
+																					value="${designerOrderPhase.amount}"
+																					type="currency" maxFractionDigits="0" /></td>
 																			<td style="vertical-align: middle;">${designerOrderPhase.constructionStatus}</td>
-																			<td style="vertical-align: middle;">
-																				<%-- <img
-																				src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVoList.adminNo}"
-																				alt class="avatar w-px-40 rounded-circle" /> --%>施工圖片
-																			</td>
+																			<td style="vertical-align: middle;"><c:choose>
+																					<c:when
+																						test="${designerOrderPhase.constructionStatus =='完成施工' }">
+																						<img
+																							src="<%=request.getContextPath()%>/OrderPhasePicReader?phaseNo=${designerOrderPhase.phaseNo}"
+																							alt="user-avatar" class="d-block rounded"
+																							height="100" width="100" id="uploadedAvatar" />
+																					</c:when>
+																					<c:otherwise>
+																						尚未提供圖片
+																					</c:otherwise>
+
+																				</c:choose></td>
+
 																			<td style="vertical-align: middle;">${designerOrderPhase.paymentStatus}</td>
-																			<td style="vertical-align: middle;"><input
-																				type="file" name="upfilequotation" id="fileinp"></td>
-																			<td style="vertical-align: middle;"><label
-																				class="btn btn-primary" tabindex="0"> <span
-																					class="d-none d-sm-block">上傳</span> <i
-																					class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
-																					<%-- <input type="submit" class="account-file-input"
-																					hidden /> <input type="hidden" name="phaseNo"
-																					value="${desOrderList.phaseNo}"> <input
-																					type="hidden" name="action" value="desOrder_GetOne"> --%>
-																			</label></td>
+
+																			<c:choose>
+																				<c:when
+																					test="${designerOrderPhase.paymentStatus =='完成付款' }">
+																					<td style="vertical-align: middle;"><span>
+																							<a href="#" class="btn add-to-cart-btn"
+																							onclick="window.open(
+	    																                      '<%=request.getContextPath()%>/Quotationinfo?orderNo=${designerOrderPhase.orderNo}'
+	    																                      , '_blank').focus();">預覽付款證明</a>
+																					</span></td>
+																					<td style="vertical-align: middle;"></td>
+																				</c:when>
+
+																				<c:otherwise>
+																					<td style="vertical-align: middle;"><input
+																						type="file" name="paymentAtt" id="fileinp"></td>
+																					<td style="vertical-align: middle;"><label
+																						class="btn btn-primary" tabindex="0"> <span
+																							class="d-none d-sm-block">上傳</span> <i
+																							class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
+																							<input type="submit" class="account-file-input" hidden /> 
+																							<input type="hidden" name="phaseNo" value="${designerOrderPhase.phaseNo}"> 
+																							<input type="hidden" name="orderNo" value="${designerOrderPhase.orderNo}"> 
+																							<input type="hidden" name="orderPhase" value="${designerOrderPhase.orderPhase}"> 
+																							<input type="hidden" name="totalOrderPhase" value="${designerOrderPhase.totalOrderPhase}">
+																							<input type="hidden" name="action" value="upload_paymentPic">
+																					</label></td>
+																				</c:otherwise>
+																			</c:choose>
 																		</tr>
 																	</c:forEach>
 																</tbody>

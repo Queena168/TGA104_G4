@@ -593,7 +593,8 @@ td {
 											value="${findDesignerOrder.designerNo}">
 									</div>
 									<div class="card-body">
-										<form method="post" action="MemberOrderServlet">
+										<form method="post" action="MemberOrderServlet"
+											enctype="multipart/form-data">
 											<!-- 諮詢 -->
 											<div class="row mb-3">
 												<label class="col-sm-2 col-form-label"
@@ -1003,7 +1004,12 @@ td {
 																			<c:choose>
 																				<c:when
 																					test="${designerOrderPhase.paymentStatus =='完成付款' }">
-																					<td style="vertical-align: middle;"></td>
+																					<td style="vertical-align: middle;"><span>
+																							<a href="#" class="btn add-to-cart-btn"
+																							onclick="window.open(
+	    																                      '<%=request.getContextPath()%>/Quotationinfo?orderNo=${designerOrderPhase.orderNo}'
+	    																                      , '_blank').focus();">預覽付款證明</a>
+																					</span></td>
 																					<td style="vertical-align: middle;"></td>
 																				</c:when>
 
@@ -1014,13 +1020,12 @@ td {
 																						class="btn btn-primary" tabindex="0"> <span
 																							class="d-none d-sm-block">上傳</span> <i
 																							class="fa-regular fa-pen-to-square d-block d-sm-none"></i>
-																							<input type="submit" class="account-file-input"
-																							hidden /> <input type="hidden" name="phaseNo"
-																							value="${designerOrderPhase.phaseNo}"> <input
-																							type="hidden" name="orderNo"
-																							value="${designerOrderPhase.orderNo}"> <input
-																							type="hidden" name="action"
-																							value="upload_paymentPic">
+																							<input type="submit" class="account-file-input" hidden /> 
+																							<input type="hidden" name="phaseNo" value="${designerOrderPhase.phaseNo}"> 
+																							<input type="hidden" name="orderNo" value="${designerOrderPhase.orderNo}"> 
+																							<input type="hidden" name="orderPhase" value="${designerOrderPhase.orderPhase}"> 
+																							<input type="hidden" name="totalOrderPhase" value="${designerOrderPhase.totalOrderPhase}"> 
+																							<input type="hidden" name="action" value="upload_paymentPic">
 																					</label></td>
 																				</c:otherwise>
 																			</c:choose>

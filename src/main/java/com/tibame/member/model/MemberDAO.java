@@ -685,9 +685,9 @@ public class MemberDAO implements Member_interface {
 		return designerOrderPhaseVO;
 	}
 	
-	private static final String UPDATEPHAREPAYMENT = "UPDATE DesignerOrderPhase set paymentStatus='完成付款' where phaseNo = ?;";
+	private static final String UPDATEPHAREPAYMENT = "UPDATE DesignerOrderPhase set paymentStatus='完成付款',paymentAtt=? where phaseNo = ?;";
 
-	public void updatePharePayment(Integer phaseNo) {
+	public void updatePharePayment(Integer phaseNo, byte[] quotationAtt) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -697,7 +697,52 @@ public class MemberDAO implements Member_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATEPHAREPAYMENT);
-			pstmt.setInt(1, phaseNo);
+			pstmt.setBytes(1, quotationAtt);
+			pstmt.setInt(2, phaseNo);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	private static final String UPDATEFINISHSTATUS = "UPDATE DesignerOrder set finishStatus=? where orderNo = ?;";
+
+	public void updateOrderFinishStatus(Integer orderNo,Boolean finishStatus) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATEFINISHSTATUS);
+			pstmt.setBoolean(1, finishStatus);
+			pstmt.setInt(2, orderNo);
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
