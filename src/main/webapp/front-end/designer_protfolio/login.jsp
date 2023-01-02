@@ -183,7 +183,7 @@
 								<div class="custom-form__footer--link">
 									<h6>尚未註冊</h6>
 										<div class="custom-form__footer--link">
-											<a href="" class="btn ">註冊設計師</a>
+											<a href="<%=request.getContextPath()%>/front-end/designer/addDesigner.jsp" class="btn ">註冊設計師</a>
 										</div>
 								</div>
 							</div>
