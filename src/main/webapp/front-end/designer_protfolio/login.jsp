@@ -82,8 +82,7 @@
 				</div>
 				<!-- navbar cart icon -->
 				<div class="main-navbar-action__btn nav-dropdown">
-					<a class="dropdown-link" data-target="cartmenu"> <span
-						class="cart-badge">2</span> <i class="icon-shopping-bag"></i>
+					<a class="dropdown-link" data-target="cartmenu"> <i class="icon-shopping-bag"></i>
 					</a>
 				</div>
 				<!-- navbar actions content -->

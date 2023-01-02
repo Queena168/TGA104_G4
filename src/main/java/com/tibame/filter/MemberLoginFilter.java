@@ -19,7 +19,7 @@ import org.springframework.core.annotation.Order;
 import com.tibame.member.model.MemberVO;
 
 @Order(value = 2)
-@WebFilter(filterName = "MemberLoginFilter", urlPatterns = {"/front-end/designer/inquiryPage.jsp"})
+@WebFilter(filterName = "MemberLoginFilter", urlPatterns = {"/designerExpertise"})
 public class MemberLoginFilter extends HttpFilter implements Filter {
        
     
@@ -45,7 +45,7 @@ public class MemberLoginFilter extends HttpFilter implements Filter {
 		
 		if(memberVO == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect("/front-end/member/login.jsp");
+			res.sendRedirect("http://localhost:8081/TGA104_G4/front-end/member/login.jsp");
 		}else {
 			chain.doFilter(request, response);
 		}
