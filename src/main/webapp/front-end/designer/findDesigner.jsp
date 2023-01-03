@@ -80,6 +80,8 @@
     color: blue;
     display: inline;
   }
+  
+
 </style>
 
 <style>
@@ -97,6 +99,7 @@
     text-align: center;
   }
   
+
   
   .content_box_grey {
     display: block;
@@ -387,30 +390,26 @@
 
 <hr color="gray">
 <div style="text-align:center"><h3>找設計師</h3></div>
-<!-- <div class="content_box_grey"> -->
-<!--   <div>&emsp;&emsp;<font size="4px" color="black">設計強項</font></div> -->
-<!--   <div> -->
-<!--      <div align="center"> -->
+<div class="content_box_grey">
+  <div>&emsp;&emsp;<font size="4px" color="black">設計強項</font></div>
+  <div>
+     <div align="center">
+      <ul style="display: inline-flex;">
+       <c:forEach var="expertoseVOlist" items="${expertoseVOlist}">
        
-<!--          <form id="expertiseform" METHOD="post" action="ExpertiseSearch"> -->
-<!--            <ul> -->
-<%--            <c:forEach var="expertoseVOlist" items="${expertoseVOlist}"> --%>
-<%--             <input type="hidden" name="expertiseno${expertoseVOlist.expertiseNo}" value="${expertoseVOlist.expertiseNo}"> --%>
-<%--             <input type="submit" value="${expertoseVOlist.expertiseName}" /> &emsp;&emsp; --%>
-<!-- <!--             <input type="button" value="大坪數" /> &emsp;&emsp; --> 
-<%-- <%--             <input id="btn3" name="btn3expertise" type="button" value="${}" /> &emsp;&emsp; --%>
-<!-- <!--             <input type="button" value="格局動線"/> &emsp;&emsp; --> 
-<!-- <!--             <input type="button" value="透天設計"/> &emsp;&emsp; --> 
-<!-- <!--             <input type="button" value="退休樂活"/> &emsp;&emsp; --> 
-<!-- <!--             <input type="button" value="小資裝潢"/> &emsp;&emsp; --> 
-<!-- <!--             <input type="button" value="老屋翻新"/> &emsp;&emsp; --> 
-<!-- <!--             <input type="button" value="奢華裝修"/>  --> 
-<%--             </c:forEach> --%>
-<!--            </ul> -->
-<!--         </form> -->
+         <form id="expertiseform" METHOD="get" action="ExpertiseSearch?expertiseNo=${expertoseVOlist.expertiseNo }">
+           
         
-<!--      </div> -->
-<!--   </div> -->
+            <input type="hidden" name="expertiseno" value="${expertoseVOlist.expertiseNo}">
+            <input type="submit" value="${expertoseVOlist.expertiseName}" /> &emsp;&emsp;
+   
+         
+        </form>
+        
+        </c:forEach> 
+         </ul> 
+     </div>
+  </div>
  
 </div>
 
