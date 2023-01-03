@@ -29,17 +29,18 @@ public class DesignerExpertiseServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
-		//HttpSession session = req.getSession();
+		
+		HttpSession session = req.getSession();
 		//session.getAttribute("designerVO");
 		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
 		//PrintWriter out = res.getWriter();
 		DesignerExpertiseService designerExpertiseScv=new DesignerExpertiseService();
 		List<DesignerExpertiseVO> list= designerExpertiseScv.getMyExpertise(designerNo);
 		DesignerExpertiseVO designerExpertiseVO = designerExpertiseScv.getMyExpertises(designerNo);
-		HttpSession session = req.getSession();
+		//HttpSession session = req.getSession();
 		session.setAttribute("designerExpertiseVO", designerExpertiseVO);
 		System.out.println("DesignerExpertiseServlet收到的list內容"+list);
-		req.setAttribute("listXX", list);
+		session.setAttribute("listXX", list);
 		String url = "/front-end/designer/listOneDesignerINFO.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
 		successView.forward(req, res);

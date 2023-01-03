@@ -29,6 +29,10 @@ public class DesignerExpertiseService {
 	public DesignerExpertiseVO getMyExpertises(Integer designerNo) {
 		return dao.getMyExpertises(designerNo);
 	}
+	
+	public Set<DesignerExpertiseVO> getExpertiseDesigner(Integer expertiseNo){
+		return dao.getExpertiseDesigner(expertiseNo);
+	}
 
 
 }

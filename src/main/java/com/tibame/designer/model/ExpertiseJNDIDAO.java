@@ -24,117 +24,87 @@ public class ExpertiseJNDIDAO implements ExpertiseDAO_interface {
 		}
 	}
 
-	private static final String INSERT_DESIGNER = "";
-	private static final String GET_ALL_EXPERTISE = "";
-	private static final String DELETE = "";
-	private static final String UPDATE = "";
+	//private static final String INSERT_DESIGNER = "";
+	private static final String GET_ALL_EXPERTISE = "select * from Expertise";
+	//private static final String DELETE = "";
+	//private static final String UPDATE = "";
 	private static final String GET_ONE_EXPERTISE="select expertiseNo,expertiseName from Expertise  where expertiseNo=?";
 
 	@Override
 	public void insert(ExpertiseVO expertiseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_DESIGNER);
-
-			pstmt.executeUpdate();
-
-			System.out.println("新增成功");
-
-		} catch (SQLException se) {
-			System.out.println(se);
-		} finally {
-			// 依建立順序關閉資源 (越晚建立越早關閉)
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-		}
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//			con = ds.getConnection();
+//			pstmt = con.prepareStatement(INSERT_DESIGNER);
+//
+//			pstmt.executeUpdate();
+//
+//			System.out.println("新增成功");
+//
+//		} catch (SQLException se) {
+//			System.out.println(se);
+//		} finally {
+//			// 依建立順序關閉資源 (越晚建立越早關閉)
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					System.out.println(se);
+//				}
+//			}
+//
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException se) {
+//					System.out.println(se);
+//				}
+//			}
+//		}
 
 	}
 
 	@Override
 	public void update(ExpertiseVO expertiseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.executeUpdate();
-
-			System.out.println("新增成功");
-
-		} catch (SQLException se) {
-			System.out.println(se);
-		} finally {
-			// 依建立順序關閉資源 (越晚建立越早關閉)
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-		}
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//			con = ds.getConnection();
+//			pstmt = con.prepareStatement(UPDATE);
+//
+//			pstmt.executeUpdate();
+//
+//			System.out.println("新增成功");
+//
+//		} catch (SQLException se) {
+//			System.out.println(se);
+//		} finally {
+//			// 依建立順序關閉資源 (越晚建立越早關閉)
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					System.out.println(se);
+//				}
+//			}
+//
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException se) {
+//					System.out.println(se);
+//				}
+//			}
+//		}
 
 	}
 
 	@Override
 	public void delete(Integer expertiseNo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE);
-
-			pstmt.executeUpdate();
-
-			System.out.println("新增成功");
-
-		} catch (SQLException se) {
-			System.out.println(se);
-		} finally {
-			// 依建立順序關閉資源 (越晚建立越早關閉)
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException se) {
-					System.out.println(se);
-				}
-			}
-		}
+		
 
 	}
 
@@ -203,10 +173,13 @@ public class ExpertiseJNDIDAO implements ExpertiseDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_EXPERTISE);
-			rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				expertiseVO = new ExpertiseVO();
+				expertiseVO.setExpertiseNo(rs.getInt("expertiseNo"));
+				expertiseVO.setExpertiseName(rs.getString("expertiseName"));
+				list.add(expertiseVO);
 			}
 
 			// Handle any driver errors

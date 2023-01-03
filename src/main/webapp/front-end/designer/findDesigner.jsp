@@ -387,27 +387,30 @@
 
 <hr color="gray">
 <div style="text-align:center"><h3>找設計師</h3></div>
-<div class="content_box_grey">
-  <div>&emsp;&emsp;<font size="4px" color="black">設計強項</font></div>
-  <div>
-     <div>
+<!-- <div class="content_box_grey"> -->
+<!--   <div>&emsp;&emsp;<font size="4px" color="black">設計強項</font></div> -->
+<!--   <div> -->
+<!--      <div align="center"> -->
        
-         <form id="expertiseform" METHOD="post" action="ExpertiseSearch">
-           <ul>
-            <input type="button" value="小坪數" /> &emsp;&emsp;
-            <input type="button" value="大坪數" /> &emsp;&emsp;
-            <input id="btn3" name="btn3" type="button" value="輕奢新古典" onclick="displayResult()"/> &emsp;&emsp;
-            <input type="button" value="格局動線"/> &emsp;&emsp;
-            <input type="button" value="透天設計"/> &emsp;&emsp;
-            <input type="button" value="退休樂活"/> &emsp;&emsp;
-            <input type="button" value="小資裝潢"/> &emsp;&emsp;
-            <input type="button" value="老屋翻新"/> &emsp;&emsp;
-            <input type="button" value="奢華裝修"/> 
-           </ul>
-        </form>
+<!--          <form id="expertiseform" METHOD="post" action="ExpertiseSearch"> -->
+<!--            <ul> -->
+<%--            <c:forEach var="expertoseVOlist" items="${expertoseVOlist}"> --%>
+<%--             <input type="hidden" name="expertiseno${expertoseVOlist.expertiseNo}" value="${expertoseVOlist.expertiseNo}"> --%>
+<%--             <input type="submit" value="${expertoseVOlist.expertiseName}" /> &emsp;&emsp; --%>
+<!-- <!--             <input type="button" value="大坪數" /> &emsp;&emsp; --> 
+<%-- <%--             <input id="btn3" name="btn3expertise" type="button" value="${}" /> &emsp;&emsp; --%>
+<!-- <!--             <input type="button" value="格局動線"/> &emsp;&emsp; --> 
+<!-- <!--             <input type="button" value="透天設計"/> &emsp;&emsp; --> 
+<!-- <!--             <input type="button" value="退休樂活"/> &emsp;&emsp; --> 
+<!-- <!--             <input type="button" value="小資裝潢"/> &emsp;&emsp; --> 
+<!-- <!--             <input type="button" value="老屋翻新"/> &emsp;&emsp; --> 
+<!-- <!--             <input type="button" value="奢華裝修"/>  --> 
+<%--             </c:forEach> --%>
+<!--            </ul> -->
+<!--         </form> -->
         
-     </div>
-  </div>
+<!--      </div> -->
+<!--   </div> -->
  
 </div>
 
@@ -547,11 +550,7 @@
 	});
 	
 	</script>
-<script>
-    function displayResult(){
-    var x=document.getElementById("btn3").value;
-}
-</script>
+
 	
 	
 </body>

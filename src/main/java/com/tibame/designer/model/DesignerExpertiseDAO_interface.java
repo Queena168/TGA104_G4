@@ -8,6 +8,7 @@ public interface DesignerExpertiseDAO_interface {
        public DesignerExpertiseVO findDesignerExpertiseNo(Integer designerExpertiseNo);
        public Set<DesignerExpertiseVO> getAll();
        public List<DesignerExpertiseVO> getMyExpertise(Integer designerNo);
+       public Set<DesignerExpertiseVO> getExpertiseDesigner(Integer expertiseNo);
        public DesignerExpertiseVO getMyExpertises(Integer designerNo);
        //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //     public List<EmpVO> getAll(Map<String, String[]> map); 

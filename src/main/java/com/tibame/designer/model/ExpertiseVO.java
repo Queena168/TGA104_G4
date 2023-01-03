@@ -24,4 +24,12 @@ public class ExpertiseVO implements java.io.Serializable {
 		this.expertiseName = expertiseName;
 	}
 
+	@Override
+	public String toString() {
+		return "ExpertiseVO [expertiseNo=" + expertiseNo + ", expertiseName=" + expertiseName + "]";
+	}
+	
+	
+	
+
 }
