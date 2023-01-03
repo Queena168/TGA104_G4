@@ -53,18 +53,9 @@ public class DesignerService {
 		dao.insertDesigner(designerVO);
 		return designerVO;
 	}
-
-
-//	// 預留給 Struts 2 或 Spring MVC 用
-//	public void addDesigner(DesignerVO designerVO) {
-//		dao.insert(designerVO);
-//	}
-//	
-	
 	
 	public DesignerVO updateDesigner(Integer designerNo, String designerAccount, String designerPassword, String designerName,
-			String designerCompany, byte[] designerPic/*, String approvalStatus, java.sql.Date approvalTime,
-			Integer approver, Boolean designerStatus*/) {
+			String designerCompany, byte[] designerPic,String designerDetail) {
 		DesignerVO designerVO = new DesignerVO();
 		designerVO.setDesignerNo(designerNo);
 		designerVO.setDesignerAccount(designerAccount);
@@ -72,10 +63,7 @@ public class DesignerService {
 		designerVO.setDesignerName(designerName);
 		designerVO.setDesignerCompany(designerCompany);
 		designerVO.setDesignerPic(designerPic);
-//		designerVO.setApprovalStatus(approvalStatus);
-//		designerVO.setApprovalTime(approvalTime);
-//		designerVO.setApprover(approver);
-//		designerVO.setDesignerStatus(designerStatus);    
+		designerVO.setDesignerDetail(designerDetail);
 		dao.update(designerVO);
 		return dao.findByPrimaryKey(designerNo);
 	}
@@ -83,8 +71,7 @@ public class DesignerService {
 	
 
 	public DesignerVO updateDesignerNOPic(Integer designerNo, String designerAccount, String designerPassword, String designerName,
-			String designerCompany/*, byte[] designerPic, String approvalStatus, java.sql.Date approvalTime,
-			Integer approver, Boolean designerStatus*/) {
+			String designerCompany,String designerDetail) {
 
 		DesignerVO designerVO = new DesignerVO();
 
@@ -93,19 +80,11 @@ public class DesignerService {
 		designerVO.setDesignerPassword(designerPassword);
 		designerVO.setDesignerName(designerName);
 		designerVO.setDesignerCompany(designerCompany);
-//		designerVO.setDesignerPic(designerPic);
-//		designerVO.setApprovalStatus(approvalStatus);
-//		designerVO.setApprovalTime(approvalTime);
-//		designerVO.setApprover(approver);
-//		designerVO.setDesignerStatus(designerStatus);    
+        designerVO.setDesignerDetail(designerDetail); 
 		dao.updatenoPic(designerVO);
 		return dao.findByPrimaryKey(designerNo);
 	}
 
-	// 預留給 Struts 2 用的
-//	public void updatedesigner(DesignerVO designerVO) {
-//		dao.update(designerVO);
-//	}
 
 	public void deleteDesigner(Integer designerNo) {
 		dao.delete(designerNo);
@@ -130,6 +109,15 @@ public class DesignerService {
 	public List<DesignerVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public void updatedesignersuccess(Integer designerNo) {
+	dao.updatesuccess(designerNo);
+}
+	
+	public void updatedesignerfail(Integer designerNo) {
+
+	    dao.updatefail(designerNo);
+}
 	
 
 

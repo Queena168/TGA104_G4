@@ -22,14 +22,8 @@ public class DesignerEdit extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.getAttribute("designerVO");
 		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
-		//System.out.println(designerNo);
-
 		DesignerService designerService = new DesignerService();
 		DesignerVO designerVO = designerService.getOneDesigner(designerNo);
-		//System.out.println("有執行============================================");
-
-		// System.out.println(designerNo + "===========================");
-
 		session.setAttribute("designerVO", designerVO); //
 		String url = "/front-end/designer/updatedesignerINFO.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp

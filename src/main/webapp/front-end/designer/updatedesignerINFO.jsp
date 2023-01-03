@@ -326,7 +326,7 @@ margin-left: 200px;
 
 <div style="text-align: center;"><h2>基本資料修改</h2></div> 
 
-<FORM METHOD="post" ACTION="designer.do" name="form1"  enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="check" name="form1"  enctype="multipart/form-data">
 <div id="container">
 
 
@@ -401,6 +401,7 @@ margin-left: 200px;
 </div>
 </FORM>
 
+
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
@@ -443,8 +444,6 @@ margin-left: 200px;
 		</div>
 	</footer>
 	<!-- end footer -->
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/front-end/designer/js/MatDesign.js"></script>
 </body>

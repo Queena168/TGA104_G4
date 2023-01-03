@@ -87,7 +87,7 @@ h4 {
 
 <style>
 table {
-	width: 800px;
+	width: 1300px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -180,7 +180,7 @@ margin-left: 200px;
 
 <style>
   table {
-	width: 1100px;
+	width: 1300px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;

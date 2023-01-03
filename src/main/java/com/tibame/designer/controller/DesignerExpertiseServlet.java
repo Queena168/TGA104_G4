@@ -31,13 +31,10 @@ public class DesignerExpertiseServlet extends HttpServlet {
 		res.setContentType("image/gif");
 		
 		HttpSession session = req.getSession();
-		//session.getAttribute("designerVO");
 		Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
-		//PrintWriter out = res.getWriter();
 		DesignerExpertiseService designerExpertiseScv=new DesignerExpertiseService();
 		List<DesignerExpertiseVO> list= designerExpertiseScv.getMyExpertise(designerNo);
 		DesignerExpertiseVO designerExpertiseVO = designerExpertiseScv.getMyExpertises(designerNo);
-		//HttpSession session = req.getSession();
 		session.setAttribute("designerExpertiseVO", designerExpertiseVO);
 		System.out.println("DesignerExpertiseServlet收到的list內容"+list);
 		session.setAttribute("listXX", list);

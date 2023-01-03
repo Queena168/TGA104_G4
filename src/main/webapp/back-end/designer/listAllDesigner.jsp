@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.tibame.designer.model.*"%>
@@ -8,6 +9,7 @@
 DesignerService designerSvc = new DesignerService();
 List<DesignerVO> list = designerSvc.getAll();
 pageContext.setAttribute("list", list);
+System.out.print(list.toString());
 %>
 
 
@@ -27,7 +29,7 @@ pageContext.setAttribute("list", list);
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
+	href="<%=request.getContextPath()%>/back-end/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <script src="https://kit.fontawesome.com/6a35b80892.js"
@@ -39,30 +41,30 @@ pageContext.setAttribute("list", list);
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/assets/vendor/fonts/boxicons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/core.css"
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/assets/vendor/css/core.css"
 	class="template-customizer-core-css" />
-<link rel="stylesheet" href="../assets/vendor/css/theme-default.css"
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/assets/vendor/css/theme-default.css"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" href="../assets/css/demo.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+	href="<%=request.getContextPath()%>/back-end/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet"
-	href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+	href="<%=request.getContextPath()%>/back-end/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 <!-- Page CSS -->
 
 <!-- Helpers -->
-<script src="../assets/vendor/js/helpers.js"></script>
+<script src="<%=request.getContextPath()%>/back-end/assets/vendor/js/helpers.js"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="../assets/js/config.js"></script>
+<script src="<%=request.getContextPath()%>/back-end/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -108,7 +110,7 @@ pageContext.setAttribute("list", list);
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-DesignerInfo.html"
+								href="../designer/listAllDesigner.jsp"
 								class="menu-link">
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>
@@ -303,12 +305,11 @@ pageContext.setAttribute("list", list);
 
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">MatDesign /</span> 會員列表
+							<span class="text-muted fw-light">MatDesign /</span> 設計師列表
 						</h4>
 
 						<!-- Striped Rows -->
 						<div class="card">
-							<a href="selectPageMember.jsp" class="card-header">會員查詢</a>
 							<div class="table-responsive text-nowrap">
 								<table class="table table-striped">
 									<thead>
@@ -320,20 +321,33 @@ pageContext.setAttribute("list", list);
 											<th>公司</th>
 											<th>電話</th>
 											<th>審核狀態</th>
+											
 											<th>啟用狀態</th>
+											<th>審核按鈕</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
 										<c:forEach var="designerlist" items="${list}">
 											<tr>
-												<td><strong>${designerlist.DesignerNo}</strong></td>
-												<td>${designerlist.DesignerAccount}</td>
-												<td>${designerlist.DesignerPassword}</td>
-												<td>${designerlist.DesignerName}</td>
-												<td>${designerlist.DesignerCompany}</td>
-												<td>${designerlist.Phone}</td>
-												<td>${designerlist.ApprovalStatus}</td>
-												<td>${designerlist.DesignerStatus}</td>
+												<td><strong>${designerlist.designerNo}</strong></td>
+												<td>${designerlist.designerAccount}</td>
+												<td>${designerlist.designerPassword}</td>
+												<td>${designerlist.designerName}</td>
+												<td>${designerlist.designerCompany}</td>
+												<td>${designerlist.phone}</td>										
+												<td>${designerlist.approvalStatus}</td>
+												
+												<td>${designerlist.designerStatus}</td>
+												<td>
+												<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/check?designerNo=${designerlist.designerNo}" enctype="multipart/form-data">
+			                                    <input type="hidden" name="action" value="success"> 
+			                                    <input type="submit" value="審核成功">
+			                                    </FORM>	
+			                                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/check?designerNo=${designerlist.designerNo}" enctype="multipart/form-data">
+                                                <input type="hidden" name="action" value="fail"> 
+                                                <input type="submit" value="審核失敗">
+			                                    </FORM>												
+												</td>
 <!-- 												<td> -->
 <!-- 													<form method="post" action="Admin-AdminInfo-update.html"> -->
 <!-- 														<input type="submit" value="修改"> <input -->
@@ -361,8 +375,8 @@ pageContext.setAttribute("list", list);
 <!-- 															type="hidden" name="" value=""> <input -->
 <!-- 															type="hidden" name="action" value="delete"> -->
 <!-- 														</label> -->
-													</form>
-												</td>
+<!-- 													</form> -->
+<!-- 												</td> -->
 											</tr>
 										</c:forEach>
 									</tbody>

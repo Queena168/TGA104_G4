@@ -26,13 +26,14 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 	}
 	//private static final String INSERT_DESIGNER = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,'審核未成功',null,null,null)";
 	private static final String INSERT_DESIGNERINFO = "INSERT INTO Designer(designerAccount, designerPassword, designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,Approver,designerStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String GET_ALL_DESIGNER = "SELECT designerNo,designerAccount, designerPassword, designerName,designerCompany,designerPic,Phone,DesignerDetail,approvalStatus,approvalTime,approver,designerStatus FROM Designer";
+	private static final String GET_ALL_DESIGNER = "SELECT * FROM Designer";
 	private static final String GET_ONE_DESIGNER = "SELECT designerNo,designerAccount,designerPassword,designerName,designerCompany,designerPic,phone,designerDetail,approvalStatus,approvalTime,approver,designerStatus FROM Designer where designerNo = ?";
 	//private static final String DELETE = "DELETE FROM Designer where designerNo = ?";
-	private static final String UPDATE = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=? ,designerPic=? where designerNo = ?";
-	private static final String UPDATENOPIC = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=?  where designerNo = ?";
+	private static final String UPDATE = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=? ,designerPic=? ,,designerDetail=? where designerNo = ?";
+	private static final String UPDATENOPIC = "UPDATE Designer set designerName=?,designerPassword=?, designerCompany=? ,designerDetail=? where designerNo = ?";
 	private static final String LOGIN = "select designerNo,designerAccount,designerPassword,approvalStatus,designerStatus from designer where designerAccount=? and designerPassword=? and approvalStatus=? and designerStatus=?";
-			
+	private static final String updatesuccess = "update Designer set ApprovalStatus='審核成功' ,DesignerStatus =1 where designerNo=?";		
+	private static final String updaefail = "update Designer set ApprovalStatus='審核失敗' ,DesignerStatus =0 where designerNo=?";
 	@Override
 	public void insert(DesignerVO designerVO) {
 
@@ -52,7 +53,8 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 			pstmt.setString(2, designerVO.getDesignerPassword());
 			pstmt.setString(3, designerVO.getDesignerCompany());
 			pstmt.setBytes(4, designerVO.getDesignerPic());
-			pstmt.setInt(5, designerVO.getDesignerNo());
+			pstmt.setString(5, designerVO.getDesignerDetail());
+			pstmt.setInt(6, designerVO.getDesignerNo());
 			pstmt.executeUpdate();
 			System.out.println("更新成功");
 
@@ -92,7 +94,8 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 			pstmt.setString(1, designerVO.getDesignerName());
 			pstmt.setString(2, designerVO.getDesignerPassword());
 			pstmt.setString(3, designerVO.getDesignerCompany());
-			pstmt.setInt(4, designerVO.getDesignerNo());
+			pstmt.setString(4, designerVO.getDesignerDetail());
+			pstmt.setInt(5, designerVO.getDesignerNo());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -356,6 +359,80 @@ public class DesignerJNDIDAO implements DesignerDAO_interface {
 			}
 		}
 		return designerVO;
+	}
+
+	@Override
+	public void updatesuccess(Integer designerNo) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(updatesuccess);
+			pstmt.setInt(1, designerNo);
+			pstmt.executeUpdate();
+
+			
+			System.out.println("更新成功");
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void updatefail(Integer designerNo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(updaefail);
+			pstmt.setInt(1, designerNo);
+			pstmt.executeUpdate();
+			System.out.println("更新成功");
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 
 }

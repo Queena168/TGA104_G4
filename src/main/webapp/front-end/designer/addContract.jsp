@@ -400,7 +400,7 @@ margin-left: 200px;
         <tr><th>合約金額</th><td><input type="number" size="10" name="totalamount" value="${designerOrderVO.quotationAmount}">元</td></tr>
 		
 		
-		<tr><th>合約內容</th>
+		<tr><th>合約備註</th>
 		<td id="t1td"> 
 		 <textarea id="t1"  placeholder="請輸入內容!" name="contractDetail">${designerOrderVO.contractDetail}</textarea>
 		</td>

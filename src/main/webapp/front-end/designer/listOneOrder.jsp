@@ -132,7 +132,7 @@ margin-left: 450px;
 
 #btn2{
 float:left;
-width: 100px;
+width: 130px;
 margin-left: 20px;
 }
 </style>
@@ -583,7 +583,7 @@ margin-left: 20px;
           <form method="get" action="seeOrder">
               <input type="hidden" value="${designerOrderVO.contractStatus}"> 
               <input type="hidden" name="orderNo" value="${designerOrderVO.orderNo}"> 
-            <input id="btn2" type="submit" value="查看進度"  style="display: inline-block;">
+            <input id="btn2" type="submit" value="施工/付款進度"  style="display: inline-block; size: 35">
           </form>           
           </div>
           <div id="btn2">
@@ -769,7 +769,7 @@ function progressdo(type1,type2) {
 
 //結案情況
 
-function progressfinish(type1,type2) {	
+function progressfinish(type2) {	
 	//進度條
 	const process = document.getElementById("progress");
 
@@ -781,7 +781,7 @@ function progressfinish(type1,type2) {
 	
 	
 	
-	if((type1=='第三期付款完成' && type2=='true')||type2=='true'){		
+	if((type2=='true')||type2=='true'){		
    // currentActive 就加一（往前進一步）
 	currentActive+=6;
 	//currentActive++;
@@ -789,14 +789,14 @@ function progressfinish(type1,type2) {
 		  update();
 	}
 	
-	if(type1=='未報價' && type2=='true'){
+// 	if(type1=='未報價' && type2=='true'){
 		
-		   // currentActive 就加一（往前進一步）
-			currentActive++;
-			//currentActive++;
-				  // 更新狀態（函式內容還沒定義）
-				  update();
-			}
+// 		   // currentActive 就加一（往前進一步）
+// 			currentActive++;
+// 			//currentActive++;
+// 				  // 更新狀態（函式內容還沒定義）
+// 				  update();
+// 			}
 	
 	function update() {
 		  // 第一件事：更新 .circle 元素的 .active class
@@ -849,13 +849,13 @@ progressquotation(typequotationStatus);
 progresscontract(type2);
 progressdo(progressnumber,typeprogress);
 progressfinish(typequotationStatus,type);
-progressfinish(typeprogress,type);
+progressfinish(type);
 </script>
 
 <script type="text/javascript">
 document.getElementById("btn").addEventListener("click",function(){
 	window.confirm("確定將此案件作結案");
-	if (yes) {
+	if (type) {
 		document.getElementById("finishform").submit();
 	} 
 });

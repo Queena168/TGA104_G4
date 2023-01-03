@@ -24,7 +24,7 @@ import com.tibame.designer.service.DesignerExpertiseService;
 import com.tibame.designer.service.DesignerService;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
-@WebServlet("/designer.do")
+@WebServlet("/check")
 public class DesignerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -38,146 +38,6 @@ public class DesignerServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
 		String action = req.getParameter("action");
-
-		if ("getOne_For_Display".equals(action)) { // 來自select_designer_page.jsp的請求
-
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			// PrintWriter out = res.getWriter();
-
-			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			String str = req.getParameter("designerNo");
-			if (str == null || (str.trim()).length() == 0) {
-				errorMsgs.put("designerNo", "請輸入設計師編號");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/designer/select_designer_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			Integer designerNo = null;
-			try {
-				designerNo = Integer.valueOf(str);
-			} catch (Exception e) {
-				errorMsgs.put("designerNo", "設計師編號格式不正確");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/designer/select_designer_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			/*************************** 2.開始查詢資料 *****************************************/
-			DesignerService designerSvc = new DesignerService();
-			DesignerVO designerVO = designerSvc.getOneDesigner(designerNo);
-			if (designerVO == null) {
-				errorMsgs.put("designerNo", "查無資料");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/designer/select_designer_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-
-			req.setAttribute("designerVO", designerVO); // 資料庫取出的empVO物件,存入req
-			String url = "/front-end/designer/listOneDesigner.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
-			successView.forward(req, res);
-		}
-
-//=====================================================================================================
-
-		if ("designerinfo".equals(action)) { // 來自select_designer_page.jsp的請求
-
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			String str = req.getParameter("designerNo");
-			if (str == null || (str.trim()).length() == 0) {
-				errorMsgs.put("designerNo", "請輸入設計師編號");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/designer/select_designer_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			Integer designerNo = null;
-			try {
-				designerNo = Integer.valueOf(str);
-			} catch (Exception e) {
-				errorMsgs.put("designerNo", "設計師編號格式不正確");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/designer/select_designer_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			/*************************** 2.開始查詢資料 *****************************************/
-			DesignerService designerSvc = new DesignerService();
-			DesignerVO designerVO = designerSvc.getOneDesigner(designerNo);
-			if (designerVO == null) {
-				errorMsgs.put("designerNo", "查無資料");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/designer/select_designer_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-
-			req.setAttribute("designerVO", designerVO); // 資料庫取出的empVO物件,存入req
-			String url = "/front-end/designer/listOneDesigner.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneDesigner.jsp
-			successView.forward(req, res);
-		}
-
-//====================================================================================================		
-
-		if ("getOne_For_Update".equals(action)) { // 來自listAllDesigner.jsp的請求
-
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			/*************************** 1.接收請求參數 ****************************************/
-			Integer designerNo = Integer.valueOf(req.getParameter("designerNo"));
-
-			/*************************** 2.開始查詢資料 ****************************************/
-			DesignerService designerSvc = new DesignerService();
-			DesignerVO designerVO = designerSvc.getOneDesigner(designerNo);
-
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-
-			String param = "?designerNo=" + designerVO.getDesignerNo() + "&designerAccount="
-					+ designerVO.getDesignerAccount() + "&designerPassword=" + designerVO.getDesignerPassword()
-					+ "&designerName=" + designerVO.getDesignerName() + "&designerCompany="
-					+ designerVO.getDesignerCompany() + "&designerPic=" + designerVO.getDesignerPic()
-					+ "&approvalStatus=" + designerVO.getApprovalStatus() + "&approvalTime="
-					+ designerVO.getApprovalTime() + "&approver=" + designerVO.getApprover() + "&designerStatus="
-					+ designerVO.getDesignerStatus();
-			String url = "/front-end/designer/update_designer_input.jsp" + param;
-			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-			successView.forward(req, res);
-		}
-
 		if ("update".equals(action)) { // 來自update_designer_input.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -218,17 +78,19 @@ public class DesignerServlet extends HttpServlet {
 			in.read(designerPic);
 			in.read(designerPic);
 			in.close();
+			
+			String  designerDetail = req.getParameter("designerDetail");
 
 			/*************************** 2.開始修改資料 *****************************************/
 			if ((in.read(designerPic)) == -1) {
 				DesignerService designerSvc = new DesignerService();
 				DesignerVO designerVO = designerSvc.updateDesignerNOPic(designerNo, designerAccount, designerPassword,
 						designerName,
-						designerCompany/* ,designerPic ,approvalStatus, approvalTime, approver, designerStatus */);
+						designerCompany,designerDetail);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("designerVO", designerVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/front-end/designer/listOneDesigner.jsp";
+				String url = "/front-end/designer/designerMainPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneDesigner.jsp
 				successView.forward(req, res);
 
@@ -237,165 +99,36 @@ public class DesignerServlet extends HttpServlet {
 				DesignerService designerSvc = new DesignerService();
 				DesignerVO designerVO = designerSvc.updateDesigner(designerNo, designerAccount, designerPassword,
 						designerName, designerCompany,
-						designerPic /* ,approvalStatus, approvalTime, approver, designerStatus */);
+						designerPic,designerDetail);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("designerVO", designerVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/front-end/designer/listOneDesigner.jsp";
+				String url = "/front-end/designer/updatedesignerINFO.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneDesigner.jsp
 				successView.forward(req, res);
 			}
 
 		}
 
-		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
-
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			String designerName = req.getParameter("designerName");
-			String designerNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-			if (designerName == null || designerName.trim().length() == 0) {
-				errorMsgs.put("designerName", "設計師姓名: 請勿空白");
-			} else if (!designerName.trim().matches(designerNameReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("designerName", "設計師姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-			}
-
-			String designerAccount = req.getParameter("designerAccount").trim();
-			if (designerAccount == null || designerAccount.trim().length() == 0) {
-				errorMsgs.put("designerAccount", "帳號請勿空白");
-			}
-
-			String designerPassword = req.getParameter("designerPassword").trim();
-			if (designerPassword == null || designerPassword.trim().length() == 0) {
-				errorMsgs.put("designerPassword", "密碼請勿空白");
-			}
-
-			String designerCompany = req.getParameter("designerCompany").trim();
-			if (designerCompany == null || designerCompany.trim().length() == 0) {
-				errorMsgs.put("designerCompany", "公司請勿空白");
-			}
-			Part part = req.getPart("designerPic");
-			InputStream in = part.getInputStream();
-			byte[] designerPic = new byte[in.available()];
-			in.read(designerPic);
-			in.close();
-
-			String approvalStatus = req.getParameter("approvalStatus").trim();
-			if (approvalStatus == null || approvalStatus.trim().length() == 0) {
-				errorMsgs.put("approvalStatus", "狀態請勿空白");
-			}
-
-			java.sql.Date approvalTime = null;
-			try {
-				approvalTime = java.sql.Date.valueOf(req.getParameter("approvalTime").trim());
-			} catch (IllegalArgumentException e) {
-				errorMsgs.put("approvalTime", "請輸入日期");
-			}
-
-			Integer approver = Integer.valueOf(req.getParameter("approver").trim());
-
-			if (approver == null) {
-				errorMsgs.put("approver", "審核者請勿空白");
-			}
-
-			Boolean designerStatus = Boolean.parseBoolean(req.getParameter("designer").trim());
-
-			/*************************** 2.開始新增資料 ***************************************/
-			DesignerService designerSvc = new DesignerService();
-			designerSvc.addDesigner(designerAccount, designerPassword, designerNameReg, designerCompany, designerPic,
-					approvalStatus, approvalTime, approver, designerStatus);
-
-			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-end/designer/listAllDesigner.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllDesigner.jsp
-			successView.forward(req, res);
-		}
-
-		if ("insertdesigner".equals(action)) { // 來自addDesigner.jsp的請求
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			String designerAccount = req.getParameter("designerAccount").trim();
-			DesignerService designerSvc = new DesignerService();
-			List<DesignerVO> designerVOlist = designerSvc.getAll();
-			for (int i = 0; i < designerVOlist.size(); i++) {
-				if (designerVOlist.get(i).getDesignerAccount().equals(designerAccount)) {
-					System.out.println(designerVOlist.get(i).getDesignerAccount().equals(designerAccount));
-					errorMsgs.add("設計師帳號已重複");
-				}
-			}
-			if (designerAccount == null || designerAccount.trim().length() == 0) {
-				errorMsgs.add("帳號請勿空白");
-			}
-
-			String designerPassword = req.getParameter("designerPassword").trim();
-			if (designerPassword == null || designerPassword.trim().length() == 0) {
-				errorMsgs.add("密碼請勿空白");
-
-			}
-
-			String designerName = req.getParameter("designerName").trim();
-			String designerNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-			if (designerName == null || designerName.trim().length() == 0) {
-				errorMsgs.add("設計師姓名: 請勿空白");
-			} else if (!designerName.trim().matches(designerNameReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("設計師姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-			}
-
-			String designerCompany = req.getParameter("designerCompany").trim();
-			if (designerCompany == null || designerCompany.trim().length() == 0) {
-				errorMsgs.add("公司請勿空白");
-			}
-
-			String phone = req.getParameter("phone").trim();
-			String phoneReg = "^[0][9][0-9]{8}$";
-			if (phone == null || phone.trim().length() == 0) {
-				errorMsgs.add("請勿空白，請填寫手機號碼，以利我們團隊方便聯繫到您");
-			} else if (!phone.trim().matches(phoneReg)) {
-				errorMsgs.add("請填寫正確手機號碼格式");
-			}
-
-			String designerDetail = null;
-			try {
-				designerDetail = req.getParameter("designerDetail").trim();
-
-			} catch (NullPointerException e) {
-				errorMsgs.add("請填寫您的簡介，好讓客戶對您有好感覺");
-			}
-
-			Part part = req.getPart("designerPic");
-			InputStream in = part.getInputStream();
-			byte[] designerPic = new byte[in.available()];
-			in.read(designerPic);
-			in.close();
-
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/designer/addDesigner.jsp");
-				failureView.forward(req, res);
-				return;
-			}
-
-			/*************************** 2.開始新增資料 ***************************************/
-			designerSvc.addDesignerinfo(designerAccount, designerPassword, designerName, designerCompany, designerPic,
-					phone, designerDetail);
-			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-end/designer/listAllDesigner.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllDesigner.jsp
-			successView.forward(req, res);
-		}
-
 		// ====================================================================================
-		// 設計師與專長多對多的表格查詢
-		DesignerExpertiseService designerExpertiseScv = new DesignerExpertiseService();
-		Set<DesignerExpertiseVO> set = designerExpertiseScv.getAll();
-		HttpSession session = req.getSession();
-		session.setAttribute("set", set);
-		String url = "/front-end/designer/findDesigner.jsp";
-		RequestDispatcher successView = req.getRequestDispatcher(url);
-		successView.forward(req, res);
+		if ("success".equals(action)) { 
+			String strdesignerNo = req.getParameter("designerNo").trim();
+			Integer designerNo = Integer.valueOf(strdesignerNo);
+            DesignerService designerSvc = new DesignerService();		
+            designerSvc.updatedesignersuccess(designerNo);
+            String url = "/back-end/designer/listAllDesigner.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllDesigner.jsp
+			successView.forward(req, res);
+		}
+		
+		if ("fail".equals(action)) { 
+			String strdesignerNo = req.getParameter("designerNo").trim();
+			Integer designerNo = Integer.valueOf(strdesignerNo);
+	        DesignerService designerSvc = new DesignerService();		
+	        designerSvc.updatedesignerfail(designerNo);
+	        String url = "/back-end/designer/listAllDesigner.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllDesigner.jsp
+			successView.forward(req, res);
+		}
 
 	}
 

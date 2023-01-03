@@ -103,7 +103,7 @@ AdminVO adminVO = (AdminVO) request.getAttribute("adminVO");
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="../designer/Admin-Design-DesignerInfo.html"
+								href="../designer/listAllDesigner.jsp"
 								class="menu-link">
 									<div data-i18n="">設計師資料管理</div>
 							</a></li>

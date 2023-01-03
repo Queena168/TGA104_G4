@@ -10,6 +10,8 @@ public interface DesignerDAO_interface {
 	   public void insert(DesignerVO designerVO);
 	   public void insertDesigner(DesignerVO designerVO);
        public void update(DesignerVO designerVO);
+       public void updatesuccess(Integer designerNo);
+       public void updatefail(Integer designerNo);
        public void updatenoPic(DesignerVO designerVO);
        public void delete(Integer designerNo);
        public DesignerVO login(String designerAccount,String designerPassword);   
