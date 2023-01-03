@@ -239,7 +239,7 @@
 								href="javascript:void(0);" data-bs-toggle="dropdown">
 									<div class="avatar avatar-online">
 										<img
-											src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+											src="${pageContext.request.contextPath}/AdminPicReader?adminNo=${adminVO.adminNo}"
 											alt class="w-px-40 rounded-circle" />
 									</div>
 							</a>
@@ -249,7 +249,7 @@
 												<div class="flex-shrink-0 me-3">
 													<div class="avatar avatar-online">
 														<img
-															src="<%=request.getContextPath()%>/AdminPicReader?adminNo=${adminVO.adminNo}"
+															src="${pageContext.request.contextPath}/AdminPicReader?adminNo=${adminVO.adminNo}"
 															alt class="w-px-40  rounded-circle" />
 													</div>
 												</div>
@@ -261,7 +261,7 @@
 									</a></li>
 
 									<li><form method="post"
-											action="<%=request.getContextPath()%>/back-end/admin/admin.do">
+											action="${pageContext.request.contextPath}/back-end/admin/admin.do">
 											<div class="dropdown-item" > 
 												
 												<label class="btn rounded-pill bg-label-secondary" tabindex="0">

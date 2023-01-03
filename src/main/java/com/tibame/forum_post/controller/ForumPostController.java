@@ -40,7 +40,6 @@ public class ForumPostController {
 		}
 
 		List<ForumPostVO> resultList = forumPostService.getPostByKeyword(keyword);
-		System.out.println(resultList);
 		List<String> topicNameList = new ArrayList<String>();
 		if (!resultList.isEmpty()) {
 			for (ForumPostVO a : resultList) {

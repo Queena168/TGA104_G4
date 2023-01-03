@@ -2,11 +2,15 @@ package com.tibame.forum;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tibame.forum_post.model.ForumPostService;
 import com.tibame.forum_post.model.ForumPostVO;
@@ -28,11 +32,9 @@ public class PostController {
 	@Autowired
 	ForumReplyService forumReplyService;
 
-//	@Autowired
-//	ForumJedisService forumJedisService;
-
 	@GetMapping("")
-	public String handlerMethod(Model model, Integer postNo, Integer topicNo, Integer page) {
+	public String handlerMethod(Model model, @RequestParam("postNo") Integer postNo,
+			@RequestParam("topicNo") Integer topicNo, @RequestParam("page") Integer page, HttpServletRequest request) {
 
 		ForumPostVO forumPostVO = forumPostService.getPostByPostNo(postNo);
 		model.addAttribute("forumPostVO", forumPostVO);
@@ -46,7 +48,7 @@ public class PostController {
 		model.addAttribute("forumReplyVOList", forumReplyVOList);
 		// 以postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的所有回應ReplyVO，存入attribute
 
-		ForumJedis jedis = new ForumJedis();
+		ForumJedisDAO jedis = new ForumJedisDAO();
 		jedis.setZset(postNo.toString());
 		model.addAttribute("view", jedis.getZset(postNo.toString()));
 		jedis.close();

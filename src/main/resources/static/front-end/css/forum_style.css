@@ -482,7 +482,8 @@ button {
 		flex: 75%;
 		position: relative;
 	}
-	.post_modify_btn, .post_report_btn, .reply_modify_btn, .reply_report_btn,
+	.post_modify_btn, .post_modify_btn_no, .post_report_btn,
+		.post_report_btn_no, .reply_modify_btn, .reply_report_btn,
 		.add_post_btn {
 		font-size: 10px;
 	}

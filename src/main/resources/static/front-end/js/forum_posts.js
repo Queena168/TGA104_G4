@@ -1,12 +1,11 @@
 var url = "addReply";
-//var url = "forumreply.do";
 
 //POST modify button
 document.querySelector(".post_modify_btn").addEventListener("click", function() {
+	$('#summernote').summernote('code', '');
 	$('#summernote').summernote('focus');
-	if ($('#summernote').summernote(!'isEmpty')) {
-		$('#summernote').summernote('reset');
-	} //設定summernote focus & 清空
+	//設定summernote focus & 清空
+
 	window.alert("您現在在修改模式");
 	document.querySelector("#mode").style.display = "block"; //顯示修改模式提醒
 	document.querySelector("#limit").style.display = "block"; //顯示標題字數提醒
@@ -14,11 +13,9 @@ document.querySelector(".post_modify_btn").addEventListener("click", function() 
 	let postContent = this.parentElement.firstElementChild.innerHTML; //抓取原有文章內容
 	$('#summernote').summernote('pasteHTML', postContent); //將文章內容貼入summernote
 	url = "updatePost"
-	//	url = "forumpost.do";
 
 	document.querySelector("#post_title").value = document.querySelector("#anchor_title").innerText; //抓取文文章標題
 	document.querySelector("#post_title").type = "text"; //顯示文章標題修改欄位
-	//	document.querySelector("#act").value = "update"; //form action改為update
 
 	document.querySelector("#modify_replyNo").value = "";
 });
@@ -26,10 +23,10 @@ document.querySelector(".post_modify_btn").addEventListener("click", function() 
 //REPLY modify button
 document.querySelectorAll(".reply_modify_btn").forEach(function(btn) {
 	btn.addEventListener("click", function() {
+		$('#summernote').summernote('code', '');
 		$('#summernote').summernote('focus');
-		if ($('#summernote').summernote(!'isEmpty')) {
-			$('#summernote').summernote('reset');
-		} //設定summernote focus & 清空
+		//設定summernote focus & 清空
+
 		window.alert("您現在在修改模式");
 		document.querySelector("#mode").style.display = "block"; //顯示修改模式提醒
 		document.querySelector("#limit").style.display = "none"; //隱藏標題字數提醒
@@ -37,11 +34,9 @@ document.querySelectorAll(".reply_modify_btn").forEach(function(btn) {
 		let replyContent = this.parentElement.firstElementChild.innerHTML; //抓取原有文章內容
 		$('#summernote').summernote('pasteHTML', replyContent); //將文章內容貼入summernote
 		url = "updateReply"
-		//		url = "forumreply.do"
 
 		document.querySelector("#post_title").value = document.querySelector("#anchor_title").innerText; //抓取文文章標題
 		document.querySelector("#post_title").type = "hidden"; //隱藏文章標題修改欄位
-		//		document.querySelector("#act").value = "update"; //form action改為update
 
 		document.querySelector("#modify_replyNo").value = this.parentElement.parentElement.previousElementSibling.value;//抓取回覆編號
 	});
@@ -94,7 +89,6 @@ document.querySelectorAll(".reply_report_btn").forEach(function(btn) {
 document.querySelector("#report_submit_btn").addEventListener("click", function() {
 	$.ajax({
 		type: "POST",
-//		url: "forumreport.do",
 		url: "addReport",
 		data: $("#report_form").serialize(),
 		dataType: "JSON",

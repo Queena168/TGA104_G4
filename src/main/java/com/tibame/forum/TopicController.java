@@ -31,9 +31,6 @@ public class TopicController {
 	@Autowired
 	ForumReplyService forumReplyService;
 
-//	@Autowired
-//	ForumJedisService forumJedisService;
-
 	@GetMapping("")
 	public String handlerMethod(Model model, @RequestParam("topicNo") Integer topicNo,
 			@RequestParam("page") Integer page) {
@@ -63,7 +60,7 @@ public class TopicController {
 		model.addAttribute("countList", countList);
 		// 從PostVO中得到postNo作為參數，用ForumReplyService呼叫方法取得每篇文章的總回應數，存入attribute
 
-		ForumJedis jedis = new ForumJedis();
+		ForumJedisDAO jedis = new ForumJedisDAO();
 		for (ForumPostVO a : forumPostVOList) {
 			viewList.add(jedis.getZset(a.getPostNo().toString()).intValue());
 		}

@@ -24,9 +24,6 @@ public class ForumIndexController {
 	@Autowired
 	ForumPostService forumPostService;
 
-//	@Autowired
-//	ForumJedisService forumJedisService;
-
 	@GetMapping("")
 	public String handlerMethod(Model model) {
 
@@ -44,7 +41,7 @@ public class ForumIndexController {
 		List<ForumPostVO> hotList = new ArrayList<ForumPostVO>();
 		List<Integer> viewList = new ArrayList<Integer>();
 
-		ForumJedis jedis = new ForumJedis();
+		ForumJedisDAO jedis = new ForumJedisDAO();
 		for (String a : jedis.getTop5()) {
 			hotList.add(forumPostService.getPostByPostNo(Integer.valueOf(a)));
 			viewList.add(jedis.getZset(a));

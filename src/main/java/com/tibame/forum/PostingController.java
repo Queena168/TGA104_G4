@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tibame.forum_topic.model.ForumTopicService;
 import com.tibame.forum_topic.model.ForumTopicVO;
@@ -17,7 +18,7 @@ public class PostingController {
 	ForumTopicService forumTopicService;
 
 	@GetMapping("")
-	public String handlerMethod(Model model, Integer topicNo) {
+	public String handlerMethod(Model model, @RequestParam("topicNo") Integer topicNo) {
 
 		ForumTopicVO forumTopicVO = forumTopicService.getTopicByTopicNo(topicNo);
 		model.addAttribute("forumTopicVO", forumTopicVO);

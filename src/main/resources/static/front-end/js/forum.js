@@ -15,12 +15,18 @@ function search() {
 	});
 }
 
+document.querySelector("#keyword").addEventListener("keydown", function(e) {
+	if (e.which == 13) {
+		document.querySelector(".search_btn").click();
+	}
+})
+
+
 //posting.jsp submit button
 function add() {
 	$.ajax({
 		type: "POST",
 		url: "addPost",
-		//		url: "forumpost.do",
 		data: $("#add_form").serialize(),
 		dataType: "JSON",
 		success: function(data) {
