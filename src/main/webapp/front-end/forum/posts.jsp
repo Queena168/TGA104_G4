@@ -44,7 +44,7 @@
 <!-- main header navbar -->
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
     <div class="container">
-        <a class="navbar-brand" href="index.html">    
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/front-end/index.html">    
             <img src="../images/MatDesignLogo.png" alt="">
         </a>
         <!--  navbar actions -->
@@ -347,12 +347,12 @@
 					</div>
 					<div class="col-lg-3 col-md-6 footer__content">
 						<h5 class="footer-heading">網站地圖</h5>
-						<ul class="footer-list">
-							<li class="footer-list__item"><a href="#">找作品</a></li>
-							<li class="footer-list__item"><a href="#">找設計師</a></li>
-							<li class="footer-list__item"><a href="#">商城</a></li>
-							<li class="footer-list__item"><a href="#">論壇</a></li>
-						</ul>
+                 	     <ul class="footer-list">
+                            <li class="footer-list__item"><a href="${pageContext.request.contextPath}/front-end/designer_protfolio/memFindPortfolio.jsp">找作品</a></li>
+                            <li class="footer-list__item"><a href="${pageContext.request.contextPath}/ShowDesignerPage">找設計師</a></li>
+                            <li class="footer-list__item"><a href="${pageContext.request.contextPath}/ShowShop">商城</a></li>
+                            <li class="footer-list__item"><a href="${pageContext.request.contextPath}/front-end/forum/forumIndex.do">論壇</a></li>
+                        </ul>
 					</div>
 					<div class="col-lg-3 col-md-6 footer__content">
 						<h5 class="footer-heading">Keep in touch</h5>
