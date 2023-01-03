@@ -34,9 +34,12 @@ private static final long serialVersionUID = 1L;
 			}
 			
 			String productName = req.getParameter("productName").trim();
+			String productNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 			if (productName == null || productName.trim().length() == 0) {
 				errorMsgs.add("商品名稱請勿空白");
-			}
+			}else if(!productName.trim().matches(productNameReg)) { 
+				errorMsgs.add("商品名稱只能包含中、英文字與數字");
+            }
 			
 			Integer stock = null;
 			try {

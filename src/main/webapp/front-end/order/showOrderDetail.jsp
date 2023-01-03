@@ -67,7 +67,7 @@
 <!-- main header navbar -->
     <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/front-end/index.html">
                 <img src="../../front-end/images/MatDesignLogo.png" alt="">
             </a>
             <!--  navbar actions -->
@@ -103,7 +103,7 @@
                     <!-- navbar cart dropdown -->
                     <div class="" id="cartmenu" data-collapse="false"></div>
                 </div>
-                <a class="nav-link " href="/front-end/order/SelectOrder" >訂單</a>
+<!--                 <a class="nav-link " href="/front-end/order/SelectOrder" >訂單</a> -->
                 <!-- navbar user account icon -->
                 <div class="main-navbar-action__btn nav-dropdown">
                     <a class="dropdown-link" data-target="usermenu">
@@ -116,12 +116,6 @@
                         <span class="cart-badge">${cart_list.size()}</span>
                         <i class="icon-shopping-bag"></i>
                     </a>
-                </div>
-                <div class="main-navbar-action__btn nav-dropdown">
-                	<a class="dropdown-link" data-target="cartmenu" href="/front-end/order/SelectOrder">
-                    	<span class="cart-badge">訂單</span>
-                    	<i class="icon-shopping-bag"></i>
-                	</a>
                 </div>
                 <!-- navbar actions content -->
             </div>
@@ -136,7 +130,7 @@
                         <a class="nav-link " href="#">找設計師</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
-                        <a class="nav-link " href="/ShowShop">商城</a>
+                        <a class="nav-link " href="${pageContext.request.contextPath}/ShowShop">商城</a>
                     </li>
                     <li class="nav-item main-navbar__item dropdown">
                         <a class="nav-link " href="forumIndex.do?">論壇</a>

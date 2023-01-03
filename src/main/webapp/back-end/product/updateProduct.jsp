@@ -12,7 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>MatDesign updateProductType</title>
+<title>MatDesign updateProduct</title>
 
 <meta name="description" content="" />
 
@@ -65,7 +65,7 @@
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="index.jsp" class="app-brand-link"> <span
+					<a href="back-end/index.html" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -168,24 +168,19 @@
 						</ul></li>
 
 					<!-- Product商品管理 -->
-					<li class="menu-item"><a href="javascript:void(0)"
+					<li class="menu-item active open"><a href="javascript:void(0)"
 						class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons bx bx-shopping-bag"></i>
 							<div data-i18n="Product">商品管理</div>
 					</a>
 						<ul class="menu-sub">
-							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductList.html"
+							<li class="menu-item active"><a
+								href="${pageContext.request.contextPath}/SelectAll"
 								class="menu-link">
 									<div data-i18n="">商品列表</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductType.html"
-								class="menu-link">
-									<div data-i18n="">商品類別</div>
-							</a></li>
-							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductOrderList.html"
+								href="${pageContext.request.contextPath}/BackendSelectAllOrder"
 								class="menu-link">
 									<div data-i18n="">商品訂單管理</div>
 							</a></li>
@@ -211,7 +206,7 @@
 						</ul></li>
 
 					<!-- Admin管理員管理 -->
-					<li class="menu-item active open"><a
+					<li class="menu-item"><a
 						href="javascript:void(0);" class="menu-link menu-toggle"> <i
 							class="menu-icon tf-icons fa-solid fa-users-gear"></i>
 							<div data-i18n="Admin">管理員管理</div>
@@ -306,7 +301,7 @@
 
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">MatDesign /</span> 商品類別資料修改
+							<span class="text-muted fw-light">MatDesign /</span> 商品資料修改
 						</h4>
 
 						<!-- Update Admin Info -->
@@ -345,27 +340,27 @@
 		<div class="mb-3">
 			<label for="#" class="form-label">商品名稱:</label> 			
 			<input type="text" class="form-control" 
-				name="productName" size="45"/>
+				name="productName" value ="${productVO.productName}" size="45"/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品庫存量:</label> 			
 			<input type="text" class="form-control" 
-				name="stock" size="45"/>
+				name="stock" value ="${productVO.stock}" size="45"/>
 		</div>		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品單價:</label> 			
 			<input type="text" class="form-control" 
-				name="price" size="45"/>
+				name="price" value ="${productVO.price}" size="45"/>
 		</div>		
 		<div class="mb-3">
 			<label for="#" class="form-label">商品描述:</label> 			
 			<input type="text" class="form-control" 
-				name="productDescription" size="45"/>
+				name="productDescription" value ="${productVO.productDescription}" size="45"/>
 		</div>
 		<div class="mb-3">
 			<label for="#" class="form-label">商品狀態:</label> 			
 			<input type="text" class="form-control" 
-				name="productStatus" size="45"/>
+				name="productStatus" value ="${productVO.productStatus}" size="45"/>
 		</div>	
 	    <div class="mb-3">
 	    <jsp:useBean id="adminService" scope="page" class="com.tibame.admin.model.AdminService" />

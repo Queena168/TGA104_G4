@@ -136,7 +136,7 @@ public class CheckOutServlet extends HttpServlet {
 			String receiverNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 			if (receiverName == null || receiverName.trim().length() == 0) {
 				errorMsgs.add("收件人姓名請勿空白");
-			} else if(!receiverName.trim().matches(receiverName)) { 
+			} else if(!receiverName.trim().matches(receiverNameReg)) { 
 				errorMsgs.add("收件人姓名只能是中、英文字母");
             }
 			
@@ -149,14 +149,11 @@ public class CheckOutServlet extends HttpServlet {
             }
 			
 			receiverAddress = req.getParameter("raddress").trim();
+			String receiverAddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 			if (receiverAddress == null || receiverAddress.trim().length() == 0) {
 				errorMsgs.add("地址請勿空白");
-			}
-			String receiverAddressReg = "^[(\u4e00-\u9fa5)(0-9)]$";
-			if (receiverAddress == null || receiverName.trim().length() == 0) {
-				errorMsgs.add("收件地址請勿空白");
-			} else if(!receiverAddress.trim().matches(receiverName)) { 
-				errorMsgs.add("收件地址只能包含中文字與數字");
+			} else if(!receiverAddress.trim().matches(receiverAddressReg)) { 
+				errorMsgs.add("收件人地址只能包含中、英文字與數字");
             }
 			
 			if (!errorMsgs.isEmpty()) {

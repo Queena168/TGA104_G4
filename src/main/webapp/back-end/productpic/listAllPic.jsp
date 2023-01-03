@@ -67,7 +67,7 @@
 			<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="../index.html" class="app-brand-link"> <span
+					<a href="back-end/index.html" class="app-brand-link"> <span
 						class="app-brand-text demo menu-text fw-bolder ms-2">MatDesign</span>
 					</a> <a href="javascript:void(0);"
 						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -176,18 +176,13 @@
 							<div data-i18n="Product">商品管理</div>
 					</a>
 						<ul class="menu-sub">
-							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductList.html"
+							<li class="menu-item active"><a
+								href="${pageContext.request.contextPath}/SelectAll"
 								class="menu-link">
 									<div data-i18n="">商品列表</div>
 							</a></li>
-							<li class="menu-item active"><a
-								href="/back-end/producttype/listAllProductType.jsp"
-								class="menu-link">
-									<div data-i18n="">商品類別</div>
-							</a></li>
 							<li class="menu-item"><a
-								href="../product/Admin-Product-ProductOrderList.html"
+								href="${pageContext.request.contextPath}/BackendSelectAllOrder"
 								class="menu-link">
 									<div data-i18n="">商品訂單管理</div>
 							</a></li>

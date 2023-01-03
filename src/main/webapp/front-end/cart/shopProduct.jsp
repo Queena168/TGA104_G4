@@ -79,7 +79,7 @@ th, td {
 <body bgcolor="#FFFFFF">
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
     <div class="container">
-        <a class="navbar-brand" href="index.html">    
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/front-end/index.html">    
             <img src="front-end/images/MatDesignLogo.png" alt="">
         </a>
         <!--  navbar actions -->
@@ -115,7 +115,7 @@ th, td {
                 <!-- navbar cart dropdown -->
                 <div class="" id="cartmenu" data-collapse="false"></div>
                 
-            <a class="nav-link " href="/front-end/order/SelectOrder" >訂單</a>
+<!--             <a class="nav-link " href="/front-end/order/SelectOrder" >訂單</a> -->
             
             </div>
             <!-- navbar user account icon -->
