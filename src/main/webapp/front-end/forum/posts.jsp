@@ -116,7 +116,7 @@
                     <a class="nav-link " href="#" data-toggle="dropdown">報導文章</a>
                 </li> -->
                 <li class="nav-item main-navbar__item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/front-end/contact.html">關於我們</a>
+                    <a class="nav-link" href="">關於我們</a>
                 </li>
             </ul>
         </div>
@@ -342,7 +342,7 @@
 					<div class="col-lg-2 col-md-6 footer__content">
 						<h5 class="footer-heading">關於我們</h5>
 						<ul class="footer-list">
-							<li class="footer-list__item"><a href="index.html">關於我們</a></li>
+							<li class="footer-list__item"><a href="">關於我們</a></li>
 						</ul>
 					</div>
 					<div class="col-lg-3 col-md-6 footer__content">
