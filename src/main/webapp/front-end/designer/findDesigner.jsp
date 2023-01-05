@@ -195,52 +195,7 @@
     </div>
 </nav>
 <!-- end main header navbar -->
-<!-- main header slider -->
-<div class="hero-header-slider">
-    <div class="owl-carousel ltr" id="heroHeaderSlider">
-        <div class="item">
-            <div class="hero-header-slider__img slider-img"
-                 style="background-image: url('https://via.placeholder.com/1920x800')">
-                <div class="hero-header-slider__wrapper">
-                    <div class="slider-inner">
-                        <div class="container overflow-hidden">
-                            <div class="inner-content inner-content--dark slider-animated">
-                                <h5 class="slider-subtitle">New Trend</h5>
-                                <h1 class="slider-title animated">A new way to design</h1>
-                                <p class="slider-text animated">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Quam, vel.</p>
-                                <div class="slider-btn">
-                                    <a class="btn animated" href="#">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="hero-header-slider__img slider-img"
-                 style="background-image: url('https://via.placeholder.com/1920x800')">
-                <div class="hero-header-slider__wrapper">
-                    <div class="slider-inner">
-                        <div class="container overflow-hidden">
-                            <div class="inner-content inner-content--dark slider-animated">
-                                <h5 class="slider-subtitle">New Trend</h5>
-                                <h1 class="slider-title animated">Stay on trend in new year</h1>
-                                <p class="slider-text animated">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Quam, vel.</p>
-                                <div class="slider-btn">
-                                    <a class="btn animated" href="#">View more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end of main header -->
+
 
 
 <!--<table id="table-1"> -->
@@ -517,38 +472,38 @@
 	<script src="<%=request.getContextPath()%>/front-end/designer/js/login.js"></script>
 	
 	
-<!-- 	<!-- All Jquery --> 
-<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="js/popper.min.js"></script> -->
-<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
-<!-- <!-- owl carousel js --> 
-<!-- <script type="text/javascript" src="js/owl.carousel.min.js"></script> -->
-<!-- <!-- Jquery ui --> 
-<!-- <script type="text/javascript" src="js/jquery-ui.min.js"></script> -->
-<!-- <!-- light box js --> 
-<!-- <script type="text/javascript" src="js/lightbox.min.js"></script> -->
-<!-- <!-- typeahead js --> 
-<!-- <script type="text/javascript" src="js/typeahead.jquery.min.js"></script> -->
-<!-- <!-- master zoom image js --> 
-<!-- <script type="text/javascript" src="js/jquery.zoom.min.js"></script> -->
-<!-- <!-- countdown js --> 
-<!-- <script type="text/javascript" src="js/countdown.jquery.min.js"></script> -->
-<!-- <!-- nice select js --> 
-<!-- <script type="text/javascript" src="js/nice-select.min.js"></script> -->
-<!-- <!-- wow js --> 
-<!-- <script type="text/javascript" src="js/wow.min.js"></script> -->
-<!-- <!-- custom js --> 
-<!-- <script type="text/javascript" src="js/custom.js"></script> -->
+	<!-- All Jquery -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/popper.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/bootstrap.min.js"></script>
+<!-- owl carousel js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/owl.carousel.min.js"></script>
+<!-- Jquery ui -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery-ui.min.js"></script>
+<!-- light box js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/lightbox.min.js"></script>
+<!-- typeahead js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/typeahead.jquery.min.js"></script>
+<!-- master zoom image js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.zoom.min.js"></script>
+<!-- countdown js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/countdown.jquery.min.js"></script>
+<!-- nice select js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/nice-select.min.js"></script>
+<!-- <!-- wow js  -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/wow.min.js"></script> 
+<!-- <!-- custom js  -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/custom.js"></script>
 	
-	<script type="text/javascript">
-	var btn3 =  document.getElementById("btn3");
-	var expertiseform =  document.getElementById("expertiseform");
-	btn3.addEventListener("click",function(){
-		expertiseform.submit();
+<!-- 	<script type="text/javascript"> -->
+// 	var btn3 =  document.getElementById("btn3");
+// 	var expertiseform =  document.getElementById("expertiseform");
+// 	btn3.addEventListener("click",function(){
+// 		expertiseform.submit();
 			
-	});
+// 	});
 	
-	</script>
+<!-- 	</script> -->
 
 	
 	

@@ -194,28 +194,41 @@ margin-left: 200px;
 <body bgcolor='white'>
 
 <!-- main header navbar -->
-<nav class="navbar navbar-expand-lg navbar-light custom-navbar" id="mainMenu">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">    
-            <img src="<%=request.getContextPath()%>/front-end/images/MatDesignLogo.png" alt="">
-        </a>
-        <!--  navbar actions -->
-        <div class="main-navbar-action">
-            <div id="mainNavbarDropdown">
-                <!-- navbar user account dropdown -->
-                <div class="dropdown-wrapper" id="usermenu" data-collapse="false">
-                    <div class="account-wrapper">
-                        <!-- login form wrapper -->
-                        
-                        <div class="account-wrapper__content">
-                            <form class="custom-form">
-                                <div class="custom-form__btn">
-                                    <a href="login.html">
-                                    <button type="button" class="btn submit-btn">登入/註冊</button>
-                                </div>
-                                
-                            </form>
-                        </div>
+	<nav class="navbar navbar-expand-lg navbar-light custom-navbar"
+		id="mainMenu">
+		<div class="container">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/front-end/index.html"> <img
+				src="<%=request.getContextPath()%>/front-end/images/MatDesignLogo.png" alt="" >
+			</a>
+			<!--  navbar actions -->
+			<div class="main-navbar-action">
+				<div id="mainNavbarDropdown">
+					<!-- navbar user account dropdown -->
+					<div class="dropdown-wrapper" id="usermenu" data-collapse="false">
+						<div class="account-wrapper">
+							<!-- login form wrapper -->
+
+							<div class="account-wrapper__content">
+								<div class="custom-form__btn custom-form__input">
+									<div class="account-wrapper__heading">
+										<span>${designerVO.designerAccount}</span> <span
+											class="account-wrapper__heading--link">${designerVO.designerName}
+										</span>
+									</div>
+								</div>
+								<div class="account-wrapper__content">
+<!-- 									<div class="form-group custom-form__input"> -->
+<!-- 										<a class="dropdown-item " href="memberPorfile.jsp"> <span><i -->
+<!-- 												class="icon-user-profile"></i></span>設計師資料 -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+									<div class="form-group custom-form__input">
+										<a class="dropdown-item  " href="<%=request.getContextPath()%>/front-end/index.html"><span><i
+												class="icon-log-out"></i></span>登出</a>
+									</div>
+								</div>
+
+							</div>
                         <!-- account links when user is logged in-->
                         <!--                    <a class="dropdown-item" href="account.html#v-pills-profile-tab"><span><i-->
                         <!--                            class="icon-user-profile"></i></span>Profile</a>-->
@@ -390,11 +403,8 @@ margin-left: 200px;
     </div>
 </footer>
 <!-- end footer -->
-
-
 <!-- All Jquery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.min.js"></script>
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/popper.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/bootstrap.min.js"></script>
 <!-- owl carousel js -->
@@ -411,8 +421,14 @@ margin-left: 200px;
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/countdown.jquery.min.js"></script>
 <!-- nice select js -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/nice-select.min.js"></script>
-<!-- wow js -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/wow.min.js"></script>
+<!-- <!-- wow js  -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/wow.min.js"></script> 
+<!-- <!-- custom js  -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/custom.js"></script>
+	
+
+
+
 
 
 <script type="text/javascript">

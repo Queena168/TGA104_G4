@@ -417,6 +417,31 @@ margin-left: 200px;
 <!-- end footer -->
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/designer/js/btnscontrolquotation.js"></script>   
+<!-- All Jquery -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/popper.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/bootstrap.min.js"></script>
+<!-- owl carousel js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/owl.carousel.min.js"></script>
+<!-- Jquery ui -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery-ui.min.js"></script>
+<!-- light box js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/lightbox.min.js"></script>
+<!-- typeahead js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/typeahead.jquery.min.js"></script>
+<!-- master zoom image js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/jquery.zoom.min.js"></script>
+<!-- countdown js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/countdown.jquery.min.js"></script>
+<!-- nice select js -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/nice-select.min.js"></script>
+<!-- <!-- wow js  -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/wow.min.js"></script> 
+<!-- <!-- custom js  -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/front-end/js/custom.js"></script>
+	
+
+
 <script type="text/javascript">
 var type = '${designerOrderVO.quotationStatus}';
 DisplayAndHiddenBtn("showorhidden1", type);
