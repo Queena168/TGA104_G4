@@ -34,7 +34,7 @@ public class PostController {
 
 	@GetMapping("")
 	public String handlerMethod(Model model, @RequestParam("postNo") Integer postNo,
-			@RequestParam("topicNo") Integer topicNo, @RequestParam("page") Integer page, HttpServletRequest request) {
+			@RequestParam("topicNo") Integer topicNo, @RequestParam("page") Integer page) {
 
 		ForumPostVO forumPostVO = forumPostService.getPostByPostNo(postNo);
 		model.addAttribute("forumPostVO", forumPostVO);
