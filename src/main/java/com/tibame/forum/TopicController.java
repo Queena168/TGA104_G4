@@ -62,7 +62,7 @@ public class TopicController {
 
 		ForumJedisDAO jedis = new ForumJedisDAO();
 		for (ForumPostVO a : forumPostVOList) {
-			viewList.add(jedis.getZset(a.getPostNo().toString()).intValue());
+			viewList.add(jedis.getZset(a.getPostNo().toString()));
 		}
 		model.addAttribute("viewList", viewList);
 		jedis.close();

@@ -29,10 +29,6 @@ public class ForumJedisDAO {
 		return jedis.zscore("viewZset", postNo).intValue();
 	}
 
-	public void addZset(String postNo) {
-		jedis.zadd("viewZset", 0, postNo);
-	}
-
 	public Set<String> getTop5() {
 		return jedis.zrevrange("viewZset", 0, 4);
 	}
