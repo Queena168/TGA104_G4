@@ -15,7 +15,7 @@
 ## 專案架構
 
 專案採用Java Web MVC架構，以Servlet、JSP以及JDBC技術，實作功能的新增、刪除、修改、查詢等功能。  
-後期導入Spring Boot框架，將web.xel相關設定移至application.properties設定檔以及pom.xml設定檔中，  
+後期導入Spring Boot框架，將web.xｍl相關設定移至application.properties設定檔以及pom.xml設定檔中，  
 但因時程因素，Spring annotatoin組態相關的設定都還沒進行。
 
 ## 使用技術 
