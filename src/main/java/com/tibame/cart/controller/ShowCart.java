@@ -53,7 +53,7 @@ public class ShowCart extends HttpServlet {
 			req.setAttribute("total", total);
 		}
 		String url = "/front-end/cart/cart.jsp";
-		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 cart.jsp
 		successView.forward(req, res);
 	}
 
