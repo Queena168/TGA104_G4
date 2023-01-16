@@ -40,7 +40,7 @@ public class QuantityIncDecServlet extends HttpServlet {
 							quantity++;
 							c.setQuantity(quantity);
 							String url = "ShowCart";
-							RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+							RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 cart.jsp 
 							successView.forward(req, res);
 //							res.sendRedirect("ShowCart"); // cart.jsp
 						}
@@ -54,21 +54,21 @@ public class QuantityIncDecServlet extends HttpServlet {
 							quantity--;
 							c.setQuantity(quantity);
 							String url = "ShowCart";
-							RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+							RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 cart.jsp
 							successView.forward(req, res);
 //							break;
 						}
 					}
-//					res.sendRedirect("ShowCart"); // cart.jsp
+//					res.sendRedirect("ShowCart"); 
 //					String url = "ShowCart";
-//					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+//					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 cart.jsp
 //					successView.forward(req, res);
 				}
 			}
 //			else {
 //				res.sendRedirect("http://localhost:8080/TGA104_G4/front-end/cart/cart.jsp"); // cart.jsp
 //				String url = "ShowCart";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllProductType.jsp
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 cart.jsp
 //				successView.forward(req, res);
 			}
 			
